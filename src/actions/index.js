@@ -1,4 +1,3 @@
-import * as types from "../constants/actionTypes";
 import axios from "axios";
 
 const getRequest = (type) => ({
@@ -22,7 +21,7 @@ const getRequestFail = (action) => {
     const {type, error} = action
     return ({
         type,
-        status: "REJECtED",
+        status: "REJECTED",
         payload: null,
         error
     }
@@ -33,7 +32,7 @@ export function get ( arg, config, typesReq ) {
     const {typeRequest, typeSuccess, typeFail} = typesReq
 
     return async function (dispatch){
-        dispatch (get(typeRequest))
+        dispatch (getRequest(typeRequest))
         try {
             
             let payload = await axios(`${url}/${id}`,
