@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./style/index.scss";
 
-import store from "./store/store.js";
+import store from "./store";
 
 import Router from "./router";
 

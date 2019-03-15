@@ -2,7 +2,7 @@ import * as types from "../constants/actionTypes";
 
 import initialState from "../store/initialState";
 
-export default (state = initialState.table, { type, payload }) => {
+export default (state = initialState.item, { type, payload }) => {
 	switch (type) {
 		case types.GET: {
 			return { ...state, isFetching: true };
