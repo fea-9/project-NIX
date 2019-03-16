@@ -27,22 +27,19 @@ const getRequestFail = (action) => {
     }
 )}
 
-export function get ( arg, config, typesReq ) {
-    const {url, id} = arg
+export function get ( config, typesReq ) {
     const {typeRequest, typeSuccess, typeFail} = typesReq
-
     return async function (dispatch){
         dispatch (getRequest(typeRequest))
         try {
-            
             let payload = await axios(`${url}/${id}`,
                 config
-            )                
+            )
             dispatch (getRequestSuccess({
                 type: typeSuccess,
                 payload}))
         }
-        
+
         catch(error){
             dispatch (getRequestFail({
                 type: typeFail,
