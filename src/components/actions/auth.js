@@ -32,9 +32,7 @@ export function get ( config, typesReq ) {
     return async function (dispatch){
         dispatch (getRequest(typeRequest))
         try {
-            let payload = await axios(`${url}/${id}`,
-                config
-            )
+            let payload = await axios(config)
             dispatch (getRequestSuccess({
                 type: typeSuccess,
                 payload}))

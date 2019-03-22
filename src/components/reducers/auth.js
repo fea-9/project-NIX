@@ -1,17 +1,15 @@
-import * as types from "../constants/actionTypes";
-
 import initialState from "../store/initialState";
 
 export default (state = initialState.item, { type, payload }) => {
 	switch (type) {
-		case types.GET: {
+		case "GET": {
 			return { ...state, isFetching: true };
 		}
-		case types.GET_SUCCESS: {
+		case "GET_SUCCESS": {
 			// const { id, data } = payload;			
 			return { ...state,  isFetching: false };
 		}
-		case types.GET_FAIL: {
+		case "GET_FAIL": {
 			return { ...state, isFetching: false };
         }
         
