@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import sortFunc from "../../utils/sortFunc.js";
 import varyDateView from "../../utils/varyDateView.js";
-import findLastDate from "../../utils/findLastDate.js"
+import findLastDate from "../../utils/findLastDate.js";
+import { Scrollbars } from 'react-custom-scrollbars';
 
 let generateMock = quantity => {//DELETE
   let res = []
@@ -119,33 +120,35 @@ class ArtifactsTable extends Component {
 					))}
 				</div>
 				<div className = "artifacts-table__main">
-					{!s.data.length ? "spiner..." : s.data.map((elem, index) => (
-						<div className = "artifacts-table__main__line">
-							<div className = "artifacts-table__main__line__artfs">
-								{elem.name}
-                <div className = "artifacts-table__main__line__artfs__dop">
-                    {`${elem.theme}, ${elem.publish.split(".")[2]}`}
-                </div>
-							</div>
-							<div className = "artifacts-table__main__line__contr">
-								{elem.contributors.join(", ")}
-							</div>
-							<div className = "artifacts-table__main__line__keyw">
-								{elem.keyWords.length <= 3 ?
-									elem.keyWords.map((el,ind) => <span>{el}</span>)
-									: elem.keyWords.filter((el, ind) => ind < 3)
-												   .map((el,inx)=> <span>{el}</span>)
-								}
-								{elem.keyWords.length > 3 ? <span>...</span> : false}
-							</div>
-							<div className = "artifacts-table__main__line__cit">
-								{elem.totalCitation}
-							</div>
-							<div className = "artifacts-table__main__line__prof">
-								{elem.proof.toString()}
-							</div>
-						</div>
-					))}
+          <Scrollbars >
+  					{!s.data.length ? "spiner..." : s.data.map((elem, index) => (
+  						<div className = "artifacts-table__main__line">
+  							<div className = "artifacts-table__main__line__artfs">
+  								{elem.name}
+                  <div className = "artifacts-table__main__line__artfs__dop">
+                      {`${elem.theme}, ${elem.publish.split(".")[2]}`}
+                  </div>
+  							</div>
+  							<div className = "artifacts-table__main__line__contr">
+  								{elem.contributors.join(", ")}
+  							</div>
+  							<div className = "artifacts-table__main__line__keyw">
+  								{elem.keyWords.length <= 3 ?
+  									elem.keyWords.map((el,ind) => <span>{el}</span>)
+  									: elem.keyWords.filter((el, ind) => ind < 3)
+  												   .map((el,inx)=> <span>{el}</span>)
+  								}
+  								{elem.keyWords.length > 3 ? <span>...</span> : false}
+  							</div>
+  							<div className = "artifacts-table__main__line__cit">
+  								{elem.totalCitation}
+  							</div>
+  							<div className = "artifacts-table__main__line__prof">
+  								{elem.proof.toString()}
+  							</div>
+  						</div>
+  					))}
+          </Scrollbars>
 				</div>
 			</div>
 		)
