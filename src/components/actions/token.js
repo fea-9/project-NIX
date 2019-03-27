@@ -1,5 +1,5 @@
 import store from "../store"
-import {jsonPost, authRequest, authRequestSuccess, authLogout} from "./auth"
+import {jsonPost, authLogout} from "./auth"
 
 store.subscribe(() => console.log(store.getState()))
 
@@ -47,17 +47,16 @@ export function refreshTokens ( refreshToken ) {
                 refreshToken                 
             ) 
             localStorage.setItem("access_token", payload.access_token)
-            localStorage.setItem("expires_in", payload.expires_in)            
-            console.log("refresh success", payload)
+            localStorage.setItem("expires_in", payload.expires_in)  
+            localStorage.setItem("refresh_token", payload.user.refresh_token)           
+            // console.log("refresh success", payload)
             dispatch (tokenRefreshRequestSuccess({                
                 payload}))
         }
 
         catch(error){
-            console.log("refresh error", error)
+            // console.log("refresh error", error)
             authLogout()
         }
     }
 }
-
-// refreshTokens({refresh_token: store.getState().auth.user.refresh_token})
