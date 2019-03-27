@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PageTemplate from '../Templates/PageTemplate';
+import {PageTemplate} from '../Templates/PageTemplate';
 //Нужно подключить компоненты сайдбар, контент и хедер
 
 

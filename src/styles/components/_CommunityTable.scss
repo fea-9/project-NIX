@@ -1,0 +1,68 @@
+.community-table {
+  width: 100%;
+  height: 80vh;
+  user-select: none;
+  &__total-info {
+    font-family: 'Roboto', sans-serif;
+		color: #2c2c2c;
+		font-size: 20px;
+		font-weight: bold;
+		opacity: 0.6;
+		text-align: left;
+		margin-left: 50px;
+		margin-bottom: 38px;
+  }
+  &__main {
+    width: 100%;
+    height: 100%;
+    &__line {
+      min-height: 115px;
+      width: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      box-shadow: 0  0 40px #cad5da;
+      margin: 20px 5%;
+      &__ava {
+        width: 78px;
+        height: 78px;
+        border-radius: 50%;
+      }
+      &__info {
+        text-align: left;
+        width: 18%;
+        &__name {
+          font-size: 20px;
+          color: #2c2c2c;
+          font-family: 'Roboto', sans-serif;
+          font-weight: bold;
+        }
+        &__since {
+          font-size: 17px;
+          color: #7b8180;
+          font-weight: 500;
+
+        }
+      }
+      &__block {
+        width: 18%;
+        display: flex;
+        align-items: center;
+        &__num {
+          width: 25%;
+          color: #2c2c2c;
+          text-align: left;
+          font-size: 30px;
+          font-family: 'Roboto', sans-serif;
+          font-weight: bold;
+        }
+        &__text {
+          width: 75%;
+          font-size: 16px;
+          font-weight: 500;
+          font-family: 'Raleway', sans-serif;
+        }
+      }
+    }
+  }
+}

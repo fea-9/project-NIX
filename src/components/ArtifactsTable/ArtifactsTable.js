@@ -3,13 +3,16 @@ import sortFunc from "../../utils/sortFunc.js";
 import varyDateView from "../../utils/varyDateView.js";
 import findLastDate from "../../utils/findLastDate.js";
 import { Scrollbars } from 'react-custom-scrollbars';
+//test icons
+import ThreePointIcon from "./ThreePointIcon"
+import ArrowIcon from "./ArrowIcon"
 
 let generateMock = quantity => {//DELETE
   let res = []
   let randomArray = () => {
     let res = []
     var i = 0
-    while(i++ < Math.round(Math.random()*100))res.push(i)
+    while(i++ < Math.round(Math.random()*100))res.push(i + "0000")
     return res
   }
   for(var i = 0; i < quantity; i++){
@@ -27,14 +30,6 @@ let generateMock = quantity => {//DELETE
 }
 
 let mock2 = generateMock(1200)//DELETE
-
-let ArrowIcon = p => (
-	<div className="table-arrow" onClick={p.click}
-		style={{color: p.check ? "blue" : "black"}}
-	>
-		{p.direct ? "V" : "^"}
-	</div>
-)//DELETE
 
 class ArtifactsTable extends Component {
 	state = {
@@ -108,9 +103,12 @@ class ArtifactsTable extends Component {
         </div>
 				<div className = "artifacts-table__indikators">
 					{s.indicators.map((elem, index) => (
-						<div className = {
-								`artifacts-table__indikators__item__${elem.name.split(" ").join("-").toLowerCase()}`
-						}>
+						<div
+              style = {{color: elem.check ? "#7b8180" : "#cad5da"}}
+              className = {
+  								`artifacts-table__indikators__item__${elem.name.split(" ").join("-").toLowerCase()}`
+  						}
+              key= {index}>
 							{elem.name}
 							<ArrowIcon
 								click={this.clickSortHandler(elem)}
@@ -120,9 +118,9 @@ class ArtifactsTable extends Component {
 					))}
 				</div>
 				<div className = "artifacts-table__main">
-          <Scrollbars >
+          <Scrollbars>
   					{!s.data.length ? "spiner..." : s.data.map((elem, index) => (
-  						<div className = "artifacts-table__main__line">
+  						<div key={index} className = "artifacts-table__main__line">
   							<div className = "artifacts-table__main__line__artfs">
   								{elem.name}
                   <div className = "artifacts-table__main__line__artfs__dop">
@@ -134,11 +132,13 @@ class ArtifactsTable extends Component {
   							</div>
   							<div className = "artifacts-table__main__line__keyw">
   								{elem.keyWords.length <= 3 ?
-  									elem.keyWords.map((el,ind) => <span>{el}</span>)
+  									elem.keyWords.map((el,ind) => <span key={ind}>{el}</span>)
   									: elem.keyWords.filter((el, ind) => ind < 3)
-  												   .map((el,inx)=> <span>{el}</span>)
+  												   .map((el,inx)=> <span key={inx+el}>{el}</span>)
   								}
-  								{elem.keyWords.length > 3 ? <span>...</span> : false}
+  								{elem.keyWords.length > 3 ?
+                    <ThreePointIcon data={elem.keyWords.filter((el, index) => index > 3)}/>
+                    : false}
   							</div>
   							<div className = "artifacts-table__main__line__cit">
   								{elem.totalCitation}
