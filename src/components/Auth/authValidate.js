@@ -15,19 +15,25 @@ export const authValidation = (name, value, matchTo=null) => {
 	} 
 
 	if (name === "password") {
-		error.message = [
-			{"8 characters minimum": value.length > 8 ? true : false },
-			{"lowercase character": /^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{1,16}$/.test(value) ? true : false},
-			{"uppercase character" : /^(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{1,16}$/.test(value) ? true : false},
-			{"special character" : /^(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{1,16}$/.test(value) ? true : false},
-			{"number" : /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{1,16}$/.test(value) ? true : false}
-		]		
+		// error.passwordConfig = [
+		// 	{label: "8 characters minimum",
+		// 		value: value.length > 8 ? true : false },
+		// 	{label:"lowercase character",
+		// 		value: /^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{1,16}$/.test(value) ? true : false},
+		// 	{label:"uppercase character",
+		// 		value: /^(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{1,16}$/.test(value) ? true : false},
+		// 	{label:"special character",
+		// 		value: /^(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{1,16}$/.test(value) ? true : false},
+		// 	{label:"number",
+		// 		value: /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{1,16}$/.test(value) ? true : false}
+		// ]
+		// error.status = error.passwordConfig.every(elem => elem.value === true);		
 		
-        // error.message = value.length < 6 ? "Password should contain atleast one special character and one number and be atleast 6 characters long" :        
-        //     !/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(value) ?
-		// 	"Password should contain atleast one special character and one number" : 
-		// 	"";
-		error.status = error.message ? true : false;
+        error.message = value.length < 6 ? "Password should contain atleast one special character and one number and be atleast 6 characters long" :        
+            // !/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(value) ?
+			// "Password should contain atleast one special character and one number" : 
+			"";
+		error.status = error.message ? true : false;		
 	}
 
 	if (name === 'confirmPassword'){

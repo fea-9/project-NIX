@@ -39,55 +39,11 @@ export function resetAuth (){
     }
 )}
 
-/*export function auth ( data, endpoint ) {
-    return async function (dispatch){
-        dispatch (authRequest())
-        try {
-            // let payload = await axios({
-            //     method: 'POST',
-            //     url: `https://0uumsbtgfd.execute-api.eu-central-1.amazonaws.com/Development/v0/auth/${endpoint}`,                               
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     },
-            //     body: data
-            // })
-            let payload
-            let request = new Request ( 
-                `https://0uumsbtgfd.execute-api.eu-central-1.amazonaws.com/Development/v0/auth/${endpoint}`,
-                {
-                    method: 'POST',
-                    mode: 'cors', 
-                    redirect: 'follow', 
-                    headers: new Headers({
-                        "Content-Type": "application/json"
-                    }),
-                    body: JSON.stringify(data)
-                }
-            )
-            await fetch( request )
-                .then ( response => {                    
-                    response.json()
-                        .then ( x => payload = x  )
-                })
-            // localStorage.setItem("token", payload.access_token)
-            console.log("auth success", payload)
-            dispatch (authRequestSuccess({                
-                payload}))
-        }
-
-        catch(error){
-            console.log("error", error)
-            dispatch (authRequestFail({                
-                error
-            }))
-        }
-    }
-}*/
-
 export function authLogout () {
     return function (dispatch){
         localStorage.setItem("access_token", "")
         localStorage.setItem("expires_in", "")
+        localStorage.setItem("refresh_token", "") 
         dispatch(resetAuth())
     }
     
@@ -122,14 +78,15 @@ export function auth ( userData, endpoint ) {
                    userData                 
             ) 
             localStorage.setItem("access_token", payload.access_token)
-            localStorage.setItem("expires_in", payload.expires_in)            
-            console.log("auth success", payload)
+            localStorage.setItem("expires_in", payload.expires_in) 
+            localStorage.setItem("refresh_token", payload.Item.refresh_token)           
+            // console.log("auth success", payload)
             dispatch (authRequestSuccess({                
                 payload}))
         }
 
         catch(error){
-            console.log("error",error)            
+            // console.log("error",error)            
             dispatch (authRequestFail({                
                 error
             }))
