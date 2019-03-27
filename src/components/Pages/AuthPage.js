@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PageTemplate from '../Templates/PageTemplate';
-//Нужно подключить компоненты сайдбар, контент и хедер
+import {PageTemplate} from '../Templates/PageTemplate';
+import Auth from '../Auth/Auth'
 
 
 class AuthPage extends Component {
@@ -11,7 +11,7 @@ class AuthPage extends Component {
 
     render() {
         return (
-            <PageTemplate />
+            <PageTemplate content={<Auth/>} />
         )
     }
 }
