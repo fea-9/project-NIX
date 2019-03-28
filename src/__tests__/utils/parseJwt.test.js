@@ -1,9 +1,7 @@
 import { parseJwt } from "../../utils/parseJwt";
-import { shallow } from "enzyme";
-import Item from "antd/lib/list/Item";
 
 describe("parseJwt", () => {
-  const trueJwt =
+  const jwt =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMWE0MGM0NmMtZjA2OS00NzY0LWFjMzctNTE0NzIyOWNlNmU1IiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlSWQiOjF9LCJpYXQiOjE1NTM3MzEzMzYsImV4cCI6MTU1MzczNDkzNn0.Fsw6c9_JooRFyAZJ4jJjZ9-ZCcUJP4f6VsdwdAdG34M";
 
   const result = {
@@ -17,6 +15,6 @@ describe("parseJwt", () => {
   };
 
   it("returned object from after parse jwt", () => {
-    expect(parseJwt(trueJwt)).toEqual(result);
+    expect(parseJwt(jwt)).toEqual(result);
   });
 });
