@@ -6,8 +6,8 @@ export default (state = initialState.auth, { type, payload, error }) => {
 			return { ...state, isFetching: true };
 		}
 		case "AUTH_REQUEST_SUCCESS": {
-			const { Item, access_token, message } = payload;			
-			return { ...state, error: false, user: Item, access_token, message, isFetching: false };
+			const { Item, message } = payload;			
+			return { ...state, error: false, user: Item, message, isFetching: false };
 		}
 		case "AUTH_REQUEST_FAIL": {
 			const {message} = error
@@ -21,8 +21,8 @@ export default (state = initialState.auth, { type, payload, error }) => {
 			return { ...state, isFetching: true };
 		}
 		case "TOKEN_REFRESH_REQUEST_SUCCESS": {
-			const { user, access_token, message } = payload;			
-			return { ...state, error: false, user, access_token, message, isFetching: false };
+			const { user, message } = payload;			
+			return { ...state, error: false, user, message, isFetching: false };
 		}
 		case "TOKEN_REFRESH_REQUEST_FAIL": {
 			const {message} = error

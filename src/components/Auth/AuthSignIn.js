@@ -14,23 +14,25 @@ class SignIn extends Component{
             value: '',
             config: {           
                 type: "email",
-                placeholder: "Enter your email",
-                name: "email"                                     
+                placeholder: "Email...",
+                name: "email",
+                label: "email"                                     
             },
             touch: false,
             valid: false,
-            error: "" 
+            errorMsg: "" 
         },
         password: {
             value: '',
             config: {            
                 type: "password",
-                placeholder: "Enter your password",
-                name: "password"                             
+                placeholder: "Password...",
+                name: "password",
+                label: "password"                             
             },
             touch: false,
             valid: false,
-            error: ""
+            errorMsg: ""
         }
     }
 
@@ -47,7 +49,7 @@ class SignIn extends Component{
                     value,
                     valid,
                     touch: e.type === "blur" ? true : prevState[name].touch,
-                    error: message
+                    errorMsg: message
                 }
             }
         })
@@ -75,7 +77,7 @@ class SignIn extends Component{
                 ...prevState,
                 [elem]: {
                     ...prevState[elem],
-                    error: inputValid.message,
+                    errorMsg: inputValid.message,
                     valid: !inputValid.status,
                     touch: true
                 }
@@ -88,7 +90,7 @@ class SignIn extends Component{
     }
 
     render () {
-        let {isFetching, authError, authErrorMessage} = this.props
+        let {isFetching, authErrorMessage} = this.props
         let errorMessage = authErrorMessage === "Password incorrect" || 
             authErrorMessage === "No such user" ? "Incorrect email or password" : "Something went wrong. Try again, please"
         let list = Object.keys(this.state).map (elem => {
@@ -97,10 +99,10 @@ class SignIn extends Component{
                 key={elem}
                 name={stateItem.config.name} 
                 type={stateItem.config.type} 
-                label={stateItem.config.name}
+                label={stateItem.config.label}
                 placeholder={stateItem.config.placeholder}
                 touch={stateItem.touch}
-                error={stateItem.error}
+                errorMsg={stateItem.errorMsg}
                 valid={stateItem.valid}
                 onBlur={this.validateInput}
                 onChange={this.validateInput}                
@@ -108,7 +110,7 @@ class SignIn extends Component{
         })
         return (                        
             <form onSubmit={this.submit} noValidate={true} >
-                {authError && <span> {errorMessage} </span>}
+                {authErrorMessage && <span> {errorMessage} </span>}
                 {list}
                 <button disabled={isFetching}> Sign In </button>
             </form>           

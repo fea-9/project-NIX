@@ -14,56 +14,61 @@ class SignUp extends Component{
             value: '',
             config: {           
                 type: "text",
-                placeholder: "Enter your first name",
-                name: "firstName"                                     
+                placeholder: "First name...",
+                name: "firstName",
+                label: "first name"                                     
             },
             touch: false,
             valid: false,
-            error: "" 
+            errorMsg: "" 
         },
         lastName: {
             value: '',
             config: {           
                 type: "text",
-                placeholder: "Enter your last name",
-                name: "lastName"                                     
+                placeholder: "Last name...",
+                name: "lastName",
+                label: "last name"                                    
             },
             touch: false,
             valid: false,
-            error: "" 
+            errorMsg: "" 
         },
         email: {
             value: '',
             config: {           
                 type: "email",
-                placeholder: "Enter your email",
-                name: "email"                                     
+                placeholder: "Email...",
+                name: "email",
+                label: "email"                                    
             },
             touch: false,
             valid: false,
-            error: "" 
+            errorMsg: "" 
         },
         password: {
             value: '',
             config: {            
                 type: "password",
-                placeholder: "Enter your password",
-                name: "password"                             
+                placeholder: "Password...",
+                name: "password",
+                label: "password"                            
             },
             touch: false,
             valid: false,
-            error: ""
+            errorMsg: ""
         },
         confirmPassword: {
             value: '',
             config: {            
                 type: "password",
-                placeholder: "Confirm your password",
-                name: "confirmPassword"                             
+                placeholder: "Confirm password...",
+                name: "confirmPassword",
+                label: ""                             
             },
             touch: false,
             valid: false,
-            error: ""
+            errorMsg: ""
         }
     }
 
@@ -83,12 +88,12 @@ class SignUp extends Component{
                         value,
                         valid,
                         touch: e.type === "blur" ? true : prevState[name].touch,
-                        error: message
+                        errorMsg: message
                     },
                     confirmPassword: {
                         ...prevState.confirmPassword,
                         valid: !confirmValid.status,
-                        error: confirmValid.message
+                        errorMsg: confirmValid.message
                     }
                 }
             } else return {
@@ -98,7 +103,7 @@ class SignUp extends Component{
                     value,
                     valid,
                     touch: e.type === "blur" ? true : prevState[name].touch,
-                    error: message
+                    errorMsg: message
                 }
             }
         })
@@ -132,7 +137,7 @@ class SignUp extends Component{
                 ...prevState,
                 [elem]: {
                     ...prevState[elem],
-                    error: message,
+                    errorMsg: message,
                     valid: !status,
                     touch: true
                 }
@@ -145,7 +150,7 @@ class SignUp extends Component{
     }
 
     render () {
-        let {isFetching, authError, authErrorMessage } = this.props
+        let {isFetching, authErrorMessage } = this.props
         let errorMessage = authErrorMessage === "User already exist" ? 
             "User already exist" : "Something went wrong. Try again, please"
         let list = Object.keys(this.state).map (elem => {
@@ -154,10 +159,10 @@ class SignUp extends Component{
                 key={elem}
                 name={stateItem.config.name} 
                 type={stateItem.config.type} 
-                label={stateItem.config.name}
+                label={stateItem.config.label}
                 placeholder={stateItem.config.placeholder}
                 touch={stateItem.touch}
-                error={stateItem.error}
+                errorMsg={stateItem.errorMsg}
                 valid={stateItem.valid}
                 onBlur={this.validateInput}
                 onChange={this.validateInput}                
