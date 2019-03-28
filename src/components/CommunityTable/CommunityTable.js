@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
+//test
+import TestButton from "./TestButton"
+import getFullMonthDate from "../../utils/getFullMonthDate"
 
 let generateCommunityMock = async () => {
   let res = []
@@ -20,7 +23,7 @@ let generateCommunityMock = async () => {
 				proofsExistence: gitHubUsers[prop].login.length,
 				proofsAttribution: gitHubUsers[prop].starred_url.length,
 				totalCitation: gitHubUsers[prop].events_url.length,
-        since: "10.01.1999"
+        since: `${Math.round(Math.random() * 30) + 1}.01.${Math.round(Math.random() * 1000) + 1000}`
 			})
         })
     })
@@ -72,7 +75,7 @@ export default class CommunityTable extends Component {
                             {user.name}
                           </div>
                           <div className="community-table__main__line__info__since">
-                            Member since {user.since}
+                            Member since {getFullMonthDate(user.since)}
                           </div>
                         </div>
                         <InfoBlock className="community-table__main__line__block"
@@ -87,7 +90,7 @@ export default class CommunityTable extends Component {
                           num={user.totalCitation}
                           text={"TOTAL CITATIONS"}
                         />
-                        <button>View</button>
+                        <TestButton text="View"/>
                     </div>
                   )
                 })

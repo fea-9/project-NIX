@@ -6,6 +6,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 //test icons
 import ThreePointIcon from "./ThreePointIcon"
 import ArrowIcon from "./ArrowIcon"
+import TestButton from "../CommunityTable/TestButton"
 
 let generateMock = quantity => {//DELETE
   let res = []
@@ -31,7 +32,7 @@ let generateMock = quantity => {//DELETE
 
 let mock2 = generateMock(1200)//DELETE
 
-class ArtifactsTable extends Component {
+class DocumentsTable extends Component {
 	state = {
 		data:[],
 		indicators: [
@@ -144,7 +145,8 @@ class ArtifactsTable extends Component {
   								{elem.totalCitation}
   							</div>
   							<div className = "artifacts-table__main__line__prof">
-  								{elem.proof.toString()}
+                  <TestButton text="Transact"/>
+  								{/*elem.proof.toString()*/}
   							</div>
   						</div>
   					))}
@@ -155,4 +157,4 @@ class ArtifactsTable extends Component {
 	}
 }
 
-export default ArtifactsTable
+export default DocumentsTable
