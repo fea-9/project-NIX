@@ -16,11 +16,14 @@ class SignIn extends Component{
                 type: "email",
                 placeholder: "Email...",
                 name: "email",
-                label: "email"                                     
+                label: "email",
+                required: true                                     
             },
-            touch: false,
-            valid: false,
-            errorMsg: "" 
+            validationRequired: {
+                 touch: false,
+                valid: false,
+                errorMsg: "" 
+            }           
         },
         password: {
             value: '',
@@ -28,11 +31,14 @@ class SignIn extends Component{
                 type: "password",
                 placeholder: "Password...",
                 name: "password",
-                label: "password"                             
+                label: "password",
+                required: true                             
             },
-            touch: false,
-            valid: false,
-            errorMsg: ""
+            validationRequired: {
+                touch: false,
+                valid: false,
+                errorMsg: "" 
+            } 
         }
     }
 
@@ -41,15 +47,17 @@ class SignIn extends Component{
         const { name, value } = e.target;
         const {status, message} = authValidation(name, value)
         this.setState(prevState => {
-            const valid = prevState[name].touch ? !status : prevState[name].valid
+            const valid = prevState[name].validationRequired.touch ? !status : prevState[name].validationRequired.valid
             return {
                 ...prevState,
                 [name]: {
                     ...prevState[name],
                     value,
-                    valid,
-                    touch: e.type === "blur" ? true : prevState[name].touch,
-                    errorMsg: message
+                    validationRequired: {                            
+                        valid,
+                        touch: e.type === "blur" ? true : prevState[name].validationRequired.touch,
+                        errorMsg: message
+                    }                    
                 }
             }
         })
@@ -61,7 +69,7 @@ class SignIn extends Component{
         let {auth} = this.props
         const values = Object.keys(this.state).reduce((prev, elem) => ({ ...prev, [elem]: this.state[elem].value }), {});
         if (this.formIsValid()){
-            console.log("submit", values)
+            // console.log("submit", values)
             auth (values, "signin");
         }        
     }
@@ -71,15 +79,17 @@ class SignIn extends Component{
       
         Object.keys(this.state).forEach(elem => {
             let stateItem = this.state[elem]
-            console.log("onsubmit", stateItem)
+            // console.log("onsubmit", stateItem)
             let inputValid = authValidation(stateItem.config.name, stateItem.value)
             this.setState(prevState => ({
                 ...prevState,
                 [elem]: {
                     ...prevState[elem],
-                    errorMsg: inputValid.message,
-                    valid: !inputValid.status,
-                    touch: true
+                    validationRequired: {
+                        errorMsg: inputValid.message,
+                        valid: !inputValid.status,
+                        touch: true
+                    }                    
                 }
             }))
             validForm = !inputValid.status && validForm
@@ -97,13 +107,8 @@ class SignIn extends Component{
             let stateItem = this.state[elem]
             return <InputField 
                 key={elem}
-                name={stateItem.config.name} 
-                type={stateItem.config.type} 
-                label={stateItem.config.label}
-                placeholder={stateItem.config.placeholder}
-                touch={stateItem.touch}
-                errorMsg={stateItem.errorMsg}
-                valid={stateItem.valid}
+                config = {stateItem.config}
+                validationRequired = {stateItem.validationRequired}                
                 onBlur={this.validateInput}
                 onChange={this.validateInput}                
                 />

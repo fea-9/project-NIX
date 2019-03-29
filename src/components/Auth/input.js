@@ -1,12 +1,13 @@
 import React from "react";
 
-export const InputField = ({ label, type = "text", touch, errorMsg, valid, placeholder, labelSpan, ...rest }) => {
-
+export const InputField = ({ config, validationRequired, ...rest }) => {
+	const {name, type, label, placeholder, required} = config
+	const {touch, errorMsg, valid} = validationRequired
 	return (
 		<div>
-			{label && <label>{label} {labelSpan && <span> {labelSpan} </span>}</label>}
+			{label && <label>{label} {!required && <span> (optional) </span>}</label>}
 			<div>
-				<input {...rest} placeholder={placeholder} type={type} />
+				<input {...rest} placeholder={placeholder} type={type} name={name} />
 				{touch && errorMsg && !valid && <span>{errorMsg}</span>}
 			</div>
 		</div>
