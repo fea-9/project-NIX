@@ -60,43 +60,43 @@ export default class CommunityTable extends Component {
         <div className="community-table__total-info">
           {this.state.data.length} People community
         </div>
-        <div className="community-table__main">
-          <Scrollbars>
-              {!this.state.data ? "...spiner" :
-                this.state.data.map ((user, index) => {
-                  let avatarUrl = URL.createObjectURL(user.avatar)
-                  return (
-                    <div key={index} className="community-table__main__line">
-                        <img
-                          className="community-table__main__line__ava"
-                          src={avatarUrl} />
-                        <div className="community-table__main__line__info">
-                          <div className="community-table__main__line__info__name">
-                            {user.name}
+        <Scrollbars>
+          <div className="community-table__main">
+                {!this.state.data.length ? "...spiner" :
+                  this.state.data.map ((user, index) => {
+                    let avatarUrl = URL.createObjectURL(user.avatar)
+                    return (
+                      <div key={index} className="community-table__main__line">
+                          <img
+                            className="community-table__main__line__ava"
+                            src={avatarUrl} />
+                          <div className="community-table__main__line__info">
+                            <div className="community-table__main__line__info__name">
+                              {user.name}
+                            </div>
+                            <div className="community-table__main__line__info__since">
+                              Member since {getFullMonthDate(user.since)}
+                            </div>
                           </div>
-                          <div className="community-table__main__line__info__since">
-                            Member since {getFullMonthDate(user.since)}
-                          </div>
-                        </div>
-                        <InfoBlock className="community-table__main__line__block"
-                          num={user.proofsExistence}
-                          text={"TOTAL PROOFS OF EXISTENCE"}
-                        />
-                        <InfoBlock className="community-table__main__line__block"
-                          num={user.proofsAttribution}
-                          text={"TOTAL PROOFS OF ATTRIBUTION"}
-                        />
-                        <InfoBlock className="community-table__main__line__block"
-                          num={user.totalCitation}
-                          text={"TOTAL CITATIONS"}
-                        />
-                        <TestButton text="View"/>
-                    </div>
-                  )
-                })
-            }
-          </Scrollbars>
-        </div>
+                          <InfoBlock className="community-table__main__line__block"
+                            num={user.proofsExistence}
+                            text={"TOTAL PROOFS OF EXISTENCE"}
+                          />
+                          <InfoBlock className="community-table__main__line__middle-block"
+                            num={user.proofsAttribution}
+                            text={"TOTAL PROOFS OF ATTRIBUTION"}
+                          />
+                          <InfoBlock className="community-table__main__line__block"
+                            num={user.totalCitation}
+                            text={"TOTAL CITATIONS"}
+                          />
+                          <TestButton text="View"/>
+                      </div>
+                    )
+                  })
+              }
+          </div>
+        </Scrollbars>
       </div>
     )
   }
