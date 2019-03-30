@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 //test
-import TestButton from "./TestButton"
+import TestButton from "../DocumentsTable/TestButton"
 import getFullMonthDate from "../../utils/getFullMonthDate"
+import TestSpiner from "../DocumentsTable/TestSpiner"
 
 let generateCommunityMock = async () => {
   let res = []
@@ -60,9 +61,10 @@ export default class CommunityTable extends Component {
         <div className="community-table__total-info">
           {this.state.data.length} People community
         </div>
-        <Scrollbars>
           <div className="community-table__main">
-                {!this.state.data.length ? "...spiner" :
+            {!this.state.data.length ? <TestSpiner /> : false}
+            <Scrollbars>
+                {!this.state.data.length ? false :
                   this.state.data.map ((user, index) => {
                     let avatarUrl = URL.createObjectURL(user.avatar)
                     return (
@@ -95,8 +97,8 @@ export default class CommunityTable extends Component {
                     )
                   })
               }
+            </Scrollbars>
           </div>
-        </Scrollbars>
       </div>
     )
   }

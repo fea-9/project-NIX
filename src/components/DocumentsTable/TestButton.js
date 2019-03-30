@@ -1,5 +1,5 @@
 import React from "react"
-import "./index.scss"
+import "./TestButton.scss"
 
 export default ({text, link, event})=>{
     let bComponent = null;

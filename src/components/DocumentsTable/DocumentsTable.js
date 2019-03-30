@@ -6,7 +6,8 @@ import { Scrollbars } from 'react-custom-scrollbars';
 //test icons
 import ThreePointIcon from "./ThreePointIcon"
 import ArrowIcon from "./ArrowIcon"
-import TestButton from "../CommunityTable/TestButton"
+import TestButton from "./TestButton"
+import TestSpiner from "./TestSpiner"
 
 let generateMock = quantity => {//DELETE
   let res = []
@@ -118,9 +119,9 @@ class DocumentsTable extends Component {
 						</div>
 					))}
 				</div>
-				<div className = "artifacts-table__main">
+				<div id="parent" className = "artifacts-table__main">
           <Scrollbars>
-  					{!s.data.length ? "spiner..." : s.data.map((elem, index) => (
+  					{!s.data.length ? <TestSpiner /> : s.data.map((elem, index) => (
   						<div key={index} className = "artifacts-table__main__line">
   							<div className = "artifacts-table__main__line__artfs">
   								{elem.name}
