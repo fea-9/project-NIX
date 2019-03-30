@@ -5,6 +5,7 @@ import AuthPage from '../Pages/AuthPage';
 import {PageTemplate} from "../Templates/PageTemplate"
 import CommunityTable from "../CommunityTable/CommunityTable"
 import DocumentsTable from "../DocumentsTable/DocumentsTable"
+import TransDocGraph from "../DashboardContent/TransDocGraph/TransDocGraph"
 
 class App extends Component {
 
@@ -20,10 +21,9 @@ class App extends Component {
   render() {
     return (
 
-        <PageTemplate content={<CommunityTable/>}/>
+      <TransDocGraph />
     );
   }
 }
 
 export default App;
-// <PageTemplate content={<DocumentsTable/>}/>
