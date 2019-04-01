@@ -1,9 +1,8 @@
-
-@import url('https://fonts.googleapis.com/css?family=Raleway|Roboto');//artifact page fonts
-
 .artifacts-table {
 	width: 100%;
-	height: 100%;// for work scroll
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 	user-select: none;
 	&__info {
 		font-family: 'Raleway', sans-serif;
@@ -56,7 +55,7 @@
 	}
 	&__main {
 		width: 100%;
-		height: 70vh;
+		flex-grow: 1;
 		&__line {
 		display: flex;
 		justify-content: space-between;

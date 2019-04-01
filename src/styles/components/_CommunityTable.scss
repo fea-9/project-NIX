@@ -1,6 +1,8 @@
 .community-table {
   width: 100%;
   height: 100%;
+  display: flex;
+	flex-direction: column;
   user-select: none;
   &__total-info {
     font-family: 'Roboto', sans-serif;
@@ -14,7 +16,7 @@
   }
   &__main {
     width: 100%;
-    height: 70vh;
+    flex-grow: 1;
     &__line {
       min-height: 115px;
       width: 90%;
