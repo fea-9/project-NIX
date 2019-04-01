@@ -7,7 +7,6 @@ export default {
     auth: {
         isFetching: false,
         user: null,
-        access_token: null,
         error: null,
         message: null
     }  
