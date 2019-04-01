@@ -8,13 +8,14 @@
     height: 100vh;
 
     &__sidebar {
-      
+
     }
 
     &__container {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+
 
       &__header {
 
@@ -31,26 +32,26 @@
   .wrapper {
     max-width: 1920px;
     margin: 0 auto;
-  
+
     .main {
       flex-direction: row;
       max-height: 1080px;
-  
+
       &__sidebar {
-  
+
       }
-  
+
       &__container {
         width: 100%;
         height: 100%;
         flex-grow: 0;
-  
+
         &__header {
-  
+
         }
-  
+
         &__content {
-          // border: 2px solid red;
+          
         }
       }
     }

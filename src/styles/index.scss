@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:500,700|Roboto');
 
-@import "~antd/dist/antd.css";
+// @import "~antd/dist/antd.css";
 
 @import "abstracts/variables";
 @import "abstracts/fonts";
@@ -10,9 +10,10 @@
 
 @import "components/Form";
 @import "components/AuthPage";
-@import "components/artifactsTable";
 @import "components/PageTemplate";
 @import "components/NavList";
 @import "components/Social";
 @import "components/Calendar";
 @import "components/Sidebar";
+@import "components/DocumentsTable";
+@import "components/CommunityTable";

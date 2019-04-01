@@ -1,9 +1,12 @@
 
+@import url('https://fonts.googleapis.com/css?family=Raleway|Roboto');//artifact page fonts
+
 .artifacts-table {
-	width: 85vw;
-	height: 80vh;
-	overflow: hidden;
+	width: 100%;
+	height: 100%;// for work scroll
+	user-select: none;
 	&__info {
+		font-family: 'Raleway', sans-serif;
 		color: #2c2c2c;
 		font-size: 20px;
 		font-weight: bold;
@@ -14,6 +17,7 @@
 		&__dop {
 			font-size: 15px;
 			font-weight: 500;
+			font-family: 'Roboto', sans-serif;
 		}
 	}
 	&__indikators {
@@ -21,16 +25,17 @@
 			justify-content: space-around;
 			margin: 0 30px;
 		&__item {
-			color: red;
-			color: #cad5da;
-			font-weight: Bold;
 			&__artifacts, &__contributors, &__keywords, &__total-citations, &__proof-of-existence {
+				font-family: 'Raleway', sans-serif;
 				display: flex;
 				align-items: center;
 				justify-content: flex-start;
 				font-size: 14px;
 				margin-bottom: 15px;
+				color: #cad5da;
+				font-weight: Bold;
 			}
+
 			&__artifacts {
 				width: 30%;
 				margin-left: 20px;
@@ -42,26 +47,25 @@
 				width: 15%;
 			}
 			&__total-citations {
-				width: 15%;
+				width: 13%;
 			}
 			&__proof-of-existence {
-				width: 15%;
+				width: 17%;
 			}
 		}
 	}
 	&__main {
 		width: 100%;
-		height: 100%;
-		overflow-y: auto;
-
+		height: 70vh;
 		&__line {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		height: 100px;
+		min-height: 100px;
 		margin: 15px 30px;
 		box-shadow: 0  0 40px #cad5da;
 		text-align: left;
+
 
 			&__artfs {
 				width: 30%;
@@ -96,28 +100,35 @@
 				width: 15%;
 			}
 			&__cit {
-				width: 15%;
+				width: 13%;
 				color: #4facfe;
 				font-size: 16px;
-				font-style: Roboto;
 				line-height: 20px;
 				font-weight: Bold;
 			}
 			&__prof {
-				width: 15%;
+				width: 17%;
 			}
 			&__cit, &__prof {
 				text-align: center;
+				font-family: 'Roboto', sans-serif;
+				display:flex;
+				justify-content:center;
 			}
 		}
 	}
 }
+//icons
+.arrow-icon {
+	padding: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
-//DELETE
-.table-arrow {
-	width: 20px;
-	height: 20px;
-	display: block;
-	background: gray;
-	margin-left: 10px;
+.threePointIcon {
+	cursor: pointer
+}
+.threePointIcon:hover {
+	background: #7b8180aa;
 }
