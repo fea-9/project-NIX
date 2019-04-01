@@ -39,7 +39,7 @@ export const ArrowDownSearchIcon = props => (
         <defs>
             <clipPath id="adsi1">
                 <path
-                    class="adsi1"
+                    className="adsi1"
                     d="M253.635-231.009l3.1-3.062-3.1-3.062.949-.938,4.051,4-4.051,4Z"
                     transform="translate(0 0)"
                 />
