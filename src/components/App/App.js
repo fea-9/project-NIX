@@ -20,12 +20,14 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/auth/:name" component={AuthPage} />
+        <Route path="/auth" component={AuthPage} />
         <Route exact path="/dashboard" component={DashboardPage} />
         <Route exact path="/documents" component={DocumentsPage} />
-        <Route exact path="/profile/" component={ProfilePage} />
-        <Route exact path="/community/:user" component={CommunityPage} />
+        <Route exact path="/profile" component={ProfilePage} />
+        <Route exact path="/community" component={CommunityPage} />
         <Route exact path="/search" component={SearchPage} />
+
+        <Route render={() => <div>404</div>} />
       </Switch>
     );
   }
