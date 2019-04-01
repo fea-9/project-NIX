@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import { connect } from 'react-redux';
 
 class ProfileHeader extends Component {
-    getPeiodOfMembership = dateOfRegistration => {
+    getPeriodOfMembership = dateOfRegistration => {
         let diff = Math.floor(dateOfRegistration - new Date().getTime());
         let day = 1000 * 60 * 60 * 24;
     
@@ -33,7 +33,7 @@ class ProfileHeader extends Component {
                     {fullName}
                 </h2>
                 <p>
-                    {getPeiodOfMembership(created_at)}
+                    {this.getPeriodOfMembership(created_at)}
                 </p>
             </>
         )
