@@ -29,7 +29,7 @@ class App extends Component {
 
         <Route render={() => <div>404</div>} />
       </Switch>
-    );
+    )
   }
 }
 
