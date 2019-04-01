@@ -4,6 +4,9 @@
   display: flex;
 	flex-direction: column;
   user-select: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   &__total-info {
     font-family: 'Roboto', sans-serif;
 		color: #2c2c2c;
@@ -16,6 +19,7 @@
   }
   &__main {
     width: 100%;
+    overflow-x: hidden;
     flex-grow: 1;
     &__line {
       min-height: 115px;
@@ -25,6 +29,7 @@
       justify-content: space-around;
       box-shadow: 0  0 40px #cad5da;
       margin: 20px 5%;
+
       &__ava {
         width: 78px;
         height: 78px;
@@ -43,12 +48,14 @@
           font-size: 17px;
           color: #7b8180;
           font-weight: 500;
-
         }
       }
       &__middle-block {
         border-left: 1px solid #6b6b6b30;
         border-right: 1px solid #6b6b6b30;
+        &__num {
+          margin-left: 10px;
+        }
       }
       &__block, &__middle-block {
         width: 18%;

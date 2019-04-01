@@ -4,6 +4,9 @@
 	display: flex;
 	flex-direction: column;
 	user-select: none;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 	&__info {
 		font-family: 'Raleway', sans-serif;
 		color: #2c2c2c;
@@ -47,15 +50,18 @@
 			}
 			&__total-citations {
 				width: 13%;
+				justify-content: center;
 			}
 			&__proof-of-existence {
 				width: 17%;
+				justify-content: center;
 			}
 		}
 	}
 	&__main {
 		width: 100%;
 		flex-grow: 1;
+		overflow-x: hidden;
 		&__line {
 		display: flex;
 		justify-content: space-between;
