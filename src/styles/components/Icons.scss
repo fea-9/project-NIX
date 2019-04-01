@@ -1,145 +1,141 @@
 @import "../abstracts/variables";
 
-.icon{
-  fill:$icon;
+.icon {
+  fill: $icon;
 }
 
-.settings-icon{
-  fill:#fff;
+.settings-icon {
+  fill: #fff;
 }
-.checked-icon{
-  fill:#4ab0fe;
-}
-
-.projects-icon{
-  fill:#37d3ca;
+.checked-icon {
+  fill: #4ab0fe;
 }
 
-.dashboard-menu{
-  &-poe{
-    fill:#34fff3;
+.projects-icon {
+  fill: #37d3ca;
+}
+
+.dashboard-menu {
+  &-poe {
+    fill: #34fff3;
   }
-  &-poa{
-    fill:#5ce5dd;
+  &-poa {
+    fill: #5ce5dd;
   }
-  &-downloads{
-    fill:#37d3ca;
+  &-downloads {
+    fill: #37d3ca;
   }
-  &-share{
-    fill:#26bcb3;
+  &-share {
+    fill: #26bcb3;
   }
 }
 
-.projects-icon-big{
-  opacity:0.5;fill:url(#projects-icon-big);
+.projects-icon-big {
+  opacity: 0.5;
+  fill: url(#projects-icon-big);
 }
 
-.burger-menu-icon{
-  fill:#26bcb3;
-  &:hover{
+.burger-menu-icon {
+  fill: #26bcb3;
+  &:hover {
     fill: $icon-active;
   }
-  &-active{
-    fill: $icon-active;
-  }
-
-}
-
-.arrow-icon{
-  fill:#989898;
-  &:hover{
-    fill: $icon-active;
-  }
-  &-active{
+  &-active {
     fill: $icon-active;
   }
 }
 
-.social-icon{
+.arrow-icon {
+  fill: #989898;
+  &:hover {
+    fill: $icon-active;
+  }
+  &-active {
+    fill: $icon-active;
+  }
+}
+
+.social-icon {
   fill: $socials-icon;
   opacity: 0.5;
 }
 
 .search-icon {
-  &:hover{
+  &:hover {
     fill: url(#search-icon);
     cursor: pointer;
   }
-  active{
+  .active {
     fill: url(#search-icon);
     cursor: pointer;
   }
 }
-.documents-icon{
-  &:hover{
+.documents-icon {
+  &:hover {
     fill: url(#documents-icon);
     cursor: pointer;
   }
-  active{
+  .active {
     fill: url(#documents-icon);
     cursor: pointer;
   }
 }
-.dashboard-icon{
-  &:hover{
+.dashboard-icon {
+  &:hover {
     fill: url(#dashboard-icon);
     cursor: pointer;
   }
-  active{
+  .active {
     fill: url(#dashboard-icon);
     cursor: pointer;
   }
 }
-.community-icon{
-  &:hover{
+.community-icon {
+  &:hover {
     fill: url(#community-icon);
     cursor: pointer;
   }
-  active{
+  .active {
     fill: url(#community-icon);
     cursor: pointer;
   }
 }
-.facebook-icon{
-  &:hover{
+.facebook-icon {
+  &:hover {
     fill: url(#facebook-icon);
     cursor: pointer;
   }
 }
-.twitter-icon{
-  &:hover{
+.twitter-icon {
+  &:hover {
     fill: url(#twitter-icon);
     cursor: pointer;
   }
 }
-.youtube-icon{
-  &:hover{
+.youtube-icon {
+  &:hover {
     fill: url(#youtube-icon);
     cursor: pointer;
   }
 }
-.search-clear-icon{
-
-  &-round{
-    fill:#9fbcba;
-    opacity:0.25;
+.search-clear-icon {
+  &-round {
+    fill: #9fbcba;
+    opacity: 0.25;
   }
-  &-clip{
-    clip-path:url(#search-icon-clip);
+  &-clip {
+    clip-path: url(#search-icon-clip);
   }
 }
-adsi1{
-  clip-rule:evenodd;
+.adsi1 {
+  clip-rule: evenodd;
 }
-.adsi2{
-  fill:#2c2c2c;
+.adsi2 {
+  fill: #2c2c2c;
 }
-.adsi3{
-  clip-path:url(#adsi1);
+.adsi3 {
+  clip-path: url(#adsi1);
 }
-.adsi4{
-  clip-path:url(#adsi2);
+.adsi4 {
+  clip-path: url(#adsi2);
 }
-
-
-
