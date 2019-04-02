@@ -33,7 +33,7 @@ class Sidebar extends Component {
       >
         <div className="top-content-wrapper">
           <div className="logo-wrapper">
-            <Logo className=".logo .logo_sidebar" minimized={this.state.minimized} />
+            <Logo className="logo logo_sidebar" minimized={this.state.minimized} />
           </div>
           <div className="user-profile">
             <div className="profile" onClick={this.clickHandler} />
