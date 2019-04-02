@@ -59,10 +59,10 @@ export function jsonPost(url, data)
         x.send(JSON.stringify(data))
 
         x.onreadystatechange = () => {
-            if (x.readyState == XMLHttpRequest.DONE && x.status == 200){
+            if (x.readyState === XMLHttpRequest.DONE && x.status === 200){
                 resolve(JSON.parse(x.responseText))
             }
-            else if (x.readyState == XMLHttpRequest.DONE && x.status != 200){                
+            else if (x.readyState === XMLHttpRequest.DONE && x.status !== 200){                
                 // console.log(x.responseText)
                 reject(JSON.parse(x.responseText))
             }

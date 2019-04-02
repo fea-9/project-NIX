@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 
 import {authValidation} from "../Auth/authValidate"
 import {InputField, CheckboxField, TextareaField} from "../Auth/input"
+import ProfileAvatar from "./ProfileAvatar"
 
 
 class ProlileForm extends Component{
@@ -14,79 +15,99 @@ class ProlileForm extends Component{
     defaultState = {
         withValidation: {
             firstName: {
-                value: this.props.user.fullName.split(" ")[0],                           
-                type: "text",
-                placeholder: "First name...",
-                name: "firstName",
-                label: "first name",
-                touch: false,
-                valid: false,
-                errorMsg: "",
-                required: true 
+                value: this.props.user.fullName.split(" ")[0],
+                config: {
+                    type: "text",
+                    placeholder: "First name...",
+                    name: "firstName",
+                    label: "first name",
+                    required: true 
+                },
+                validationRequired: {
+                    touch: false,
+                    valid: false,
+                    errorMsg: "" 
+                }                 
             },
             lastName: {
-                value: this.props.user.fullName.split(" ")[1],                           
-                type: "text",
-                placeholder: "Last name...",
-                name: "lastName",
-                label: "last name",
-                touch: false,
-                valid: false,
-                errorMsg: "",                
-                required: true 
+                value: this.props.user.fullName.split(" ")[1], 
+                config: {
+                    type: "text",
+                    placeholder: "Last name...",
+                    name: "lastName",
+                    label: "last name", 
+                    required: true
+                },
+                validationRequired: {
+                    touch: false,
+                    valid: false,
+                    errorMsg: "" 
+                }
             },
             email: {
                 value: this.props.user.email,                          
-                type: "email",
-                placeholder: "Email...",
-                name: "email",
-                label: "email",
-                touch: false,
-                valid: false,
-                errorMsg: "",                
-                required: true 
+                config: {
+                    type: "email",
+                    placeholder: "Email...",
+                    name: "email",
+                    label: "email",
+                    required: true 
+                },
+                validationRequired: {
+                    touch: false,
+                    valid: false,
+                    errorMsg: "" 
+                }
             }           
         },        
-        checkbox: {
-            type: "checkbox",
-            label: "Public Profile",
-            message: "Let other users know you are open to connecting. You can customize a note about this just above",
-            value: "public",
-            name: "publicity",
-            checked: false // from props            
+        publicity: {
+            checked: false, // from props
+            config: {
+                type: "checkbox",
+                label: "Public Profile",
+                message: "Let other users know you are open to connecting. You can customize a note about this just above",
+                value: "public",
+                name: "publicity",
+            }          
         },        
-        textarea: {
-            label: "description",
-            labelSpan: "(optional)",
+        description: {            
             value: "I am open to connecting and meeting new potential collaborators.", // from props
-            name: "description",
-            maxlength: 250,
-            placeholder: "Add some information about yourself..."            
+            config: {
+                type: "textarea",
+                label: "description",
+                required: false,
+                name: "description",
+                placeholder: "Add some information about yourself...",
+                maxlength: 250,
+                cols: 50,
+                rows: 7
+            },            
+            maxlength: 250,                        
         },
-        input: {
-            value: "",               
-            type: "text",
-            placeholder: "Add your research areas to enhance discoverability...",
-            name: "researchAreas",
-            label: "research areas",
-            labelSpan: "(optional)",                 
-            required: false
+        researchAreas: {
+            value: "", 
+            config: {
+                type: "text",
+                placeholder: "Add your research areas to enhance discoverability...",
+                name: "researchAreas",
+                label: "research areas",
+                required: false  
+            }
         },
         researchAreaTags: {
-            tags: ["biology", "chemistry", "biochemistry"]
+            tags: ["biology", "chemistry", "biochemistry"] // from props
         }        
     }
 
-    state = {
-        ...this.defaultState 
-    }
+    state = JSON.parse(JSON.stringify(this.defaultState)) // because of array of tags
 
     validateInput = e => {
         e.persist()
         const { name, value } = e.target;
         this.setState(prevState => {            
             let {status, message} = authValidation(name, value)
-            let valid = prevState.withValidation[name].touch ? !status : prevState.withValidation[name].valid
+            let valid = prevState.withValidation[name].validationRequired.touch ? 
+                !status : prevState.withValidation[name].validationRequired.valid
             return {
                 ...prevState,
                 withValidation: {
@@ -94,9 +115,11 @@ class ProlileForm extends Component{
                     [name]: {
                         ...prevState.withValidation[name],
                         value,
-                        valid,
-                        touch: e.type === "blur" ? true : prevState.withValidation[name].touch,
-                        errorMsg: message
+                        validationRequired: {
+                            valid,
+                            touch: e.type === "blur" ? true : prevState.withValidation[name].validationRequired.touch,
+                            errorMsg: message
+                        }
                     }
                 }
             }             
@@ -117,9 +140,10 @@ class ProlileForm extends Component{
         })   
     }
     
-    onCheckbox = (e) => {
+    onChangeCheckbox = (e) => {
         e.persist()
         const { name } = e.target;
+
         this.setState(prevState => {  
             return {
                 ...prevState,                
@@ -129,133 +153,163 @@ class ProlileForm extends Component{
                 }
             }
         })   
-    }   
+    } 
+    
+    addTags = (e) => {
+        let {value} = e.target
+        value.toLowerCase()
+        let {tags} = this.state.researchAreaTags
+
+        if (e.key === "Enter"){
+            e.preventDefault()
+            if( tags.indexOf(value) > -1){
+                this.setState(prevState => ({
+                    ...prevState,
+                    researchAreas:{
+                        ...prevState.researchAreas,
+                        value: ""
+                }}))
+            } else {
+                tags.push(value)
+                this.setState(prevState => ({
+                    ...prevState,
+                    researchAreas:{
+                        ...prevState.researchAreas,
+                        value: ""
+                }}))
+            }            
+        }
+    }
+
+    deleteTags = e => {
+        let {id} = e.target
+
+        this.setState(prevState => {
+            let tagArray = prevState.researchAreaTags.tags  
+            tagArray.splice( tagArray.indexOf(id), 1)          
+            return {
+            ...prevState,
+            researchAreaTags:{
+                tags: tagArray
+        }}})
+    }
+
 
     submit = e => {
-        e.preventDefault();
-        console.log("start submit")
-        // let {auth, id} = this.props
-        // const {email, firstName, lastName} = this.state.withValidation
-        // const values = {
-        //     email: email.value,             
-        //     fullName: `${firstName.value.trim()} ${lastName.value.trim()}`
-        // };
-        // if (this.formIsValid()){
-        //     console.log("submit", values)
-        //     auth (values, `users/object/${id}/update`);
-        // }        
+        e.preventDefault();       
+        let {auth, id} = this.props
+        const {email, firstName, lastName} = this.state.withValidation
+        const values = {
+            email: email.value,             
+            fullName: `${firstName.value.trim()} ${lastName.value.trim()}`
+        };
+        if (this.formIsValid()){
+            // console.log("submit", values)
+            auth (values, `users/object/${id}/update`);
+        }        
     }
 
     formIsValid = () => {
         let validForm = true
 
-        Object.keys(this.state.inputs).forEach(elem => {
+        Object.keys(this.state.withValidation).forEach(elem => {
             if (elem.required){
-                let stateItem = this.state[elem]
-                let {status, message} = authValidation(stateItem.config.name, stateItem.value, this.state.password.value)            
+                let stateItem = this.state.withValidation[elem]
+                let {status, message} = authValidation(stateItem.config.name, stateItem.value, this.state.withValidation.password.value)            
 
                 this.setState(prevState => ({
                     ...prevState,
                     [elem]: {
                         ...prevState[elem],
-                        errorMsg: message,
-                        valid: !status,
-                        touch: true
+                        validationRequired: {
+                            errorMsg: message,
+                            valid: !status,
+                            touch: true
+                        } 
                     }
                 }))
                 validForm = !status && validForm
             }
         })
+
+        validForm = JSON.stringify(this.state) !== JSON.stringify(this.defaultState) && validForm // to avoid unnecessary requests
        
         return validForm
 
-    }
-
-    addEmailField = () => {
-        let i = 2
-        this.setState({
-            ["email" + i++]: {
-                value: "",                          
-                type: "email",
-                placeholder: "Email...",
-                name: "email",
-                touch: false,
-                valid: false,
-                errorMsg: "",                
-                required: true 
-            }  
-        })
-    }
+    }    
 
     resetForm = () => {
-        this.setState(this.defaultState)
+        this.setState(JSON.parse(JSON.stringify(this.defaultState))) // because of array of tags
     }
 
     render () {
         console.log(this.state)
 
-        let {isFetching, authError, authErrorMessage } = this.props
+        let {isFetching, authErrorMessage } = this.props
 
-        let {checkbox, textarea, input} = this.state
-        let errorMessage = authErrorMessage === "User already exist" ? 
-            "User already exist" : "Something went wrong. Try again, please"
+        let {publicity, description, researchAreas} = this.state
+        let errorMessage = authErrorMessage === "You should specify at least one updateble field in your request" ? 
+            "" : "Something went wrong. Try again, please"
         let list = Object.keys(this.state.withValidation).map (elem => {
             let stateItem = this.state.withValidation[elem]
             return <InputField 
                 key={elem}
-                name={stateItem.name} 
-                type={stateItem.type} 
-                label={stateItem.name}
-                placeholder={stateItem.placeholder}
-                value={stateItem.value}
-                touch={stateItem.touch}
-                errorMsg={stateItem.errorMsg}
-                valid={stateItem.valid}
+                value = {stateItem.value}
+                config = {stateItem.config}
+                validationRequired = {stateItem.validationRequired}
                 onBlur={this.validateInput}
                 onChange={this.validateInput}                
                 />
         })
+        let listOfTags = this.state.researchAreaTags.tags.map (areaTag => {
+            return <span 
+                    key = {areaTag}
+                    id = {areaTag}
+                    onClick = {this.deleteTags} 
+                >
+                {areaTag}
+            </span>
+        })
         return (            
             <form onSubmit={this.submit} noValidate={true} >
-                {authErrorMessage && <span> {errorMessage} </span>}
-                {list}
-                <CheckboxField 
-                    label={checkbox.label} 
-                    type={checkbox.type}
-                    message={checkbox.message} 
-                    value={checkbox.value} 
-                    name={checkbox.name} 
-                    checked={checkbox.checked}  
-                />
-                <TextareaField 
-                    label={textarea.label} 
-                    labelSpan={textarea.labelSpan} 
-                    value={textarea.value} 
-                    name={textarea.name} 
-                    maxlength={textarea.maxlength}
-                    placeholder={textarea.placeholder}
-                    cols={50}
-                    rows={7}
-                />
-                <InputField 
-                    value={input.value}            
-                    type={input.type} 
-                    placeholder={input.placeholder} 
-                    name={input.name} 
-                    label={input.label} 
-                    labelSpan={input.labelSpan}                  
-                    
-                />
-                <button disabled={isFetching}> Save </button>
-                <button disabled={isFetching} onClick={this.resetForm} > Discard </button>
+                <ProfileAvatar />
+                <div className="form__column" >
+                    {authErrorMessage && <span> {errorMessage} </span>}
+                    {list}
+                </div>
+                <div className="form__column" > 
+                    <CheckboxField 
+                        config = {publicity.config}
+                        checked={publicity.checked} 
+                        onChange={this.onChangeCheckbox} 
+                    />
+                    <TextareaField 
+                        config = {description.config}
+                        value={description.value}
+                        onChange={this.onChangeInput}
+                    />
+                    <InputField 
+                        value={researchAreas.value}            
+                        config = {researchAreas.config} 
+                        validationRequired = {{}}
+                        onChange = {this.onChangeInput} 
+                        onKeyDown = {this.addTags}
+                    />
+                    {listOfTags}
+                </div>
+                <button disabled={isFetching} className = "form-button" > 
+                    Save 
+                </button>
+                <button disabled={isFetching} onClick={this.resetForm} className = "form-button" > 
+                    Discard 
+                </button>
             </form>           
         )
     }   
 }
 
 const mapStateToProps = state => {
-	return {
-        // user: state.auth.user,
+	return {        
         // id: state.auth.user.id,
         isFetching: state.auth.isFetching,
         authError: state.auth.error,
