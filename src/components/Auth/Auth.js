@@ -66,7 +66,7 @@ class Auth extends Component {
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actions }, dispatch);
 
 
-export default connect(
+export default withRouter(connect(
 	null,
 	mapDispatchToProps
-)(withRouter(Auth));
+)(Auth));

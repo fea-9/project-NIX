@@ -25,8 +25,8 @@ export default (state = initialState.auth, { type, payload, error }) => {
 			return { ...state, error: false, user, message, isFetching: false };
 		}
 		case "TOKEN_REFRESH_REQUEST_FAIL": {
-			const {message} = error
-			return { ...initialState.auth, error: true, message, isFetching: false };
+			const {err} = error
+			return { ...initialState.auth, error: err, isFetching: false };
 		}
         
 		default:
