@@ -26,13 +26,13 @@ class ProfileHeader extends Component {
     }
 
     render () {
-        const {fullName, created_at} = this.props
+        const {fullName, created_at} = this.props.user
         return (
             <>
-                <h2>
+                <h2 className = "header__profile-name" >
                     {fullName}
                 </h2>
-                <p>
+                <p className = "header__profile-details" >
                     {this.getPeriodOfMembership(created_at)}
                 </p>
             </>
@@ -42,8 +42,8 @@ class ProfileHeader extends Component {
 
 const mapStateToProps = state => {
 	return {        
-        fullName: state.auth.user.fullName,
-        created_at: state.auth.user.created_at
+        // fullName: state.auth.user.fullName,
+        // created_at: state.auth.user.created_at
     };
 };
 

@@ -22,7 +22,7 @@ class ProfileAvatar extends Component{
     }
 
     onSelectFile =  event =>  {                     
-        var file = event.target.files [0] 
+        var file = event.target.files[0] 
         let newImage         
         if ( file.type.split('/')[0] !== 'image' ) return                
         var fileReader = new FileReader ()
@@ -48,7 +48,7 @@ class ProfileAvatar extends Component{
         const {scale, image} = this.state
         // console.log(this.state)
         return (
-            <div>
+            <div className = "avatar-box" >
                 <AvatarEditor 
                     image={image}
                     width={250}

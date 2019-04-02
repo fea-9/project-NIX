@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 
 import {authValidation} from "../Auth/authValidate"
 import {InputField, CheckboxField, TextareaField} from "../Auth/input"
+import ProfileAvatar from "./ProfileAvatar"
 
 
 class ProlileForm extends Component{
@@ -271,6 +272,7 @@ class ProlileForm extends Component{
         })
         return (            
             <form onSubmit={this.submit} noValidate={true} >
+                <ProfileAvatar />
                 <div className="form__column" >
                     {authErrorMessage && <span> {errorMessage} </span>}
                     {list}
@@ -295,8 +297,12 @@ class ProlileForm extends Component{
                     />
                     {listOfTags}
                 </div>
-                <button disabled={isFetching}> Save </button>
-                <button disabled={isFetching} onClick={this.resetForm} > Discard </button>
+                <button disabled={isFetching} className = "form-button" > 
+                    Save 
+                </button>
+                <button disabled={isFetching} onClick={this.resetForm} className = "form-button" > 
+                    Discard 
+                </button>
             </form>           
         )
     }   
