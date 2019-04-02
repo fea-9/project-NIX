@@ -1,0 +1,95 @@
+@import "../abstracts/variables";
+
+.auth-box {
+    height: 100vh;
+    display: flex;    
+  
+    &__aside {
+        width: 50%;
+        background-image: url("../assets/images/Mask Group 2.png");
+        background-size: 100% 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &-logo {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            font-size: 11.8rem;
+            line-height: 13.9rem;
+            color: white;
+        }
+    }
+}
+
+.auth-box__form{
+    width: 50%;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    &-wrapper{
+      width: 60%;
+    }
+  }
+  
+  .form-title {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    border-bottom: 1px solid #D7DDDC;
+    margin-bottom: 4rem;
+  
+    &__link {        
+        color: #9FBCBA;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 2rem;
+        margin: 0 2rem;
+        padding-bottom: 1rem;
+        text-transform: uppercase;
+    
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:hover{
+            color: #4FACFE;
+        }
+    
+        &--active {
+            color: #26BCB3;
+            font-family: 'Raleway', sans-serif;
+            border-bottom: 4px outset #26BCB3;
+            text-decoration: none
+        }
+    }
+}
+.auth__form{
+    .input-box:nth-child(4){ 
+        .input-box__input{
+            margin-bottom: 1rem; 
+        }
+        .input-box__error{
+            margin-bottom: 3.5rem;
+        }                     
+    }
+    .input-box:nth-child(5){ 
+        .input-box__error-message{
+            top: 7rem;
+        }
+    }
+}
+
+.auth-submit-button{
+    font-size: 1.8rem;
+    padding: 0.7rem 8rem;
+}
+
+@media screen and (max-width: 768px) {
+    .auth-box__aside{
+        display: none;
+    }
+    .auth-box__form{
+        width: 100%;
+    }
+}

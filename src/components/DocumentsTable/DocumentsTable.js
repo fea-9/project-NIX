@@ -31,7 +31,8 @@ let generateMock = quantity => {//DELETE
   return res
 }
 
-let mock2 = generateMock(1200)//DELETE
+let mock2 = generateMock(120)//DELETE
+
 
 class DocumentsTable extends Component {
 	state = {
@@ -121,7 +122,7 @@ class DocumentsTable extends Component {
 				</div>
 				<div id="parent" className = "artifacts-table__main">
           <Scrollbars>
-  					{!s.data.length ? <TestSpiner /> : s.data.map((elem, index) => (
+  					{!s.data.length ? <TestSpiner full={true}/> : s.data.map((elem, index) => (
   						<div key={index} className = "artifacts-table__main__line">
   							<div className = "artifacts-table__main__line__artfs">
   								{elem.name}
