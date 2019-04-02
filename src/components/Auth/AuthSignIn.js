@@ -20,7 +20,7 @@ class SignIn extends Component{
                 required: true                                     
             },
             validationRequired: {
-                 touch: false,
+                touch: false,
                 valid: false,
                 errorMsg: "" 
             }           
@@ -114,10 +114,12 @@ class SignIn extends Component{
                 />
         })
         return (                        
-            <form onSubmit={this.submit} noValidate={true} >
+            <form className="auth-box__form" onSubmit={this.submit} noValidate={true} >
                 {authErrorMessage && <span> {errorMessage} </span>}
                 {list}
-                <button disabled={isFetching}> Sign In </button>
+                <button disabled={isFetching} className = "form-button" > 
+                    Sign In 
+                </button>
             </form>           
         )
     }   
