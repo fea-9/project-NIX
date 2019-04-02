@@ -4,7 +4,7 @@ export const InputField = ({ config = {}, validationRequired = {}, ...rest }) =>
 	const {name, type, label, placeholder, required} = config
 	const {touch, errorMsg, valid} = validationRequired
 	return (
-		<div>
+		<div className = "input-box" >
 			{label && 
 				<label className = "input-box__label">
 					{label} 
@@ -29,7 +29,7 @@ export const InputField = ({ config = {}, validationRequired = {}, ...rest }) =>
 export const CheckboxField = ({ config, checked, ...rest }) => {
 	const {type, name, value, label, message} = config
 	return (
-		<div>						
+		<div className = "input-box">						
 			<input {...rest} type={type} id={name} name={name} value={value} />
 			{label && 
 				<label htmlFor={name} className = "checkbox__label" >
@@ -46,7 +46,7 @@ export const CheckboxField = ({ config, checked, ...rest }) => {
 export const TextareaField = ({ config, ...rest }) => {
 	const {name, label, placeholder, required, maxlength, cols, rows} = config
 	return (
-		<div>	
+		<div className = "input-box">	
 			{label && 
 				<label className = "input-box__label" >
 					{label} 

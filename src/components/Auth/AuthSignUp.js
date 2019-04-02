@@ -188,10 +188,10 @@ class SignUp extends Component{
                 />
         })
         return (            
-            <form className="auth-box__form" onSubmit={this.submit} noValidate={true} >
+            <form className="auth__form" onSubmit={this.submit} noValidate={true} >
                 {authErrorMessage && <span> {errorMessage} </span>}
                 {list}
-                <button disabled={isFetching} className = "form-button" > 
+                <button disabled={isFetching} className = "form-button auth-submit-button" > 
                     Sign Up 
                 </button>
             </form>           

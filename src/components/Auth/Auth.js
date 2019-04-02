@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from "redux";
 
@@ -43,17 +43,17 @@ class Auth extends Component {
                 <div className="auth-box__form">
                     <div className = "auth-box__form-wrapper">
                         <nav className="form-title">
-                            <Link 
-                                // activeClassName="form-title__link--active"
+                            <NavLink 
+                                activeClassName="form-title__link--active"
                                 className="form-title__link" to="/auth/signin" onClick = {this.switchForm} >
                                     Sign In
-                            </Link>
+                            </NavLink>
                         
-                            <Link 
-                                // activeClassName="form-title__link--active"
+                            <NavLink 
+                                activeClassName="form-title__link--active"
                                 className="form-title__link" to="/auth/signup" onClick = {this.switchForm} >
                                     Sign Up
-                            </Link>
+                            </NavLink>
                         </nav>
                         {authComponent}
                     </div>
