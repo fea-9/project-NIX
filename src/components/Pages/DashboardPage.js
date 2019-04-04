@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {PageTemplate} from '../Templates/PageTemplate';
 import Sidebar from '../Sidebar/Sidebar';
-//import components dashboard, header, sidebar
+import DashboardContent from "../DashboardContent/DashboardContent"
 
 
 class DashboardPage extends Component {
@@ -12,7 +12,7 @@ class DashboardPage extends Component {
 
     render() {
         return (
-            <PageTemplate sidebar={<Sidebar/>} content={React.createElement('div')} />
+            <PageTemplate sidebar={<Sidebar/>} content={<DashboardContent />} />
         )
     }
 }

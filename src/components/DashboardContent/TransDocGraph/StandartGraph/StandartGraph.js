@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import "./StandartGraph.scss"
 
 export default p =>  {
   const {data, nameKey, valueKey, width = 500, height = 400, gap = 20, textHeight = 12} = {...p}
