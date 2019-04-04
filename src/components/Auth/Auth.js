@@ -10,28 +10,29 @@ import AuthSignIn from "./AuthSignIn";
 import AuthSignUp from "./AuthSignUp"
 
 class Auth extends Component {
-    state = { currentForm: "signin"};
+    // state = { currentForm: "signin"};
 
-    componentDidMount = () => {
-        const { match } = this.props;
-        if (match.params.id !== this.state.currentForm){
-            this.setState({ currentForm: match.params.id })                           
-        }             
-    }  
+    // componentDidMount = () => {
+    //     const { match } = this.props;
+    //     if (match.params.id !== this.state.currentForm){
+    //         this.setState({ currentForm: match.params.id })                           
+    //     }             
+    // }  
 
-    componentDidUpdate = (prevProps, prevState) => {
-        const { match, history, resetAuth } = this.props; 
+    // componentDidUpdate = (prevProps, prevState) => {
+    //     const { match, history, resetAuth } = this.props; 
         
-        if (match.params.id !== prevState.currentForm){
-            this.setState({ currentForm: match.params.id })
-            resetAuth()
-            return history.push(`/auth/${match.params.id}`)                
-        } 
-    }
+    //     if (match.params.id !== prevState.currentForm){
+    //         this.setState({ currentForm: match.params.id })
+    //         resetAuth()
+    //         return history.push(`/auth/${match.params.id}`)                
+    //     } 
+    // }
 
-	render() {		
-        const authComponent = this.state.currentForm === "signin" ? <AuthSignIn /> :
-            this.state.currentForm === "signup" ? <AuthSignUp /> : <AuthSignIn />;         
+	render() {	
+        const {authComponent} = this.props
+        // const authComponent = this.state.currentForm === "signin" ? <AuthSignIn /> :
+        //     this.state.currentForm === "signup" ? <AuthSignUp /> : <AuthSignIn />;         
 		
         return (
             <div className="auth-box">
@@ -63,10 +64,11 @@ class Auth extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actions }, dispatch);
+export default Auth;
+// const mapDispatchToProps = dispatch => bindActionCreators({ ...actions }, dispatch);
 
 
-export default withRouter(connect(
-    null,
-    mapDispatchToProps
-)(Auth));
+// export default withRouter(connect(
+//     null,
+//     mapDispatchToProps
+// )(Auth));

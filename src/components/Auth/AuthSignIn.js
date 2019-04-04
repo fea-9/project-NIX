@@ -115,7 +115,10 @@ class SignIn extends Component{
         })
         return (                        
             <form className="auth__form" onSubmit={this.submit} noValidate={true} >
-                {authErrorMessage && <span> {errorMessage} </span>}
+                { authErrorMessage && 
+                    <span className = "form__error-message"> 
+                        {errorMessage} 
+                    </span>}
                 {list}
                 <button disabled={isFetching} className = "form-button auth-submit-button" > 
                     Sign In 
