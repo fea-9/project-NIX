@@ -59,10 +59,10 @@ export function jsonPost(url, data)
         x.send(JSON.stringify(data))
 
         x.onreadystatechange = () => {
-            if (x.readyState == XMLHttpRequest.DONE && x.status == 200){
+            if (x.readyState === XMLHttpRequest.DONE && x.status === 200){
                 resolve(JSON.parse(x.responseText))
             }
-            else if (x.readyState == XMLHttpRequest.DONE && x.status != 200){                
+            else if (x.readyState === XMLHttpRequest.DONE && x.status !== 200){                
                 // console.log(x.responseText)
                 reject(JSON.parse(x.responseText))
             }
@@ -77,9 +77,9 @@ export function auth ( userData, endpoint ) {
                 `https://0uumsbtgfd.execute-api.eu-central-1.amazonaws.com/Development/v0/auth/${endpoint}`,                
                    userData                 
             ) 
-            localStorage.setItem("access_token", payload.access_token)
-            localStorage.setItem("expires_in", payload.expires_in) 
-            localStorage.setItem("refresh_token", payload.Item.refresh_token)           
+            payload.access_token && localStorage.setItem("access_token", payload.access_token)
+            payload.expires_in && localStorage.setItem("expires_in", payload.expires_in) 
+            payload.Item && localStorage.setItem("refresh_token", payload.Item.refresh_token)           
             // console.log("auth success", payload)
             dispatch (authRequestSuccess({                
                 payload}))

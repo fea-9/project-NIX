@@ -1,0 +1,198 @@
+@import "../abstracts/variables";
+
+.profile { 
+
+  &-form{
+    width: 100%;
+    height: 100%;
+    position: relative; 
+    border-top: 1px solid $light-grey-text; 
+    box-sizing: border-box;    
+  }
+
+  &__form-box{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    min-height: calc(100vh - 97px - 70px);
+    width: 100%;
+    padding: 5rem;
+    flex-grow: 1;
+  }
+
+  &__buttons-box{
+    width: 100%; 
+    background: $dark-black;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &-submit-button{
+    font-size: 2.5rem;
+    padding: 2rem 5rem;
+    float: right;
+  }
+
+  &-discard-button{
+    font-size: 2.5rem;
+    padding: 2rem 5rem;
+    float: right;
+    background: #ffffff26;
+    font-weight: 400;
+    &:hover{
+      background-image: linear-gradient(180deg, $light-grey-text 15%,  #ffffff26 );
+    }
+  }  
+}
+
+.form-column{
+  width: 100%;
+  height: 100%;
+  margin-left: 5rem;
+  position: relative;
+  &:last-of-type{
+    .input-box:nth-child(3){ 
+      .input-box__input{
+          margin-bottom: 1rem; 
+      }
+    }  
+  }
+
+  .tags{ 
+    position: relative;
+    font-family: 'Raleway';
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: $dark-black;
+    background: #e7eeee;
+    border-radius: 12rem;
+    padding: 0.6rem 3.5rem 0.6rem 1.9rem;
+    margin: 1rem 1rem 0rem 0rem;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &-delete{
+      cursor: pointer; 
+      position: absolute;
+      right: 1.5rem; 
+      color: $icon;
+      font-weight: 400;
+    }
+
+    &-box{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.avatar{
+  &-box{
+    width: 25rem;
+    position: relative;
+  }
+
+  &-preview{
+    margin-bottom: 2rem;
+  }
+
+  &-select {
+    position: absolute;
+    top: 22rem;
+    right: 1.5rem;
+    font-size: 2.5rem;
+    color: white;
+    cursor: pointer;
+    z-index: 20;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &__buttons-box{     
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &-ok-button, &-cancel-button{
+    font-size: 1.5rem;
+    padding: 1.1rem 2.5rem;
+    border-radius: 5px;    
+  }
+
+  &-cancel-button{
+    color: $dark-grey-text;
+    font-weight: 500;
+    background: none;
+    margin-right: 1rem;
+    &:hover{
+      background-image: linear-gradient(180deg, $light-grey-text 0%,  #aeaeae );
+      color: white;
+    }
+  }
+
+  &-range {
+    -webkit-appearance: none;
+    background: transparent;
+    width: 100%;
+    height: 2rem;
+    margin: 0;
+    &:focus {
+      outline: none;
+    } 
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 2rem;
+      width: 1.2rem;
+      border-radius: 5rem;
+      background: linear-gradient(to bottom, #03EFFE, #4FACFE );
+      border: none;
+      cursor: pointer;
+      margin-top: -0.7rem;
+    }
+    &::-moz-range-thumb, &::-ms-thumb {
+      height: 2rem;
+      width: 1.2rem;
+      border-radius: 5rem;
+      background: linear-gradient(to bottom, #03EFFE, #4FACFE );
+      cursor: pointer;
+      border: none;
+    }    
+    &::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 0.5rem;
+      cursor: pointer;
+      border: 0.1rem solid #CAD5DA;
+      border-radius: 0.5rem;
+    }
+    &::-moz-range-track {
+      width: 100%;
+      height: 0.5rem;
+      cursor: pointer;
+    }
+    &::-ms-track {
+      width: 100%;
+      height: 0.5rem;
+      cursor: pointer;
+      border-color: transparent;
+      color: transparent;
+      border: 0.1rem solid #CAD5DA;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    &__form-box{     
+      flex-direction: column;      
+      padding: 1rem; 
+      .form-column{     
+        margin-left: 0rem;
+      }    
+    }    
+  }
+}

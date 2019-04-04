@@ -1,8 +1,12 @@
-@import "~antd/dist/antd.css";
-
 @import "abstracts/variables";
+@import "abstracts/fonts";
+@import "components/Icons";
 
 @import "base/base";
 
+@import "components/baseFormElements";
+
+@import "components/Profile";
 @import "components/AuthPage";
+@import "components/HeaderTemplate";
 @import "components/artifactsTable";

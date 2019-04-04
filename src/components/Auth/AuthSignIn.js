@@ -14,23 +14,31 @@ class SignIn extends Component{
             value: '',
             config: {           
                 type: "email",
-                placeholder: "Enter your email",
-                name: "email"                                     
+                placeholder: "Email...",
+                name: "email",
+                label: "email",
+                required: true                                     
             },
-            touch: false,
-            valid: false,
-            error: "" 
+            validationRequired: {
+                touch: false,
+                valid: false,
+                errorMsg: "" 
+            }           
         },
         password: {
             value: '',
             config: {            
                 type: "password",
-                placeholder: "Enter your password",
-                name: "password"                             
+                placeholder: "Password...",
+                name: "password",
+                label: "password",
+                required: true                             
             },
-            touch: false,
-            valid: false,
-            error: ""
+            validationRequired: {
+                touch: false,
+                valid: false,
+                errorMsg: "" 
+            } 
         }
     }
 
@@ -39,15 +47,17 @@ class SignIn extends Component{
         const { name, value } = e.target;
         const {status, message} = authValidation(name, value)
         this.setState(prevState => {
-            const valid = prevState[name].touch ? !status : prevState[name].valid
+            const valid = prevState[name].validationRequired.touch ? !status : prevState[name].validationRequired.valid
             return {
                 ...prevState,
                 [name]: {
                     ...prevState[name],
                     value,
-                    valid,
-                    touch: e.type === "blur" ? true : prevState[name].touch,
-                    error: message
+                    validationRequired: {                            
+                        valid,
+                        touch: e.type === "blur" ? true : prevState[name].validationRequired.touch,
+                        errorMsg: message
+                    }                    
                 }
             }
         })
@@ -59,7 +69,7 @@ class SignIn extends Component{
         let {auth} = this.props
         const values = Object.keys(this.state).reduce((prev, elem) => ({ ...prev, [elem]: this.state[elem].value }), {});
         if (this.formIsValid()){
-            console.log("submit", values)
+            // console.log("submit", values)
             auth (values, "signin");
         }        
     }
@@ -69,15 +79,17 @@ class SignIn extends Component{
       
         Object.keys(this.state).forEach(elem => {
             let stateItem = this.state[elem]
-            console.log("onsubmit", stateItem)
+            // console.log("onsubmit", stateItem)
             let inputValid = authValidation(stateItem.config.name, stateItem.value)
             this.setState(prevState => ({
                 ...prevState,
                 [elem]: {
                     ...prevState[elem],
-                    error: inputValid.message,
-                    valid: !inputValid.status,
-                    touch: true
+                    validationRequired: {
+                        errorMsg: inputValid.message,
+                        valid: !inputValid.status,
+                        touch: true
+                    }                    
                 }
             }))
             validForm = !inputValid.status && validForm
@@ -88,29 +100,29 @@ class SignIn extends Component{
     }
 
     render () {
-        let {isFetching, authError, authErrorMessage} = this.props
+        let {isFetching, authErrorMessage} = this.props
         let errorMessage = authErrorMessage === "Password incorrect" || 
             authErrorMessage === "No such user" ? "Incorrect email or password" : "Something went wrong. Try again, please"
         let list = Object.keys(this.state).map (elem => {
             let stateItem = this.state[elem]
             return <InputField 
                 key={elem}
-                name={stateItem.config.name} 
-                type={stateItem.config.type} 
-                label={stateItem.config.name}
-                placeholder={stateItem.config.placeholder}
-                touch={stateItem.touch}
-                error={stateItem.error}
-                valid={stateItem.valid}
+                config = {stateItem.config}
+                validationRequired = {stateItem.validationRequired}                
                 onBlur={this.validateInput}
                 onChange={this.validateInput}                
                 />
         })
         return (                        
-            <form onSubmit={this.submit} noValidate={true} >
-                {authError && <span> {errorMessage} </span>}
+            <form className="auth__form" onSubmit={this.submit} noValidate={true} >
+                { authErrorMessage && 
+                    <span className = "form__error-message"> 
+                        {errorMessage} 
+                    </span>}
                 {list}
-                <button disabled={isFetching}> Sign In </button>
+                <button disabled={isFetching} className = "form-button auth-submit-button" > 
+                    Sign In 
+                </button>
             </form>           
         )
     }   
