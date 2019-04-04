@@ -30,10 +30,16 @@ let generateMock = quantity => {//DELETE
   }
   return res
 }
+<<<<<<< HEAD
 let mock =() => (new Promise( rs =>{
   setTimeout(()=>{ rs(generateMock(1200))},3000)
 }))
 let mock2 = generateMock(1200)//DELETE
+=======
+
+let mock2 = generateMock(120)//DELETE
+
+>>>>>>> 30c1eb350653507e79372ad3ad6c78efe19fb80e
 
 class DocumentsTable extends Component {
 	state = {
@@ -123,7 +129,7 @@ class DocumentsTable extends Component {
 				</div>
 				<div className = "artifacts-table__main">
           <Scrollbars>
-  					{!s.data.length ? <TestSpiner /> : s.data.map((elem, index) => (
+  					{!s.data.length ? <TestSpiner full={true}/> : s.data.map((elem, index) => (
   						<div key={index} className = "artifacts-table__main__line">
   							<div className = "artifacts-table__main__line__artfs">
   								{elem.name}

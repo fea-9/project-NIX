@@ -46,9 +46,9 @@ export function refreshTokens ( refreshToken ) {
                 `https://0uumsbtgfd.execute-api.eu-central-1.amazonaws.com/Development/v0/auth/refresh`,                
                 refreshToken                 
             ) 
-            localStorage.setItem("access_token", payload.access_token)
-            localStorage.setItem("expires_in", payload.expires_in)  
-            localStorage.setItem("refresh_token", payload.user.refresh_token)           
+            payload.access_token && localStorage.setItem("access_token", payload.access_token)
+            payload.expires_in && localStorage.setItem("expires_in", payload.expires_in)  
+            payload.user && localStorage.setItem("refresh_token", payload.user.refresh_token)           
             // console.log("refresh success", payload)
             dispatch (tokenRefreshRequestSuccess({                
                 payload}))

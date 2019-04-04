@@ -14,56 +14,76 @@ class SignUp extends Component{
             value: '',
             config: {           
                 type: "text",
-                placeholder: "Enter your first name",
-                name: "firstName"                                     
+                placeholder: "First name...",
+                name: "firstName",
+                label: "first name",
+                required: true                                     
             },
-            touch: false,
-            valid: false,
-            error: "" 
+            validationRequired: {
+                touch: false,
+                valid: false,
+                errorMsg: "" 
+            } 
         },
         lastName: {
             value: '',
             config: {           
                 type: "text",
-                placeholder: "Enter your last name",
-                name: "lastName"                                     
+                placeholder: "Last name...",
+                name: "lastName",
+                label: "last name",
+                required: true                                    
             },
-            touch: false,
-            valid: false,
-            error: "" 
+            validationRequired: {
+                touch: false,
+                valid: false,
+                errorMsg: "" 
+            }  
         },
         email: {
             value: '',
             config: {           
                 type: "email",
-                placeholder: "Enter your email",
-                name: "email"                                     
+                placeholder: "Email...",
+                name: "email",
+                label: "email",
+                required: true                                    
             },
-            touch: false,
-            valid: false,
-            error: "" 
+            validationRequired: {
+                touch: false,
+                valid: false,
+                errorMsg: "" 
+            }  
         },
         password: {
             value: '',
             config: {            
                 type: "password",
-                placeholder: "Enter your password",
-                name: "password"                             
+                placeholder: "Password...",
+                name: "password",
+                label: "password",
+                required: true                            
             },
-            touch: false,
-            valid: false,
-            error: ""
+            validationRequired: {
+                touch: false,
+                valid: false,
+                errorMsg: "" 
+            } 
         },
         confirmPassword: {
             value: '',
             config: {            
                 type: "password",
-                placeholder: "Confirm your password",
-                name: "confirmPassword"                             
+                placeholder: "Confirm password...",
+                name: "confirmPassword",
+                label: "",
+                required: true                             
             },
-            touch: false,
-            valid: false,
-            error: ""
+            validationRequired: {
+                touch: false,
+                valid: false,
+                errorMsg: "" 
+            } 
         }
     }
 
@@ -72,7 +92,7 @@ class SignUp extends Component{
         const { name, value } = e.target;
         this.setState(prevState => {
             let {status, message} = authValidation(name, value, this.state.password.value)
-            let valid = prevState[name].touch ? !status : prevState[name].valid
+            let valid = prevState[name].validationRequired.touch ? !status : prevState[name].validationRequired.valid            
             if (name === "password"){
                 const {confirmPassword} = this.state
                 let confirmValid = authValidation(confirmPassword.config.name, confirmPassword.value, value)
@@ -81,14 +101,19 @@ class SignUp extends Component{
                     [name]: {
                         ...prevState[name],
                         value,
-                        valid,
-                        touch: e.type === "blur" ? true : prevState[name].touch,
-                        error: message
+                        validationRequired: {
+                            valid,
+                            touch: e.type === "blur" ? true : prevState[name].validationRequired.touch,
+                            errorMsg: message
+                        }                        
                     },
                     confirmPassword: {
                         ...prevState.confirmPassword,
-                        valid: !confirmValid.status,
-                        error: confirmValid.message
+                        validationRequired: {
+                            touch: prevState.confirmPassword.validationRequired.touch,
+                            valid: !confirmValid.status,
+                            errorMsg: confirmValid.message
+                        }                        
                     }
                 }
             } else return {
@@ -96,9 +121,11 @@ class SignUp extends Component{
                 [name]: {
                     ...prevState[name],
                     value,
-                    valid,
-                    touch: e.type === "blur" ? true : prevState[name].touch,
-                    error: message
+                    validationRequired: {
+                        valid,
+                        touch: e.type === "blur" ? true : prevState[name].validationRequired.touch,
+                        errorMsg: message
+                    }                    
                 }
             }
         })
@@ -107,7 +134,7 @@ class SignUp extends Component{
 
     submit = e => {
         e.preventDefault();
-        console.log("start submit")
+        // console.log("start submit")
         let {auth} = this.props
         const {email, password, firstName, lastName} = this.state
         const values = {
@@ -116,7 +143,7 @@ class SignUp extends Component{
             fullName: `${firstName.value.trim()} ${lastName.value.trim()}`
         };
         if (this.formIsValid()){
-            console.log("submit", values)
+            // console.log("submit", values)
             auth (values, "signup");
         }        
     }
@@ -132,9 +159,11 @@ class SignUp extends Component{
                 ...prevState,
                 [elem]: {
                     ...prevState[elem],
-                    error: message,
-                    valid: !status,
-                    touch: true
+                    validationRequired: {
+                        errorMsg: message,
+                        valid: !status,
+                        touch: true
+                    }                    
                 }
             }))
             validForm = !status && validForm
@@ -145,29 +174,26 @@ class SignUp extends Component{
     }
 
     render () {
-        let {isFetching, authError, authErrorMessage } = this.props
+        let {isFetching, authErrorMessage } = this.props
         let errorMessage = authErrorMessage === "User already exist" ? 
-            "User already exist" : "Something went wrong. Try again, please"
+            "User already exists" : "Something went wrong. Try again, please"
         let list = Object.keys(this.state).map (elem => {
             let stateItem = this.state[elem]
             return <InputField 
-                key={elem}
-                name={stateItem.config.name} 
-                type={stateItem.config.type} 
-                label={stateItem.config.name}
-                placeholder={stateItem.config.placeholder}
-                touch={stateItem.touch}
-                error={stateItem.error}
-                valid={stateItem.valid}
-                onBlur={this.validateInput}
-                onChange={this.validateInput}                
+                key = {elem}
+                config = {stateItem.config}
+                validationRequired = {stateItem.validationRequired}
+                onBlur = {this.validateInput}
+                onChange = {this.validateInput}                
                 />
         })
         return (            
-            <form onSubmit={this.submit} noValidate={true} >
+            <form className="auth__form" onSubmit={this.submit} noValidate={true} >
                 {authErrorMessage && <span> {errorMessage} </span>}
                 {list}
-                <button disabled={isFetching}> Sign Up </button>
+                <button disabled={isFetching} className = "form-button auth-submit-button" > 
+                    Sign Up 
+                </button>
             </form>           
         )
     }   

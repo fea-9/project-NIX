@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 // import "./StandartGraph.scss"
+=======
+>>>>>>> 30c1eb350653507e79372ad3ad6c78efe19fb80e
 
 export default p =>  {
   const {

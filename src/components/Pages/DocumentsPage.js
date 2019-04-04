@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
-import {PageTemplate} from '../Templates/PageTemplate';
+import React, { Component } from "react";
+import { PageTemplate } from "../Templates/PageTemplate";
+import Sidebar from "../Sidebar/Sidebar";
+import DocumentsTable from "../DocumentsTable/DocumentsTable";
 //import components documents, header, sidebar
 
+class DocumentsPage extends Component {
+  componentDidMount() {}
 
-// class DocumentsPage extends Component {
+  render() {
+    return <PageTemplate sidebar={<Sidebar />} content={<DocumentsTable />} />;
+  }
+}
 
-//     componentDidMount() {
-
-//     }
-
-//     render() {
-//         return (
-//             <PageTemplate sidebar={} header={} content={} />
-//         )
-//     }
-// }
-
-// export default DocumentsPage;
+export default DocumentsPage;

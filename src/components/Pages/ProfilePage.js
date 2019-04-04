@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
-import {PageTemplate} from '../Templates/PageTemplate';
+import React, { Component } from "react";
+import { PageTemplate } from "../Templates/PageTemplate";
+import Sidebar from "../Sidebar/Sidebar";
+import ProfileForm from "../Profile/ProlileForm";
 //import components profile, header, sidebar
 
+class ProfilePage extends Component {
+  componentDidMount() {}
 
-// class ProfilePage extends Component {
+  render() {
+    return <PageTemplate sidebar={<Sidebar />} content={<ProfileForm />} />;
+  }
+}
 
-//     componentDidMount() {
-
-//     }
-
-//     render() {
-//         return (
-//             <PageTemplate sidebar={} header={} content={} />
-//         )
-//     }
-// }
-
-// export default ProfilePage;
+export default ProfilePage;

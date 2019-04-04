@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {PageTemplate} from '../Templates/PageTemplate';
 import Auth from '../Auth/Auth'
+import Sidebar from '../Sidebar/Sidebar';
 
 
 class AuthPage extends Component {
@@ -11,7 +12,7 @@ class AuthPage extends Component {
 
     render() {
         return (
-            <PageTemplate content={<Auth/>} />
+            <PageTemplate sidebar={<Sidebar/>} content={<Auth/>} />
         )
     }
 }

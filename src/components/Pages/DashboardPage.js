@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import {PageTemplate} from '../Templates/PageTemplate';
-//import components dashboard, header, sidebar
+import Sidebar from '../Sidebar/Sidebar';
+import DashboardContent from "../DashboardContent/DashboardContent"
 
 
-// class DashboardPage extends Component {
+class DashboardPage extends Component {
 
-//     componentDidMount() {
+    componentDidMount() {
 
-//     }
+    }
 
-//     render() {
-//         return (
-//             <PageTemplate sidebar={} header={} content={} />
-//         )
-//     }
-// }
+    render() {
+        return (
+            <PageTemplate sidebar={<Sidebar/>} content={<DashboardContent />} />
+        )
+    }
+}
 
-// export default DashboardPage;
+export default DashboardPage;

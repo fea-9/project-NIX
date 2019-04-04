@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StandartGraph from "./StandartGraph/StandartGraph.js"
+import CircleGraph from "./CircleGraph/CircleGraph.js"
 
 let data = [
    {
@@ -30,6 +31,7 @@ export default class TransDocGraph extends Component {
       <div className="tr-doc-graph">
         <h1>Coming soon...</h1>
         <StandartGraph data={data} nameKey={"key"} valueKey={"count"}/>
+        <CircleGraph />
       </div>
     )
   }

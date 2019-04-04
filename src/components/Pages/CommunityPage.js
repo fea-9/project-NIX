@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
-import {PageTemplate} from '../Templates/PageTemplate';
+import React, { Component } from "react";
+import { PageTemplate } from "../Templates/PageTemplate";
+import Sidebar from "../Sidebar/Sidebar";
+import CommunityTable from "../CommunityTable/CommunityTable";
 //import components community, header, sidebar
 
+class CommunityPage extends Component {
+  componentDidMount() {}
 
-// class CommunityPage extends Component {
+  render() {
+    return <PageTemplate sidebar={<Sidebar />} content={<CommunityTable />} />;
+  }
+}
 
-//     componentDidMount() {
-
-//     }
-
-//     render() {
-//         return (
-//             <PageTemplate sidebar={} header={} content={} />
-//         )
-//     }
-// }
-
-// export default CommunityPage;
+export default CommunityPage;

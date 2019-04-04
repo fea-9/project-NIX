@@ -1,0 +1,18 @@
+.circle-graph {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.line {
+  font-size: 15px;
+  border-bottom: 2px dotted #CAD5DA;
+  &__text {
+    color: #7B8180;
+  }
+  &__num {
+    color: #7B8180;
+  }
+}

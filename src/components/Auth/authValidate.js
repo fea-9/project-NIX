@@ -29,7 +29,7 @@ export const authValidation = (name, value, matchTo=null) => {
 		// ]
 		// error.status = error.passwordConfig.every(elem => elem.value === true);		
 		
-        error.message = value.length < 6 ? "Password should contain atleast one special character and one number and be atleast 6 characters long" :        
+        error.message = value.length < 6 ? "Password should contain at least one special character and one number and be at least 6 characters long" :        
             // !/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(value) ?
 			// "Password should contain atleast one special character and one number" : 
 			"";
