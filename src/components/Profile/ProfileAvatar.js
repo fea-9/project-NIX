@@ -36,7 +36,8 @@ class ProfileAvatar extends Component{
         fileReader.readAsDataURL ( file )
     }
 
-    resetForm = () => {
+    resetForm = (e) => {
+        e.preventDefault();
         this.setState(this.defaultState) 
     }
 
@@ -50,6 +51,7 @@ class ProfileAvatar extends Component{
         return (
             <div className = "avatar-box" >
                 <AvatarEditor 
+                    className = "avatar-preview"
                     image={image}
                     width={250}
                     height={250}
@@ -75,8 +77,16 @@ class ProfileAvatar extends Component{
                         type: "range", name: "scale", 
                     }} step="0.01" min="1" max="2" value={scale} onChange={this.onZoomChange} 
                 />
-                <button onClick = {this.resetForm} > Cancel </button>
-                <button type="submit" onSubmit = {this.submit} > OK </button>
+                <div className = "avatar__buttons-box" > 
+                    <button className = "form-button avatar-cancel-button"
+                        onClick = {this.resetForm} > 
+                            Cancel 
+                    </button>
+                    <button className = "form-button avatar-ok-button"
+                        type="submit" onSubmit = {this.submit} > 
+                            OK 
+                    </button>
+                </div>
             </div>
         )
     }

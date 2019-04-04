@@ -61,7 +61,7 @@ class ProlileForm extends Component{
             }           
         },        
         publicity: {
-            checked: false, // from props
+            checked: true, // from props
             config: {
                 type: "checkbox",
                 label: "Public Profile",
@@ -243,7 +243,7 @@ class ProlileForm extends Component{
     }
 
     render () {
-        console.log(this.state)
+        // console.log(this.state)
 
         let {isFetching, authErrorMessage } = this.props
 
@@ -262,47 +262,61 @@ class ProlileForm extends Component{
                 />
         })
         let listOfTags = this.state.researchAreaTags.tags.map (areaTag => {
-            return <span 
-                    key = {areaTag}
-                    id = {areaTag}
-                    onClick = {this.deleteTags} 
-                >
-                {areaTag}
-            </span>
+            return (
+            <span 
+                className = "tags"
+                key = {areaTag} >
+                    {areaTag}
+                    <span className = "tags-delete" 
+                        onClick = {this.deleteTags}
+                        id = {areaTag} >
+                            x
+                    </span>
+            </span>)
         })
         return (            
-            <form onSubmit={this.submit} noValidate={true} >
-                <ProfileAvatar />
-                <div className="form__column" >
-                    {authErrorMessage && <span> {errorMessage} </span>}
-                    {list}
-                </div>
-                <div className="form__column" > 
-                    <CheckboxField 
-                        config = {publicity.config}
-                        checked={publicity.checked} 
-                        onChange={this.onChangeCheckbox} 
-                    />
-                    <TextareaField 
-                        config = {description.config}
-                        value={description.value}
-                        onChange={this.onChangeInput}
-                    />
-                    <InputField 
-                        value={researchAreas.value}            
-                        config = {researchAreas.config} 
-                        validationRequired = {{}}
-                        onChange = {this.onChangeInput} 
-                        onKeyDown = {this.addTags}
-                    />
-                    {listOfTags}
-                </div>
-                <button disabled={isFetching} className = "form-button" > 
-                    Save 
-                </button>
-                <button disabled={isFetching} onClick={this.resetForm} className = "form-button" > 
-                    Discard 
-                </button>
+            <form className = "profile-form"
+                onSubmit={this.submit} noValidate={true} >
+                    <div className = "profile__form-box" >
+                        <ProfileAvatar />
+                        <div className="form-column" >
+                            {authErrorMessage && 
+                                <span className ="form__error-message" > 
+                                    {errorMessage} 
+                                </span>}
+                            {list}
+                        </div>
+                        <div className="form-column" > 
+                            <CheckboxField 
+                                config = {publicity.config}
+                                checked={publicity.checked} 
+                                onChange={this.onChangeCheckbox} 
+                            />
+                            <TextareaField 
+                                config = {description.config}
+                                value={description.value}
+                                onChange={this.onChangeInput}
+                            />
+                            <InputField 
+                                value={researchAreas.value}            
+                                config = {researchAreas.config} 
+                                validationRequired = {{}}
+                                onChange = {this.onChangeInput} 
+                                onKeyDown = {this.addTags}
+                            />
+                            <div className = "tags-box" >
+                                {listOfTags}
+                            </div>
+                        </div>
+                    </div>
+                    <div className = "profile__buttons-box" >                    
+                        <button disabled={isFetching} onClick={this.resetForm} className = "form-button profile-discard-button" > 
+                            Discard 
+                        </button>
+                        <button disabled={isFetching} className = "form-button profile-submit-button" > 
+                            Save 
+                        </button>
+                    </div>
             </form>           
         )
     }   
