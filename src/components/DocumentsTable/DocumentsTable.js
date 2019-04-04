@@ -6,7 +6,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 //test icons
 import ThreePointIcon from "./ThreePointIcon"
 import ArrowIcon from "./ArrowIcon"
-import TestButton from "./TestButton"
+import TestButton from "../DocumentsTable/TestButton"
 import TestSpiner from "./TestSpiner"
 
 let generateMock = quantity => {//DELETE
@@ -30,7 +30,9 @@ let generateMock = quantity => {//DELETE
   }
   return res
 }
-
+let mock =() => (new Promise( rs =>{
+  setTimeout(()=>{ rs(generateMock(1200))},3000)
+}))
 let mock2 = generateMock(1200)//DELETE
 
 class DocumentsTable extends Component {
@@ -85,7 +87,7 @@ class DocumentsTable extends Component {
 		this.setState({data: sortFunc(this.state.data, indic.key, indic.direction), indicators: nInd})
 	}
 	componentDidMount(){
-		this.setState({data: mock2})
+		mock().then( res => this.setState({data:res}))
 	}
 	render(){
 		let s = this.state
@@ -119,7 +121,7 @@ class DocumentsTable extends Component {
 						</div>
 					))}
 				</div>
-				<div id="parent" className = "artifacts-table__main">
+				<div className = "artifacts-table__main">
           <Scrollbars>
   					{!s.data.length ? <TestSpiner /> : s.data.map((elem, index) => (
   						<div key={index} className = "artifacts-table__main__line">

@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import "./StandartGraph.scss"
+// import "./StandartGraph.scss"
 
 export default p =>  {
-  const {data, nameKey, valueKey, width = 500, height = 400, gap = 20, textHeight = 12} = {...p}
+  const {
+    data, 
+    nameKey,
+    valueKey, 
+    width = 500, 
+    height = 400, 
+    gap = 20, 
+    textHeight = 12
+  } = {...p}
 
   if(!nameKey || !valueKey || !data){
     console.error("not set nameKey || valueKey || data")
@@ -78,14 +86,14 @@ export default p =>  {
             return(
               <>
                 <rect onMouseMove = {e=>
-                            {
-                              act(
-                                   true,
-                                   indFromAbove,
-                                   textCoord ,
-                                   el[valueKey]
-                                 )
-                            }
+                        {
+                          act(
+                                true,
+                                indFromAbove,
+                                textCoord ,
+                                el[valueKey]
+                              )
+                        }
                       }
                       onMouseOut = { e => {deAct()}}
                       x={rectProgress} y={indFromAbove}
@@ -103,17 +111,19 @@ export default p =>  {
             )
           })
         }
-        {state.foc && <>
-          <line x1={indent} y1={state.y} x2={width}
-                y2={state.y}
-                style={{stroke:"#7B8180",strokeWidth:"2"}} />
-          <text x={state.x}
-                textAnchor = "middle"
-                y = {state.y - 2}
-                fill="#7B8180">
-                {state.val}
-          </text>
-        </>}
+        {state.foc && 
+          <>
+            <line x1={indent} y1={state.y} x2={width}
+                  y2={state.y}
+                  style={{stroke:"#7B8180",strokeWidth:"2"}} />
+            <text x={state.x}
+                  textAnchor = "middle"
+                  y = {state.y - 2}
+                  fill="#7B8180">
+                  {state.val}
+            </text>
+          </>
+        }
       </svg>
     </div>
   )

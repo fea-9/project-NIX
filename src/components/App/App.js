@@ -20,10 +20,10 @@ class App extends Component {
 
   render() {
     return (
-
-      <TransDocGraph />
+      <TransDocGraph/>
     );
   }
 }
-
+// <CommunityTable/>
+//  <TransDocGraph />
 export default App;
