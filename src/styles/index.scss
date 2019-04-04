@@ -4,7 +4,9 @@
 
 @import "base/base";
 
-@import "components/Profile";
 @import "components/baseFormElements";
+
+@import "components/Profile";
 @import "components/AuthPage";
+@import "components/HeaderTemplate";
 @import "components/artifactsTable";

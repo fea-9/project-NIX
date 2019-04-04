@@ -30,9 +30,11 @@ export const CheckboxField = ({ config, checked, ...rest }) => {
 	const {type, name, value, label, message} = config
 	return (
 		<div className = "input-box">						
-			<input {...rest} type={type} id={name} name={name} value={value} />
+			<input 
+				className = "input-box__checkbox" checked = {checked}
+				{...rest} type={type} id={name} name={name} value={value} />
 			{label && 
-				<label htmlFor={name} className = "checkbox__label" >
+				<label htmlFor={name} className = "input-box__checkbox-label" >
 					{label}
 				</label>}
 			{message && 
@@ -50,7 +52,7 @@ export const TextareaField = ({ config, ...rest }) => {
 			{label && 
 				<label className = "input-box__label" >
 					{label} 
-					{required && 
+					{!required && 
 						<span className = "input-box__optional" > 
 							(optional) 
 						</span>} 
