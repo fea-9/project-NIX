@@ -30,16 +30,11 @@ let generateMock = quantity => {//DELETE
   }
   return res
 }
-<<<<<<< HEAD
+
 let mock =() => (new Promise( rs =>{
   setTimeout(()=>{ rs(generateMock(1200))},3000)
 }))
-let mock2 = generateMock(1200)//DELETE
-=======
 
-let mock2 = generateMock(120)//DELETE
-
->>>>>>> 30c1eb350653507e79372ad3ad6c78efe19fb80e
 
 class DocumentsTable extends Component {
 	state = {

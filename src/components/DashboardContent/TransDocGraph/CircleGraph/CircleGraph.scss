@@ -1,18 +1,53 @@
 .circle-graph {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+.graph-info, .graph-info ul {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.graph-info {
+  width: 40%;
+  margin-right: 2%;
+}
+.graph-info ul {
+  width: 100%;
+  border: 1px solid gray;
+  border-bottom-right-radius:  20%;
+  border-top-right-radius:  20%;
 
+}
+.sumText {
+  font-weight: bold;
+}
 .line {
   font-size: 15px;
   border-bottom: 2px dotted #CAD5DA;
+  padding: 0.8em 0;
+  width: 80%;
+  position: relative;
   &__text {
     color: #7B8180;
   }
   &__num {
     color: #7B8180;
+    position: absolute;
+    font-weight: bold;
+    right: 0;
   }
+}
+.line:last-child {
+  border: none;
+}
+.testBtn {
+  padding-top: 12px;
+  padding-bottom: 10px;
+  padding-left: 23px;
+  padding-right: 23px; 
 }
