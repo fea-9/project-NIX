@@ -1,19 +1,29 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
-const PrivateRoute = ({ component: Component, token, ...rest }) => (
-  <Route
-    {...rest}
-    render={props => {
-      const token = localStorage.getItem("token");
-      if (token === null) {
-        return <Redirect to="auth" />;
-      }
+import Spinner from "../Spinner/Spinner";
 
-      return <Component {...props} />;
-    }}
-  />
-);
+const PrivateRoute = ({ component: Component, user, isFetching, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={props => {
+        return isFetching ? (
+          <Spinner />
+        ) : user ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/auth/signin" />
+        );
+      }}
+    />
+  );
+};
 
-export default PrivateRoute;
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  isFetching: state.auth.isFetching_token
+});
 
+export default connect(mapStateToProps)(PrivateRoute);

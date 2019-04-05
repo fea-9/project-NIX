@@ -5,8 +5,14 @@ import { withRouter } from "react-router";
 
 import { mobileSize } from "../actions/resize";
 
+import PrivateRoute from "../PrivateRouter/PrivateRouter";
+
 import AuthPage from "../Pages/AuthPage";
-import ProfileForm from "../Profile/ProlileForm";
+import CommunityPage from "../Pages/CommunityPage";
+import DashboardPage from "../Pages/DashboardPage";
+import DocumentsPage from "../Pages/DocumentsPage";
+import ProfilePage from "../Pages/ProfilePage";
+import SearchPage from "../Pages/SearchPage";
 
 class App extends Component {
   resize = () => {
@@ -32,19 +38,17 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <ProfileForm
-          user={{
-            created_at: 1544026928182,
-            refresh_token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZTI4MGE2ZjYtMWE1Zi00ZTZmLThmZGUtZjViNDE3NzMzNDdmIiwiZW1haWwiOiJzb21lQGVtYWlsLmNvbSJ9LCJpYXQiOjE1NDQwMjY5MjgsImV4cCI6MTU0NjYxODkyOH0.13PAt8IPYx3P6qjzTJmqY4fg-fjGjZjEbN3GIrMIV_A",
-            project: "cms_edu",
-            fullName: "my name",
-            id: "e280a6f6-1a5f-4e6f-8fde-f5b41773347f",
-            email: "some@email.com"
-          }}
-        />
-      </div>
+      <Switch>
+        <Route path="/auth/:id" component={AuthPage} />
+        <PrivateRoute exact path="/profile" component={ProfilePage} />
+        <PrivateRoute exact path="/search" component={SearchPage} />
+        <PrivateRoute exact path="/dashboard" component={DashboardPage} />
+        <PrivateRoute exact path="/documents" component={DocumentsPage} />
+        <PrivateRoute exact path="/community" component={CommunityPage} />
+        <PrivateRoute exact path="/community/:user" component={CommunityPage} />
+
+        <Route render={() => <div>404</div>} />
+      </Switch>
     );
   }
 }
