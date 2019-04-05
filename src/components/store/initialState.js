@@ -8,7 +8,8 @@ export default {
     isFetching: false,
     user: null,
     error: null,
-    message: null
+    message: null,
+    isFetching_token: false
   },
   resize: {
     mobile: false
