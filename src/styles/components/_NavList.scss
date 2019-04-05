@@ -1,0 +1,111 @@
+.nav-wrapper {
+  .nav-list {
+    padding: 0;
+    margin: 0;
+    .nav-list-item {
+      list-style: none;
+      margin-bottom: 15px;
+      .link {
+        text-decoration: none;
+        color: white;
+        text-transform: uppercase;
+        font-size: 15px;
+        font-family: "Raleway", sans-serif;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        padding: 15px 0 15px 50px;
+        position: relative;
+
+        &:hover:before {
+          content: "";
+          display: block;
+          background: linear-gradient(to top, #4facfe, #03effe);
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 8px;
+          min-height: 100%;
+        }
+
+        &:hover {
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0.15)
+          );
+        }
+
+        &:hover .search-icon {
+          fill: url(#search-icon);
+          cursor: pointer;
+        }
+
+        &:hover .dashboard-icon {
+          fill: url(#dashboard-icon);
+          cursor: pointer;
+        }
+
+        &:hover .documents-icon {
+          fill: url(#documents-icon);
+          cursor: pointer;
+        }
+
+        &:hover .community-icon {
+          fill: url(#community-icon);
+          cursor: pointer;
+        }
+      }
+      .icon {
+        margin-right: 30px;
+        height: 24px;
+      }
+
+      .active {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.15)
+        );
+        &:before {
+          content: "";
+          display: block;
+          background: linear-gradient(to top, #4facfe, #03effe);
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 8px;
+          min-height: 100%;
+        }
+
+        .search-icon {
+          fill: url(#search-icon);
+          cursor: pointer;
+        }
+
+        .dashboard-icon {
+          fill: url(#dashboard-icon);
+          cursor: pointer;
+        }
+
+        .documents-icon {
+          fill: url(#documents-icon);
+          cursor: pointer;
+        }
+
+        .community-icon {
+          fill: url(#community-icon);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .nav-list_minimized {
+    .nav-list-item {
+      .link {
+        padding: 15px 0 15px 35px;
+      }
+    }
+  }
+}
