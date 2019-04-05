@@ -11,8 +11,6 @@ import * as serviceWorker from "./serviceWorker";
 
 import "./styles/index.scss";
 
-store.subscribe(() => console.log(store.getState())); //удалить перед продакшн
-
 const token = localStorage.getItem("access_token");
 const refreshToken = localStorage.getItem("refresh_token");
 
