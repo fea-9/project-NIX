@@ -76,7 +76,7 @@ export default class TransDocGraph extends Component {
               nameKey={"key"}
               valueKey={"count"}
               width={s.width}
-              height={s.height * 0.8}
+              height={s.height * 0.95}
             />
           ) : (
             <CircleGraph
