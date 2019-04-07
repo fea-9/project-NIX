@@ -10,8 +10,8 @@ export default ({ advanced, color, num, text, icon, dop }) => (
       </span>
       {dop && (
         <div className="info-card-dop">
-          {dop.map(el => (
-            <div className="info-card-dop__line">
+          {dop.map((el, ind) => (
+            <div key = {ind} className="info-card-dop__line">
               <span style={{ color: el.color }}>{el.num}</span>
               <span>{el.text}</span>
             </div>

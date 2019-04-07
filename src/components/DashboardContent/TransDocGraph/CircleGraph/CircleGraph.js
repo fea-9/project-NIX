@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import "./CircleGraph.scss";
 
-const ListItem = p => (
-  <li style={{ color: p.itemColor }} className={p.classItem}>
-    <span className={p.classItem + "__text"}>{p.text}</span>
-    <span className={p.classItem + "__num"}>{p.num}</span>
-  </li>
-);
+
+const List = ({data,keyText, keyNum}) => {
+  return (
+    <ul>
+      {
+        data.map((el, ind) => (
+          <li key={ind} style={{ color: el.color }} className={"line"}>
+            <span className={"line__text"}>{el[keyText]}</span>
+            <span className={"line__num"}>{el[keyNum]}</span>
+          </li>
+        ))
+      }
+    </ul>
+  )
+}
 
 export default ({ nameKey, valueKey, data, height = "50%" }) => {
   const colors = ["#03EFFE", "#34FFF3", "#5CE5DD", "#37D3CA", "#26BCB3"];
@@ -42,16 +51,12 @@ export default ({ nameKey, valueKey, data, height = "50%" }) => {
   return (
     <div className="circle-graph">
       <div className="graph-info">
-        <ul>
-          {data.map((el, ind) => (
-            <ListItem
-              classItem={"line"}
-              itemColor={colorChange(ind)}
-              text={el[nameKey]}
-              num={el[valueKey]}
-            />
-          ))}
-        </ul>
+        <List data={data.map((el, ind)=>{
+          el.color = colorChange(ind)
+          return el
+        })}
+          keyText = "key"
+          keyNum = "count"/>
       </div>
       <svg
         viewBox="-1 -1 2 2"

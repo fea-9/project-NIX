@@ -56,7 +56,7 @@ export default p => (
   <div className="dashboard-main">
     <div className="info-block">
       {data.map((el, ind) => (
-        <div className="info-block__cell">
+        <div key={ind} className="info-block__cell">
           <InfoCard
             advanced={true}
             color={colors[ind]}

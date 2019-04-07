@@ -30,7 +30,7 @@ export default class StandartGraph extends Component {
   render() {
     let p = this.props;
     let s = this.state;
-    let gap = p.width * 0.3 / p.data.length
+    let gap = (p.width * 0.3) / p.data.length;
     let maxVal = Math.max(...p.data.map(el => el[p.valueKey]));
     let numRank = maxVal.toString().substr(1).length;
     let stepInd = +("1" + "e" + numRank);
@@ -96,7 +96,8 @@ export default class StandartGraph extends Component {
           />
           {indArr.map((el, ind, arr) => {
             return (
-              <text
+              <text 
+                key={ind + "isg"}
                 x={indent - 2}
                 className="textLeft"
                 textAnchor="end"
@@ -107,15 +108,16 @@ export default class StandartGraph extends Component {
               </text>
             );
           })}
-          {p.data.map(el => {
+          {p.data.map((el, ind) => {
             let indFromAbove = workY - el[p.valueKey] * graphPx;
             !rectProgress
               ? (rectProgress += rectStartPos)
               : (rectProgress += rectStep + gap);
             let textCoord = rectProgress + rectStep / 2;
             return (
-              <>
+              <React.Fragment key={ind + "fr"}>
                 <rect
+                  key={ind + "sg"}
                   onMouseMove={e => {
                     this.act(true, indFromAbove, textCoord, el[p.valueKey]);
                   }}
@@ -131,6 +133,7 @@ export default class StandartGraph extends Component {
                 />
 
                 <text
+                  key={ind}
                   className="textBottom"
                   x={textCoord}
                   textAnchor="middle"
@@ -139,7 +142,7 @@ export default class StandartGraph extends Component {
                 >
                   {el[p.nameKey]}
                 </text>
-              </>
+              </React.Fragment>
             );
           })}
           {s.foc && (
