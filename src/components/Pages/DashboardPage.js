@@ -4,6 +4,10 @@ import { PageTemplate } from "../Templates/PageTemplate";
 
 import Sidebar from "../Sidebar/Sidebar";
 
+import {HeaderTemplate} from "../Header/Header";
+
+import DashboardContent from "../DashboardContent/DashboardContent"
+
 class DashboardPage extends Component {
   componentDidMount() {}
 
@@ -11,7 +15,8 @@ class DashboardPage extends Component {
     return (
       <PageTemplate
         sidebar={<Sidebar />}
-        content={React.createElement("div")}
+        header={<HeaderTemplate title={"Dashboard"}/>}
+        content={<DashboardContent />}
       />
     );
   }
