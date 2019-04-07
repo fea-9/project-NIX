@@ -3,7 +3,11 @@ import React, { Component } from "react";
 import { PageTemplate } from "../Templates/PageTemplate";
 
 import Sidebar from "../Sidebar/Sidebar";
-// import DocumentsTable from "../DocumentsTable/DocumentsTable";
+
+import {HeaderTemplate} from "../Header/Header";
+
+import DocumentsTable from "../DocumentsTable/DocumentsTable"
+
 
 class DocumentsPage extends Component {
   componentDidMount() {}
@@ -12,8 +16,8 @@ class DocumentsPage extends Component {
     return (
       <PageTemplate
         sidebar={<Sidebar />}
-        // content={<DocumentsTable />}
-        content={React.createElement("div")}
+        header={<HeaderTemplate title={"DOCUMENTS"}/>}
+        content={<DocumentsTable />}
       />
     );
   }
