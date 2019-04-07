@@ -1,0 +1,80 @@
+.documents {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	user-select: none;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	&__main {
+		width: 100%;
+		flex-grow: 1;
+		overflow-x: hidden;
+	}
+}
+.documents-info {
+	font-family: 'Raleway', sans-serif;
+	color: #2c2c2c;
+	font-size: 20px;
+	font-weight: bold;
+	opacity: 0.6;
+	text-align: left;
+	margin-left: 50px;
+	margin-bottom: 38px;
+	&__dop {
+		font-size: 15px;
+		font-weight: 500;
+		font-family: 'Roboto', sans-serif;
+	}
+}
+.indikators {
+	display: flex;
+	justify-content: space-around;
+	margin: 0 30px;
+	&__item {
+		&__artifacts, &__contributors, &__keywords, &__total-citations, &__proof-of-existence {
+			font-family: 'Raleway', sans-serif;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			font-size: 14px;
+			margin-bottom: 15px;
+			color: #cad5da;
+			font-weight: Bold;
+		}
+
+		&__artifacts {
+			width: 30%;
+			margin-left: 20px;
+		}
+		&__contributors {
+			width: 25%;
+		}
+		&__keywords {
+			width: 15%;
+		}
+		&__total-citations {
+			width: 14%;
+			justify-content: center;
+		}
+		&__proof-of-existence {
+			width: 16%;
+			justify-content: center;
+		}
+	}
+}
+//icons
+.arrow-icon {
+	padding: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.threePointIcon {
+	cursor: pointer
+}
+.threePointIcon:hover {
+	background: #7b8180aa;
+}
