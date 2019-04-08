@@ -29,22 +29,23 @@ let generateCommunityMock = async () => {
      `https://api.github.com/users?since=${Math.round(Math.random()*1000)}`
    )
   .then ( response => response.json())
+  let i = 1
   for(let prop in gitHubUsers){
 	await fetch ( gitHubUsers[prop].avatar_url)
     .then ( response => {
-        response.blob().then ( response => {
-            res.push( {
-				avatar: response ,
-				name: gitHubUsers[prop].login,
-				proofsExistence: gitHubUsers[prop].login.length,
-				proofsAttribution: gitHubUsers[prop].starred_url.length,
-				totalCitation: gitHubUsers[prop].events_url.length,
-        since: `${Math.round(Math.random() * 30) + 1}.01.${Math.round(Math.random() * 1000) + 1000}`
-			})
+      response.blob().then ( response => {
+        res.push( {
+          memberId: i++,
+          memberName: gitHubUsers[prop].login,
+          memberCreatedDate: new Date().getTime(),
+          memberProofOfExistence: gitHubUsers[prop].login.length,
+          memberProofOfAttribution: gitHubUsers[prop].starred_url.length,
+          memberCitations: gitHubUsers[prop].events_url.length,
         })
+      })
     })
   }
-  return res
+  return {totalCount: 345, memberslist: res}
 }
 
 class CommunityPage extends Component {
@@ -52,7 +53,9 @@ class CommunityPage extends Component {
     data: null
   }
   componentDidMount() {
-    generateCommunityMock().then(res => this.setState({data: res }))
+    generateCommunityMock().then(res => {
+      this.setState({data: res })
+    })
   }
 
   render() {
@@ -63,7 +66,8 @@ class CommunityPage extends Component {
         sidebar={<Sidebar />}
         header={<HeaderTemplate title={"Community"}/>}
         content={
-          s.data ? <CommunityTable data={s.data}/> :
+          s.data ? <CommunityTable title={s.data.totalCount} 
+                                   data={s.data.memberslist}/> :
             <Spinner procent={true} />
         }
       />
