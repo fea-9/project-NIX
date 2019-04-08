@@ -172,7 +172,7 @@ export const Twitter = ({className="social-icon twitter-icon", props}) => (
     </svg>
 );
 
-export const Youtube = (className ="social-icon youtube-icon", props) => (
+export const Youtube = ({className ="social-icon youtube-icon", props}) => (
     <svg
         className={className}
         xmlns="http://www.w3.org/2000/svg"

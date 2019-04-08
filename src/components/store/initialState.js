@@ -13,5 +13,8 @@ export default {
   },
   resize: {
     mobile: false
+  },
+  sidebar: {
+    minimized: false
   }
 };
