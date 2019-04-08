@@ -1,0 +1,48 @@
+.info-card {
+    width: 100%;
+    height: 100%;
+}
+.info-card-title, .info-card-text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+// .info-card-title span, .info-card-text span {
+//     display: block;
+// }
+.info-card-title--adv .num {
+    font-size: 100px;
+    font-weight: bold;
+    line-height: 120px;
+    font-family: 'Roboto', sans-serif;
+}
+.info-card-text--adv span{
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    margin-left: 8px;
+}
+.info-card-dop {
+    margin-left: 8px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px; 
+    flex-grow: 1;
+    width: 40%;
+
+    &__line {
+        width: 100%;
+        display: inline-block;
+    }
+    &__line span {
+        line-height: 25px;
+        color: #7B8180;
+        font-weight: 500;
+    }
+    &__line span:first-child {
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        margin-right: 5px;
+        font-size: 20px;
+        float: left;
+    }
+}
