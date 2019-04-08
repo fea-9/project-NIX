@@ -9,7 +9,7 @@ export default p => {
             <div className={`${currentClass}-artfs`}>
             {p.title}
             <div className={`${currentClass}-artfs__dop`}>
-                {`${p.theme}, ${p.publish}`}
+                {p.theme}
             </div>
             </div>
             <div className={`${currentClass}-contr`}>
