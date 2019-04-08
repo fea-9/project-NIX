@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 //test
 import TestButton from "../DocumentsTable/TestButton";
+
 import getFullMonthDate from "../../utils/getFullMonthDate";
+
+import avaMock from "./AvaMock"
+import AvaMock from './AvaMock';
 
 
 let InfoBlock = p => (
@@ -24,36 +28,33 @@ export default class CommunityTable extends Component {
     return(
       <div className="community-table">
         <div className="community-table__total-info">
-          {this.props.data.length} People community
+          {this.props.title} People community
         </div>
           <div className="community-table__main">
             <Scrollbars>
                 {
                   this.props.data.map ((user, index) => {
-                    let avatarUrl = URL.createObjectURL(user.avatar)
                     return (
                       <div key={index} className="table-line">
-                            <img
-                              className="table-line__ava"
-                              src={avatarUrl} />
+                            <AvaMock text={user.memberName}/>
                             <div className="table-line__info">
                               <div className="table-line__info__name">
-                                {user.name}
+                                {user.memberName}
                               </div>
                               <div className="table-line__info__since">
-                                Member since {getFullMonthDate(user.since)}
+                                Member since {getFullMonthDate(user.memberCreatedDate)}
                               </div>
                             </div>
                             <InfoBlock className="table-line__block"
-                              num={user.proofsExistence}
+                              num={user.memberProofOfExistence}
                               text={"TOTAL PROOFS OF EXISTENCE"}
                             />
                             <InfoBlock className="table-line__middle-block"
-                              num={user.proofsAttribution}
+                              num={user.memberProofOfAttribution}
                               text={"TOTAL PROOFS OF ATTRIBUTION"}
                             />
                             <InfoBlock className="table-line__block"
-                              num={user.totalCitation}
+                              num={user.memberCitations}
                               text={"TOTAL CITATIONS"}
                             />
                             <TestButton text="View"/>
