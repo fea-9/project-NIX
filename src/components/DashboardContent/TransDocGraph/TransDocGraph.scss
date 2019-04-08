@@ -1,0 +1,16 @@
+.graph-panel {
+  display: flex;
+}
+.graph-panel h3 {
+  font-size: 20px;
+}
+.graph-view {
+  flex-grow: 1;
+  font-family: 'Roboto', sans-serif;
+}
+.tr-doc-graph{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
