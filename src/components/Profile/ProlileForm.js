@@ -1,16 +1,18 @@
 import React, {Component} from "react";
 
-import * as actions from "../actions/auth"
+import PropTypes from 'prop-types';
 
+import * as actions from "../actions/auth"
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
-import {authValidation} from "../Auth/authValidate"
-import {InputField, CheckboxField, TextareaField} from "../Auth/input"
-import ProfileAvatar from "./ProfileAvatar"
+import {authValidation} from "../Auth/authValidate";
+import InputField from "../BaseComponents/Forms/Input";
+import CheckboxField from "../BaseComponents/Forms/Checkbox";
+import TextareaField from "../BaseComponents/Forms/Textarea";
+import ProfileAvatar from "./ProfileAvatar";
 
-
-class ProlileForm extends Component{
+class ProfileForm extends Component{
     
     defaultState = {
         withValidation: {
@@ -197,14 +199,13 @@ class ProlileForm extends Component{
 
     submit = e => {
         e.preventDefault();       
-        let {auth, id} = this.props
+        const {auth, id} = this.props
         const {email, firstName, lastName} = this.state.withValidation
         const values = {
             email: email.value,             
             fullName: `${firstName.value.trim()} ${lastName.value.trim()}`
         };
         if (this.formIsValid()){
-            // console.log("submit", values)
             auth (values, `users/object/${id}/update`);
         }        
     }
@@ -243,8 +244,6 @@ class ProlileForm extends Component{
     }
 
     render () {
-        // console.log(this.state)
-
         let {isFetching, authErrorMessage } = this.props
 
         let {publicity, description, researchAreas} = this.state
@@ -322,15 +321,38 @@ class ProlileForm extends Component{
     }   
 }
 
+ProfileForm.propTypes = {
+    user: PropTypes.object,
+    id: PropTypes.string,
+    isFetching: PropTypes.bool,
+    authErrorMessage: PropTypes.string,
+    auth: PropTypes.func
+}
+
+ProfileForm.defaultProps = {
+    user: {
+        created_at: 1553715252982,
+        refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2EyMzU5MmItYjVkMi00MTQ1LThmNjMtMzFjODQyZjlhMDM2IiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20uY29tIiwicm9sZUlkIjoxfSwiaWF0IjoxNTU0ODAxNDU0LCJleHAiOjE1NTczOTM0NTR9.qTsOGV7xi1iDvVHegcMvaJKV2EFXCG0l8AT3AKnhcT0",
+        project: "cms_edu",
+        fullName: "my name",
+        id: "ca23592b-b5d2-4145-8f63-31c842f9a036",
+        email: "admin@admin.com.com"
+    },
+    id: "ca23592b-b5d2-4145-8f63-31c842f9a036",
+    isFetching: false,
+    authErrorMessage: null,
+    auth: () => {console.log(`Auth submit ...`)}    
+}
+
 const mapStateToProps = state => {
 	return {        
-        // id: state.auth.user.id,
+        id: state.auth.user.id,
         isFetching: state.auth.isFetching,
-        authError: state.auth.error,
+        user: state.auth.user,
         authErrorMessage: state.auth.message
     };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actions }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProlileForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

@@ -1,40 +1,24 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
+
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { withRouter } from 'react-router-dom'
-import { bindActionCreators } from "redux";
 
-import * as actions from "../actions/auth";
-
+import { NavLink, Redirect } from "react-router-dom";
 import AuthSignIn from "./AuthSignIn";
-import AuthSignUp from "./AuthSignUp"
+import Spinner from "../Spinner/Spinner";
+
 
 class Auth extends Component {
-    // state = { currentForm: "signin"};
-
-    // componentDidMount = () => {
-    //     const { match } = this.props;
-    //     if (match.params.id !== this.state.currentForm){
-    //         this.setState({ currentForm: match.params.id })                           
-    //     }             
-    // }  
-
-    // componentDidUpdate = (prevProps, prevState) => {
-    //     const { match, history, resetAuth } = this.props; 
-        
-    //     if (match.params.id !== prevState.currentForm){
-    //         this.setState({ currentForm: match.params.id })
-    //         resetAuth()
-    //         return history.push(`/auth/${match.params.id}`)                
-    //     } 
-    // }
-
+    
 	render() {	
-        const {authComponent} = this.props
-        // const authComponent = this.state.currentForm === "signin" ? <AuthSignIn /> :
-        //     this.state.currentForm === "signup" ? <AuthSignUp /> : <AuthSignIn />;         
+        const {authComponent, isFetching, user} = this.props
 		
-        return (
+        return isFetching ? (
+            <Spinner />
+          ) : user ? (
+            <Redirect to="/dashboard" />
+        ) :
+        (
             <div className="auth-box">
                 <div className="auth-box__aside">
                     <h1 className="auth-box__aside-logo">
@@ -46,13 +30,13 @@ class Auth extends Component {
                         <nav className="form-title">
                             <NavLink 
                                 activeClassName="form-title__link--active"
-                                className="form-title__link" to="/auth/signin" onClick = {this.switchForm} >
+                                className="form-title__link" to="/auth/signin" >
                                     Sign In
                             </NavLink>
                         
                             <NavLink 
                                 activeClassName="form-title__link--active"
-                                className="form-title__link" to="/auth/signup" onClick = {this.switchForm} >
+                                className="form-title__link" to="/auth/signup" >
                                     Sign Up
                             </NavLink>
                         </nav>
@@ -63,12 +47,20 @@ class Auth extends Component {
         )
     }
 }
+Auth.propTypes = {
+    authComponent: PropTypes.element,
+    isFetching: PropTypes.bool,
+    user: PropTypes.object
+}
+Auth.defaultProps = {
+    authComponent: AuthSignIn,
+    isFetching: false,
+    user: {}
+}
 
-export default Auth;
-// const mapDispatchToProps = dispatch => bindActionCreators({ ...actions }, dispatch);
+const mapStateToProps = state => ({
+    user: state.auth.user,
+    isFetching: state.auth.isFetching_token
+}); 
 
-
-// export default withRouter(connect(
-//     null,
-//     mapDispatchToProps
-// )(Auth));
+export default connect(mapStateToProps)(Auth);
