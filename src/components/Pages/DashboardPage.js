@@ -21,13 +21,12 @@ let mapStateToProps = state => ({
 
 class DashboardPage extends Component {
   componentDidMount() {
-    this.props.dashboardRequest({ period: "month" }, this.props.token); //this.props.match.params.range
+    this.props.dashboardRequest({ period: "day" }, this.props.token); //this.props.match.params.range
   }
 
   render() {
     let p = this.props;
-    console.log(p);
-    console.log(p.dashRange.data);
+  
     return (
       <PageTemplate
         sidebar={<Sidebar />}
