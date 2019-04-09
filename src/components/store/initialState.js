@@ -13,5 +13,11 @@ export default {
   },
   resize: {
     mobile: false
+  },
+  dashboardRange: {
+    initial: true,
+    isFetching: false,
+    data: null,
+    error: null
   }
 };
