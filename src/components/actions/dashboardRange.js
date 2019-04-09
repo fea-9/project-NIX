@@ -1,5 +1,5 @@
-import {refreshTokens} from "./token"
-import apiWorker from "../../utils/apiWorker"
+import {refreshTokens} from "./token";
+import apiWorker from "../../utils/apiWorker";
 
 
 export const dashboardRequest = (params, token) => {
