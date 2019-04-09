@@ -12,7 +12,7 @@ import { sidebarSize } from "../actions/sidebar";
 
 class Sidebar extends Component {
   render() {
-    const { authLogout, minimized, sidebarSize, mobile } = this.props;
+    const { authLogout, minimized, mobile } = this.props;
 
     return (
       <div
@@ -28,7 +28,7 @@ class Sidebar extends Component {
         </div>
         <div className="bottom-content-wrapper">
           <Social minimized={minimized} />
-          <Button className="logout-btn" text="Log out" onClick={sidebarSize} />
+          <Button className="logout-btn" text="Log out" onClick={authLogout} />
         </div>
       </div>
     );
@@ -42,5 +42,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { ...actions, sidebarSize }
+  { ...actions }
 )(Sidebar);
