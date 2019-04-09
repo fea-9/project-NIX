@@ -2,6 +2,7 @@ import React from "react";
 import TransDocGraph from "./TransDocGraph/TransDocGraph";
 import InfoCard from "../InfoCard/InfoCard";
 import * as icons from "../BaseComponents/Icons/IconsDashboard";
+import Spinner from "../Spinner/Spinner";
 
 export default p => {
   let colors = ["#34FFF3", "#5CE5DD", "#37D3CA", "#26BCB3"];
@@ -14,7 +15,7 @@ export default p => {
   return (
     <div className="dashboard-main">
       <div className="info-block">
-        {p.data.map((el, ind) => (
+        {p.spinner ? <Spinner procent={true} /> : p.data.map((el, ind) => (
           <div key={ind} className="info-block__cell">
             <InfoCard
               advanced={true}
