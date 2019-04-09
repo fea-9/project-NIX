@@ -34,7 +34,7 @@ export default class TransDocGraph extends Component {
   };
   componentDidMount() {
     this.setSizes();
-    window.addEventListener("resize", this.setSizes)
+    window.addEventListener("resize", this.setSizes, true)
   }
   componentDidUpdate() {//ловим пропсы с сайдбара, если изменились то resize.
     this.setSizes();
@@ -43,7 +43,6 @@ export default class TransDocGraph extends Component {
     window.removeEventListener("resize", this.setSizes)
   }
   setSizes = () => {
-    console.log("resize")
     let currentWidth = this.container.offsetWidth;
     let currentHeight = this.container.offsetHeight;
     if (

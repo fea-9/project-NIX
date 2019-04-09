@@ -5,23 +5,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    // border: 1px solid red;
 }
 .info-block, .graph-block {
     display: flex;
     flex-direction: row;
     width: 95%;
-    // border: 1px solid blue;
 }
 .info-block {
     margin: 1% 0;
     display: flex;
     justify-content: space-evenly;
     flex-flow: row wrap;
+    min-height: 27%;
     &__cell {
         width: 25%;
         min-width: 180px;
-        // border: 1px solid green;
         padding: 1%;
         border-left: 1px solid #CAD5DA;
     }

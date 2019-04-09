@@ -33,7 +33,7 @@ class DashboardPage extends Component {
         header={<HeaderTemplate title={"Dashboard"} />}
         content={
           p.dashRange.initial || p.dashRange.isFetching ? (
-            <Spinner procent={true} />
+            <DashboardContent spinner={true} />
           ) : p.dashRange.error ? (
             <h1>ERROR</h1>
           ) : (
