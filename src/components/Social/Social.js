@@ -4,10 +4,9 @@ import React from "react";
 import * as Icons from '../BaseComponents/Icons/IconsSideBar'
 
 export const Social = props => (
-  <div className="social-wrapper">
     <ul
       className={
-        props.minimized 
+        props.minimized
           ? "social-list social-list_minimized"
           : "social-list"
       }
@@ -28,5 +27,4 @@ export const Social = props => (
         </a>
       </li>
     </ul>
-  </div>
 );

@@ -65,7 +65,7 @@
     fill: url(#search-icon);
     cursor: pointer;
   }
-  active{
+  .active{
     fill: url(#search-icon);
     cursor: pointer;
   }
@@ -75,7 +75,7 @@
     fill: url(#documents-icon);
     cursor: pointer;
   }
-  active{
+  .active{
     fill: url(#documents-icon);
     cursor: pointer;
   }
@@ -85,7 +85,7 @@
     fill: url(#dashboard-icon);
     cursor: pointer;
   }
-  active{
+  .active{
     fill: url(#dashboard-icon);
     cursor: pointer;
   }
@@ -95,7 +95,7 @@
     fill: url(#community-icon);
     cursor: pointer;
   }
-  active{
+  .active{
     fill: url(#community-icon);
     cursor: pointer;
   }
@@ -128,7 +128,7 @@
     clip-path:url(#search-icon-clip);
   }
 }
-adsi1{
+.adsi1{
   clip-rule:evenodd;
 }
 .adsi2{

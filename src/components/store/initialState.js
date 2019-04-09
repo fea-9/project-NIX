@@ -19,5 +19,8 @@ export default {
     isFetching: false,
     data: null,
     error: null
+  },
+  sidebar: {
+    minimized: false
   }
 };

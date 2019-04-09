@@ -19,51 +19,57 @@ let generateMock = quantity => {
   };
   for (var i = 0; i < quantity; i++) {
     res.push({
-      name: String.fromCharCode(Math.round(Math.random() * 10000)),
-      theme: "someTheme",
-      publish: `01.06.${Math.round(Math.random() * 2000)}`,
-      contributors: randomArray(),
-      keyWords: randomArray(),
-      totalCitation: Math.round(Math.random() * 1000),
-      proof: Math.random() < 0.5
+      documentId: i,
+      documentTitle: String.fromCharCode(Math.round(Math.random() * 10000)),
+      documentSource: "Pediatric Rheumatology, 2017",
+      documentContributors: randomArray(),
+      documentKeywords: randomArray(),
+      documentCitations: Math.round(Math.random() * 1000),
+      documentProof: {
+        modifiedDate: new Date().getTime() - Math.round(Math.random()*1000)
+      }
     });
   }
-  return res;
+  return {
+    totalCount: 345,
+    modifiedDate: new Date().getTime(),
+    documentslist: res
+  };
 };
 
 let mock = generateMock(12);
 
 class DocumentsTable extends Component {
   state = {
-    data: [],
+    data: null,
     indicators: [
       {
         name: "ARTIFACTS",
-        key: "name",
+        key: "documentTitle",
         check: false,
         direction: false
       },
       {
         name: "CONTRIBUTORS",
-        key: "contributors",
+        key: "documentContributors",
         check: false,
         direction: false
       },
       {
         name: "KEYWORDS",
-        key: "keyWords",
+        key: "documentKeywords",
         check: false,
         direction: false
       },
       {
         name: "TOTAL CITATIONS",
-        key: "totalCitation",
+        key: "documentCitations",
         check: false,
         direction: false
       },
       {
         name: "PROOF OF EXISTENCE",
-        key: "proof",
+        key: "documentProof",
         check: false,
         direction: false
       }
@@ -81,27 +87,33 @@ class DocumentsTable extends Component {
       }
       return elem;
     });
+    let nData = JSON.parse(JSON.stringify(this.state.data))
+    nData.documentslist = sortFunc(
+      this.state.data.documentslist,
+      indic.key,
+      indic.direction,
+      "modifiedDate"
+    )
     this.setState({
-      data: sortFunc(this.state.data, indic.key, indic.direction),
+      data: nData ,
       indicators: nInd
     });
-	};
-	
+  };
+
   componentDidMount() {
     this.setState({ data: mock });
-	}
-	
+  }
+
   render() {
     let s = this.state;
+    if(s.data === null) return (<TestSpiner full={true}/>)
+    console.log(s.data)
     return (
       <div className="documents">
         <div className="documents-info">
-          You have {s.data.reduce((prev, el) => ++prev, 0)} documents
+          You have {s.data.totalCount} documents
           <div className="documents-info__dop">
-            Last update{" "}
-            {!s.data.length
-              ? 0
-              : varyDateView(findLastDate(s.data.map(el => el.publish)))}
+            Last update {varyDateView(s.data.modifiedDate)}
           </div>
         </div>
         <div className="indikators">
@@ -125,21 +137,18 @@ class DocumentsTable extends Component {
         </div>
         <div className="documents__main">
           <Scrollbars>
-            {!s.data.length ? (
-              <TestSpiner full={true} />
-            ) : (
-              s.data.map((elem, index) => (
+            {
+              s.data.documentslist.map((elem, index) => (
                 <DocCard
-									key= {index}
-                  title={elem.name}
-                  theme={elem.theme}
-                  publish={elem.publish.split(".")[2]}
-                  contributors={elem.contributors.join(", ")}
-                  keyWords={elem.keyWords}
-                  totalCitation={elem.totalCitation}
+                  key={index}
+                  title={elem.documentTitle}
+                  theme={elem.documentSource}
+                  contributors={elem.documentContributors.join(", ")}
+                  keyWords={elem.documentKeywords}
+                  totalCitation={elem.documentCitations}
                 />
               ))
-            )}
+            }
           </Scrollbars>
         </div>
       </div>

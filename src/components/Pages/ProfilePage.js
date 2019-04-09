@@ -1,12 +1,12 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 
 import { PageTemplate } from "../Templates/PageTemplate";
-// import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import ProfileForm from "../Profile/ProlileForm";
 import {HeaderTemplate} from "../Header/Header";
-import ProfileHeader from "../Profile/ProfileHeader"
-//import components profile, header, sidebar
 
 
 class ProfilePage extends Component {
@@ -43,31 +43,29 @@ class ProfilePage extends Component {
     render() {
         const {fullName, created_at} = this.props
         return <PageTemplate 
-        // sidebar={<Sidebar />} 
-                content={<ProfileForm user = {
-                    {
-                    created_at: 1544026928182,
-                    refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZTI4MGE2ZjYtMWE1Zi00ZTZmLThmZGUtZjViNDE3NzMzNDdmIiwiZW1haWwiOiJzb21lQGVtYWlsLmNvbSJ9LCJpYXQiOjE1NDQwMjY5MjgsImV4cCI6MTU0NjYxODkyOH0.13PAt8IPYx3P6qjzTJmqY4fg-fjGjZjEbN3GIrMIV_A",
-                    project: "cms_edu",
-                    fullName: "my name",
-                    id: "e280a6f6-1a5f-4e6f-8fde-f5b41773347f",
-                    email: "some@email.com"
-                } } />}  
-                header = {<HeaderTemplate 
-                    title = {fullName}
-                    details = {this.getPeriodOfMembership(created_at)}        
-                    
-                //  component = {<ProfileHeader created_at = "1544026928182"         
-                //  fullName = "my name"/>}
-                />} 
-            />;
+                    sidebar={<Sidebar />} 
+                    content={<ProfileForm />}  
+                    header = {<HeaderTemplate 
+                        title = {fullName}
+                        details = {this.getPeriodOfMembership(created_at)} 
+                    />} 
+                />;
     }
+}
+
+ProfilePage.propTypes = {
+    fullname: PropTypes.string,
+    created_at: PropTypes.number 
+}
+ProfilePage.defaultProps = {
+    fullname: "my name",
+    created_at: 1553715252982
 }
 
 const mapStateToProps = state => {
 	return {        
-        // fullName: state.auth.user.fullName,
-        // created_at: state.auth.user.created_at
+        fullName: state.auth.user.fullName,
+        created_at: state.auth.user.created_at
     };
 };
 

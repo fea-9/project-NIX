@@ -1,12 +1,13 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
 
-import * as actions from "../actions/auth"
+import * as actions from "../actions/auth";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
-import {authValidation} from "./authValidate"
-import {InputField} from "./input"
+import {authValidation} from "./authValidate";
+import InputField from "../BaseComponents/Forms/Input";
 
 class SignIn extends Component{
     state = {
@@ -63,13 +64,11 @@ class SignIn extends Component{
         })
     }
    
-
     submit = e => {
         e.preventDefault();
         let {auth} = this.props
         const values = Object.keys(this.state).reduce((prev, elem) => ({ ...prev, [elem]: this.state[elem].value }), {});
         if (this.formIsValid()){
-            // console.log("submit", values)
             auth (values, "signin");
         }        
     }
@@ -79,7 +78,6 @@ class SignIn extends Component{
       
         Object.keys(this.state).forEach(elem => {
             let stateItem = this.state[elem]
-            // console.log("onsubmit", stateItem)
             let inputValid = authValidation(stateItem.config.name, stateItem.value)
             this.setState(prevState => ({
                 ...prevState,
@@ -127,11 +125,20 @@ class SignIn extends Component{
         )
     }   
 }
+SignIn.propTypes = {
+    isFetching: PropTypes.bool,
+    authErrorMessage: PropTypes.string,
+    auth: PropTypes.func 
+};
+SignIn.defaultProps = {
+    isFetching: false,
+    authErrorMessage: "",
+    auth: () => {console.log(`Auth submit ...`)} 
+};
 
 const mapStateToProps = state => {
 	return {
         isFetching: state.auth.isFetching,
-        authError: state.auth.error,
         authErrorMessage: state.auth.message	
 	};
 };

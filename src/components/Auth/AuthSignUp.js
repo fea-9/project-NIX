@@ -1,12 +1,13 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
 
-import * as actions from "../actions/auth"
+import * as actions from "../actions/auth";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
-import {authValidation} from "./authValidate"
-import {InputField} from "./input"
+import {authValidation} from "./authValidate";
+import InputField from "../BaseComponents/Forms/Input";
 
 class SignUp extends Component{
     state = {
@@ -201,11 +202,20 @@ class SignUp extends Component{
         )
     }   
 }
+SignUp.propTypes = {
+    isFetching: PropTypes.bool,
+    authErrorMessage: PropTypes.string,
+    auth: PropTypes.func 
+};
+SignUp.defaultProps = {
+    isFetching: false,
+    authErrorMessage: "",
+    auth: () => {console.log(`Auth submit ...`)} 
+};
 
 const mapStateToProps = state => {
 	return {
         isFetching: state.auth.isFetching,
-        authError: state.auth.error,
         authErrorMessage: state.auth.message
     };
 };

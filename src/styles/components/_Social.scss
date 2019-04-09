@@ -1,28 +1,39 @@
-.social-wrapper {
-  .social-list {
-    display: flex;
-    padding: 0;
-    margin: 0;
-    justify-content: space-between;
+.social-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 2rem 0;
+  padding: 0 30vw 0;
+  // transition: all 1s;
+  
 
-    .social-list-item {
-      list-style: none;
-      margin: 0 20px 0 0;
-
-      &:last-child {
-        margin: 0;
-      }
-    }
+  .social-list-item {
+    list-style: none;
+    text-align: center;
   }
+}
 
+@media (min-width: 768px) {
+  .social-list {
+    // display: flex;
+    // justify-content: space-between;
+    // margin: 0 0 2rem 0;
+    padding: 0 110px 0;
+    transition: all 1s;
+    
+  
+    // .social-list-item {
+    //   list-style: none;
+    //   text-align: center;
+    // }
+  }
+  
   .social-list_minimized {
     flex-direction: column;
-    align-items: space-between;
-
+    padding: 0;
+  
     .social-list-item {
-      list-style: none;
-      margin: 0 0 10px 0;
-
+      margin-bottom: 1rem;
+  
       &:last-child {
         margin: 0;
       }
