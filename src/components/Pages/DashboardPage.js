@@ -12,6 +12,8 @@ import DashboardContent from "../DashboardContent/DashboardContent";
 
 import * as actions from "../actions/dashboardRange";
 
+import RangePanel from "../RangePanel/RangePanel"
+
 import Spinner from "../Spinner/Spinner";
 
 let mapStateToProps = state => ({
@@ -30,7 +32,7 @@ class DashboardPage extends Component {
     return (
       <PageTemplate
         sidebar={<Sidebar />}
-        header={<HeaderTemplate title={"Dashboard"} />}
+        header={<HeaderTemplate title={"Dashboard"} component={<RangePanel/>}/>}
         content={
           p.dashRange.initial || p.dashRange.isFetching ? (
             <DashboardContent spinner={true} />
