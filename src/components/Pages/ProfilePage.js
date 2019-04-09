@@ -5,6 +5,7 @@ import { PageTemplate } from "../Templates/PageTemplate";
 // import Sidebar from "../Sidebar/Sidebar";
 import ProfileForm from "../Profile/ProlileForm";
 import {HeaderTemplate} from "../Header/Header";
+import Sidebar from "../Sidebar/Sidebar";
 import ProfileHeader from "../Profile/ProfileHeader"
 //import components profile, header, sidebar
 
@@ -60,6 +61,7 @@ class ProfilePage extends Component {
                 //  component = {<ProfileHeader created_at = "1544026928182"         
                 //  fullName = "my name"/>}
                 />} 
+                sidebar={<Sidebar />}
             />;
     }
 }
