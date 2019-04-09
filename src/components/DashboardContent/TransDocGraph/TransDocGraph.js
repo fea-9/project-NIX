@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import StandartGraph from "./StandartGraph/StandartGraph.js";
 import CircleGraph from "./CircleGraph/CircleGraph.js";
 import "./TransDocGraph.scss";
+import Button from "../../BaseComponents/Button";
+import ButtonGroup from "../../BaseComponents/ButtonGroup";
 
 let data = [
   {
@@ -61,12 +63,10 @@ export default class TransDocGraph extends Component {
       <div className="tr-doc-graph">
         <div className="graph-panel">
           <h3>TRANSACTED PROJECTS AND DOCUMENTS</h3>
-          <button onClick={this.toggleView(false)} className="testBtn">
-            POE
-          </button>
-          <button onClick={this.toggleView(true)} className="testBtn">
-            POV
-          </button>
+          <ButtonGroup>
+            <Button onClick={this.toggleView(false)} active={!s.view}>POA</Button>
+            <Button onClick={this.toggleView(true)} active={s.view}>POE</Button>
+          </ButtonGroup>
         </div>
         <div className="graph-view" ref={el => (this.container = el)}>
           {s.view ? (

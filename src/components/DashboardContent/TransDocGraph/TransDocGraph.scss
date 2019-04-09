@@ -1,8 +1,11 @@
 .graph-panel {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .graph-panel h3 {
   font-size: 20px;
+  display: inline-block;
 }
 .graph-view {
   flex-grow: 1;

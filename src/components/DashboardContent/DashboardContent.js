@@ -1,17 +1,18 @@
 import React from "react";
 import TransDocGraph from "./TransDocGraph/TransDocGraph";
 import InfoCard from "../InfoCard/InfoCard";
-import * as icons from "../BaseComponents/Icons/IconsDashboard";
 import Spinner from "../Spinner/Spinner";
+import Icon from "../BaseComponents/icon/index"
 
 export default p => {
   let colors = ["#34FFF3", "#5CE5DD", "#37D3CA", "#26BCB3"];
   let iconsArr = [
-    icons.ProofOfExictanceIcon,
-    icons.ProofOfAttributionIcon,
-    icons.DownloadsIcon,
-    icons.SharesIcon
-  ];
+    <Icon className = "dashboard-menu-poe" type = "poeIcon" width = {20} height = {20} viewBox="0 0 20 20"/>,
+    <Icon className = "dashboard-menu-poa" type = "mostCitedIcon" width = {20} height = {20} viewBox="0 0 20 20"/>,
+    <Icon className = "dashboard-menu-downloads" type = "downloadsIcon" width = {20} height = {20} viewBox="0 0 20 20"/>,
+    <Icon className = "dashboard-menu-share" type = "sharesIcon" width = {20} height = {20} viewBox="0 0 20 20"/>,
+  ]
+
   return (
     <div className="dashboard-main">
       <div className="info-block">
@@ -32,7 +33,7 @@ export default p => {
                       color: "#5CE5DD"
                     }))
               }
-              icon={iconsArr[ind]()}
+              icon={iconsArr[ind]}
             />
           </div>
         ))}
