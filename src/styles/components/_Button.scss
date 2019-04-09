@@ -1,3 +1,86 @@
+.btn{
+  text-decoration: none;
+  color:black;
+  border: none;
+  outline: none;
+  font-family: 'Raleway', sans-serif;
+  background-color: transparent;
+  cursor: pointer;
+
+  &-community{
+    background-image: linear-gradient(180deg, #03EFFE, #4FACFE);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  &-documents{
+    background-image: linear-gradient(180deg, #03EFFE, #4FACFE);
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    font-size: 1.5rem 2rem;
+    font-weight: 700;
+  }
+  &-close{
+    font-family: Arial, sans-serif;
+    color:white;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    background-color: transparent;
+  }
+  &-search{
+    background-image: linear-gradient(180deg, #03EFFE, #4FACFE);
+    color: white;
+    padding: 1rem;
+    border-radius: 0 5px 5px 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+
+    .search-icon{
+      fill: #fff;
+      margin-right:0.5rem; 
+    }
+  }
+}
+
+.btn[disabled] {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.btn-group {
+  display: inline-block;
+
+  .btn{
+    color: #7B8180;
+    background: none;
+  }
+  .btn.active {
+    background-image: linear-gradient(180deg, #4FACFE, #03EFFE);
+    color: white;
+    font-weight: 600;
+    padding: 0.7rem 1.5rem !important;
+    border-radius: 5px !important;
+    border: none !important;  
+  }
+}
+
+.btn-group > .btn:first-child {
+  border-radius: 5px 0 0 5px;
+  border: 1px solid #CAD5DA;
+  padding: 0.1rem 1.5rem;
+  border-right: 0; 
+}
+
+.btn-group > .btn:last-child {
+  border-radius: 0 5px 5px 0;
+  border: 1px solid #CAD5DA;
+  padding: 0.1rem 1.5rem;
+  border-left: 0; 
+}
+
 .logout-btn {
   width: 100%;
   background: none;

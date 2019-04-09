@@ -1,11 +1,11 @@
 import React from "react";
-import * as Icons from '../BaseComponents/Icons/IconsHeader'
+//import * as Icons from '../BaseComponents/Icons/IconsHeader'
+import Button from '../BaseComponents/Button'
+import Icon from '../BaseComponents/icon/index';
 
 export const HeaderTemplate = ({title, details, component, ...rest}) => (
     <>
-        <div className = "header__icon-box">
-            <Icons.BurgerMenu className='icon burger-menu-icon' />
-        </div>
+        <Button><Icon className = "burger-menu-icon" type = "burgerMenuIcon" width = {20} height = {20} viewBox="0 0 20 20"/></Button>
         <div className = "header__title-box" >
             { title && <h2 className = "header__name" >
                 {title}
