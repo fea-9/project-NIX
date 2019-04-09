@@ -1,7 +1,6 @@
 // import axios from "axios";
 import store from "../store"
 
-store.subscribe(() => console.log(store.getState()))
 
 export const authRequest = () => ({
     type: "AUTH_REQUEST",
