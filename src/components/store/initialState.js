@@ -20,6 +20,12 @@ export default {
     data: null,
     error: null
   },
+  documents: {
+    initial: true,
+    isFetching: false,
+    data: null,
+    error: null
+  },
   sidebar: {
     minimized: false
   }
