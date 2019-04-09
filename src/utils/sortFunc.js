@@ -1,7 +1,8 @@
 export default (arr = [], key, toggle, dop) => {
   if (!arr.length) return [];
-  if (arr.some(el => !(key in el)))
-    return console.error("cannot find some keys in array");
+  if (arr.some(el => !(key in el))){
+    return console.error("cannot find some keys in array", "key " + key, arr);
+  }
   let workArr = JSON.parse(JSON.stringify(arr));
   let sortArr = [];
   let type = typeof workArr[0][key];
