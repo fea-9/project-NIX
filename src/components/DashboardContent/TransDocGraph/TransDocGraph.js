@@ -12,7 +12,7 @@ export default class TransDocGraph extends Component {
   };
   componentDidMount() {
     this.setSizes();
-    window.addEventListener("resize", this.setSizes, true)
+    window.addEventListener("resize", this.setSizes)
   }
   componentDidUpdate() {//ловим пропсы с сайдбара, если изменились то resize.
     this.setSizes();
@@ -21,6 +21,7 @@ export default class TransDocGraph extends Component {
     window.removeEventListener("resize", this.setSizes)
   }
   setSizes = () => {
+    console.log("resize")
     let currentWidth = this.container.offsetWidth;
     let currentHeight = this.container.offsetHeight;
     if (
@@ -52,7 +53,7 @@ export default class TransDocGraph extends Component {
               nameKey={"key"}
               valueKey={"count"}
               width={s.width}
-              height={s.height * 0.95}
+              height={s.height * 0.8}
             />
           ) : (
             <CircleGraph
