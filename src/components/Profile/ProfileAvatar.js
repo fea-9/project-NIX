@@ -1,9 +1,8 @@
 import React, {Component} from "react";
-// import "../../styles/components/_Profile.scss"
 
-import {InputField} from "../Auth/input" // to change on BaseComponents
+import InputField from "../BaseComponents/Forms/Input"; 
 
-import AvatarEditor from 'react-avatar-editor'
+import AvatarEditor from 'react-avatar-editor';
 
 
 class ProfileAvatar extends Component{    
@@ -21,7 +20,7 @@ class ProfileAvatar extends Component{
         this.setState({scale: +e.target.value})
     }
 
-    onSelectFile =  event =>  {                     
+    onSelectFile = event =>  {                     
         var file = event.target.files[0] 
         let newImage         
         if ( file.type.split('/')[0] !== 'image' ) return                
@@ -47,7 +46,6 @@ class ProfileAvatar extends Component{
 
     render () {
         const {scale, image} = this.state
-        // console.log(this.state)
         return (
             <div className = "avatar-box" >
                 <AvatarEditor 
