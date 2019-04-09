@@ -20,7 +20,7 @@ export const NavList = props => (
         minimized={props.minimized}
       />
       <NavListItem
-        path="/dashboard"
+        path="/dashboard/day"
         text={props.minimized ? "" : "Dashboard"}
         icon={<Icons.DashboardIcon className="icon dashboard-icon" />}
         minimized={props.minimized}
