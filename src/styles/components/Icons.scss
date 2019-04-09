@@ -6,27 +6,34 @@
 
 .settings-icon{
   fill:#fff;
+  cursor: pointer;
 }
 .checked-icon{
   fill:#4ab0fe;
+  cursor: pointer;
 }
 
 .projects-icon{
   fill:#37d3ca;
+  cursor: pointer;
 }
 
 .dashboard-menu{
   &-poe{
     fill:#34fff3;
+    cursor: pointer;
   }
   &-poa{
     fill:#5ce5dd;
+    cursor: pointer;
   }
   &-downloads{
     fill:#37d3ca;
+    cursor: pointer;
   }
   &-share{
     fill:#26bcb3;
+    cursor: pointer;
   }
 }
 
@@ -39,7 +46,7 @@
   &:hover{
     fill: $icon-active;
   }
-  &-active{
+  .active{
     fill: $icon-active;
   }
 
@@ -50,7 +57,7 @@
   &:hover{
     fill: $icon-active;
   }
-  &-active{
+  .active{
     fill: $icon-active;
   }
 }
@@ -58,6 +65,7 @@
 .social-icon{
   fill: $socials-icon;
   opacity: 0.5;
+  cursor: pointer;
 }
 
 .search-icon {
