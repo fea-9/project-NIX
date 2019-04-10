@@ -5,7 +5,7 @@ import Icon from '../BaseComponents/icon/index';
 
 export const HeaderTemplate = ({title, details, component, ...rest}) => (
     <>
-        <Button><Icon className = "burger-menu-icon" type = "burgerMenuIcon" width = {20} height = {20} viewBox="0 0 20 20"/></Button>
+        <Button className = "header__icon-box"><Icon className = "burger-menu-icon" type = "burgerMenuIcon" width = {20} height = {20} viewBox="0 0 20 20"/></Button>
         <div className = "header__title-box" >
             { title && <h2 className = "header__name" >
                 {title}
