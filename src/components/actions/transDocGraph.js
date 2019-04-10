@@ -1,22 +1,20 @@
 import {refreshTokens} from "./token";
 import apiWorker from "../../utils/apiWorker";
 
-
-export const dashboardRequest = (params, token) => {
+export const transDocRequest = ( token ) => {
     return apiWorker(
         {
-            typeRequest: "DASH_PENDING",
-            typeSuccess: "DASH_SUCCSESS",
-            typeFail: "DASH_FAIL"
+            typeRequest: "TRANS_DOC_PENDING",
+            typeSuccess: "TRANS_DOC_SUCCSESS",
+            typeFail: "TRANS_DOC_FAIL"
         },
         {
-            url: "/stats",
+            url: "/keywords",
             headers: {
                 'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/json'
             },
-            method: "get",
-            params: params
+            method: "get"
         }
     )
 } 

@@ -16,7 +16,6 @@ import RangePanel from "../RangePanel/RangePanel";
 
 import queryString from "query-string";
 
-import Spinner from "../Spinner/Spinner";
 
 let mapStateToProps = state => ({
   dashRange: state.dashboardRange,
@@ -32,7 +31,6 @@ class DashboardPage extends Component {
 
   render() {
     let p = this.props;
-  
     return (
       <PageTemplate
         sidebar={<Sidebar />}
