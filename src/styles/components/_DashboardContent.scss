@@ -16,8 +16,9 @@
     display: flex;
     justify-content: space-evenly;
     flex-flow: row wrap;
-    min-height: 27%;
+    min-height: 20%;
     &__cell {
+        // display: inline-block;
         width: 25%;
         min-width: 180px;
         padding: 1%;

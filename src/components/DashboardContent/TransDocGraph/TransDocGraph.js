@@ -21,7 +21,7 @@ export default class TransDocGraph extends Component {
     window.removeEventListener("resize", this.setSizes)
   }
   setSizes = () => {
-    console.log("resize")
+    if(!this.container) return
     let currentWidth = this.container.offsetWidth;
     let currentHeight = this.container.offsetHeight;
     if (
@@ -60,7 +60,7 @@ export default class TransDocGraph extends Component {
               data={p.data}
               nameKey={"key"}
               valueKey={"count"}
-              height={s.height * 0.8}
+              height={s.height * 0.6}
             />
           )}
         </div>
