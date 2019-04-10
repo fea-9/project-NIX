@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
-//test
-import TestButton from "../DocumentsTable/TestButton";
 
+import Button from "../BaseComponents/Button"
 import getFullMonthDate from "../../utils/getFullMonthDate";
 
 import avaMock from "./AvaMock"
@@ -57,7 +56,7 @@ export default class CommunityTable extends Component {
                               num={user.memberCitations}
                               text={"TOTAL CITATIONS"}
                             />
-                            <TestButton text="View"/>
+                            <Button children="View" className="btn-community"/>
                       </div>
                     )
                   })
