@@ -3,8 +3,8 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import Button from "../BaseComponents/Button"
 import getFullMonthDate from "../../utils/getFullMonthDate";
+import { NavLink, Redirect } from "react-router-dom";
 
-import avaMock from "./AvaMock"
 import AvaMock from './AvaMock';
 
 
@@ -23,7 +23,7 @@ let InfoBlock = p => (
 export default class CommunityTable extends Component {
 
   render(){
-
+    console.log(this.props.data)
     return(
       <div className="community-table">
         <div className="community-table__total-info">
@@ -56,7 +56,7 @@ export default class CommunityTable extends Component {
                               num={user.memberCitations}
                               text={"TOTAL CITATIONS"}
                             />
-                            <Button children="View" className="btn-community"/>
+                            <NavLink to={`/community?${user.memberName}_${user.memberId}`}><Button children="View" className="btn-community"/></NavLink>
                       </div>
                     )
                   })
