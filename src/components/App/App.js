@@ -42,7 +42,7 @@ class App extends Component {
         <Route path="/auth/:id" component={AuthPage} />
         <PrivateRoute exact path="/profile" component={ProfilePage} />
         <PrivateRoute exact path="/search" component={SearchPage} />
-        <PrivateRoute exact path="/dashboard/:range" component={DashboardPage} />
+        <PrivateRoute exact path="/dashboard" component={DashboardPage} />
         <PrivateRoute exact path="/documents" component={DocumentsPage} />
         <PrivateRoute exact path="/community" component={CommunityPage} />
         <PrivateRoute exact path="/community/:user" component={CommunityPage} />
