@@ -16,7 +16,7 @@ class Auth extends Component {
         return isFetching ? (
             <Spinner />
           ) : user ? (
-            <Redirect to="/dashboard/day" />
+            <Redirect to="/dashboard?period=day" />
         ) :
         (
             <div className="auth-box">
