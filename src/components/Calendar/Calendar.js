@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Calendar from "react-calendar/dist/entry.nostyle";
 
-import "./Calendar.scss";
-
 class Calend extends Component {
   state = {
     initialDate: new Date(),
