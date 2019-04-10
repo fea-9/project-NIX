@@ -12,7 +12,9 @@ import DashboardContent from "../DashboardContent/DashboardContent";
 
 import * as actions from "../actions/dashboardRange";
 
-import RangePanel from "../RangePanel/RangePanel"
+import RangePanel from "../RangePanel/RangePanel";
+
+import queryString from "query-string";
 
 import Spinner from "../Spinner/Spinner";
 
@@ -23,7 +25,9 @@ let mapStateToProps = state => ({
 
 class DashboardPage extends Component {
   componentDidMount() {
-    this.props.dashboardRequest({ period: "day" }, this.props.token); //this.props.match.params.range
+    const {location, token, dashboardRequest} = this.props
+    const search = queryString.parse(location.search)
+    dashboardRequest( search, token);
   }
 
   render() {
