@@ -32,8 +32,6 @@ class RangePanel extends Component {
     const search = queryString.parse(location.search);
 
     if (prevProps.location.search !== location.search) {
-      console.log("prevProps.location.search", prevProps.location.search);
-      console.log("location.search", location.search);
       return !prevProps.location.search
         ? null
         : search.period === "range"
