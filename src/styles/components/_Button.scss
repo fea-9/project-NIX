@@ -29,7 +29,19 @@
     font-weight: 400;
     font-size: 2.2rem;
     background-color: transparent;
+    height: 100%;
+    position: absolute;
+    left: 1rem;
+    top: 0;
   }
+
+  &-burger{
+    height: 100%;
+    position: absolute;
+    left: 1rem;
+    top: 0;
+  }
+
   &-search{
     background-image: linear-gradient(180deg, #03EFFE, #4FACFE);
     color: white;
@@ -37,7 +49,7 @@
     border-radius: 0 5px 5px 0;
     font-size: 2.5rem;
     font-weight: 700;
-
+    
     .search-icon{
       fill: #fff;
       margin-right:0.5rem; 

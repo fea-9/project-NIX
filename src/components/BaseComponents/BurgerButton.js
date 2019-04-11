@@ -21,7 +21,7 @@ class BurgerButton extends PureComponent{
         else{
             return(
                 <Button onClick={() => this.changeBurger()} className="btn-burger">
-                <Icon className="burger-menu-btn" type="burgerMenuIcon" width={15} height={16} viewBox="0 0 14 16"/>
+                <Icon className="burger-menu-btn-mobile" type="burgerMenuIcon" width={15} height={16} viewBox="0 0 14 16"/>
                 </Button>
             )
         }
