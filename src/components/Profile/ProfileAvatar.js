@@ -1,15 +1,18 @@
 import React, {Component} from "react";
+import AvatarEditor from 'react-avatar-editor';
+
+import * as actions from "../actions/avatar";
+import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
 
 import InputField from "../BaseComponents/Forms/Input"; 
-
-import AvatarEditor from 'react-avatar-editor';
 
 
 class ProfileAvatar extends Component{    
 
     defaultState = {
-        scale: 1, 
-        image: "http://www.blackdesertbase.com/img/users/avatars/70.png" // from props in ideal
+        scale: this.props.scale, 
+        src: this.props.src // from props in ideal
     }
 
     state = {
@@ -29,7 +32,7 @@ class ProfileAvatar extends Component{
             newImage = e.target.result
             this.setState(prevstate => ({
                 ...prevstate,
-                image: newImage
+                src: newImage
             }))                                                                            
         }             
         fileReader.readAsDataURL ( file )
@@ -37,20 +40,24 @@ class ProfileAvatar extends Component{
 
     resetForm = (e) => {
         e.preventDefault();
+        const {resetAvatar} = this.props
         this.setState(this.defaultState) 
     }
 
-    submit = (e) => {
+    submit = (e) => {       
         e.preventDefault(); // mock, no back-end
+        const {saveAvatar} = this.props
+        saveAvatar(this.state)
     }
 
     render () {
-        const {scale, image} = this.state
+        const {scale, src} = this.state
+        
         return (
             <div className = "avatar-box" >
                 <AvatarEditor 
                     className = "avatar-preview"
-                    image={image}
+                    image={src}
                     width={250}
                     height={250}
                     border={0}
@@ -77,11 +84,12 @@ class ProfileAvatar extends Component{
                 />
                 <div className = "avatar__buttons-box" > 
                     <button className = "form-button avatar-cancel-button"
+                        onSubmit = {this.resetForm}
                         onClick = {this.resetForm} > 
                             Cancel 
                     </button>
                     <button className = "form-button avatar-ok-button"
-                        type="submit" onSubmit = {this.submit} > 
+                        type="submit" onSubmit = {this.submit} onClick = {this.submit} > 
                             OK 
                     </button>
                 </div>
@@ -89,5 +97,26 @@ class ProfileAvatar extends Component{
         )
     }
 }
+ProfileAvatar.propTypes = {
+    src: PropTypes.string,
+    scale: PropTypes.number,
+    saveAvatar: PropTypes.func,
+    resetAvatar: PropTypes.func
+}
+ProfileAvatar.defaultProps = {
+    src: "http://www.blackdesertbase.com/img/users/avatars/70.png",
+    scale: 1,
+    saveAvatar: () => {console.log("SaveAvatar isn't set")},
+    resetAvatar: () => {console.log("ResetAvatar isn't set")}
+}
 
-export default ProfileAvatar;
+const mapStateToProps = state => {
+    return ({
+        src: state.avatar.src,
+        scale: state.avatar.scale
+    })
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators({ ...actions }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileAvatar);
