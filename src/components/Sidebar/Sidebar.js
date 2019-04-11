@@ -7,6 +7,7 @@ import NavList from "../Nav/NavList";
 import { Social } from "../Social/Social";
 import { Logo } from "../Logo/Logo";
 import { Button } from "../BaseComponents/Forms/Button";
+import { BurgerButton } from "../BaseComponents/BurgerButton";
 
 class Sidebar extends Component {
   state = {
@@ -36,9 +37,10 @@ class Sidebar extends Component {
             minimized={minimized}
             button={
               mobile && (
-                <button className="logo-btn" onClick={this.showSidebar}>
-                  =
-                </button>
+                <BurgerButton
+                  onClick={this.showSidebar}
+                  isOpen={!isMinSidebar}
+                />
               )
             }
           />

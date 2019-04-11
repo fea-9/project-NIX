@@ -4,7 +4,6 @@ import Button from '../BaseComponents/Button';
 import PropTypes from 'prop-types';
 import * as actions from "../actions/search";
 import { connect } from "react-redux"; 
-import BurgerButton from '../BaseComponents/BurgerButton';
 
 class Search extends Component{
     state = {
@@ -43,7 +42,6 @@ class Search extends Component{
                 />
                 Search
                 </Button>
-                <BurgerButton/>
             </div>
         )
     }
