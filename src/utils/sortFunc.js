@@ -1,7 +1,9 @@
 export default (arr = [], key, toggle, dop) => {
   if (!arr.length) return [];
-  if (arr.some(el => !(key in el)))
-    return console.error("cannot find some keys in array");
+  let nonCorrectKey = false
+  if (arr.some(el => !(key in el))){
+    nonCorrectKey = true
+  }
   let workArr = JSON.parse(JSON.stringify(arr));
   let sortArr = [];
   let type = typeof workArr[0][key];
@@ -24,10 +26,13 @@ export default (arr = [], key, toggle, dop) => {
           (a, b) => b[key].charCodeAt() - a[key].charCodeAt()
         ));
   }
-  if (workArr[0][key].__proto__.constructor.name === "Object") {
+  if (workArr[0][key].__proto__.constructor.name === "Object" && !nonCorrectKey) {
     toggle
       ? (sortArr = workArr.sort((a, b) => a[key][dop] - b[key][dop]))
       : (sortArr = workArr.sort((a, b) => b[key][dop] - a[key][dop]));
+  } else {
+      // eslint-disable-next-line no-unused-expressions
+      nonCorrectKey ?( sortArr = workArr) : false
   }
   return sortArr;
 };

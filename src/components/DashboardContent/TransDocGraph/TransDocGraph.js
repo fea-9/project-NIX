@@ -1,30 +1,8 @@
 import React, { Component } from "react";
 import StandartGraph from "./StandartGraph/StandartGraph.js";
 import CircleGraph from "./CircleGraph/CircleGraph.js";
-import "./TransDocGraph.scss";
-
-let data = [
-  {
-    key: "Reports",
-    count: 380
-  },
-  {
-    key: "Parents",
-    count: 105
-  },
-  {
-    key: "Articles",
-    count: 350
-  },
-  {
-    key: "Grants",
-    count: 470
-  },
-  {
-    key: "Data Sets",
-    count: 380
-  }
-];
+import Button from "../../BaseComponents/Button";
+import ButtonGroup from "../../BaseComponents/ButtonGroup";
 
 export default class TransDocGraph extends Component {
   state = {
@@ -43,7 +21,7 @@ export default class TransDocGraph extends Component {
     window.removeEventListener("resize", this.setSizes)
   }
   setSizes = () => {
-    console.log("resize")
+    if(!this.container) return
     let currentWidth = this.container.offsetWidth;
     let currentHeight = this.container.offsetHeight;
     if (
@@ -58,32 +36,31 @@ export default class TransDocGraph extends Component {
   };
   render() {
     let s = this.state;
+    let p = this.props
     return (
       <div className="tr-doc-graph">
         <div className="graph-panel">
           <h3>TRANSACTED PROJECTS AND DOCUMENTS</h3>
-          <button onClick={this.toggleView(false)} className="testBtn">
-            POE
-          </button>
-          <button onClick={this.toggleView(true)} className="testBtn">
-            POV
-          </button>
+          <ButtonGroup>
+            <Button onClick={this.toggleView(false)} active={!s.view}>POA</Button>
+            <Button onClick={this.toggleView(true)} active={s.view}>POE</Button>
+          </ButtonGroup>
         </div>
         <div className="graph-view" ref={el => (this.container = el)}>
           {s.view ? (
             <StandartGraph
-              data={data}
+              data={p.data}
               nameKey={"key"}
               valueKey={"count"}
               width={s.width}
-              height={s.height * 0.95}
+              height={s.height * 0.8}
             />
           ) : (
             <CircleGraph
-              data={data}
+              data={p.data}
               nameKey={"key"}
               valueKey={"count"}
-              height={s.height * 0.8}
+              height={s.height * 0.6}
             />
           )}
         </div>

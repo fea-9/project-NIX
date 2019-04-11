@@ -12,7 +12,10 @@ import DashboardContent from "../DashboardContent/DashboardContent";
 
 import * as actions from "../actions/dashboardRange";
 
-import Spinner from "../Spinner/Spinner";
+import RangePanel from "../RangePanel/RangePanel";
+
+import queryString from "query-string";
+
 
 let mapStateToProps = state => ({
   dashRange: state.dashboardRange,
@@ -21,20 +24,20 @@ let mapStateToProps = state => ({
 
 class DashboardPage extends Component {
   componentDidMount() {
-    this.props.dashboardRequest({ period: "month" }, this.props.token); //this.props.match.params.range
+    const {location, token, dashboardRequest} = this.props
+    const search = queryString.parse(location.search)
+    dashboardRequest( search, token);
   }
 
   render() {
     let p = this.props;
-    console.log(p);
-    console.log(p.dashRange.data);
     return (
       <PageTemplate
         sidebar={<Sidebar />}
-        header={<HeaderTemplate title={"Dashboard"} />}
+        header={<HeaderTemplate title={"Dashboard"} component={<RangePanel/>}/>}
         content={
           p.dashRange.initial || p.dashRange.isFetching ? (
-            <Spinner procent={true} />
+            <DashboardContent spinner={true} />
           ) : p.dashRange.error ? (
             <h1>ERROR</h1>
           ) : (

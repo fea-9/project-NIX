@@ -1,22 +1,20 @@
 import {refreshTokens} from "./token";
 import apiWorker from "../../utils/apiWorker";
 
-
-export const dashboardRequest = (params, token) => {
+export const communityRequest = ( token ) => {
     return apiWorker(
         {
-            typeRequest: "DASH_PENDING",
-            typeSuccess: "DASH_SUCCSESS",
-            typeFail: "DASH_FAIL"
+            typeRequest: "COMMUN_PENDING",
+            typeSuccess: "COMMUN_SUCCSESS",
+            typeFail: "COMMUN_FAIL"
         },
         {
-            url: "/stats",
+            url: "/community",
             headers: {
                 'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/json'
             },
-            method: "get",
-            params: params
+            method: "get"
         }
     )
 } 

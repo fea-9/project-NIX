@@ -30,6 +30,7 @@ export default class StandartGraph extends Component {
   render() {
     let p = this.props;
     let s = this.state;
+    console.log(p.width, p.height, "SIZES")
     let gap = (p.width * 0.3) / p.data.length;
     let maxVal = Math.max(...p.data.map(el => el[p.valueKey]));
     let numRank = maxVal.toString().substr(1).length;
@@ -43,7 +44,7 @@ export default class StandartGraph extends Component {
       return result;
     })();
 
-    let workY = p.height - indent;
+    let workY = p.height - indent/4;
     let workX = p.width - indent - gap * p.data.length;
     let graphPx = (p.height - indent) / maxInd;
     let rectStep = workX / p.data.length;
@@ -84,14 +85,14 @@ export default class StandartGraph extends Component {
             x1={indent}
             y1={0}
             x2={indent}
-            y2={p.height - indent}
+            y2={p.height - indent/4}
             style={{ stroke: "#7B8180", strokeWidth: "2" }}
           />
           <line
             x1={indent}
-            y1={p.height - indent}
+            y1={p.height - indent/4}
             x2={p.width}
-            y2={p.height - indent}
+            y2={p.height - indent/4}
             style={{ stroke: "#7B8180", strokeWidth: "2" }}
           />
           {indArr.map((el, ind, arr) => {
@@ -128,16 +129,17 @@ export default class StandartGraph extends Component {
                   y={indFromAbove}
                   fill={"url(#grad1)"}
                   width={rectStep}
-                  height={p.height - indent - indFromAbove}
+                  height={p.height - indent/4 - indFromAbove}
                   style={{ strokeWidth: 5, strokeOpacity: 0.9 }}
                 />
 
                 <text
                   key={ind}
                   className="textBottom"
-                  x={textCoord}
-                  textAnchor="middle"
-                  y={workY + p.textHeight + 5}
+                  x={/*textCoord*/rectProgress - 2}
+                  textAnchor="start"
+                  transform={`rotate(270 ${/*textCoord*/ rectProgress - 2} ${workY - indent/2.5})`}
+                  y={workY - indent/2.5/* + p.textHeight + 5*/}
                   fill="#7B8180"
                 >
                   {el[p.nameKey]}
