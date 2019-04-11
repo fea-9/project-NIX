@@ -70,7 +70,7 @@ export default class StandartGraph extends Component {
       <div className="standart-graph">
         <svg width={p.width} height={p.height}>
           <defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop
                 offset="0%"
                 style={{ stopColor: "#03EFFE", stopOpacity: 1 }}
@@ -127,7 +127,7 @@ export default class StandartGraph extends Component {
                   }}
                   x={rectProgress}
                   y={indFromAbove}
-                  fill={"url(#grad1)"}
+                  fill={"url(#grad2)"}
                   width={rectStep}
                   height={p.height - indent/4 - indFromAbove}
                   style={{ strokeWidth: 5, strokeOpacity: 0.9 }}
