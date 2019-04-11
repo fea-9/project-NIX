@@ -8,23 +8,21 @@
   width: 100vw;
   background: linear-gradient(to top, #012724, #276763 75%, #489e98);
   padding: 1.5rem 0 0 0;
-  // transition: all 1s;
+}
+
+.sidebar-wrapper_minimized_mobile {
+  height: auto;
+  background: #489E98;
 }
 
 @media (min-width: 768px) {
   .sidebar-wrapper {
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
-    // overflow: auto;
     height: 100%;
-    width: 350px;
-    // background: linear-gradient(to top, #012724, #276763 75%, #489e98);
-    // padding: 15px 0 0 0;
+    width: 35rem;
     transition: all 1s;
   }
-  
+
   .sidebar-wrapper_minimized {
-    width: 100px;
+    width: 10rem;
   }
 }
