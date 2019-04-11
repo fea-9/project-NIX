@@ -1,12 +1,11 @@
 @import "../abstracts/variables";
 
-.main__container__header{
+.header{
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap; 
     align-items: center;
-}
 
-.header{
     &__icon-box{
         margin: 4.4rem 1.6rem 3.4rem 5rem;
         cursor: pointer; 
