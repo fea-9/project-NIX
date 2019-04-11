@@ -6,13 +6,17 @@
   justify-content: space-between;
   align-items: center;
 
-  .img-wrapper {
+  .container-scale {
     position: relative;
   }
 
-  .profile-preview__img {
-    background-color: #e6e4bd;
+  .img-wrapper {
     border-radius: 50%;
+    background-color: #e6e4bd;
+    overflow: hidden;
+  }
+
+  .profile-preview__img {
     height: 8rem;
     width: 8rem;
   }
