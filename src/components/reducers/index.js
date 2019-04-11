@@ -7,6 +7,7 @@ import sidebar from "./sidebar";
 import documents from "./documents"
 import community from "./community"
 import transDocGraph from "./transDocGraph"
+import avatar from "./avatar"
 
 export default combineReducers({
   sidebar,
@@ -15,5 +16,6 @@ export default combineReducers({
   dashboardRange,
   documents,
   community,
-  transDocGraph
+  transDocGraph,
+  avatar
 });
