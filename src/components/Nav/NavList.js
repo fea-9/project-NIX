@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { NavListItem } from "./NavListItem";
+import AvatarPreview from "../AvatarPreview/AvatarPreview";
 import Icon from "../BaseComponents/icon/";
 
 class NavList extends Component {
@@ -16,7 +17,7 @@ class NavList extends Component {
         >
           <NavListItem
             path="/profile"
-            elem={React.createElement("div")}
+            elem={<AvatarPreview/>}
             minimized={this.props.minimized}
           />
           <NavListItem
