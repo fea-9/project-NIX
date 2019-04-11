@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import AvatarEditor from 'react-avatar-editor';
+import PropTypes from 'prop-types';
 
 import * as actions from "../actions/avatar";
 import { connect } from 'react-redux';
