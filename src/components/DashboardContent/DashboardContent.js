@@ -1,5 +1,6 @@
 import React, { Component }  from "react";
 import TransDocGraph from "./TransDocGraph/TransDocGraph";
+import BubbleChart from "./BubbleChart/BubbleChart"
 import InfoCard from "../InfoCard/InfoCard";
 import Spinner from "../Spinner/Spinner";
 import Icon from "../BaseComponents/icon/index"
@@ -53,11 +54,15 @@ class DashboardContent extends Component {
         </div>
         <div className="graph-block">
           <div className="graph-block__cell">
-            <div
-              style={{ width: "100%", height: "100%", border: "1px solid black" }}
-            >
-              BubbleChart
-            </div>
+            {
+              p.graph.initial || p.graph.isFetching ? (
+                <Spinner procent={true} />
+              ) : p.graph.error ? (
+                <h1>ERROR</h1>
+              ) : (
+                <BubbleChart data={p.graph.data.data}/>
+              )
+            }            
           </div>
           <div className="graph-block__cell">
             {
