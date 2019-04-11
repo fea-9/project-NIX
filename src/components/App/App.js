@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
@@ -39,6 +39,7 @@ class App extends Component {
   render() {
     return (
       <Switch>
+        <Redirect exact from="/" to="/dashboard?period=day" />
         <Route path="/auth/:id" component={AuthPage} />
         <PrivateRoute exact path="/profile" component={ProfilePage} />
         <PrivateRoute exact path="/search" component={SearchPage} />
