@@ -1,7 +1,7 @@
 @import "../abstracts/variables";
 
 .auth-box {
-    height: 100vh;
+    height: 100%;
     display: flex;    
   
     &__aside {
@@ -89,10 +89,16 @@
 }
 
 @media screen and (max-width: 768px) {
-    .auth-box__aside{
-        display: none;
-    }
-    .auth-box__form{
-        width: 100%;
-    }
+    .auth-box{
+        padding: 1rem;
+        &__aside{
+            display: none;
+        }
+        .auth-box__form{
+            width: 100%;        
+            &-wrapper{
+                width: 90%;
+            }
+        }
+    }        
 }
