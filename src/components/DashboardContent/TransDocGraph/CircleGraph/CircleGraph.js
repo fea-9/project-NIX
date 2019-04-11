@@ -1,27 +1,43 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
+import { Scrollbars } from "react-custom-scrollbars";
 import "./CircleGraph.scss";
 
+class CustomScrollbars extends Component {
+  render() {
+    return (
+      <Scrollbars
+        renderTrackHorizontal={props => <div {...props} className="track-horizontal"/>}
+        renderTrackVertical={props => <div {...props} className="track-vertical"/>}
+        renderThumbHorizontal={props => <div {...props} className="thumb-horizontal"/>}
+        renderThumbVertical={props => <div {...props} className="thumb-vertical"/>}
+        renderView={props => <div {...props} className="view"/>}>
+        {this.props.children}
+      </Scrollbars>
+    );
+  }
+}
 
-const List = ({data,keyText, keyNum}) => {
+const List = ({data,keyText, keyNum, height}) => {
   return (
-    <ul>
-      {
-        data.map((el, ind) => (
-          <li key={ind} style={{ color: el.color }} className={"line"}>
-            <span className={"line__text"}>{el[keyText]}</span>
-            <span className={"line__num"}>{el[keyNum]}</span>
-          </li>
-        ))
-      }
-    </ul>
+    <CustomScrollbars>
+      <ul style={{height: height}}>
+          {
+            data.map((el, ind) => (
+              <li key={ind} style={{ color: el.color }} className={"line"}>
+                <span className={"line__text"}>{el[keyText]}</span>
+                <span className={"line__num"}>{el[keyNum]}</span>
+              </li>
+            ))
+          }
+      </ul>
+    </CustomScrollbars>
   )
 }
 
 export default ({ nameKey, valueKey, data, height = "50%" }) => {
   const colors = ["#03EFFE", "#34FFF3", "#5CE5DD", "#37D3CA", "#26BCB3"];
   let sum = data.reduce((prev, el) => (prev += el[valueKey]), 0);
-  let colorChange = num =>
-    num >= colors.length ? colors[num - colors.length] : colors[num];
+  let colorChange = num => colors[num% colors.length]
 
   let createViewData = () => {
     const viewData = [...data];
@@ -48,15 +64,17 @@ export default ({ nameKey, valueKey, data, height = "50%" }) => {
     const y = Math.sin(2 * Math.PI * percent);
     return [x, y];
   }
+  console.log(height, "CIRCLE")
   return (
     <div className="circle-graph">
       <div className="graph-info">
-        <List data={data.map((el, ind)=>{
-          el.color = colorChange(ind)
-          return el
-        })}
-          keyText = "key"
-          keyNum = "count"/>
+          <List data={data.map((el, ind)=>{
+            el.color = colorChange(ind)
+            return el
+          })}
+            keyText = "key"
+            keyNum = "count"
+            height={height}/>
       </div>
       <svg
         viewBox="-1 -1 2 2"

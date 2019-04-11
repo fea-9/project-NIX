@@ -1,14 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { NavList } from "../Nav/NavList";
+import * as actions from "../actions/auth";
+
+import NavList from "../Nav/NavList";
 import { Social } from "../Social/Social";
 import { Logo } from "../Logo/Logo";
 import { Button } from "../BaseComponents/Forms/Button";
-
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as actions from "../actions/auth";
-import { sidebarSize } from "../actions/sidebar";
 
 class Sidebar extends Component {
   render() {
@@ -23,7 +21,11 @@ class Sidebar extends Component {
         }
       >
         <div className="top-content-wrapper">
-          <Logo className="logo logo_sidebar" minimized={minimized} button={mobile}/>
+          <Logo
+            className="logo logo_sidebar"
+            minimized={minimized}
+            button={mobile}
+          />
           <NavList minimized={minimized} />
         </div>
         <div className="bottom-content-wrapper">

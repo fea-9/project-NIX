@@ -1,20 +1,18 @@
 import React, { Component } from "react";
 import sortFunc from "../../utils/sortFunc.js";
 import varyDateView from "../../utils/varyDateView.js";
-import findLastDate from "../../utils/findLastDate.js";
 import { Scrollbars } from "react-custom-scrollbars";
 import DocCard from "../DocCard/DocCard";
 import * as actions from "../actions/documents";
 import { connect } from "react-redux";
-import Spinner from "../Spinner/Spinner"
-//test icons
-import ArrowIcon from "./ArrowIcon";
+import Spinner from "../Spinner/Spinner";
+import Icon from "../BaseComponents/icon/index";
+import Button from "../BaseComponents/Button";
 
 let mapStateToProps = state => ({
   documents: state.documents,
   token: state.auth.user.access_token
 });
-
 
 class DocumentsTable extends Component {
   state = {
@@ -63,29 +61,30 @@ class DocumentsTable extends Component {
       }
       return elem;
     });
-    let nData = JSON.parse(JSON.stringify(this.props.documents.data.data))
+    let nData = JSON.parse(JSON.stringify(this.props.documents.data.data));
     nData.documentslist = sortFunc(
       this.props.documents.data.data.documentslist,
       indic.key,
       indic.direction,
       "modifiedDate"
-    )
+    );
     this.setState({
       indicators: nInd
     });
-    this.props.setData(nData)
+    this.props.setData(nData);
   };
 
   componentDidMount() {
-    let token = localStorage.getItem("access_token")
-    this.props.documentsRequest(token)
+    let token = localStorage.getItem("access_token");
+    this.props.documentsRequest(token);
   }
 
   render() {
     let s = this.state;
     let p = this.props;
-    if(p.documents.initial || p.documents.isFetching) return (<Spinner procent={true}/>)
-    if(p.documents.error) return (<div>ERROR</div>)
+    if (p.documents.initial || p.documents.isFetching)
+      return <Spinner procent={true} />;
+    if (p.documents.error) return <div>ERROR</div>;
     return (
       <div className="documents">
         <div className="documents-info">
@@ -105,28 +104,43 @@ class DocumentsTable extends Component {
               key={index}
             >
               {elem.name}
-              <ArrowIcon
-                click={this.clickSortHandler(elem)}
-                direct={elem.direction}
-                check={elem.check}
-              />
+              {elem.direction ? (
+                <Button onClick={this.clickSortHandler(elem)}>
+                  <Icon
+                    type="arrowUpIcon"
+                    className="arrow-icon"
+                    viewBox="0 0 10 6"
+                    width={10}
+                    height={6}
+                  />
+                </Button>
+              ) : (
+                <Button onClick={this.clickSortHandler(elem)}>
+                  <Icon 
+                    type="arrowDownIcon" 
+                    className="arrow-icon"
+                    viewBox="0 0 10 6" 
+                    width={10}
+                    height={6}
+                  />
+                </Button>
+              )}
             </div>
           ))}
         </div>
         <div className="documents__main">
           <Scrollbars>
-            {
-              p.documents.data.data.documentslist.map((elem, index) => (
-                <DocCard
-                  key={index}
-                  title={elem.documentTitle}
-                  theme={elem.documentSource}
-                  contributors={elem.documentContributors.join(", ")}
-                  keyWords={elem.documentKeywords}
-                  totalCitation={elem.documentCitations}
-                />
-              ))
-            }
+            {p.documents.data.data.documentslist.map((elem, index) => (
+              <DocCard
+                key={index}
+                title={elem.documentTitle}
+                theme={elem.documentSource}
+                contributors={elem.documentContributors.join(", ")}
+                keyWords={elem.documentKeywords}
+                totalCitation={elem.documentCitations}
+                documentProof={elem.documentProof || false}
+              />
+            ))}
           </Scrollbars>
         </div>
       </div>
@@ -134,6 +148,9 @@ class DocumentsTable extends Component {
   }
 }
 
-DocumentsTable = connect(mapStateToProps, {...actions})(DocumentsTable)
+DocumentsTable = connect(
+  mapStateToProps,
+  { ...actions }
+)(DocumentsTable);
 
 export default DocumentsTable;

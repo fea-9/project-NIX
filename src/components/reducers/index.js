@@ -6,6 +6,7 @@ import dashboardRange from "./dashboardRange"
 import sidebar from "./sidebar";
 import documents from "./documents"
 import community from "./community"
+import transDocGraph from "./transDocGraph"
 
 export default combineReducers({
   sidebar,
@@ -13,5 +14,6 @@ export default combineReducers({
   auth,
   dashboardRange,
   documents,
-  community
+  community,
+  transDocGraph
 });
