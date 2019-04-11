@@ -10,22 +10,22 @@ import { Button } from "../BaseComponents/Forms/Button";
 
 class Sidebar extends Component {
   state = {
-    isFullSidebar: false
+    isMinSidebar: true
   };
 
   showSidebar = event =>
-    this.setState(state => ({ isFullSidebar: !state.isFullSidebar }));
+    this.setState(state => ({ isMinSidebar: !state.isMinSidebar }));
 
   render() {
     const { authLogout, minimized, mobile } = this.props;
-    const { isFullSidebar } = this.state;
+    const { isMinSidebar } = this.state;
 
     return (
       <div
         className={
           minimized
             ? "sidebar-wrapper sidebar-wrapper_minimized"
-            : (isFullSidebar && mobile)
+            : isMinSidebar && mobile
             ? "sidebar-wrapper sidebar-wrapper_minimized_mobile"
             : "sidebar-wrapper"
         }
@@ -42,9 +42,9 @@ class Sidebar extends Component {
               )
             }
           />
-          {(!isFullSidebar || !mobile) && <NavList minimized={minimized} />}
+          {(!isMinSidebar || !mobile) && <NavList minimized={minimized} />}
         </div>
-        {(!isFullSidebar || !mobile) && (
+        {(!isMinSidebar || !mobile) && (
           <div className="bottom-content-wrapper">
             <Social minimized={minimized} />
             <Button
