@@ -14,7 +14,7 @@ const Button = ({
         return onClick(e);
       }
     };
-  
+
     const classes = classNames(
         'btn',
         className,

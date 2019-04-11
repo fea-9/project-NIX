@@ -5,6 +5,7 @@ import Spinner from "../Spinner/Spinner";
 import Icon from "../BaseComponents/icon/index"
 import { connect } from "react-redux";
 import * as actions from "../actions/transDocGraph";
+import {Copyright} from "../Copyright/Copyright"
 
 let mapStateToProps = state => ({
   graph: state.transDocGraph,
@@ -30,7 +31,7 @@ class DashboardContent extends Component {
         <div className="info-block">
           {p.spinner ? <Spinner procent={true} /> : p.data.map((el, ind) => (
             <div key={ind} className="info-block__cell">
-              <InfoCard
+              <InfoCard 
                 advanced={true}
                 color={colors[ind]}
                 num={el.count}
@@ -69,6 +70,9 @@ class DashboardContent extends Component {
               )
             }
           </div>
+        </div>
+        <div className="dash-copyright">
+          <Copyright />
         </div>
       </div>
     )

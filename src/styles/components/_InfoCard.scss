@@ -1,6 +1,7 @@
 .info-card {
     width: 100%;
     height: 100%;
+    display: inline-block;
 }
 .info-card-title, .info-card-text {
     display: flex;
@@ -8,14 +9,12 @@
     align-items: center;
     width: 100%;
 }
-// .info-card-title span, .info-card-text span {
-//     display: block;
-// }
 .info-card-title--adv .num {
     font-size: 10rem;
     font-weight: bold;
     line-height: 10rem;
     font-family: 'Roboto', sans-serif;
+    display: inline-block;
 }
 .info-card-text--adv span{
     font-size: 2rem;
@@ -23,10 +22,11 @@
     margin-left: 8px;
 }
 .info-card-dop {
+    display: inline-block;
     margin-left: 8px;
     font-family: 'Raleway', sans-serif;
     font-size: 15px; 
-    flex-grow: 1;
+    // flex-grow: 1;
     width: 40%;
 
     &__line {

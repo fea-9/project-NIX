@@ -5,9 +5,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    user-select: none;
+}
+.dash-copyright {
+    align-self: flex-start;
+    padding: 0.5rem;
+    padding-left: 8rem;
 }
 .info-block, .graph-block {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     width: 95%;
 }
@@ -18,7 +24,7 @@
     flex-flow: row wrap;
     min-height: 20%;
     &__cell {
-        // display: inline-block;
+        display: inline-block;
         width: 25%;
         min-width: 180px;
         padding: 1%;
