@@ -10,14 +10,38 @@ class BubbleChart extends Component {
     mounted = false;
     
     state = {
-        data: []
-    };
-       
-    componentWillMount() {
-        this.mounted = true;
-    }
+        data: [],
+        // width: 0,
+        // height: 0
+    };    
+   
+    // componentDidUpdate() {//ловим пропсы с сайдбара, если изменились то resize.
+    //     this.setSizes();
+    // }
+    // componentWillUnmount(){
+    //     window.removeEventListener("resize", this.setSizes)
+    // }
+    
+    // setSizes = () => {
+    //     if(!this.container) return
+        
+    //     let currentWidth = this.container.offsetWidth;
+    //     let currentHeight = this.container.offsetHeight;
+    //     console.log(currentWidth, currentHeight)
+    //     if (
+    //         this.state.width !== currentWidth &&
+    //         this.state.height !== currentHeight
+    //     )
+    //     this.setState(prevState => ({ 
+    //         ...prevState,
+    //         width: currentWidth, 
+    //         height: currentHeight }));
+    // };
+   
 
     componentDidMount() {
+        // this.setSizes();
+        // window.addEventListener("resize", this.setSizes)
         if (this.props.data.length > 0) {
 
             this.minValue =
@@ -36,9 +60,7 @@ class BubbleChart extends Component {
         }
     }
 
-    componentWillUnmount() {
-        this.mounted = false;
-    }
+    
 
     radiusScale = value => {      
         const fx = d3
@@ -65,9 +87,9 @@ class BubbleChart extends Component {
                 .iterations(1)
             ) 
             .on("tick", () => {
-                if (this.mounted) {
+                
                     this.setState({ data });
-                }
+                
             })
     };
 
@@ -84,7 +106,7 @@ class BubbleChart extends Component {
         const color = "#5CE5DD";
 
         // render circle and text elements inside a group
-        const texts = this.props.data.map((item, index) => {
+        const texts = data.map((item, index) => {
             const fontSize = this.radiusScale(item.v)/3;
             const textLines = item.key.length > 10 && item.key.search(/\s/g) < 0 ? 
                 [item.key.substr(0,item.key.length/2), item.key.slice(item.key.length/2)]
@@ -138,12 +160,15 @@ class BubbleChart extends Component {
 
         return texts;
     };
-
-    render() {
-        if (this.state.data.length) {
+   
+    render() { 
+        const {data} = this.state
+        const { width, height} = this.props
+        
+        if (data.length) {
             return (
-                <div className = "keychart-view" >
-                    <svg width={this.props.width} height={this.props.height} >
+                <div className = "keychart-view" ref={el => (this.container = el)}>
+                    <svg width={width} height={height} >
                         <defs>
                             <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
                                 <stop offset="0%" style={{stopColor:"#03EFFE",
@@ -155,7 +180,7 @@ class BubbleChart extends Component {
                                 <stop offset="100%" style={{stopColor:"#012724",stopOpacity:1}} />
                             </radialGradient>
                         </defs>
-                        {this.renderBubbles(this.state.data)}
+                        {this.renderBubbles(data)}
                     </svg>
                 </div>
             );
