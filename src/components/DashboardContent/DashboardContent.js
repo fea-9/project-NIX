@@ -1,5 +1,6 @@
 import React from "react";
 import TransDocGraph from "./TransDocGraph/TransDocGraph";
+import BubbleChart from "./BubbleChart/BubbleChart"
 import InfoCard from "../InfoCard/InfoCard";
 import * as icons from "../BaseComponents/Icons/IconsDashboard";
 
@@ -38,11 +39,12 @@ export default p => {
       </div>
       <div className="graph-block">
         <div className="graph-block__cell">
-          <div
+          {/* <div
             style={{ width: "100%", height: "100%", border: "1px solid black" }}
-          >
-            BubbleChart
-          </div>
+          > */}
+          {/* BubbleChart */}
+            < BubbleChart />
+          {/* </div> */}
         </div>
         <div className="graph-block__cell">
           <TransDocGraph />
