@@ -1,37 +1,37 @@
 @import "../abstracts/variables";
 
-.header{
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap; 
-    align-items: center;
+.header {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
 
-    &__icon-box{
-        margin: 4.4rem 1.6rem 3.4rem 5rem;
-        cursor: pointer; 
-    }
-    &__title-box{
-        text-align: left;
-        line-height: 1;
-        margin-right: 2.8rem;
-        margin-top: 0.6rem;
-    }
-        
-    &__name{
-        font-family: "Raleway";
-        font-size: 3.5rem;
-        font-weight: 800;
-        color: $dark-black;
-        text-transform: capitalize;
-        margin: 0;
-    }
-    
-    &__details{
-        font-family: 'Roboto';
-        font-weight: 500;
-        font-size: 1.5rem;
-        color: $light-grey-text;
-        margin: 0.5rem 0 0 0;
-        letter-spacing: 0.05rem;
-    }      
+  &__icon-box {
+    margin: 4.4rem 1.6rem 3.4rem 5rem;
+    cursor: pointer;
+  }
+  &__title-box {
+    text-align: left;
+    line-height: 1;
+    margin-right: 2.8rem;
+    margin-top: 0.6rem;
+  }
+
+  &__name {
+    font-family: "Raleway";
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: $dark-black;
+    text-transform: capitalize;
+    margin: 0;
+  }
+
+  &__details {
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: $light-grey-text;
+    margin: 0.5rem 0 0 0;
+    letter-spacing: 0.05rem;
+  }
 }
