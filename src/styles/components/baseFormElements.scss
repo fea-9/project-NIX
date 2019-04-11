@@ -86,8 +86,7 @@
   &__checkbox{
     &:checked, 
     &:not(:checked){
-        position: absolute;
-        left: -100vw;
+        display: none;
     }
 
     &:checked + label, 
