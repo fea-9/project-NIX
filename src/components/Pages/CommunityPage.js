@@ -1,25 +1,19 @@
 import React, { Component } from "react";
-
 import { PageTemplate } from "../Templates/PageTemplate";
-
 import Sidebar from "../Sidebar/Sidebar";
-
 import { HeaderTemplate } from "../Header/Header";
-
 import CommunityTable from "../CommunityTable/CommunityTable";
-
 import Spinner from "../Spinner/Spinner";
-
 import * as actions from "../actions/community";
-
 import { connect } from "react-redux";
+import PublicProfile from "../PublicProfile/PublicProfile"
 
 let mapStateToProps = state => ({
   community: state.community,
   token: state.auth.user.access_token
 });
 class CommunityPage extends Component {
-  componentDidMount() {
+  componentDidMount() { 
     let token = localStorage.getItem("access_token");
     this.props.communityRequest(token);
   }
@@ -31,6 +25,7 @@ class CommunityPage extends Component {
         sidebar={<Sidebar />}
         header={<HeaderTemplate title={"Community"} />}
         content={
+          p.location.search ? <PublicProfile userId={p.location.search.split("_")[1]}/> :
           p.community.initial || p.community.isFetching ? (
             <Spinner procent={true} />
           ) : p.community.error ? (

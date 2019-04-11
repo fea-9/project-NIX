@@ -33,6 +33,12 @@ export default {
     data: null,
     error: null
   },
+  publicProfile: {
+    initial: true,
+    isFetching: false,
+    data: null,
+    error: null
+  },
   sidebar: {
     minimized: false
   },
