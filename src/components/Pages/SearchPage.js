@@ -3,7 +3,10 @@ import React, { Component } from "react";
 import { PageTemplate } from "../Templates/PageTemplate";
 
 import Sidebar from "../Sidebar/Sidebar";
+
 import {HeaderTemplate} from "../Header/Header";
+
+import Search from "../Search/Search"
 
 class SearchPage extends Component {
   componentDidMount() {}
@@ -13,7 +16,7 @@ class SearchPage extends Component {
       <PageTemplate
         sidebar={<Sidebar />}
         header={<HeaderTemplate title={"SEARCH"}/>}
-        content={React.createElement("div")}
+        content={<Search/>}
       />
     );
   }
