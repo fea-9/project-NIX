@@ -1,9 +1,4 @@
 export default {
-  item: {
-    isFetching: false,
-    data: null,
-    error: null
-  },
   auth: {
     isFetching: false,
     user: null,
@@ -46,5 +41,9 @@ export default {
   },
   sidebar: {
     minimized: false
+  },
+  avatar: {
+    src:"http://www.blackdesertbase.com/img/users/avatars/70.png",
+    scale: 1
   }
 };
