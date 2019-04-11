@@ -5,26 +5,36 @@ import Icon from "../BaseComponents/icon/";
 
 class AvatarPreview extends Component {
   render() {
-    const { srcAvatar, fullName, minimized } = this.props;
+    const { srcAvatar, fullName, minimized, scale } = this.props;
 
     return (
-      <div className={minimized ? "profile-preview profile-preview_minimized" : "profile-preview"}>
-        <div className="img-wrapper">
-          <img
-            className="profile-preview__img"
-            src={"http://www.blackdesertbase.com/img/users/avatars/70.png"}
-            alt="avatar"
-          />
-          <div className="profile-preview__icon">
-            <Icon
-              className="settings-icon"
-              type="settingsIcon"
-              width={minimized ? 6 : 13}
-              height={minimized ? 6 : 13}
-              viewBox="0 0 13 13"
+      <div
+        className={
+          minimized
+            ? "profile-preview profile-preview_minimized"
+            : "profile-preview"
+        }
+      >
+        <div className="container-scale">
+          <div className="img-wrapper">
+            <img
+              className="profile-preview__img"
+              src={srcAvatar}
+              alt="avatar"
+              style={{ transform: `scale(${scale})` }}
             />
+            <div className="profile-preview__icon">
+              <Icon
+                className="settings-icon"
+                type="settingsIcon"
+                width={minimized ? 6 : 13}
+                height={minimized ? 6 : 13}
+                viewBox="0 0 13 13"
+              />
+            </div>
           </div>
         </div>
+
         {!minimized && <p className="profile-preview__name">{fullName}</p>}
       </div>
     );
@@ -33,7 +43,9 @@ class AvatarPreview extends Component {
 
 const mapStateToProps = state => ({
   fullName: state.auth.user.fullName,
-  minimized: state.sidebar.minimized
+  minimized: state.sidebar.minimized,
+  srcAvatar: state.avatar.src,
+  scale: state.avatar.scale
 });
 
 export default connect(mapStateToProps)(AvatarPreview);
