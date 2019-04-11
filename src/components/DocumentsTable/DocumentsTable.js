@@ -130,8 +130,10 @@ class DocumentsTable extends Component {
         </div>
         <div className="documents__main">
           <Scrollbars>
-            {p.documents.data.data.documentslist.map((elem, index) => (
+            {p.documents.data.data.documentslist.map((elem, index, arr) => (
               <DocCard
+                data={p.documents.data.data}
+                ind={index}
                 key={index}
                 title={elem.documentTitle}
                 theme={elem.documentSource}
