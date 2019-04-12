@@ -6,7 +6,8 @@ import CommunityTable from "../CommunityTable/CommunityTable";
 import Spinner from "../Spinner/Spinner";
 import * as actions from "../actions/community";
 import { connect } from "react-redux";
-import PublicProfile from "../PublicProfile/PublicProfile"
+import PublicProfile from "../PublicProfile/PublicProfile";
+import Error from "../Error/Error";
 
 let mapStateToProps = state => ({
   community: state.community,
@@ -29,7 +30,7 @@ class CommunityPage extends Component {
           p.community.initial || p.community.isFetching ? (
             <Spinner procent={true} />
           ) : p.community.error ? (
-            <h1>ERROR</h1>
+            <Error />
           ) : (
             <CommunityTable
               title={p.community.data.data.totalCount}
