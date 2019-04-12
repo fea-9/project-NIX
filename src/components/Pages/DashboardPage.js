@@ -1,20 +1,14 @@
 import React, { Component } from "react";
-
 import { connect } from "react-redux";
 
 import { PageTemplate } from "../Templates/PageTemplate";
-
 import Sidebar from "../Sidebar/Sidebar";
-
 import { HeaderTemplate } from "../Header/Header";
-
 import DashboardContent from "../DashboardContent/DashboardContent";
-
 import * as actions from "../actions/dashboardRange";
-
 import RangePanel from "../RangePanel/RangePanel";
-
 import queryString from "query-string";
+import Error from "../Error/Error";
 
 
 let mapStateToProps = state => ({
@@ -39,7 +33,7 @@ class DashboardPage extends Component {
           p.dashRange.initial || p.dashRange.isFetching ? (
             <DashboardContent spinner={true} />
           ) : p.dashRange.error ? (
-            <h1>ERROR</h1>
+            <Error />
           ) : (
             <DashboardContent data={p.dashRange.data.data} />
           )

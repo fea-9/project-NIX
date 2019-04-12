@@ -6,7 +6,8 @@ import Spinner from "../Spinner/Spinner";
 import Icon from "../BaseComponents/icon/index"
 import { connect } from "react-redux";
 import * as actions from "../actions/transDocGraph";
-import {Copyright} from "../Copyright/Copyright"
+import {Copyright} from "../Copyright/Copyright";
+import Error from "../Error/Error";
 
 let mapStateToProps = state => ({
   graph: state.transDocGraph,
@@ -58,7 +59,7 @@ class DashboardContent extends Component {
               p.graph.initial || p.graph.isFetching ? (
                 <Spinner procent={true} />
               ) : p.graph.error ? (
-                <h1>ERROR</h1>
+                <Error />
               ) : (
                 <BubbleChart data={p.graph.data.data}/>
               )

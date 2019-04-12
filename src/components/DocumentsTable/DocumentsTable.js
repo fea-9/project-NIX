@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import Spinner from "../Spinner/Spinner";
 import Icon from "../BaseComponents/icon/index";
 import Button from "../BaseComponents/Button";
+import Error from "../Error/Error"
 
 let mapStateToProps = state => ({
   documents: state.documents,
@@ -84,7 +85,7 @@ class DocumentsTable extends Component {
     let p = this.props;
     if (p.documents.initial || p.documents.isFetching)
       return <Spinner procent={true} />;
-    if (p.documents.error) return <div>ERROR</div>;
+    if (p.documents.error) return <Error />;
     return (
       <div className="documents">
         <div className="documents-info">
