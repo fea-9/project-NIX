@@ -13,6 +13,7 @@ import DashboardPage from "../Pages/DashboardPage";
 import DocumentsPage from "../Pages/DocumentsPage";
 import ProfilePage from "../Pages/ProfilePage";
 import SearchPage from "../Pages/SearchPage";
+import Error from "../Error/Error"
 
 class App extends Component {
   resize = () => {
@@ -46,9 +47,8 @@ class App extends Component {
         <PrivateRoute exact path="/dashboard" component={DashboardPage} />
         <PrivateRoute exact path="/documents" component={DocumentsPage} />
         <PrivateRoute exact path="/community" component={CommunityPage} />
-        <PrivateRoute exact path="/community/:user" component={CommunityPage} />
 
-        <Route render={() => <div>404</div>} />
+        <Route render={() => <Error description="404 page not found"/>} />
       </Switch>
     );
   }
