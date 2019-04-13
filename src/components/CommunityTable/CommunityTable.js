@@ -6,12 +6,8 @@ import Button from "../BaseComponents/Button";
 import getFullMonthDate from "../../utils/getFullMonthDate";
 import { NavLink } from "react-router-dom";
 
-<<<<<<< HEAD
 import AvaMock from './AvaMock';
 
-=======
-import AvaMock from "./AvaMock";
->>>>>>> 55912e4fe1773e4fb40cc7cf292cd9857cb48490
 
 let InfoBlock = p => (
   <div className={p.className}>
