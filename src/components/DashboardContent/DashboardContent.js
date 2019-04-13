@@ -70,7 +70,7 @@ class DashboardContent extends Component {
               p.graph.initial || p.graph.isFetching ? (
                 <Spinner procent={true} />
               ) : p.graph.error ? (
-                <h1>ERROR</h1>
+                <Error />
               ) : (
                 <TransDocGraph data={p.graph.data.data}/>
               )
