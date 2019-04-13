@@ -23,6 +23,7 @@ class CommunityPage extends Component {
     let p = this.props;
     return (
       <PageTemplate
+        title={"Community"}
         sidebar={<Sidebar />}
         header={<HeaderTemplate title={"Community"} />}
         content={

@@ -15,6 +15,7 @@ class DocumentsPage extends Component {
 
     return (
       <PageTemplate
+        title={"Documents"}
         sidebar={<Sidebar />}
         header={<HeaderTemplate title={"DOCUMENTS"}/>}
         content={

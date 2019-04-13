@@ -14,6 +14,7 @@ class SearchPage extends Component {
   render() {
     return (
       <PageTemplate
+        title="Search"
         sidebar={<Sidebar />}
         header={<HeaderTemplate title={"SEARCH"}/>}
         content={<Search/>}
