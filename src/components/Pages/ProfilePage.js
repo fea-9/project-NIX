@@ -43,6 +43,7 @@ class ProfilePage extends Component {
     render() {
         const {fullName, created_at} = this.props
         return <PageTemplate 
+                    title="Profile"
                     sidebar={<Sidebar />} 
                     content={<ProfileForm />}  
                     header = {<HeaderTemplate 
