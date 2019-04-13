@@ -7,16 +7,27 @@ import NavList from "../Nav/NavList";
 import { Social } from "../Social/Social";
 import { Logo } from "../Logo/Logo";
 import { Button } from "../BaseComponents/Forms/Button";
+import { BurgerButton } from "../BaseComponents/BurgerButton";
 
 class Sidebar extends Component {
+  state = {
+    isMinSidebar: true
+  };
+
+  showSidebar = event =>
+    this.setState(state => ({ isMinSidebar: !state.isMinSidebar }));
+
   render() {
     const { authLogout, minimized, mobile } = this.props;
+    const { isMinSidebar } = this.state;
 
     return (
       <div
         className={
           minimized
             ? "sidebar-wrapper sidebar-wrapper_minimized"
+            : isMinSidebar && mobile
+            ? "sidebar-wrapper sidebar-wrapper_minimized_mobile"
             : "sidebar-wrapper"
         }
       >
@@ -24,14 +35,27 @@ class Sidebar extends Component {
           <Logo
             className="logo logo_sidebar"
             minimized={minimized}
-            button={mobile}
+            button={
+              mobile && (
+                <BurgerButton
+                  onClick={this.showSidebar}
+                  isOpen={!isMinSidebar}
+                />
+              )
+            }
           />
-          <NavList minimized={minimized} />
+          {(!isMinSidebar || !mobile) && <NavList minimized={minimized} />}
         </div>
-        <div className="bottom-content-wrapper">
-          <Social minimized={minimized} />
-          <Button className="logout-btn" text="Log out" onClick={authLogout} />
-        </div>
+        {(!isMinSidebar || !mobile) && (
+          <div className="bottom-content-wrapper">
+            <Social minimized={minimized} />
+            <Button
+              className="logout-btn"
+              text="Log out"
+              onClick={authLogout}
+            />
+          </div>
+        )}
       </div>
     );
   }

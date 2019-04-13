@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-export default ({text}) => {
+export default ({text, width=78, height = 78} ) => {
     const getRand = () => {
         let num =Math.round(Math.random()*255)
         let upNum = num.toString(16)
@@ -14,8 +14,8 @@ export default ({text}) => {
         <div 
             style={
                 { 
-                    width: "78px", 
-                    height: "78px", 
+                    width: `${width}px`, 
+                    height: `${height}px`, 
                     borderRadius: "50%",
                     background: `#${getRand()}${getRand()}${getRand()}`,
                     display: "flex",

@@ -4,9 +4,11 @@ import auth from "./auth";
 import resize from "./resize";
 import dashboardRange from "./dashboardRange"
 import sidebar from "./sidebar";
-import documents from "./documents"
-import community from "./community"
-import transDocGraph from "./transDocGraph"
+import documents from "./documents";
+import community from "./community";
+import transDocGraph from "./transDocGraph";
+import publicProfile from "./publicProfile";
+import avatar from "./avatar";
 
 export default combineReducers({
   sidebar,
@@ -15,5 +17,7 @@ export default combineReducers({
   dashboardRange,
   documents,
   community,
-  transDocGraph
+  transDocGraph,
+  publicProfile,
+  avatar
 });

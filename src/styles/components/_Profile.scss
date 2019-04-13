@@ -7,14 +7,16 @@
     height: 100%;
     position: relative; 
     border-top: 1px solid $light-grey-text; 
-    box-sizing: border-box;    
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;   
   }
 
   &__form-box{
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    min-height: calc(100vh - 97px - 70px);
     width: 100%;
     padding: 5rem;
     flex-grow: 1;

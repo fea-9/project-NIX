@@ -1,68 +1,88 @@
-import React, { Component } from 'react';
-import { Scrollbars } from 'react-custom-scrollbars';
+import React, { Component } from "react";
+import { Scrollbars } from "react-custom-scrollbars";
+import PropTypes from "prop-types";
 
-import Button from "../BaseComponents/Button"
+import Button from "../BaseComponents/Button";
 import getFullMonthDate from "../../utils/getFullMonthDate";
+import { NavLink } from "react-router-dom";
 
+<<<<<<< HEAD
 import AvaMock from './AvaMock';
 
+=======
+import AvaMock from "./AvaMock";
+>>>>>>> 55912e4fe1773e4fb40cc7cf292cd9857cb48490
 
 let InfoBlock = p => (
   <div className={p.className}>
-    <div className={p.className + "__num"}>
-      {p.num}
-    </div>
-    <div className={p.className + "__text"}>
-      {p.text}
-    </div>
+    <div className={p.className + "__num"}>{p.num}</div>
+    <div className={p.className + "__text"}>{p.text}</div>
   </div>
-)
+);
 
+InfoBlock.propTypes = {
+  className: PropTypes.string,
+  num: PropTypes.number,
+  text: PropTypes.string
+};
 
 export default class CommunityTable extends Component {
-
-  render(){
-
-    return(
-      <div className="community-table">
-        <div className="community-table__total-info">
+  static propTypes = {
+    title: PropTypes.number,
+    data: PropTypes.array,
+    mobile: PropTypes.bool
+  };
+  render() {
+    const mobile = this.props.mobile ? "-mobile" : "";
+    return (
+      <div className={`community-table${mobile}`}>
+        <div className={`community-table${mobile}__total-info`}>
           {this.props.title} People community
         </div>
-          <div className="community-table__main">
-            <Scrollbars>
-                {
-                  this.props.data.map ((user, index) => {
-                    return (
-                      <div key={index} className="table-line">
-                            <AvaMock text={user.memberName}/>
-                            <div className="table-line__info">
-                              <div className="table-line__info__name">
-                                {user.memberName}
-                              </div>
-                              <div className="table-line__info__since">
-                                Member since {getFullMonthDate(user.memberCreatedDate)}
-                              </div>
-                            </div>
-                            <InfoBlock className="table-line__block"
-                              num={user.memberProofOfExistence}
-                              text={"TOTAL PROOFS OF EXISTENCE"}
-                            />
-                            <InfoBlock className="table-line__middle-block"
-                              num={user.memberProofOfAttribution}
-                              text={"TOTAL PROOFS OF ATTRIBUTION"}
-                            />
-                            <InfoBlock className="table-line__block"
-                              num={user.memberCitations}
-                              text={"TOTAL CITATIONS"}
-                            />
-                            <Button children="View" className="btn-community"/>
-                      </div>
-                    )
-                  })
-              }
-            </Scrollbars>
-          </div>
+        <div className={`community-table${mobile}__main`}>
+          <Scrollbars>
+            {this.props.data.map((user, index) => {
+              return (
+                <div key={index} className={`table-line${mobile}`}>
+                  <div className={`table-line${mobile}__ava`}>
+                    <AvaMock text={user.memberName} />
+                  </div>
+                  <div className={`table-line${mobile}__info`}>
+                    <div className={`table-line${mobile}__info__name`}>
+                      {user.memberName}
+                    </div>
+                    <div className={`table-line${mobile}__info__since`}>
+                      Member since {getFullMonthDate(user.memberCreatedDate)}
+                    </div>
+                  </div>
+                  <InfoBlock
+                    className={`table-line${mobile}__block`}
+                    num={user.memberProofOfExistence}
+                    text={"TOTAL PROOFS OF EXISTENCE"}
+                  />
+                  <InfoBlock
+                    className={`table-line${mobile}__middle-block`}
+                    num={user.memberProofOfAttribution}
+                    text={"TOTAL PROOFS OF ATTRIBUTION"}
+                  />
+                  <InfoBlock
+                    className={`table-line${mobile}__block`}
+                    num={user.memberCitations}
+                    text={"TOTAL CITATIONS"}
+                  />
+                  <div className={`table-line${mobile}__bottom`}>
+                    <NavLink
+                      to={`/community?${user.memberName}_${user.memberId}`}
+                    >
+                      <Button children="View" className="btn-community" />
+                    </NavLink>
+                  </div>
+                </div>
+              );
+            })}
+          </Scrollbars>
+        </div>
       </div>
-    )
+    );
   }
 }

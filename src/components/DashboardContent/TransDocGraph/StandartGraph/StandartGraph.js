@@ -15,7 +15,7 @@ export default class StandartGraph extends Component {
     textHeight: 12
   };
   static propTypes = {
-    data: PropTypes.array,
+    data: PropTypes.array.isRequired,
     nameKey: PropTypes.string,
     valueKey: PropTypes.string,
     width: PropTypes.number,

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
@@ -13,6 +13,7 @@ import DashboardPage from "../Pages/DashboardPage";
 import DocumentsPage from "../Pages/DocumentsPage";
 import ProfilePage from "../Pages/ProfilePage";
 import SearchPage from "../Pages/SearchPage";
+import Error from "../Error/Error"
 
 class App extends Component {
   resize = () => {
@@ -39,15 +40,15 @@ class App extends Component {
   render() {
     return (
       <Switch>
+        <Redirect exact from="/" to="/dashboard?period=day" />
         <Route path="/auth/:id" component={AuthPage} />
         <PrivateRoute exact path="/profile" component={ProfilePage} />
         <PrivateRoute exact path="/search" component={SearchPage} />
         <PrivateRoute exact path="/dashboard" component={DashboardPage} />
         <PrivateRoute exact path="/documents" component={DocumentsPage} />
         <PrivateRoute exact path="/community" component={CommunityPage} />
-        <PrivateRoute exact path="/community/:user" component={CommunityPage} />
 
-        <Route render={() => <div>404</div>} />
+        <Route render={() => <Error description="404 page not found"/>} />
       </Switch>
     );
   }
