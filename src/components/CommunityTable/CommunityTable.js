@@ -4,7 +4,6 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import Button from "../BaseComponents/Button"
 import getFullMonthDate from "../../utils/getFullMonthDate";
 
-import avaMock from "./AvaMock"
 import AvaMock from './AvaMock';
 
 
