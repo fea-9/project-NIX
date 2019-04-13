@@ -9,7 +9,7 @@
 	flex-direction: column;
 	&__main {
 		width: 100%;
-		flex-grow: 1;
+		flex-grow: 1; 
 		overflow-x: hidden;
 	}
 }
@@ -28,12 +28,16 @@
 		font-family: 'Roboto', sans-serif;
 	}
 }
-.indikators {
+.indikators, .indikators-mobile {
 	display: flex;
 	justify-content: space-around;
 	margin: 0 30px;
 	&__item {
-		&__artifacts, &__contributors, &__keywords, &__total-citations, &__proof-of-existence {
+		&__artifacts,
+		&__contributors, 
+		&__keywords, 
+		&__total-citations, 
+		&__proof-of-existence {
 			font-family: 'Raleway', sans-serif;
 			display: flex;
 			align-items: center;
@@ -61,6 +65,28 @@
 		&__proof-of-existence {
 			width: 16%;
 			justify-content: center;
+		}
+	}
+}
+.indikators-mobile {
+	flex-direction: column;
+	margin: 0;
+	// justify-content: center;
+	&__item {
+		&__artifacts,
+		&__contributors, 
+		&__keywords, 
+		&__total-citations, 
+		&__proof-of-existence {
+			margin-left: 10px;
+			width: 100%;
+			text-align: left;
+		}
+		&__total-citations {
+			justify-content: flex-start;
+		}
+		&__proof-of-existence {
+			justify-content: flex-start;
 		}
 	}
 }

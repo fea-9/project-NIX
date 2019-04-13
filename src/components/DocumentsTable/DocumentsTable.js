@@ -8,11 +8,13 @@ import { connect } from "react-redux";
 import Spinner from "../Spinner/Spinner";
 import Icon from "../BaseComponents/icon/index";
 import Button from "../BaseComponents/Button";
-import Error from "../Error/Error"
-
+import Error from "../Error/Error";
+import PropTypes from "prop-types";
+ 
 let mapStateToProps = state => ({
   documents: state.documents,
-  token: state.auth.user.access_token
+  token: state.auth.user.access_token,
+  mobile: state.resize.mobile
 });
 
 class DocumentsTable extends Component {
@@ -51,6 +53,12 @@ class DocumentsTable extends Component {
     ]
   };
 
+  static propTypes = {
+    documents: PropTypes.object.isRequired,
+    token: PropTypes.string,
+    mobile: PropTypes.bool
+  } 
+
   clickSortHandler = indic => event => {
     let nInd = this.state.indicators.map(elem => {
       if (elem.name === indic.name) {
@@ -83,6 +91,8 @@ class DocumentsTable extends Component {
   render() {
     let s = this.state;
     let p = this.props;
+    let mob = p.mobile ? "-mobile" : ""
+    console.log("MOBILE", mob)
     if (p.documents.initial || p.documents.isFetching)
       return <Spinner procent={true} />;
     if (p.documents.error) return <Error />;
@@ -94,11 +104,11 @@ class DocumentsTable extends Component {
             Last update {varyDateView(p.documents.data.data.modifiedDate)}
           </div>
         </div>
-        <div className="indikators">
+        <div className={`indikators${mob}`}>
           {s.indicators.map((elem, index) => (
             <div
               style={{ color: elem.check ? "#7b8180" : "#cad5da" }}
-              className={`indikators__item__${elem.name
+              className={`indikators${mob}__item__${elem.name
                 .split(" ")
                 .join("-")
                 .toLowerCase()}`}
@@ -134,6 +144,7 @@ class DocumentsTable extends Component {
             {p.documents.data.data.documentslist.map((elem, index, arr) => (
               <DocCard
                 data={p.documents.data.data}
+                mobile={p.mobile}
                 ind={index}
                 key={index}
                 title={elem.documentTitle}
