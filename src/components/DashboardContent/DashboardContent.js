@@ -25,7 +25,7 @@ class DashboardContent extends Component {
   }
   render(){
     let p = this.props
-    console.log(p)
+    console.log(p)       
     return (
       <div className="dashboard-main">
         <div className="info-block">
