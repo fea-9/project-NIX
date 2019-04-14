@@ -1,13 +1,155 @@
-$icon:#9fbcba;
-$icon-active:#4facfe;
-$socials-icon:#5c7775;
+$icon: #9fbcba;
+$icon-active: #4facfe;
+$socials-icon: #5c7775;
 
 $base-dark-blue: #4facfe;
-$base-light-blue: #03EFFE;
+$base-light-blue: #03effe;
 
-$dark-grey-text: #7B8180;
+$dark-grey-text: #7b8180;
 $light-grey-text: #bec0c0;
 
-$dark-black: #2C2C2C;
+$dark-black: #2c2c2c;
 
 $dark-green: #027478;
+
+// breakpoints
+
+$firstBreakpoint: 768px;
+
+// sidebar
+
+$heightSidebar: 100vh;
+$widthtSidebar: 100vw;
+$backgroundColorSidebar: linear-gradient(to top, #012724, #276763 75%, #489e98);
+$paddingSidebar: 1.5rem 0 0 0;
+
+$heightSidebarMobileMinimized: auto;
+$backgroundSidebarMobileMinimized: #489e98;
+
+$heightSidebarDesktop: 100%;
+$widthtSidebarDesktop: 35rem;
+$transitionSidebarDesktop: all 1s;
+
+$widthSidebarDesktopMinimized: 10rem;
+
+// Logo
+
+$fontFamilyLogo: "Raleway", sans-serif;
+$fontWeightLogo: 700;
+$colorLogo: #ffffff;
+$textTransformLogo: uppercase;
+$textAlignLogo: center;
+
+$positionLogoSidebar: relative;
+$fontSizeLogoSidebar: 2.4rem;
+$marginLogoSidebar: 0 0 3vh 0;
+$transitionLogoSidebar: all 1s;
+
+$marginLogoSidebarMinimized: 0 0 6vh 0;
+
+$fontSizeLogoSidebarDesktop: 4rem;
+$fontSizeLogoSidebarDesktopMinimized: 6vh;
+
+// NavListItem
+
+$marginNavListItem: 0 0 1.5rem 0;
+
+$paddingNavListItemFirstChild: 1.5rem 0 1.5rem 0;
+$marginNavListItemFirstChild: 2vh;
+
+$colorNavListItemLink: #9fbcba;
+$textTransformNavListItemLink: uppercase;
+$fontSizeNavListItemLink: 1.5rem;
+$fontFamilyNavListItemLink: "Raleway", sans-serif;
+$fontWeightNavListItemLink: 700;
+$paddingNavListItemLink: 1.5rem 0 1.5rem 3.5rem;
+$positionNavListItemLink: relative;
+
+$marginNavListItemIcon: 0 3rem 0 0;
+
+$colorNavListItemLinkHover: #fff;
+$backgroundNavListItemLinkHover: linear-gradient(
+  90deg,
+  rgba(255, 255, 255, 0),
+  rgba(255, 255, 255, 0.15)
+);
+$backgroundNavListItemLinkHoverVerticalLineEnd: linear-gradient(
+  to top,
+  #4facfe,
+  #03effe
+);
+$widthNavListItemLinkHoverVerticalLineEnd: 0.8rem;
+
+$heightNavListItemLinkProfile: 9rem;
+$widthNavListItemLinkProfile: 11.8rem;
+$colorNavListItemLinkProfile: #fff;
+
+$paddingNavListItemLinkDesktop: 1.5rem 0 1.5rem 5rem;
+$transitionNavListItemLinkDesktop: all 1s;
+
+$heightNavListItemLinkProfileDesktop: 11.3rem;
+$widthNavListItemLinkProfileDesktop: 12.4rem;
+
+$transitionNavListItemLinkTextDesktop: all 0.8s 0.2s;
+
+$marginNavListItemFirstChildDesktop: 0 0 9vh 0;
+
+$paddingNavListItemLinkDesktopMinimized: 1.5rem 0 1.5rem 3.5rem;
+$heightNavListItemLinkProfileDesktopMinimized: 4.5rem;
+$widthNavListItemLinkProfileDesktopMinimized: 4.5rem;
+
+$paddingNavListItemDesktopMinimized: 1.5rem 0 1.5rem 0;
+$marginNavListItemDesktopMinimized: 0 0 6vh 0;
+
+// Social
+
+$marginSocialList: 0 0 2rem 0;
+$paddingSocialList: 0 30vw 0;
+
+$textAlignSocialListItem: center;
+
+$paddingSocialListDesktop: 0 11rem 0;
+$transitionSocialListDesktop: all 1s;
+
+$marginSocialListItemDesktopMinimized: 0 0 1rem 0;
+
+// PageTemplate
+
+$widthPageTemplateWrapper: 100vw;
+$heightPageTemplateWrapper: 100vh;
+
+$heightPageTemplateMain: 100vh;
+
+$maxWidthPageTemplateWrapperDesktop: 1920px;
+$maxHeightPageTemplateMainDesktop: 1080px;
+
+$widthPageTemplateContainerDesktop: 100%;
+$heightPageTemplateContainerDesktop: 100%;
+
+// ProfilePreview in sidebar
+
+$widthProfilePreview: 100%;
+$heightProfilePreview: 100%;
+$alignItemsProfilePreview: center;
+
+$borderRadiusProfilePreviewImageWrapper: 50%;
+$backgroundColorProfilePreviewImageWrapper: #e6e4bd;
+
+$heightProfilePreviewImage: 8rem;
+$widthProfilePreviewImage: 8rem;
+
+$widthProfilePreviewIcon: 2.5rem;
+$heightProfilePreviewIcon: 2.5rem;
+$borderRadiusProfilePreviewIcon: 50%;
+$backgroundProfilePreviewIcon: linear-gradient(to top, #4facfe, #03effe);
+
+$fontFamilyProfilePreviewName: "Raleway", sans-serif;
+$fontWeightProfilePreviewName: 700;
+$fontSizeProfilePreviewName: 1.5rem;
+$textTransformProfilePreviewName: capitalize;
+
+$heightProfilePreviewImageMinimized: 4.5rem;
+$widthProfilePreviewImageMinimized: 4.5rem;
+
+$widthProfilePreviewIconMinimized: 1.2rem;
+$heightProfilePreviewIconMinimized: 1.2rem;

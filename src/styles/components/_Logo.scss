@@ -1,30 +1,21 @@
 .logo {
-  font-family: "Raleway", sans-serif;
-  font-weight: 700;
-  color: #ffffff;
-  text-transform: uppercase;
-  text-align: center;
-  
+  font-family: $fontFamilyLogo;
+  font-weight: $fontWeightLogo;
+  color: $colorLogo;
+  text-transform: $textTransformLogo;
+  text-align: $textAlignLogo;
 }
 
 .logo_sidebar {
-  position: relative;
-  margin: 0;
-  font-size: 2.4rem;
-  margin-bottom: 3vh;
+  position: $positionLogoSidebar;
+  font-size: $fontSizeLogoSidebar;
+  margin: $marginLogoSidebar;
   overflow: hidden;
-  transition: all 1s;
-
-  .logo-btn {
-    height: 100%;
-    position: absolute;
-    left: 1rem;
-    top: 0;
-  }
+  transition: $transitionLogoSidebar;
 }
 
 .logo_sidebar_minimized {
-  margin-bottom: 6vh;
+  margin: $marginLogoSidebarMinimized;
 }
 
 .logo_auth {
@@ -32,13 +23,12 @@
   line-height: 13.9rem;
 }
 
-@media (min-width: 768px) {
-  
+@media screen and (min-width: $firstBreakpoint) {
   .logo_sidebar {
-    font-size: 4rem;
+    font-size: $fontSizeLogoSidebarDesktop;
   }
-  
+
   .logo_sidebar_minimized {
-    margin-bottom: 6vh;
+    margin-bottom: $fontSizeLogoSidebarDesktopMinimized;
   }
 }

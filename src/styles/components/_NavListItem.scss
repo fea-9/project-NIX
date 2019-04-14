@@ -1,48 +1,43 @@
 .nav-list__item {
   list-style: none;
-  margin-bottom: 15px;
+  margin: $marginNavListItem;
 
   .link-sidebar {
     text-decoration: none;
-    color: white;
-    text-transform: uppercase;
-    font-size: 15px;
-    font-family: "Raleway", sans-serif;
-    font-weight: 700;
+    color: $colorNavListItemLink;
+    text-transform: $textTransformNavListItemLink;
+    font-size: $fontSizeNavListItemLink;
+    font-family: $fontFamilyNavListItemLink;
+    font-weight: $fontWeightNavListItemLink;
     display: flex;
     align-items: center;
-    padding: 15px 0 15px 35px;
-    position: relative;
+    padding: $paddingNavListItemLink;
+    position: $positionNavListItemLink;
 
     .link-sidebar__profile {
-      height: 90px;
-      width: 118px;
+      height: $heightNavListItemLinkProfile;
+      width: $widthNavListItemLinkProfile;
       margin: 0 auto;
+      color: $colorNavListItemLinkProfile;
     }
 
     .link-sidebar__text {
-      display: inline-block;
-      width: 0;
       opacity: 1;
     }
 
     &:hover:before {
       content: "";
       display: block;
-      background: linear-gradient(to top, #4facfe, #03effe);
+      background: $backgroundNavListItemLinkHoverVerticalLineEnd;
       position: absolute;
       top: 0;
       right: 0;
-      width: 8px;
+      width: $widthNavListItemLinkHoverVerticalLineEnd;
       min-height: 100%;
     }
 
     &:hover {
-      background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0),
-        rgba(255, 255, 255, 0.15)
-      );
+      background: $backgroundNavListItemLinkHover;
     }
 
     &:hover .search-icon {
@@ -66,23 +61,19 @@
     }
   }
   .icon {
-    margin-right: 30px;
-    height: 24px;
+    margin: $marginNavListItemIcon;
   }
   .active {
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.15)
-    );
+    color: $colorNavListItemLinkHover;
+    background: $backgroundNavListItemLinkHover;
     &:before {
       content: "";
       display: block;
-      background: linear-gradient(to top, #4facfe, #03effe);
+      background: $backgroundNavListItemLinkHoverVerticalLineEnd;
       position: absolute;
       top: 0;
       right: 0;
-      width: 8px;
+      width: $widthNavListItemLinkHoverVerticalLineEnd;
       min-height: 100%;
     }
 
@@ -110,56 +101,53 @@
 
 .nav-list__item:first-child {
   .link-sidebar {
-    padding: 15px 0 15px 0;
-    margin-bottom: 2vh;
+    padding: $paddingNavListItemFirstChild;
+    margin-bottom: $marginNavListItemFirstChild;
   }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: $firstBreakpoint) {
   .nav-list__item {
-  
     .link-sidebar {
-      padding: 15px 0 15px 50px;
-      transition: all 1s;
-  
+      padding: $paddingNavListItemLinkDesktop;
+      transition: $transitionNavListItemLinkDesktop;
+
       .link-sidebar__profile {
-        height: 113px;
-        width: 124px;
+        height: $heightNavListItemLinkProfileDesktop;
+        width: $widthNavListItemLinkProfileDesktop;
       }
-  
+
       .link-sidebar__text {
-        transition: all .8s 0.2s;
+        transition: $transitionNavListItemLinkTextDesktop;
       }
     }
   }
-  
+
   .nav-list__item:first-child {
     .link-sidebar {
-      margin-bottom: 9vh;
+      margin: $marginNavListItemFirstChildDesktop;
     }
   }
-  
+
   .nav-list__item_minimized {
     .link-sidebar {
-      padding: 15px 0 15px 35px;
-  
+      padding: $paddingNavListItemLinkDesktopMinimized;
+
       .link-sidebar__profile {
-        height: 45px;
-        width: 45px;
+        height: $heightNavListItemLinkProfileDesktopMinimized;
+        width: $widthNavListItemLinkProfileDesktopMinimized;
       }
-  
+
       .link-sidebar__text {
-        display: inline-block;
         opacity: 0;
-        width: 0;
       }
     }
   }
-  
+
   .nav-list__item_minimized:first-child {
     .link-sidebar {
-      padding: 15px 0 15px 0;
-      margin-bottom: 6vh;
+      padding: $paddingNavListItemDesktopMinimized;
+      margin: $marginNavListItemDesktopMinimized;
     }
   }
 }

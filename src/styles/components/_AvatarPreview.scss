@@ -1,34 +1,34 @@
 .profile-preview {
-  width: 100%;
-  height: 100%;
+  width: $widthProfilePreview;
+  height: $heightProfilePreview;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: $alignItemsProfilePreview;
 
   .container-scale {
     position: relative;
   }
 
   .img-wrapper {
-    border-radius: 50%;
-    background-color: #e6e4bd;
+    border-radius: $borderRadiusProfilePreviewImageWrapper;
+    background-color: $backgroundColorProfilePreviewImageWrapper;
     overflow: hidden;
   }
 
   .profile-preview__img {
-    height: 8rem;
-    width: 8rem;
+    height: $heightProfilePreviewImage;
+    width: $widthProfilePreviewImage;
     vertical-align: top;
   }
   .profile-preview__icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    background: linear-gradient(to top, #4facfe, #03effe);
+    width: $widthProfilePreviewIcon;
+    height: $heightProfilePreviewIcon;
+    border-radius: $borderRadiusProfilePreviewIcon;
+    background: $backgroundProfilePreviewIcon;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -37,22 +37,20 @@
   .profile-preview__name {
     padding: 0;
     margin: 0;
-    font-family: "Raleway";
-    font-weight: 700;
-    font-size: 1.5rem;
-    text-transform: capitalize;
+    font-family: $fontFamilyProfilePreviewName;
+    font-weight: $fontWeightProfilePreviewName;
+    font-size: $fontSizeProfilePreviewName;
+    text-transform: $textTransformProfilePreviewName;
   }
 }
 
 .profile-preview_minimized {
   .profile-preview__img {
-    background-color: #e6e4bd;
-    border-radius: 50%;
-    height: 4.5rem;
-    width: 4.5rem;
+    height: $heightProfilePreviewImageMinimized;
+    width: $widthProfilePreviewImageMinimized;
   }
   .profile-preview__icon {
-    width: 1.2rem;
-    height: 1.2rem;
+    width: $widthProfilePreviewIconMinimized;
+    height: $heightProfilePreviewIconMinimized;
   }
 }
