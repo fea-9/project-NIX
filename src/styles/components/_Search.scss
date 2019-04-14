@@ -6,5 +6,28 @@
     background-size: cover;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+    flex-direction: column;
+    
+    &-input{
+        &__wrapper{
+            display: flex
+        }
+        &-fail{
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+    }
+    
+    
+}
+
+.search-list{
+    &_content{
+        height: 75vh;
+        width: 98%;
+    }
+
+    
 }

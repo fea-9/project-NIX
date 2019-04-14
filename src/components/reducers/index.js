@@ -9,6 +9,7 @@ import community from "./community";
 import transDocGraph from "./transDocGraph";
 import publicProfile from "./publicProfile";
 import avatar from "./avatar";
+import search from "./search";
 
 export default combineReducers({
   sidebar,
@@ -19,5 +20,6 @@ export default combineReducers({
   community,
   transDocGraph,
   publicProfile,
-  avatar
+  avatar,
+  search,
 });
