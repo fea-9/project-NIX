@@ -30,5 +30,6 @@ export const PageTemplate = props => {
 PageTemplate.propTypes = {
   header: PropTypes.element,
   sidebar: PropTypes.element,
-  content: PropTypes.element.isRequired
+  content: PropTypes.element.isRequired,
+  title: PropTypes.string
 };
