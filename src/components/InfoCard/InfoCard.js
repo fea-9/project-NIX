@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default ({ advanced, color, num, text, icon, dop, mobile}) => {
+const InfoCard = ({ advanced, color, num, text, icon, dop, mobile}) => {
   const dopClass =( advanced ? "--adv" : "" ) + ( mobile ? "--mob" : "")
   return (
     <div className={"info-card" + dopClass}>
@@ -30,3 +31,14 @@ export default ({ advanced, color, num, text, icon, dop, mobile}) => {
     </div>
   )
 }
+
+InfoCard.propTypes = {
+  advanced: PropTypes.bool,
+  color: PropTypes.string,
+  num: PropTypes.number,
+  icon: PropTypes.func,
+  dop: PropTypes.array,
+  mobile: PropTypes.bool
+}
+
+export default InfoCard

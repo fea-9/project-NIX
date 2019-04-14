@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions/transDocGraph";
 import {Copyright} from "../Copyright/Copyright";
 import Error from "../Error/Error";
+import PropTypes from "prop-types";
 
 let mapStateToProps = state => ({
   graph: state.transDocGraph,
@@ -22,6 +23,11 @@ let iconsArr = [
 ]
 let colors = ["#34FFF3", "#5CE5DD", "#37D3CA", "#26BCB3"];
 class DashboardContent extends Component {
+  static propTypes = {
+    graph: PropTypes.object,
+    token: PropTypes.string,
+    mobile: PropTypes.bool
+  }
   componentDidMount(){
     let token = localStorage.getItem("access_token");
     this.props.transDocRequest(token)
@@ -42,7 +48,7 @@ class DashboardContent extends Component {
                 text={el.attributes.displayName.toUpperCase()}
                 dop={
                   !el.embeded
-                    ? false
+                    ? []
                     : el.embeded.map(el => ({
                         num: el.count,
                         text:

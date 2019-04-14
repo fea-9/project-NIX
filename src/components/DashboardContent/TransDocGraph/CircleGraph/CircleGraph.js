@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import "./CircleGraph.scss";
+import PropTypes from "prop-types";
 
 class CustomScrollbars extends Component {
   render() {
@@ -21,6 +22,19 @@ export default class CircleGraph extends Component {
     displayInd: -1
   };
 
+  static propTypes = {
+    data: PropTypes.array,
+    valueKey: PropTypes.string,
+    nameKey: PropTypes.string,
+    mobile: PropTypes.number,
+    height: PropTypes.oneOfType (
+      [
+        PropTypes.string,
+        PropTypes.number
+      ]
+    )
+  }
+
   getDataSum = (data, key) => data.reduce((prev, el) => (prev += el[key]), 0);
 
   componentDidMount() {
@@ -36,6 +50,8 @@ export default class CircleGraph extends Component {
   mouseOutHandler = val => e => {
     this.setState({ displayValue: val, displayInd: -1 });
   };
+
+
   render() {
     const { data, valueKey, height, nameKey, mobile} = this.props;
     const colors = ["#03EFFE", "#34FFF3", "#5CE5DD", "#37D3CA", "#26BCB3"];

@@ -4,6 +4,7 @@ import CircleGraph from "./CircleGraph/CircleGraph.js";
 import Button from "../../BaseComponents/Button";
 import ButtonGroup from "../../BaseComponents/ButtonGroup";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 let mapStateToProps = state => ({
   minimized: state.sidebar.minimized,
@@ -16,6 +17,10 @@ class TransDocGraph extends Component {
     width: 0,
     height: 0
   };
+  static propTypes = {
+    minimized: PropTypes.bool,
+    mobile: PropTypes.bool
+  }
   componentDidMount() {
     this.setSizes();
     window.addEventListener("resize", this.setSizes);
