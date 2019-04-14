@@ -28,13 +28,11 @@ class SearchInput extends PureComponent{
     componentDidMount(){
         if(this.state.value !== this.props.inputValue && this.props.inputValue !== ""){
             this.setState({value: this.props.inputValue})
-            console.log("Помойка")
         }
     }
 
 
     render(){
-        console.log("searchinputprops", this.props)
         return(
             <div className = "search-box-input__wrapper">
                 <input 
