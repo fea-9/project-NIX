@@ -153,3 +153,32 @@ $widthProfilePreviewImageMinimized: 4.5rem;
 
 $widthProfilePreviewIconMinimized: 1.2rem;
 $heightProfilePreviewIconMinimized: 1.2rem;
+
+// Range Panel in Header
+
+$borderRangePanelList: 1px solid #cad5da;
+$borderRadiusRangePanelList: 0.5rem;
+$paddingRangePanelList: 0 1rem;
+
+$textAlignRangePanelListLink: center;
+$fontSizeRangePanelListLink: 1.5rem;
+$minWidthRangePanelListLink: 9rem;
+$paddingRangePanelListLink: 0.5rem 0;
+$fontFamilyRangePanelListLink: "Roboto", sans-serif;
+$fontWeightRangePanelListLink: 500;
+$colorRangePanelListLink: #7b8180;
+$borderRangePanelListLink: 1px solid transparent;
+
+$fontWeightRangePanelListLinkSelected: 700;
+$colorRangePanelListLinkSelected: #ffffff;
+
+$backgroundRangePanelListLinkSelected: linear-gradient(
+  to top,
+  #4facfe,
+  #03effe
+);
+$borderRadiusRangePanelListLinkSelected: 0.5rem;
+$widthRangePanelListLinkSelected: 100%;
+$heightRangePanelListLinkSelected: 140%;
+$leftRangePanelListLinkSelected: 0;
+$bottomRangePanelListLinkSelected: -20%;

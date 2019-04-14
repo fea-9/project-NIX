@@ -7,42 +7,42 @@
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: 1px solid #cad5da;
-    border-radius: .5rem;
-    padding: 0 1rem;
+    border: $borderRangePanelList;
+    border-radius: $borderRadiusRangePanelList;
+    padding: $paddingRangePanelList;
 
     .range-panel-list__item {
       list-style: none;
 
       .range-panel-list__link {
         display: inline-block;
-        text-align: center;
+        text-align: $textAlignRangePanelListLink;
         position: relative;
         text-decoration: none;
         z-index: 1;
-        font-size: 1.5rem;
-        min-width: 9rem;
-        padding: .5rem 0;
-        font-family: "Roboto";
-        font-weight: 500;
-        color: #7b8180;
-        border: 0.1rem solid transparent;
+        font-size: $fontSizeRangePanelListLink;
+        min-width: $minWidthRangePanelListLink;
+        padding: $paddingRangePanelListLink;
+        font-family: $fontFamilyRangePanelListLink;
+        font-weight: $fontWeightRangePanelListLink;
+        color: $colorRangePanelListLink;
+        border: $borderRangePanelListLink;
       }
 
       .range-panel-list__link_selected {
-        font-weight: 700;
-        color: #ffffff;
+        font-weight: $fontWeightRangePanelListLinkSelected;
+        color: $colorRangePanelListLinkSelected;
 
         &:before {
           content: "";
           display: block;
           position: absolute;
-          background: linear-gradient(to top, #4facfe, #03effe);
-          border-radius: .5rem;
-          width: 100%;
-          height: 140%;
-          left: 0;
-          bottom: -20%;
+          background: $backgroundRangePanelListLinkSelected;
+          border-radius: $borderRadiusRangePanelListLinkSelected;
+          width: $widthRangePanelListLinkSelected;
+          height: $heightRangePanelListLinkSelected;
+          left: $leftRangePanelListLinkSelected;
+          bottom: $bottomRangePanelListLinkSelected;
           z-index: -1;
         }
       }
