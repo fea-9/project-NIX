@@ -19,6 +19,7 @@
   .profile-preview__img {
     height: $heightProfilePreviewImage;
     width: $widthProfilePreviewImage;
+    vertical-align: top;
   }
   .profile-preview__icon {
     display: flex;

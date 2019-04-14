@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import Icon from "../BaseComponents/icon/";
 
 class AvatarPreview extends Component {
+  static propTypes = {
+    srcAvatar: PropTypes.string,
+    fullName: PropTypes.string,
+    minimized: PropTypes.bool,
+    scale: PropTypes.number
+  };
+
   render() {
     const { srcAvatar, fullName, minimized, scale } = this.props;
 

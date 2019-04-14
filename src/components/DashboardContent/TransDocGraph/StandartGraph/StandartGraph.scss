@@ -1,12 +1,19 @@
-.standart-graph {
+.standart-graph,
+.standart-graph-mobile  {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
 }
+.standart-graph-mobile {
+    transform: rotate(90deg) scaleX(1);
+    overflow: scroll;
+}
 
 .textLeft, .textBottom, .textInfo {
     font-size: 1.4rem;
 }
+
+
 

@@ -19,3 +19,11 @@ export const searchRequest = ( params, token ) => {
         }
     )
 }
+
+export const searchClear = () => {
+    return(
+        {
+            type: "SEARCH_CLEAR"
+        }
+    ) 
+}

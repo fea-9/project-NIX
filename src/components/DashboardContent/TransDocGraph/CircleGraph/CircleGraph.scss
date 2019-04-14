@@ -1,37 +1,52 @@
-.circle-graph {
+.circle-graph, 
+.circle-graph-mobile {
   width: 100%;
   height: 100%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
   user-select: none;
   overflow: hidden;
+  box-sizing: border-box;
 }
-.graph-info, .graph-info ul {
-  position: relative;
-  // align-self: stretch;
+.circle-graph-mobile {
+  flex-direction: column;
+}
+.graph-info,
+.graph-list
+.graph-info-mobile,
+.graph-list-mobile {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   overflow: hidden;
 }
-.graph-info {
-  height: 50%;
-  width: 40%;
+.graph-info,
+.graph-info-mobile {
+  height: 60%;
+  width: 45%;
   margin-right: 1%;
   border: 1px solid gray;
-  border-bottom-right-radius:  20%;
-  border-top-right-radius:  20%;
-  padding-right: 5%;
-  
+  border-bottom-right-radius:  25%;
+  border-top-right-radius:  25%;
+  padding: 2rem 2rem 2rem 0;
 }
-.graph-info ul {
+.graph-info-mobile {
+  height: 40%;
+  width: 100%;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+  padding: 1rem 1rem 1rem 0;
+  border-radius: 3px; 
+}
+.graph-list,
+.graph-list-mobile {
   align-self: stretch;
-  padding-left: 2.5rem;
   width: 100%;
   height: 100%;
-  
   display: block;
 
 }
@@ -39,34 +54,49 @@
   font-weight: bold;
 }
 .line {
-  // left: -1rem;
-  font-size: 1.2rem;
+  margin-left: 1.2rem;
+  font-size: 1.6rem;
   border-bottom: 2px dotted #CAD5DA;
-  padding: 0.8em 0;
+  padding: 0.8em 1rem;
   width: 90%;
-  // display: block;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-right: 0;
+  color: #7B8180;
+  border-bottom-right-radius:  0.5rem;
+  border-top-right-radius:  0.5rem;
+  &__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    margin-right: 2rem;
+  }
   &__text {
-    color: #7B8180;
-    // position: absolute;
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 0.3rem;
   }
   &__num {
-    color: #7B8180;
-    position: absolute;
     font-weight: bold;
-    right: 0;
   }
 }
+
 .line span {
   display: inline-block;
 }
 .line:last-child {
   border: none;
 }
-.testBtn {
-  padding-top: 12px;
-  padding-bottom: 10px;
-  padding-left: 23px;
-  padding-right: 23px; 
+.track-horizontal, .thumb-horizontal {
+  display: none;
 }
+.track-vertical {
+  position: absolute;
+  width: 6px;
+  left: 2px;
+  bottom: 2px;
+  top: 2px;
+  border-radius: 3px;
+}
+
