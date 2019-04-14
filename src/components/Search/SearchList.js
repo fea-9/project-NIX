@@ -5,6 +5,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 class SearchList extends PureComponent {
     render() {
         console.log("searchList", this.props.data)
+        console.log(JSON.stringify(this.props.data.data.articlesList))
         return (
             <div className="search-list_wrapper">
                 <div className="search-list_header">
@@ -12,11 +13,11 @@ class SearchList extends PureComponent {
                     <div>сортировка</div>
                 </div>
                 <div className="search-list_content">
-                    
+                    <Scrollbars>
                         {
                             this.props.data.data.articlesList.map((article, index) => {
                                 return (
-                                    <div key={index}>
+                                    <div key={index} className="article_item">
                                         <h3 className="article_title">
                                             {article.articleTitle}
                                         </h3>
@@ -36,7 +37,7 @@ class SearchList extends PureComponent {
                                     )
                             })
                         }
-                
+                </Scrollbars>
                 </div>
             </div>
         )

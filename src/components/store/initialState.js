@@ -51,6 +51,6 @@ export default {
     isFetching:false,
     isSearched:false,
     data: null,
-    error: null
+    error: null,
   }
 };

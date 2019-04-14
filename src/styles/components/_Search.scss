@@ -18,5 +18,16 @@
             font-size: 2rem;
             font-weight: bold;
         }
-    }   
+    }
+    
+    
+}
+
+.search-list{
+    &_content{
+        height: 75vh;
+        width: 98%;
+    }
+
+    
 }

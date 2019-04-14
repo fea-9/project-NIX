@@ -7,6 +7,7 @@ import { HeaderTemplate } from "../Header/Header";
 import SearchList from '../Search/SearchList'
 import Spinner from "../Spinner/Spinner";
 import SearchInput from "../BaseComponents/Forms/SearchInput";
+import { Redirect } from 'react-router-dom'
 
 
 let mapStateToProps = state => ({
@@ -20,10 +21,16 @@ class SearchPage extends Component {
     let token = localStorage.getItem("access_token");
     const { location, searchRequest } = this.props
     //const search = queryString.parse(location.search)
-    console.log('locsearch', location, location.search.substr(1))
+    //console.log('locsearch', location, location.search.substr(1))
     location.search && searchRequest({ request: location.search.substr(1) }, token);
-
+    
   }
+
+  componentWillUnmount(){
+    this.props.searchClear()
+  }
+
+  changeInput =()=> this.props.location.search ? this.props.location.search.substr(1): ''
 
   render() {
     let p = this.props;
@@ -38,7 +45,8 @@ class SearchPage extends Component {
           p.search.data.data.length === 0 ? 
             <HeaderTemplate title="Search"/>
           :
-            <HeaderTemplate component={(<SearchInput/>)}/>
+            <HeaderTemplate component={
+              (<SearchInput inputValue={this.changeInput()}/>)}/>
           }
         content={
           p.location.search ?
@@ -53,10 +61,10 @@ class SearchPage extends Component {
               <h1>ERROR</h1>
             ) 
             : 
-            p.search.data.data.length === 0 
+            p.search.data.data.length === 0 && this.props.location.search
             ?     
                   <div className="search-box" >
-                      <SearchInput /> 
+                      <SearchInput inputValue={this.changeInput()} /> 
                       <p className="search-box-input-fail">Nothing was found :(</p>
                   </div>
                   :
@@ -65,7 +73,7 @@ class SearchPage extends Component {
                   ) 
                   :
                   <div className = "search-box">
-                    <SearchInput />
+                    <SearchInput inputValue={this.changeInput()}/>
                   </div>
                   }
       />
