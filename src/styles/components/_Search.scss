@@ -25,9 +25,128 @@
 
 .search-list{
     &_content{
-        height: 75vh;
-        width: 98%;
+        margin-left: 4.5rem;
+        height: 65vh;
+        display: flex;
+        justify-content: space-around;
     }
+    &_header{
+        background-color:  rgba(159, 188, 186, 0.3);
+        display:flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #9FBCBA;
 
-    
+        &-name{
+            margin-left: 6rem;
+            color:black;
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin-bottom: 0;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid#4FACFE;
+            &-count{
+                color: #7D7E7E;
+                font-weight: 500;
+            }
+        }
+        &-sort-wrapper{
+            margin-top: 1.7rem;
+            margin-right: 5rem;
+        }
+
+    }
+}
+
+.article{
+    &_item{
+        display: inline-flex;
+        flex-direction: column;
+        padding: 3rem;
+        margin-top: 1.5rem;
+        margin-left: 1.5rem;
+        max-width: 40%;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(202,213,218,1);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(202,213,218,1);
+        box-shadow: 0px 0px 10px 0px rgba(202,213,218,1);
+    }
+    &_title{
+        font-size:1.5rem;
+        line-height: 2.5rem;
+        color:#2C2C2C;
+    }
+    &_contributors{
+        font-size: 1.2rem;
+        line-height: 2rem;
+        color: #7B8180;
+    }
+    &_source{
+        font-size: 1.2rem;
+        line-height: 2rem;
+        color: #7B8180;
+    }
+    &_keyword-container{
+        display: flex; 
+    }
+    &_count-container{
+        display: flex;
+    }
+    &_count-artifacts{
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.8rem;
+        margin-right:0.5rem;
+        color:#7B8180;
+    }
+    &_count-count{
+        color:#7B8180;
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.8rem;
+        margin-right:0.5rem;
+    }
+    &_count-citations{
+        color:#7B8180;
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.8rem;
+        margin-right:0.5rem;
+    }
+}
+
+.article_keyword-item{
+    font-size:1.1rem;
+    color:#7B8180;
+    background-color:rgba(123, 129, 128, 0.2);
+    margin-right: 1rem;
+    border-radius: 1.5rem;
+    padding:0.5rem 1rem;
+}
+
+@media screen and (max-width:830px){
+    .article{
+        &_item{
+            display:block;
+        }
+    }
+    .search-list_content{
+        display:block;
+        margin-left: 0;
+    }
+    .article_item{
+        max-width: 90%;
+    }
+    .header__icon-box{
+        display:none;
+    }
+    .input-box__input-search-component{
+        padding:0;
+        padding-left:0.5rem;
+    }
+    .btn-search{
+        padding:0 0.5rem;
+        
+    }
+    .search-list_header-name{
+        margin-left: 1.5rem;
+    }
 }
