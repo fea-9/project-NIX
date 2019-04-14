@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import "./CircleGraph.scss";
+import PropTypes from "prop-types";
 
 class CustomScrollbars extends Component {
   render() {
@@ -21,6 +22,19 @@ export default class CircleGraph extends Component {
     displayInd: -1
   };
 
+  static propTypes = {
+    data: PropTypes.array,
+    valueKey: PropTypes.string,
+    nameKey: PropTypes.string,
+    mobile: PropTypes.number,
+    height: PropTypes.oneOfType (
+      [
+        PropTypes.string,
+        PropTypes.number
+      ]
+    )
+  }
+
   getDataSum = (data, key) => data.reduce((prev, el) => (prev += el[key]), 0);
 
   componentDidMount() {
@@ -36,12 +50,15 @@ export default class CircleGraph extends Component {
   mouseOutHandler = val => e => {
     this.setState({ displayValue: val, displayInd: -1 });
   };
+
+
   render() {
-    const { data, valueKey, height, nameKey } = this.props;
+    const { data, valueKey, height, nameKey, mobile} = this.props;
     const colors = ["#03EFFE", "#34FFF3", "#5CE5DD", "#37D3CA", "#26BCB3"];
     const sum = this.getDataSum(data, valueKey);
     const colorChange = num => colors[num % colors.length];
-
+    const classMob = mobile ? "-mobile" : ""
+ 
     const createViewData = () => {
       const viewData = [...data];
       let i = 0;
@@ -69,9 +86,9 @@ export default class CircleGraph extends Component {
     }
     
     return (
-      <div className="circle-graph">
-        <div className="graph-info">
-          <div className="graph-list">
+      <div className={`circle-graph${classMob}`}>
+        <div className={`graph-info${classMob}`}>
+          <div className={`graph-list${classMob}`}>
             <CustomScrollbars >
               {data.map((el, ind) => {
                 return (
@@ -102,7 +119,6 @@ export default class CircleGraph extends Component {
           height={height}
         >
           {createViewData().map((slice, ind) => {
-            console.log(slice);
             const [startX, startY] = getCoordinatesForPercent(
               cumulativePercent
             );

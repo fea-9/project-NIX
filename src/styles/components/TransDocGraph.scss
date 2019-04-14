@@ -1,17 +1,19 @@
-.graph-panel {
+.graph-panel, .graph-panel-mobile {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.graph-panel h3 {
-  font-size: 1.5rem;
-  margin: 0;
-  // display: inline-block;
+.graph-panel-mobile {
+  flex-direction: column;
 }
-.graph-view {
+.graph-panel h3, .graph-panel-mobile h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.graph-view, .graph-view-mobile {
   flex-grow: 1;
+  display: inline-block;
   font-family: 'Roboto', sans-serif;
-  // display: inline-block;
 }
 .tr-doc-graph{ 
   display: flex;
