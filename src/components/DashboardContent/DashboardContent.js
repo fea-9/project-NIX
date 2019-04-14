@@ -27,7 +27,7 @@ class DashboardContent extends Component {
   }
   render(){
     let p = this.props
-    console.log(p)
+    console.log(p)       
     return (
       <div className="dashboard-main">
         <div className="info-block">
@@ -70,7 +70,7 @@ class DashboardContent extends Component {
               p.graph.initial || p.graph.isFetching ? (
                 <Spinner procent={true} />
               ) : p.graph.error ? (
-                <h1>ERROR</h1>
+                <Error />
               ) : (
                 <TransDocGraph data={p.graph.data.data}/>
               )
