@@ -20,8 +20,6 @@ class SearchPage extends Component {
   componentDidMount() {
     let token = localStorage.getItem("access_token");
     const { location, searchRequest } = this.props
-    //const search = queryString.parse(location.search)
-    //console.log('locsearch', location, location.search.substr(1))
     location.search && searchRequest({ request: location.search.substr(1) }, token);
     
   }
@@ -34,7 +32,6 @@ class SearchPage extends Component {
 
   render() {
     let p = this.props;
-    console.log("searchprops", this.props)
     return (
       <PageTemplate
         sidebar={<Sidebar />}
@@ -75,7 +72,7 @@ class SearchPage extends Component {
                   <div className = "search-box">
                     <SearchInput inputValue={this.changeInput()}/>
                   </div>
-                  }
+        }
       />
     );
   }

@@ -1,11 +1,29 @@
 import React, { PureComponent } from 'react'
-
+import sortFunc from "../../utils/sortFunc.js";
 import { Scrollbars } from 'react-custom-scrollbars';
+import { connect } from "react-redux";
+import * as actions from "../actions/search";
+
+let mapStateToProps = state => ({
+    search: state.search,
+    token: state.auth.user.access_token
+  });
 
 class SearchList extends PureComponent {
+
+    sortSearch = e =>{
+        let nData = this.props.data.data;
+        if(e.target.value === "Max"){
+            nData.articlesList = sortFunc(this.props.data.data.articlesList, "articleCitations")
+            this.props.setSearchData(nData)
+        }
+        else if(e.target.value === "Min"){
+            nData.articlesList = sortFunc(this.props.data.data.articlesList, "articleCitations", true)
+            this.props.setSearchData(nData)
+        }
+    }
+
     render() {
-        console.log("searchList", this.props.data)
-        console.log(JSON.stringify(this.props.data.data.articlesList))
         return (
             <div className="search-list_wrapper">
                 <div className="search-list_header">
@@ -17,9 +35,9 @@ class SearchList extends PureComponent {
                     </h3>
                     <div className="search-list_header-sort-wrapper">
                         Sort by
-                        <select className="search-list_header-sort">
-                            <option className="search-list_header-sort-item">Max to min</option>
-                            <option className="search-list_header-sort-item">Min to max</option>
+                        <select onChange={this.sortSearch} className="search-list_header-sort">
+                            <option value="Max" className="search-list_header-sort-item">Max to min</option>
+                            <option value="Min" className="search-list_header-sort-item">Min to max</option>
                         </select>
                     </div>
                 </div>
@@ -62,4 +80,10 @@ class SearchList extends PureComponent {
         )
     }
 }
-export default SearchList
+
+SearchList = connect(
+    mapStateToProps,
+    { ...actions }
+  )(SearchList);
+  
+export default SearchList;
