@@ -4,25 +4,25 @@
   justify-content: space-between;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to top, #012724, #276763 75%, #489e98);
-  padding: 1.5rem 0 0 0;
+  height: $heightSidebar;
+  width: $widthtSidebar;
+  background: $backgroundColorSidebar;
+  padding: $paddingSidebar;
 }
 
 .sidebar-wrapper_minimized_mobile {
-  height: auto;
-  background: #489E98;
+  height: $heightSidebarMobileMinimized;
+  background: $backgroundSidebarMobileMinimized;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: $firstBreakpoint) {
   .sidebar-wrapper {
-    height: 100%;
-    width: 35rem;
-    transition: all 1s;
+    height: $heightSidebarDesktop;
+    width: $widthtSidebarDesktop;
+    transition: $transitionSidebarDesktop;
   }
 
   .sidebar-wrapper_minimized {
-    width: 10rem;
+    width: $widthSidebarDesktopMinimized;
   }
 }
