@@ -25,11 +25,11 @@ class App extends Component {
   resize = () => {
     const { mobileSize, mobile } = this.props;
 
-    if (window.innerWidth > 768 && mobile) {
+    if (window.innerWidth >= 768 && mobile) {
       mobileSize(false);
     }
 
-    if (window.innerWidth <= 768 && !mobile) {
+    if (window.innerWidth < 768 && !mobile) {
       mobileSize(true);
     }
   };
