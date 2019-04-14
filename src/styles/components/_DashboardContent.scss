@@ -1,4 +1,5 @@
-.dashboard-main {
+.dashboard-main, 
+.dashboard-main-mobile {
     width: 100%;
     height: 100%;
     display: flex;
@@ -6,18 +7,27 @@
     align-items: center;
     justify-content: center;
     user-select: none;
+    position: relative;
 }
-.dash-copyright { 
+.dash-copyright, 
+.dash-copyright-mobile { 
     align-self: flex-start;
     padding: 0.5rem;
     padding-left: 8rem;
 }
-.info-block, .graph-block {
+.dash-copyright-mobile {
+    display: none;
+}
+.info-block, 
+.graph-block, 
+.info-block-mobile, 
+.graph-block-mobile {
     display: inline-flex;
     flex-direction: row;
     width: 95%;
 }
-.info-block {
+.info-block, 
+.info-block-mobile {
     margin: 1% 0;
     display: flex;
     justify-content: space-evenly;
@@ -31,21 +41,48 @@
         border-left: 1px solid #CAD5DA;
     }
 }
-.graph-block {
+.info-block-mobile {
+    min-height: 35%;
+    &__cell {
+        width: 50%;
+        min-width: 0;
+        border-left: none;
+    }
+}
+.graph-block, 
+.graph-block-mobile {
     margin-top: 3%;
     flex-grow: 1;
     &__cell {
-        padding: 0.5%;
+        padding: 1rem;
         width: 47.5%;
         margin-right: 2.5%;
         margin-left: 1.25%;
         margin-top: 2%;
         margin-bottom: 0;
-        // border: 1px solid green;
+        border-radius: 5px;
         box-shadow: 0 0 40px #CAD5DA;
     }
     &__cell:first-child {
         margin-left: 2.5%;
         margin-right: 1.25%;
+    }
+}
+.graph-block-mobile {
+    flex-direction: column;
+    width: 100%;
+    &__cell {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+        margin-top: 5%;
+        margin-bottom: 0;
+    }
+    &__cell:first-child {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    &__cell:last-child {
+        min-height: 70%;
     }
 }

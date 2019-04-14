@@ -11,7 +11,8 @@ import Error from "../Error/Error";
 
 let mapStateToProps = state => ({
   graph: state.transDocGraph,
-  token: state.auth.user.access_token
+  token: state.auth.user.access_token,
+  mobile: state.resize.mobile
 });
 let iconsArr = [
   <Icon className = "dashboard-menu-poe" type = "poeIcon" width = {20} height = {20} viewBox="0 0 20 20"/>,
@@ -26,15 +27,16 @@ class DashboardContent extends Component {
     this.props.transDocRequest(token)
   }
   render(){
-    let p = this.props
-    console.log(p)       
+    const p = this.props 
+    const mobile = p.mobile ? "-mobile" : ""
     return (
-      <div className="dashboard-main">
-        <div className="info-block">
+      <div className={`dashboard-main${mobile}`}>
+        <div className={`info-block${mobile}`}>
           {p.spinner ? <Spinner procent={true} /> : p.data.map((el, ind) => (
-            <div key={ind} className="info-block__cell">
+            <div key={ind} className={`info-block${mobile}__cell`}>
               <InfoCard 
                 advanced={true}
+                mobile={p.mobile}
                 color={colors[ind]}
                 num={el.count}
                 text={el.attributes.displayName.toUpperCase()}
@@ -53,8 +55,8 @@ class DashboardContent extends Component {
             </div>
           ))}
         </div>
-        <div className="graph-block">
-          <div className="graph-block__cell">
+        <div className={`graph-block${mobile}`}>
+          <div className={`graph-block${mobile}__cell`}>
             {
               p.graph.initial || p.graph.isFetching ? (
                 <Spinner procent={true} />
@@ -65,7 +67,7 @@ class DashboardContent extends Component {
               )
             }            
           </div>
-          <div className="graph-block__cell">
+          <div className={`graph-block${mobile}__cell`}>
             {
               p.graph.initial || p.graph.isFetching ? (
                 <Spinner procent={true} />
@@ -77,7 +79,7 @@ class DashboardContent extends Component {
             }
           </div>
         </div>
-        <div className="dash-copyright">
+        <div className={`dash-copyright${mobile}`}>
           <Copyright />
         </div>
       </div>
