@@ -29,16 +29,12 @@
     justify-content: flex-end;
   }
 
-  &-submit-button{
+  &-submit-button, &-discard-button{
     font-size: 2.5rem;
     padding: 2rem 5rem;
-    float: right;
   }
 
-  &-discard-button{
-    font-size: 2.5rem;
-    padding: 2rem 5rem;
-    float: right;
+  &-discard-button{    
     background: #ffffff26;
     font-weight: 400;
     &:hover{
@@ -69,11 +65,12 @@
     background: #e7eeee;
     border-radius: 12rem;
     padding: 0.6rem 3.5rem 0.6rem 1.9rem;
-    margin: 1rem 1rem 0rem 0rem;
+    margin: 0.5rem 1rem 0.5rem 0rem;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    display: inline-block;
 
     &-delete{
       cursor: pointer; 
@@ -87,6 +84,7 @@
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
+      height: 7.5rem;
     }
   }
 }
@@ -188,13 +186,20 @@
 }
 
 @media screen and (max-width: 768px) {
-  .profile {
+  .profile {    
     &__form-box{     
-      flex-direction: column;      
-      padding: 1rem; 
+      flex-direction: column;
+      padding: 2rem;
+      align-items: center;
       .form-column{     
         margin-left: 0rem;
       }    
-    }    
+    } 
+    &__buttons-box{
+      justify-content: center;
+    }   
+    &-submit-button, &-discard-button{
+      flex-grow: 1;
+    }
   }
 }
