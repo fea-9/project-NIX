@@ -105,7 +105,6 @@ describe ('Page template', () => {
     })
 
     it ('renders <div> for content with props', () => {
-      console.log('pageTemplate', pageTemplate.find('main__content'))
       expect(pageTemplate.find('.main__content').contains(props.content)).toEqual(true);
     })
   })
