@@ -10,14 +10,20 @@
     flex-direction: column;
     
     &-input{
-        &__wrapper{
-            display: flex
+        &__wrapper{ 
+            display: flex;
         }
         &-fail{
             color: white;
             font-size: 2rem;
             font-weight: bold;
         }
+    }
+    &_copyright-wrapper{
+        align-self:flex-start;
+        margin-left: 3%;
+        position: absolute;
+        top: 95%;
     }   
 }
 
