@@ -15,7 +15,7 @@ export default class StandartGraph extends Component {
     textHeight: 12
   };
   static propTypes = {
-    data: PropTypes.array,
+    data: PropTypes.array.isRequired,
     nameKey: PropTypes.string,
     valueKey: PropTypes.string,
     width: PropTypes.number,
@@ -28,27 +28,27 @@ export default class StandartGraph extends Component {
   deAct = () => this.setState({ foc: false });
 
   render() {
-    let p = this.props;
-    let s = this.state;
-    console.log(p.width, p.height, "SIZES")
-    let gap = (p.width * 0.3) / p.data.length;
-    let maxVal = Math.max(...p.data.map(el => el[p.valueKey]));
-    let numRank = maxVal.toString().substr(1).length;
-    let stepInd = +("1" + "e" + numRank);
-    let maxInd = Math.ceil(maxVal / stepInd) * stepInd;
+    const p = this.props;
+    const s = this.state;
+    const gap = (p.width * 0.3) / p.data.length;
+    const maxVal = Math.max(...p.data.map(el => el[p.valueKey]));
+    const numRank = maxVal.toString().substr(1).length;
+    const stepInd = +("5" + "e" + (numRank-1));
+    const maxInd = Math.ceil(maxVal / stepInd) * stepInd;
+    console.log(stepInd, maxInd, maxVal, numRank)
 
-    let indent = (() => {
+    const indent = (() => {
       let result = 25;
       let i = 2;
       while (i++ <= numRank) result += 7;
       return result;
     })();
 
-    let workY = p.height - indent/4;
-    let workX = p.width - indent - gap * p.data.length;
-    let graphPx = (p.height - indent) / maxInd;
-    let rectStep = workX / p.data.length;
-    let rectStartPos = indent + gap;
+    const workY = p.height - indent/4;
+    const workX = p.width - indent - gap * p.data.length;
+    const graphPx = (p.height - indent) / maxInd;
+    const rectStep = workX / p.data.length;
+    const rectStartPos = indent + gap;
     let rectProgress = 0;
 
     let indArr = (() => {
@@ -65,9 +65,9 @@ export default class StandartGraph extends Component {
         pos: !ind ? progress : (progress += workStep)
       }));
     })();
-
+    const mobClass = p.mobile ? "-mobile" : ""
     return (
-      <div className="standart-graph">
+      <div className={`standart-graph${mobClass}`}>
         <svg width={p.width} height={p.height}>
           <defs>
             <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">

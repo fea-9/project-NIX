@@ -38,8 +38,7 @@ class AuthPage extends Component {
         const authComponent = this.state.currentForm === "signin" ? <AuthSignIn /> :
             this.state.currentForm === "signup" ? <AuthSignUp /> : <AuthSignIn />;  
         return (
-            <PageTemplate 
-                content = {<Auth authComponent = {authComponent} />}            
+            <PageTemplate title={this.props.match.params.id} content = {<Auth authComponent = {authComponent} />}            
             />
         )
     }

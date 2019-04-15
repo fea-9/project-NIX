@@ -6,11 +6,15 @@ import CommunityTable from "../CommunityTable/CommunityTable";
 import Spinner from "../Spinner/Spinner";
 import * as actions from "../actions/community";
 import { connect } from "react-redux";
-import PublicProfile from "../PublicProfile/PublicProfile"
+import PublicProfile from "../PublicProfile/PublicProfile";
+import Error from "../Error/Error";
+import PropTypes from "prop-types";
 
 let mapStateToProps = state => ({
   community: state.community,
-  token: state.auth.user.access_token
+  token: state.auth.user.access_token,
+  mobile: state.resize.mobile
+
 });
 class CommunityPage extends Component {
   componentDidMount() { 
@@ -18,10 +22,11 @@ class CommunityPage extends Component {
     this.props.communityRequest(token);
   }
 
-  render() {
+  render() { 
     let p = this.props;
     return (
       <PageTemplate
+        title={"Community"}
         sidebar={<Sidebar />}
         header={<HeaderTemplate title={"Community"} />}
         content={
@@ -29,17 +34,24 @@ class CommunityPage extends Component {
           p.community.initial || p.community.isFetching ? (
             <Spinner procent={true} />
           ) : p.community.error ? (
-            <h1>ERROR</h1>
+            <Error />
           ) : (
             <CommunityTable
               title={p.community.data.data.totalCount}
               data={p.community.data.data.memberslist}
+              mobile={p.mobile}
             />
           )
         }
       />
     );
   }
+}
+
+CommunityPage.propTypes = {
+  community: PropTypes.object,
+  token: PropTypes.string,
+  mobile: PropTypes.bool
 }
 
 CommunityPage = connect(

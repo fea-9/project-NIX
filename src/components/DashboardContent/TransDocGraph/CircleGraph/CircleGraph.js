@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import "./CircleGraph.scss";
+import PropTypes from "prop-types";
 
 class CustomScrollbars extends Component {
   render() {
@@ -9,112 +10,162 @@ class CustomScrollbars extends Component {
         renderTrackHorizontal={props => <div {...props} className="track-horizontal"/>}
         renderTrackVertical={props => <div {...props} className="track-vertical"/>}
         renderThumbHorizontal={props => <div {...props} className="thumb-horizontal"/>}
-        renderThumbVertical={props => <div {...props} className="thumb-vertical"/>}
-        renderView={props => <div {...props} className="view"/>}>
+      >
         {this.props.children}
       </Scrollbars>
     );
   }
 }
-
-const List = ({data,keyText, keyNum, height}) => {
-  return (
-    <CustomScrollbars>
-      <ul style={{height: height}}>
-          {
-            data.map((el, ind) => (
-              <li key={ind} style={{ color: el.color }} className={"line"}>
-                <span className={"line__text"}>{el[keyText]}</span>
-                <span className={"line__num"}>{el[keyNum]}</span>
-              </li>
-            ))
-          }
-      </ul>
-    </CustomScrollbars>
-  )
-}
-
-export default ({ nameKey, valueKey, data, height = "50%" }) => {
-  const colors = ["#03EFFE", "#34FFF3", "#5CE5DD", "#37D3CA", "#26BCB3"];
-  let sum = data.reduce((prev, el) => (prev += el[valueKey]), 0);
-  let colorChange = num => colors[num% colors.length]
-
-  let createViewData = () => {
-    const viewData = [...data];
-    let i = 0;
-    while (i < viewData.length) {
-      viewData[i].percent = viewData[i][valueKey] / (sum / 100) / 100;
-      viewData[i].color = colorChange(i);
-      i++;
-    }
-    i = 0;
-    let nLength = viewData.length * 2;
-    while (i < nLength) {
-      if (i % 2) {
-        viewData.splice(i, 0, { percent: 0.003, color: "#fff" });
-      }
-      i++;
-    }
-    return viewData;
+export default class CircleGraph extends Component {
+  state = {
+    displayValue: 0,
+    displayInd: -1
   };
-  let cumulativePercent = 0;
 
-  function getCoordinatesForPercent(percent) {
-    const x = Math.cos(2 * Math.PI * percent);
-    const y = Math.sin(2 * Math.PI * percent);
-    return [x, y];
+  static propTypes = {
+    data: PropTypes.array,
+    valueKey: PropTypes.string,
+    nameKey: PropTypes.string,
+    mobile: PropTypes.number,
+    height: PropTypes.oneOfType (
+      [
+        PropTypes.string,
+        PropTypes.number
+      ]
+    )
   }
-  console.log(height, "CIRCLE")
-  return (
-    <div className="circle-graph">
-      <div className="graph-info">
-          <List data={data.map((el, ind)=>{
-            el.color = colorChange(ind)
-            return el
-          })}
-            keyText = "key"
-            keyNum = "count"
-            height={height}/>
-      </div>
-      <svg
-        viewBox="-1 -1 2 2"
-        style={{ transform: " rotate(-90deg)" }}
-        height={height}
-      >
-        {createViewData().map((slice, ind) => {
-          // destructuring assignment sets the two variables at once
-          const [startX, startY] = getCoordinatesForPercent(cumulativePercent);
 
-          // each slice starts where the last slice ended, so keep a cumulative percent
-          cumulativePercent += slice.percent;
+  getDataSum = (data, key) => data.reduce((prev, el) => (prev += el[key]), 0);
 
-          const [endX, endY] = getCoordinatesForPercent(cumulativePercent);
+  componentDidMount() {
+    this.setState({
+      displayValue: this.getDataSum(this.props.data, this.props.valueKey)
+    });
+  }
 
-          // if the slice is more than 50%, take the large arc (the long way around)
-          const largeArcFlag = slice.percent > 0.5 ? 1 : 0;
+  mouseOverHandler = (val, ind) => e => {
+    if (!val) return;
+    this.setState({ displayValue: val, displayInd: ind });
+  };
+  mouseOutHandler = val => e => {
+    this.setState({ displayValue: val, displayInd: -1 });
+  };
 
-          // create an array and join it just for code readability
-          let pathData = [
-            `M ${startX} ${startY}`, // Move
-            `A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`, // Arc
-            `L 0 0` // Line
-          ].join(" ");
-          return <path key={ind} d={pathData} fill={slice.color} />;
-        })}
-        <circle cx={0} cy={0} r={0.65} style={{ fill: "#fff" }} />
-        <text
-          className="sumText"
-          x={0}
-          y={0 + 0.1}
-          textAnchor="middle"
-          fontSize={"0.3px"}
-          style={{ transform: " rotate(90deg)" }}
-          fill="#000"
-          className="sum-text"
+
+  render() {
+    const { data, valueKey, height, nameKey, mobile} = this.props;
+    const colors = ["#03EFFE", "#34FFF3", "#5CE5DD", "#37D3CA", "#26BCB3"];
+    const sum = this.getDataSum(data, valueKey);
+    const colorChange = num => colors[num % colors.length];
+    const classMob = mobile ? "-mobile" : ""
+ 
+    const createViewData = () => {
+      const viewData = [...data];
+      let i = 0;
+      while (i < viewData.length) {
+        viewData[i].percent = viewData[i][valueKey] / (sum / 100) / 100;
+        viewData[i].color = colorChange(i);
+        viewData[i].indificator = i;
+        i++;
+      }
+      i = 0;
+      let nLength = viewData.length * 2;
+      while (i < nLength) {
+        if (i % 2) {
+          viewData.splice(i, 0, { percent: 0.003, color: "#fff" });
+        }
+        i++;
+      }
+      return viewData;
+    };
+    let cumulativePercent = 0;
+    function getCoordinatesForPercent(percent) {
+      const x = Math.cos(2 * Math.PI * percent);
+      const y = Math.sin(2 * Math.PI * percent);
+      return [x, y];
+    }
+    
+    return (
+      <div className={`circle-graph${classMob}`}>
+        <div className={`graph-info${classMob}`}>
+          <div className={`graph-list${classMob}`}>
+            <CustomScrollbars >
+              {data.map((el, ind) => {
+                return (
+                  <div
+                    key={ind}
+                    style={{
+                      backgroundImage:
+                        this.state.displayInd === ind
+                          ? " linear-gradient(to right, #fff,#34fff3)"
+                          : ""
+                    }}
+                    className={"line"}
+                    onMouseOver={this.mouseOverHandler(el[valueKey], ind)}
+                    onMouseOut={this.mouseOutHandler(sum)}
+                  > 
+                    <span className="line__dot" style={{background: colorChange(ind)}}></span>
+                    <span className={"line__text"}>{el[nameKey]}</span>
+                    <span className={"line__num"}>{el[valueKey]}</span>
+                  </div>
+                );
+              })}
+            </CustomScrollbars>
+          </div>
+        </div>
+        <svg
+          viewBox="-1 -1 2 2"
+          style={{ transform: " rotate(-90deg)" }}
+          height={height}
         >
-          {sum}
-        </text>
-      </svg>
-    </div>
-  );
-};
+          {createViewData().map((slice, ind) => {
+            const [startX, startY] = getCoordinatesForPercent(
+              cumulativePercent
+            );
+
+            cumulativePercent += slice.percent;
+
+            const [endX, endY] = getCoordinatesForPercent(cumulativePercent);
+
+            const largeArcFlag = slice.percent > 0.5 ? 1 : 0;
+
+            let pathData = [
+              `M ${startX} ${startY}`,
+              `A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`,
+              `L 0 0`
+            ].join(" ");
+            return (
+              <path
+                key={ind}
+                d={pathData}
+                fill={
+                  slice.indificator === this.state.displayInd
+                    ? "#04332f"
+                    : slice.color
+                }
+                onMouseOver={this.mouseOverHandler(
+                  slice[valueKey],
+                  slice.indificator
+                )}
+                onMouseOut={this.mouseOutHandler(sum)}
+              />
+            );
+          })}
+          <circle cx={0} cy={0} r={0.65} style={{ fill: "#fff" }} />
+          <text
+            className="sumText"
+            x={0}
+            y={0 + 0.1}
+            textAnchor="middle"
+            fontSize={"0.3px"}
+            style={{ transform: " rotate(90deg)" }}
+            fill="#000"
+            className="sum-text"
+          >
+            {this.state.displayValue}
+          </text>
+        </svg>
+      </div>
+    );
+  }
+}

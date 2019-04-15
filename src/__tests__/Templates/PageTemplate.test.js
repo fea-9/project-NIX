@@ -27,7 +27,7 @@ describe ('Page template', () => {
     })
 
     it('renders div for content', () => {
-      expect(pageTemplate.find('.main__container__content')).toHaveLength(1);
+      expect(pageTemplate.find('.main__content')).toHaveLength(1);
     })
 
     it('renders header with props', () => {
@@ -39,7 +39,7 @@ describe ('Page template', () => {
     })
 
     it('renders div for content with props', () => {
-      expect(pageTemplate.find('.main__container__content').contains(props.content)).toEqual(true);
+      expect(pageTemplate.find('.main__content').contains(props.content)).toEqual(true);
     })
   })
 
@@ -64,7 +64,7 @@ describe ('Page template', () => {
     })
 
     it ('renders <div> for content', () => {
-      expect(pageTemplate.find('.main__container__content')).toHaveLength(1);
+      expect(pageTemplate.find('.main__content')).toHaveLength(1);
     })
 
     it ('renders aside with props', () => {
@@ -72,7 +72,7 @@ describe ('Page template', () => {
     })
 
     it ('renders <div> for content with props', () => {
-      expect(pageTemplate.find('.main__container__content').contains(props.content)).toEqual(true);
+      expect(pageTemplate.find('.main__content').contains(props.content)).toEqual(true);
     })
   })
 
@@ -97,7 +97,7 @@ describe ('Page template', () => {
     })
 
     it ('renders <div> for content', () => {
-      expect(pageTemplate.find('.main__container__content')).toHaveLength(1);
+      expect(pageTemplate.find('.main__content')).toHaveLength(1);
     })
 
     it ('renders header with props', () => {
@@ -105,7 +105,8 @@ describe ('Page template', () => {
     })
 
     it ('renders <div> for content with props', () => {
-      expect(pageTemplate.find('.main__container__content').contains(props.content)).toEqual(true);
+      console.log('pageTemplate', pageTemplate.find('main__content'))
+      expect(pageTemplate.find('.main__content').contains(props.content)).toEqual(true);
     })
   })
 });

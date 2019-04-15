@@ -41,14 +41,14 @@ class Calend extends Component {
             type="text"
             name="startRange"
             placeholder="06/11/2018"
-            value={this.state.startRange}
+            defaultValue={this.state.startRange}
           />
           <input
             className="calendar-wrapper__inputs-block__input"
             type="text"
             name="endRange"
             placeholder="06/14/2018"
-            value={this.state.endRange}
+            defaultValue={this.state.endRange}
           />
         </div>
         <Calendar

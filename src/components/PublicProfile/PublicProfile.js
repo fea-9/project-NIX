@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-// import * as actions from "../actions/publicProfile";
+import * as actions from "../actions/publicProfile";
 import Spinner from "../Spinner/Spinner";
 import pup from "../../assets/images/pup.png";
 import getFullMonthDate from "../../utils/getFullMonthDate";
@@ -8,19 +8,17 @@ import AvaMock from "../CommunityTable/AvaMock";
 import svgList from "../../assets/icons/test.svg";
 import test from "../../assets/icons/test2.svg";
 
-// let mapStateToProps = state => ({publicProfile: state.publicProfile})
-
-import * as actions from "../actions/community";
-let mapStateToProps = state => ({
-    community: state.community,
-    token: state.auth.user.access_token
-  });
+let mapStateToProps = state => ({publicProfile: state.publicProfile})
+// let mapStateToProps = state => ({
+//     community: state.community,
+//     token: state.auth.user.access_token
+//   });
 
 class PublicProfile extends Component {
     componentDidMount(){
         console.log(this.props,"DID")
         let token = localStorage.getItem("access_token");
-        this.props.communityRequest(token);//test mock
+        this.props.Request(token);//test mock
         // this.props.publicProfileRequest({id: this.props.userId}, token)
     }
     render(){
