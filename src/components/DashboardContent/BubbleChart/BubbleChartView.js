@@ -118,9 +118,9 @@ class BubbleChart extends Component {
                     transform={`translate(${width / 2 + item.x}, 
                         ${height / 2 + item.y})`}
                     onClick = {this.onClick}
-                    onMouseOver = {(d) => d3.select(`#${item.key.split(" ").join("")}`)
-                            .attr("r", this.radiusScale(item.v) * 1.04)}
-                    onMouseOut = {(d) => d3.select(`#${item.key.split(" ").join("")}`)
+                    onMouseEnter = {(d) => d3.select(`#${item.key.split(" ").join("_")}`)
+                            .attr("r", this.radiusScale(item.v) + 1.5)}
+                    onMouseLeave = {(d) => d3.select(`#${item.key.split(" ").join("_")}`)
                         .attr("r", this.radiusScale(item.v))}
                 >
                     <circle
