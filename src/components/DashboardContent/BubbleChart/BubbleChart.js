@@ -15,19 +15,21 @@ class BubbleChart extends Component {
         this.setState({currentKey: id})
     }
 
+    unique = (arr) =>{ // because of the same keys and data from server
+        let obj = {};
+      
+        for (let i of arr) {
+          let elem = i.key;
+          obj[elem] = JSON.parse(JSON.stringify({...i, v: i.count ? i.count : 0})); 
+        }
+      
+        return Object.keys(obj).reduce((prev, elem) => ([ ...prev, obj[elem] ]), []); 
+    }
+
     render() {
         const {data} = this.props
-        function unique(arr) {
-            var obj = {};
-          
-            for (var i of arr) {
-              var str = i.key;
-              obj[str] = JSON.parse(JSON.stringify({...i, v: i.count ? i.count : 0})); 
-            }
-          
-            return Object.keys(obj).reduce((prev, elem) => ([ ...prev, obj[elem] ]), []); 
-        }
-        const dataToSHow = unique(data).filter(item => item.count > 100)
+        
+        const dataToSHow = this.unique(data).filter(item => item.count > 100)
         
         // const dataToSHow = data.map(item => {return ({...item, v: item.count ? item.count : 0})})
         //                         .filter(item => item.count > 100)
