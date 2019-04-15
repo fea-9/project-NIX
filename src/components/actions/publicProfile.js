@@ -2,7 +2,7 @@ import {refreshTokens} from "./token";
 import apiWorker from "../../utils/apiWorker";
 
 
-export const publicProfileRequest = (params, token) => {
+export const publicProfileRequest = (url, token) => {
     return apiWorker(
         {
             typeRequest: "PUBLIC_PROFILE_PENDING",
@@ -10,13 +10,12 @@ export const publicProfileRequest = (params, token) => {
             typeFail: "PUBLIC_PROFILE_FAIL"
         },
         {
-            url: "/users/object",
+            url: url,
             headers: {
                 'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/json'
             },
-            method: "get",
-            params: params
+            method: "get"
         }
     )
 } 

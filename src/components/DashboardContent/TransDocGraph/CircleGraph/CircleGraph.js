@@ -26,7 +26,7 @@ export default class CircleGraph extends Component {
     data: PropTypes.array,
     valueKey: PropTypes.string,
     nameKey: PropTypes.string,
-    mobile: PropTypes.number,
+    mobile: PropTypes.bool,
     height: PropTypes.oneOfType (
       [
         PropTypes.string,
