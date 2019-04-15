@@ -11,41 +11,10 @@ class BubbleChartView extends Component {
     
     state = {
         data: []
-        // width: 0,
-        // height: 0
     };    
    
-    // componentDidUpdate(prevProps, prevState) {//ловим пропсы с сайдбара, если изменились то resize.
-    //     this.setSizes();
-    //     if (prevState.width !== this.state.width ||
-    //         prevState.height !== this.state.height)
-    //         this.simulatePositions(this.props.data)
-    // }
-
-    // componentWillUnmount(){
-    //     window.removeEventListener("resize", this.setSizes)
-    // }
-    
-    // setSizes = () => {
-    //     if(!this.container) return
-        
-    //     let currentWidth = this.container.offsetWidth;
-    //     let currentHeight = this.container.offsetHeight;
-    //     console.log(currentWidth, currentHeight)
-    //     if (
-    //         this.state.width !== currentWidth &&
-    //         this.state.height !== currentHeight
-    //     )
-    //     this.setState(prevState => ({ 
-    //         ...prevState,
-    //         width: currentWidth, 
-    //         height: currentHeight }));
-    // };
-   
-
     componentDidMount() {
-        // this.setSizes();
-        // window.addEventListener("resize", this.setSizes)
+        
         this.mounted = true;
         if (this.props.data.length > 0) {
 
@@ -72,7 +41,6 @@ class BubbleChartView extends Component {
     radiusScale = value => {      
         const fx = d3
             .scaleSqrt()
-            // .range([1, (3200*this.state.width/this.maxValue)])
             .range([1, 90])
             .domain([this.minValue, this.maxValue]);
         return fx(value);
@@ -109,7 +77,6 @@ class BubbleChartView extends Component {
 
     renderBubbles = data => {
         const {width, height} = this.props
-        // const {width, height} = this.state
         const color = "#5CE5DD";
 
         const texts = data.map((item, index) => {
@@ -170,7 +137,6 @@ class BubbleChartView extends Component {
     render() { 
         const {data} = this.state
         const { width, height} = this.props
-        // const { width, height} = this.state
         
         if (data.length) {
             return (
@@ -210,7 +176,5 @@ BubbleChartView.defaultProps = {
     height: 385,
     setCurrent: () => {console.log("SetCurrent isn't set")}
 };
-
-
 
 export default BubbleChartView;
