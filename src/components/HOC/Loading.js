@@ -1,9 +1,10 @@
 import React from "react";
-import Spinner from "../Spinner/Spinner";
-
 import PropTypes from "prop-types";
 
-export const Loading = ({ flag, children }) => (flag ? <Spinner /> : children);
+import Spinner from "../Spinner/Spinner";
+
+export const Loading = ({ flag, children, procent = false }) =>
+  flag ? <Spinner procent={procent} /> : children;
 
 Loading.propTypes = {
   flag: PropTypes.bool,

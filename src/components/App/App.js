@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import PropTypes from "prop-types";
 
 import { mobileSize } from "../actions/resize";
 
@@ -13,17 +14,22 @@ import DashboardPage from "../Pages/DashboardPage";
 import DocumentsPage from "../Pages/DocumentsPage";
 import ProfilePage from "../Pages/ProfilePage";
 import SearchPage from "../Pages/SearchPage";
-import Error from "../Error/Error"
+import Error from "../Error/Error";
 
 class App extends Component {
+  static propTypes = {
+    mobileSize: PropTypes.func,
+    mobile: PropTypes.bool
+  };
+
   resize = () => {
     const { mobileSize, mobile } = this.props;
 
-    if (window.innerWidth > 768 && mobile) {
+    if (window.innerWidth >= 768 && mobile) {
       mobileSize(false);
     }
 
-    if (window.innerWidth <= 768 && !mobile) {
+    if (window.innerWidth < 768 && !mobile) {
       mobileSize(true);
     }
   };
@@ -48,7 +54,7 @@ class App extends Component {
         <PrivateRoute exact path="/documents" component={DocumentsPage} />
         <PrivateRoute exact path="/community" component={CommunityPage} />
 
-        <Route render={() => <Error description="404 page not found"/>} />
+        <Route render={() => <Error description="404 page not found" />} />
       </Switch>
     );
   }

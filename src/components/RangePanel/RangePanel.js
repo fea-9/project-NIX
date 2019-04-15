@@ -41,7 +41,7 @@ class RangePanel extends Component {
   }
 
   render() {
-    const { location } = this.props;
+    const { location, mobile } = this.props;
     const { periods } = this.state;
     const search = queryString.parse(location.search);
 
@@ -50,7 +50,13 @@ class RangePanel extends Component {
     }
 
     return (
-      <div className="range-panel-wrapper">
+      <div
+        className={
+          mobile
+            ? "range-panel-wrapper range-panel-wrapper__mobile"
+            : "range-panel-wrapper"
+        }
+      >
         <ul className="range-panel-list">
           <li className="range-panel-list__item">
             <NavLink
@@ -114,9 +120,13 @@ class RangePanel extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  mobile: state.resize.mobile
+});
+
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     { ...actions }
   )(RangePanel)
 );

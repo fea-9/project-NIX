@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import * as actions from "../actions/auth";
 
@@ -10,6 +11,11 @@ import { Button } from "../BaseComponents/Forms/Button";
 import { BurgerButton } from "../BaseComponents/BurgerButton";
 
 class Sidebar extends Component {
+  static propTypes = {
+    minimized: PropTypes.bool,
+    mobile: PropTypes.bool
+  };
+
   state = {
     isMinSidebar: true
   };

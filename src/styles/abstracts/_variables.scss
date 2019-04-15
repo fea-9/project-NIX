@@ -1,13 +1,255 @@
-$icon:#9fbcba;
-$icon-active:#4facfe;
-$socials-icon:#5c7775;
+$icon: #9fbcba;
+$icon-active: #4facfe;
+$socials-icon: #5c7775;
 
 $base-dark-blue: #4facfe;
-$base-light-blue: #03EFFE;
+$base-light-blue: #03effe;
 
-$dark-grey-text: #7B8180;
+$dark-grey-text: #7b8180;
 $light-grey-text: #bec0c0;
 
-$dark-black: #2C2C2C;
+$dark-black: #2c2c2c;
 
 $dark-green: #027478;
+
+// Breakpoints
+
+$firstBreakpoint: 768px;
+
+// Sidebar
+
+$heightSidebar: 100vh;
+$widthtSidebar: 100vw;
+$backgroundColorSidebar: linear-gradient(to top, #012724, #276763 75%, #489e98);
+$paddingSidebar: 1.5rem 0 0 0;
+
+$heightSidebarMobileMinimized: auto;
+$backgroundSidebarMobileMinimized: #489e98;
+
+$heightSidebarDesktop: 100%;
+$widthtSidebarDesktop: 35rem;
+$transitionSidebarDesktop: all 1s;
+
+$widthSidebarDesktopMinimized: 10rem;
+
+// Logo in Sidebar
+
+$fontFamilyLogo: "Raleway", sans-serif;
+$fontWeightLogo: 700;
+$colorLogo: #ffffff;
+$textTransformLogo: uppercase;
+$textAlignLogo: center;
+
+$positionLogoSidebar: relative;
+$fontSizeLogoSidebar: 2.4rem;
+$marginLogoSidebar: 0 0 3vh 0;
+$transitionLogoSidebar: all 1s;
+
+$marginLogoSidebarMinimized: 0 0 6vh 0;
+
+$fontSizeLogoSidebarDesktop: 4rem;
+$fontSizeLogoSidebarDesktopMinimized: 6vh;
+
+// NavListItem in Sidebar
+
+$marginNavListItem: 0 0 1.5rem 0;
+
+$paddingNavListItemFirstChild: 1.5rem 0 1.5rem 0;
+$marginNavListItemFirstChild: 2vh;
+
+$colorNavListItemLink: #9fbcba;
+$textTransformNavListItemLink: uppercase;
+$fontSizeNavListItemLink: 1.5rem;
+$fontFamilyNavListItemLink: "Raleway", sans-serif;
+$fontWeightNavListItemLink: 700;
+$paddingNavListItemLink: 1.5rem 0 1.5rem 3.5rem;
+$positionNavListItemLink: relative;
+
+$marginNavListItemIcon: 0 3rem 0 0;
+
+$colorNavListItemLinkHover: #fff;
+$backgroundNavListItemLinkHover: linear-gradient(
+  90deg,
+  rgba(255, 255, 255, 0),
+  rgba(255, 255, 255, 0.15)
+);
+$backgroundNavListItemLinkHoverVerticalLineEnd: linear-gradient(
+  to top,
+  #4facfe,
+  #03effe
+);
+$widthNavListItemLinkHoverVerticalLineEnd: 0.8rem;
+
+$heightNavListItemLinkProfile: 9rem;
+$widthNavListItemLinkProfile: 11.8rem;
+$colorNavListItemLinkProfile: #fff;
+
+$paddingNavListItemLinkDesktop: 1.5rem 0 1.5rem 5rem;
+$transitionNavListItemLinkDesktop: all 1s;
+
+$heightNavListItemLinkProfileDesktop: 11.3rem;
+$widthNavListItemLinkProfileDesktop: 12.4rem;
+
+$transitionNavListItemLinkTextDesktop: all 0.8s 0.2s;
+
+$marginNavListItemFirstChildDesktop: 0 0 9vh 0;
+
+$paddingNavListItemLinkDesktopMinimized: 1.5rem 0 1.5rem 3.5rem;
+$heightNavListItemLinkProfileDesktopMinimized: 4.5rem;
+$widthNavListItemLinkProfileDesktopMinimized: 4.5rem;
+
+$paddingNavListItemDesktopMinimized: 1.5rem 0 1.5rem 0;
+$marginNavListItemDesktopMinimized: 0 0 6vh 0;
+
+// Social in Sidebat
+
+$marginSocialList: 0 0 2rem 0;
+$paddingSocialList: 0 30vw 0;
+
+$textAlignSocialListItem: center;
+
+$paddingSocialListDesktop: 0 11rem 0;
+$transitionSocialListDesktop: all 1s;
+
+$marginSocialListItemDesktopMinimized: 0 0 1rem 0;
+
+// Main PageTemplate
+
+$widthPageTemplateWrapper: 100vw;
+$heightPageTemplateWrapper: 100vh;
+
+$heightPageTemplateMain: 100vh;
+
+$maxWidthPageTemplateWrapperDesktop: 1920px;
+$maxHeightPageTemplateMainDesktop: 1080px;
+
+$widthPageTemplateContainerDesktop: 100%;
+$heightPageTemplateContainerDesktop: 100%;
+
+// ProfilePreview in sidebar
+
+$widthProfilePreview: 100%;
+$heightProfilePreview: 100%;
+$alignItemsProfilePreview: center;
+
+$borderRadiusProfilePreviewImageWrapper: 50%;
+$backgroundColorProfilePreviewImageWrapper: #e6e4bd;
+
+$heightProfilePreviewImage: 8rem;
+$widthProfilePreviewImage: 8rem;
+
+$widthProfilePreviewIcon: 2.5rem;
+$heightProfilePreviewIcon: 2.5rem;
+$borderRadiusProfilePreviewIcon: 50%;
+$backgroundProfilePreviewIcon: linear-gradient(to top, #4facfe, #03effe);
+
+$fontFamilyProfilePreviewName: "Raleway", sans-serif;
+$fontWeightProfilePreviewName: 700;
+$fontSizeProfilePreviewName: 1.5rem;
+$textTransformProfilePreviewName: capitalize;
+
+$heightProfilePreviewImageMinimized: 4.5rem;
+$widthProfilePreviewImageMinimized: 4.5rem;
+
+$widthProfilePreviewIconMinimized: 1.2rem;
+$heightProfilePreviewIconMinimized: 1.2rem;
+
+// Range Panel in Header
+
+$borderRangePanelList: 1px solid #cad5da;
+$borderRadiusRangePanelList: 0.5rem;
+$paddingRangePanelList: 0 1rem;
+
+$textAlignRangePanelListLink: center;
+$fontSizeRangePanelListLink: 1.5rem;
+$minWidthRangePanelListLink: 9rem;
+$paddingRangePanelListLink: 0.5rem 0;
+$fontFamilyRangePanelListLink: "Roboto", sans-serif;
+$fontWeightRangePanelListLink: 500;
+$colorRangePanelListLink: #7b8180;
+$borderRangePanelListLink: 1px solid transparent;
+
+$fontWeightRangePanelListLinkSelected: 700;
+$colorRangePanelListLinkSelected: #ffffff;
+
+$backgroundRangePanelListLinkSelected: linear-gradient(
+  to top,
+  #4facfe,
+  #03effe
+);
+$borderRadiusRangePanelListLinkSelected: 0.5rem;
+$widthRangePanelListLinkSelected: 100%;
+$heightRangePanelListLinkSelected: 140%;
+$leftRangePanelListLinkSelected: 0;
+$bottomRangePanelListLinkSelected: -20%;
+
+$widthRangePanelListMobile: 100vw;
+$borderRadiusRangePanelListMobile: 0;
+
+// Calendar in Range Panel
+
+$gradientActiveAndHoverDays: linear-gradient(#03effe, #4facfe);
+$backgroundRangeDays: #a2e9fa;
+
+$paddingCalendarWrapper: 3rem 3rem 2.5rem 3rem;
+$borderRadiusCalendarWrapper: 0.5rem;
+$backgroundColorCalendarWrapper: #f4f7f8;
+$borderCalendarWrapper: 1px solid #cad5da;
+$topRadiusCalendarWrapper: 100%;
+$rightRadiusCalendarWrapper: -10%;
+$zIndexCalendarWrapper: 999;
+
+$fontFamilyCalendarInput: "Roboto", sans-serif;
+$fontWeightCalendarInput: 400;
+$colorCalendarInput: #000000;
+$fontSizeCalendarInput: 1.5rem;
+$maxWidthCalendarInput: 11.5rem;
+$borderCalendarInput: 1px solid #cad5da;
+$borderRadiusCalendarInput: 0.5rem;
+$backgroundColorCalendarInput: #ffffff;
+$paddingCalendarInput: 0.5rem 1.6rem;
+
+$opacityCalendarInputPlaceholder: 0.3;
+
+$widthCalendar: 25.8rem;
+
+$minWidthCalendarNavigationButton: 4.4rem;
+$fontFamilyCalendarNavigationButton: "Roboto", sans-serif;
+$colorCalendarNavigationButton: #2c2c2c;
+$fontWeightCalendarNavigationButton: 400;
+
+$colorCalendarNavigationButtonHover: #a2e9fa;
+
+$fontSizeCalendarNavigationLabel: 2rem;
+$paddingCalendarNavigationLabel: 1.9rem 0 2.4rem 0;
+$paddingCalendarNavigationNextButton: 0 0 0 2rem;
+$paddingCalendarNavigationPrevButton: 0 2rem 0 0;
+
+$textAlignCalendarWeekDays: center;
+$textTransformCalendarWeekDays: uppercase;
+$fontWeightCalendarWeekDays: 500;
+$fontSizeCalendarWeekDays: 1.4rem;
+$fontFamilyCalendarWeekDays: "Raleway", sans-serif;
+$colorCalendarWeekDays: #7b8180;
+$marginCalendarWeekDays: 0 0 0.5rem 0;
+
+$fontFamilyCalendarDays: "Roboto", sans-serif;
+$fontWeightCalendarDays: 400;
+$fontSizeCalendarDays: 1.4rem;
+$colorCalendarDays: #7b8180;
+
+$maxWidthCalendarDays: 100%;
+$textAlignCalendarDays: center;
+$paddingCalendarDays: 0.75em 0.5em;
+
+$backgroundCalendarDayHover: $gradientActiveAndHoverDays;
+$borderRadiusCalendarDayHover: 0.5rem;
+$colorCalendarDayHover: #ffffff;
+
+$backgroundCalendarDayActive: $backgroundRangeDays;
+$colorCalendarDayActive: #ffffff;
+
+$backgroundCalendarDayRangeStart: $gradientActiveAndHoverDays;
+$borderRadiusCalendarDayRangeStart: 0.5rem;
+$backgroundCalendarDayRangeEnd: $gradientActiveAndHoverDays;
+$borderRadiusCalendarDayRangeEnd: 0.5rem;

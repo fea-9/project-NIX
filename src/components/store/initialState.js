@@ -45,5 +45,12 @@ export default {
   avatar: {
     src:"http://www.blackdesertbase.com/img/users/avatars/70.png",
     scale: 1
+  },
+  search: {
+    initial: true,
+    isFetching:false,
+    isSearched:false,
+    data: null,
+    error: null,
   }
 };

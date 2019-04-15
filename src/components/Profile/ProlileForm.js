@@ -1,12 +1,13 @@
 import React, {Component} from "react";
-
 import PropTypes from 'prop-types';
 
-import * as actions from "../actions/auth"
+import * as authActions from "../actions/auth";
+import * as avatarActions from "../actions/avatar";
 import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
 
-import {authValidation} from "../Auth/authValidate";
+import { Scrollbars } from "react-custom-scrollbars";
+
+import {authValidation} from "../../utils/authValidate";
 import InputField from "../BaseComponents/Forms/Input";
 import CheckboxField from "../BaseComponents/Forms/Checkbox";
 import TextareaField from "../BaseComponents/Forms/Textarea";
@@ -15,6 +16,10 @@ import ProfileAvatar from "./ProfileAvatar";
 class ProfileForm extends Component{
     
     defaultState = {
+        avatar: {
+            scale: this.props.scale, 
+            src: this.props.src // from server in ideal
+        },
         withValidation: {
             firstName: {
                 value: this.props.user.fullName.split(" ")[0],
@@ -59,11 +64,12 @@ class ProfileForm extends Component{
                     touch: false,
                     valid: false,
                     errorMsg: "" 
-                }
+                },
+                disabled: true
             }           
         },        
         publicity: {
-            checked: true, // from props
+            checked: this.props.publicity, 
             config: {
                 type: "checkbox",
                 label: "Public Profile",
@@ -73,18 +79,18 @@ class ProfileForm extends Component{
             }          
         },        
         description: {            
-            value: "I am open to connecting and meeting new potential collaborators.", // from props
+            value: this.props.description, 
             config: {
                 type: "textarea",
                 label: "description",
                 required: false,
                 name: "description",
                 placeholder: "Add some information about yourself...",
-                maxlength: 250,
-                cols: 50,
+                maxlength: 500,
+                cols: 5,
                 rows: 7
             },            
-            maxlength: 250,                        
+            maxlength: 250                        
         },
         researchAreas: {
             value: "", 
@@ -97,7 +103,7 @@ class ProfileForm extends Component{
             }
         },
         researchAreaTags: {
-            tags: ["biology", "chemistry", "biochemistry"] // from props
+            tags: this.props.researchAreaTags 
         }        
     }
 
@@ -107,8 +113,8 @@ class ProfileForm extends Component{
         e.persist()
         const { name, value } = e.target;
         this.setState(prevState => {            
-            let {status, message} = authValidation(name, value)
-            let valid = prevState.withValidation[name].validationRequired.touch ? 
+            const {status, message} = authValidation(name, value)
+            const valid = prevState.withValidation[name].validationRequired.touch ? 
                 !status : prevState.withValidation[name].validationRequired.valid
             return {
                 ...prevState,
@@ -131,6 +137,7 @@ class ProfileForm extends Component{
     onChangeInput = (e) => {
         e.persist()
         const { name, value } = e.target;
+
         this.setState(prevState => {  
             return {
                 ...prevState,                
@@ -158,28 +165,36 @@ class ProfileForm extends Component{
     } 
     
     addTags = (e) => {
-        let {value} = e.target
-        value.toLowerCase()
-        let {tags} = this.state.researchAreaTags
-
-        if (e.key === "Enter"){
+        if(e.key !== "Enter") return;
+        
+        else if (e.key === "Enter"){
             e.preventDefault()
-            if( tags.indexOf(value) > -1){
-                this.setState(prevState => ({
-                    ...prevState,
-                    researchAreas:{
-                        ...prevState.researchAreas,
-                        value: ""
-                }}))
-            } else {
-                tags.push(value)
-                this.setState(prevState => ({
-                    ...prevState,
-                    researchAreas:{
-                        ...prevState.researchAreas,
-                        value: ""
-                }}))
-            }            
+            const value = e.target.value.toLowerCase().trim()            
+            const {tags} = JSON.parse(JSON.stringify(this.state.researchAreaTags))
+
+            let tagsFromInput = value.split(/\.|\,|\;/g)
+            tagsFromInput.forEach( tag => {
+                if( tags.indexOf(tag) > -1 || !/^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*\s\*]{1,25}$/.test(value)){
+                    this.setState(prevState => ({
+                        ...prevState,
+                        researchAreas:{
+                            ...prevState.researchAreas,
+                            value: ""
+                    }}))
+                } else {
+                    tags.push(tag)
+                    this.setState(prevState => ({
+                        ...prevState,
+                        researchAreas:{
+                            ...prevState.researchAreas,
+                            value: ""
+                        },
+                        researchAreaTags:{
+                            tags: tags
+                        }
+                    }))
+                }         
+            })                
         }
     }
 
@@ -198,15 +213,15 @@ class ProfileForm extends Component{
 
 
     submit = e => {
-        e.preventDefault();       
-        const {auth, id} = this.props
+        e.preventDefault(); 
+        const {updateUserRequest, id} = this.props
         const {email, firstName, lastName} = this.state.withValidation
         const values = {
             email: email.value,             
             fullName: `${firstName.value.trim()} ${lastName.value.trim()}`
         };
         if (this.formIsValid()){
-            auth (values, `users/object/${id}/update`);
+            updateUserRequest(localStorage.getItem("access_token"), id, values)
         }        
     }
 
@@ -239,45 +254,106 @@ class ProfileForm extends Component{
 
     }    
 
-    resetForm = () => {
+    onZoomChange = (e) => {
+        e.persist()
+        this.setState(prevState => ({
+            ...prevState,
+            avatar: {
+                ...prevState.avatar,
+                scale: +e.target.value
+            }
+        }));
+    }
+
+    onSelectFile = event =>  { 
+        const file = event.target.files[0];
+        let newImage;        
+        if ( !file || file.type.split('/')[0] !== 'image' ) return;                
+        const fileReader = new FileReader ();
+        fileReader.onloadend = ( e ) => {
+            newImage = e.target.result;
+            this.setState(prevState => ({
+                ...prevState,
+                avatar: {
+                    ...prevState.avatar,
+                    src: newImage
+                }
+            }));                                                                          
+        }             
+        fileReader.readAsDataURL ( file );
+        event.target.value = ""
+    }
+
+    resetFormAvatar = (e) => {
+        e.preventDefault();
+        const {resetAvatar} = this.props; 
+        const {avatar} = this.state;        
+        if (avatar.src === this.defaultState.src && avatar.scale === this.defaultState.scale) return; 
+        else {
+            resetAvatar()
+            this.setState({...this.defaultState})
+        };
+        
+    }
+
+    saveFormAvatar = (e) => {       
+        e.preventDefault(); // mock, no back-end
+        const {saveAvatar, src, scale} = this.props;
+        const {avatar} = this.state;  
+        if (avatar.src === src && avatar.scale === scale) return;
+        else saveAvatar(this.state.avatar);
+    }
+
+    resetForm = (e) => {
+        e.preventDefault();
+        this.props.resetAvatar();
         this.setState(JSON.parse(JSON.stringify(this.defaultState))) // because of array of tags
     }
 
     render () {
-        let {isFetching, authErrorMessage } = this.props
+        const {isFetching, authErrorMessage } = this.props
 
-        let {publicity, description, researchAreas} = this.state
-        let errorMessage = authErrorMessage === "You should specify at least one updateble field in your request" ? 
+        const {publicity, description, researchAreas, avatar} = this.state
+        const errorMessage = authErrorMessage === "You should specify at least one updateble field in your request" ? 
             "" : "Something went wrong. Try again, please"
-        let list = Object.keys(this.state.withValidation).map (elem => {
+        const list = Object.keys(this.state.withValidation).map (elem => {
             let stateItem = this.state.withValidation[elem]
             return <InputField 
-                key={elem}
-                value = {stateItem.value}
-                config = {stateItem.config}
-                validationRequired = {stateItem.validationRequired}
-                onBlur={this.validateInput}
-                onChange={this.validateInput}                
-                />
+                        key={elem}
+                        value = {stateItem.value}
+                        config = {stateItem.config}
+                        validationRequired = {stateItem.validationRequired}
+                        onBlur={this.validateInput}
+                        onChange={this.validateInput} 
+                        disabled = {stateItem.disabled ? stateItem.disabled : false}               
+                    />
         })
-        let listOfTags = this.state.researchAreaTags.tags.map (areaTag => {
+        const listOfTags = this.state.researchAreaTags.tags.map (areaTag => {
             return (
-            <span 
-                className = "tags"
-                key = {areaTag} >
-                    {areaTag}
-                    <span className = "tags-delete" 
-                        onClick = {this.deleteTags}
-                        id = {areaTag} >
-                            x
-                    </span>
-            </span>)
+                <span 
+                    className = "tags"
+                    key = {areaTag} >
+                        {areaTag}
+                        <span className = "tags-delete" 
+                            onClick = {this.deleteTags}
+                            id = {areaTag} >
+                                x
+                        </span>
+                </span>
+            )
         })
         return (            
             <form className = "profile-form"
                 onSubmit={this.submit} noValidate={true} >
                     <div className = "profile__form-box" >
-                        <ProfileAvatar />
+                        <ProfileAvatar 
+                            src = {avatar.src}
+                            scale = {avatar.scale}
+                            onSelectFile = {this.onSelectFile}
+                            onZoomChange = {this.onZoomChange}
+                            saveAvatar = {this.saveFormAvatar}
+                            resetAvatar = {this.resetFormAvatar}
+                        />
                         <div className="form-column" >
                             {authErrorMessage && 
                                 <span className ="form__error-message" > 
@@ -304,16 +380,22 @@ class ProfileForm extends Component{
                                 onKeyDown = {this.addTags}
                             />
                             <div className = "tags-box" >
-                                {listOfTags}
+                                <Scrollbars>
+                                    {listOfTags}
+                                </Scrollbars>
                             </div>
                         </div>
                     </div>
                     <div className = "profile__buttons-box" >                    
-                        <button disabled={isFetching} onClick={this.resetForm} className = "form-button profile-discard-button" > 
-                            Discard 
+                        <button disabled={isFetching} 
+                            onClick={this.resetForm}
+                            onSubmit={this.resetForm} 
+                            className = "form-button profile-discard-button" > 
+                                Discard 
                         </button>
-                        <button disabled={isFetching} className = "form-button profile-submit-button" > 
-                            Save 
+                        <button disabled={isFetching} 
+                            className = "form-button profile-submit-button" > 
+                                Save 
                         </button>
                     </div>
             </form>           
@@ -322,14 +404,24 @@ class ProfileForm extends Component{
 }
 
 ProfileForm.propTypes = {
+    publicity: PropTypes.bool,
+    description: PropTypes.string,
+    researchAreaTags: PropTypes.arrayOf(PropTypes.string),
     user: PropTypes.object,
     id: PropTypes.string,
     isFetching: PropTypes.bool,
     authErrorMessage: PropTypes.string,
-    auth: PropTypes.func
+    updateUserRequest: PropTypes.func,
+    src: PropTypes.string,
+    scale: PropTypes.number,
+    saveAvatar: PropTypes.func,
+    resetAvatar: PropTypes.func
 }
 
 ProfileForm.defaultProps = {
+    publicity: true, // mock
+    description: "I am open to connecting and meeting new potential collaborators.", // mock
+    researchAreaTags: ["biology", "chemistry", "biochemistry"], // mock
     user: {
         created_at: 1553715252982,
         refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2EyMzU5MmItYjVkMi00MTQ1LThmNjMtMzFjODQyZjlhMDM2IiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20uY29tIiwicm9sZUlkIjoxfSwiaWF0IjoxNTU0ODAxNDU0LCJleHAiOjE1NTczOTM0NTR9.qTsOGV7xi1iDvVHegcMvaJKV2EFXCG0l8AT3AKnhcT0",
@@ -341,18 +433,22 @@ ProfileForm.defaultProps = {
     id: "ca23592b-b5d2-4145-8f63-31c842f9a036",
     isFetching: false,
     authErrorMessage: null,
-    auth: () => {console.log(`Auth submit ...`)}    
+    updateUserRequest: () => {console.log(`Auth submit ...`)},
+    src: "http://www.blackdesertbase.com/img/users/avatars/70.png",
+    scale: 1,
+    saveAvatar: () => {console.log("SaveAvatar isn't set")},
+    resetAvatar: () => {console.log(`ResetAvatar isn't set`)}    
 }
 
-const mapStateToProps = state => {
-	return {        
-        id: state.auth.user.id,
-        isFetching: state.auth.isFetching,
-        user: state.auth.user,
-        authErrorMessage: state.auth.message
-    };
-};
+const mapStateToProps = state => ({ 
+    src: state.avatar.src,
+    scale: state.avatar.scale,       
+    id: state.auth.user.id,
+    isFetching: state.auth.isFetching,
+    user: state.auth.user,
+    authErrorMessage: state.auth.message    
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actions }, dispatch);
+const mapDispatchToProps = { ...authActions, ...avatarActions };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

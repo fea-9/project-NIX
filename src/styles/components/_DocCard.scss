@@ -1,4 +1,5 @@
-.doc-line {
+.doc-line,  
+.doc-line-mobile{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -6,13 +7,22 @@
     margin: 15px 30px;
     box-shadow: 0  0 40px #cad5da;
     text-align: left;
+    position: relative;
 }
-.doc-line-transact span{
+.doc-line-mobile {
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    margin: 5px 5px;
+}
+.doc-line-transact span, 
+.doc-line-transact-mobile span{
     padding-left: 5%;
-    font-size: 1.2rem;
+    font-size: 1.2rem; 
     font-weight: bold;
 }
-.doc-line-artfs {
+.doc-line-artfs, 
+.doc-line-artfs-mobile {
     width: 30%;
     margin-left: 20px;
     color: #2c2c2c;
@@ -24,13 +34,27 @@
         font-weight: 500;
     }
 }
-.doc-line-contr {
+.doc-line-artfs-mobile {
+    width: 100%;
+    margin-left: 2px;
+    margin-top: 5px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.doc-line-contr, 
+.doc-line-contr-mobile {
     width: 25%;
     font-size: 12px;
     padding-right: 60px;
     color: #7b8180;
 }
-.doc-line-keyw {
+.doc-line-contr-mobile {
+    width: 100%;
+    padding-right: 0;
+    margin-left: 2px;
+}
+.doc-line-keyw, 
+.doc-line-keyw-mobile {
     & span {
         background: #7b818040;
         color: #5f6362;
@@ -44,17 +68,44 @@
     }
     width: 15%;
 }
-.doc-line-cit {
+.doc-line-keyw-mobile {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+.doc-line-keyw-mobile {
+    width: 100%;
+}
+.doc-line-cit, 
+.doc-line-cit-mobile {
     width: 14%;
     color: #4facfe;
     font-size: 16px;
-    doc-line-height: 20px;
+    line-height: 20px;
     font-weight: Bold;
 }
-.doc-line-prof {
+.doc-line-cit-mobile {
+    width: 100%;
+    margin: 10px 0;
+}
+.doc-line-prof, 
+.doc-line-prof-mobile {
     width: 16%;
 }
-.doc-line-cit, .doc-line-prof {
+.doc-line-prof-mobile  {
+    width: 100%;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.doc-line-transact-mobile {
+    padding: 5px;
+}
+.doc-line-cit, 
+.doc-line-cit-mobile, 
+.doc-line-prof,  
+.doc-line-prof-mobile{
     text-align: center;
     font-family: 'Roboto', sans-serif;
     display:flex;

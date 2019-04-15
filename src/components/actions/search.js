@@ -1,6 +1,8 @@
 import {refreshTokens} from "./token";
 import apiWorker from "../../utils/apiWorker";
 
+export const setSearchData =  data => ({type: "SEARCH_SET", payload: data})
+
 export const searchRequest = ( params, token ) => {
     return apiWorker(
         {
@@ -18,4 +20,12 @@ export const searchRequest = ( params, token ) => {
             params: params
         }
     )
+}
+
+export const searchClear = () => {
+    return(
+        {
+            type: "SEARCH_CLEAR"
+        }
+    ) 
 }

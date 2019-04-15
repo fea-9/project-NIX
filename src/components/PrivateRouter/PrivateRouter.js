@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import { Loading } from "../HOC/Loading";
 
@@ -25,3 +26,8 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(PrivateRoute);
+
+PrivateRoute.propTypes = {
+  user: PropTypes.object,
+  isFetching: PropTypes.bool
+};

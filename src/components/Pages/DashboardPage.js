@@ -27,6 +27,7 @@ class DashboardPage extends Component {
     let p = this.props;
     return (
       <PageTemplate
+        title={"Dashboard"}
         sidebar={<Sidebar />}
         header={<HeaderTemplate title={"Dashboard"} component={<RangePanel/>}/>}
         content={
