@@ -22,6 +22,8 @@
     }
 
     .link-sidebar__text {
+      width: 0;
+      display: inline-block;
       opacity: 1;
     }
 
@@ -139,6 +141,8 @@
       }
 
       .link-sidebar__text {
+        display: inline-block;
+        width: 0;
         opacity: 0;
       }
     }
