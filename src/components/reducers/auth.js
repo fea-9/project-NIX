@@ -5,6 +5,9 @@ export default (state = initialState.auth, { type, payload, error }) => {
     case "AUTH_REQUEST": {
       return { ...state, isFetching: true };
     }
+    case "AUTH_UPDATE_REQUEST": {
+      return { ...state, isFetching: true };
+    }
     case "AUTH_REQUEST_SUCCESS": {
       const { Item, message } = payload;
       return { ...state, error: false, user: Item, message, isFetching: false };
