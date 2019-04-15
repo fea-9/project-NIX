@@ -34,7 +34,7 @@
     text-transform: capitalize;
   }
 
-  &__input, &__error, &__text-area {    
+  &__input, &__error, &__disabled, &__text-area {    
     background-color: white;
     border: 1px solid $light-grey-text;
     border-radius: 0.5rem;
@@ -51,10 +51,12 @@
 
   &__text-area{
     resize: vertical;
+    text-align: justify;
   }
 
   &__error {
     border: 1px solid red; 
+    margin-bottom: 3.5rem;
   }
 
   &__error-message{
@@ -81,6 +83,10 @@
     font-size: 1.2rem;
     text-transform: lowercase;
     margin-left: 0.5rem;
+  }
+
+  &__disabled{
+    background-color: #e7eeee;
   }
 
   &__checkbox{
@@ -147,6 +153,7 @@ input[type=password] {
   font-family: Verdana, Geneva, sans-serif;
   font-size: 1.7rem;
   letter-spacing: 0.075rem;
+  margin-bottom: 1rem;
 } 
 
 
@@ -171,6 +178,11 @@ input[type=password] {
   font-size: 1.5rem;
   opacity: 0.6;
 } 
+
+:focus::-webkit-input-placeholder {color: transparent}
+:focus::-moz-placeholder          {color: transparent}
+:focus:-moz-placeholder           {color: transparent}
+:focus:-ms-input-placeholder      {color: transparent}
 
 .form__error-message{
   position: absolute;
@@ -202,4 +214,21 @@ input[type=password] {
 .button{
   text-decoration: none;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .input-box{
+    &__input, &__error, &__text-area {
+      font-size: 1.2rem;
+      padding: 1.5rem;
+    }
+    &__error-message{
+      top: 7.5rem;
+      font-size: 1rem;
+    }
+  }
+  input[type=password] {
+    font-size: 1.2rem;
+    letter-spacing: 0.075rem;
+  } 
 }

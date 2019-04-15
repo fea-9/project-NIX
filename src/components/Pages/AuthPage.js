@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
-import { bindActionCreators } from "redux";
-
+import { withRouter } from 'react-router-dom';
 import * as actions from "../actions/auth";
 
 import { PageTemplate } from "../Templates/PageTemplate";
-//import components logo
+//import component logo
 
 import Auth from "../Auth/Auth"
 import AuthSignIn from "../Auth/AuthSignIn";
@@ -16,6 +14,7 @@ import AuthSignUp from "../Auth/AuthSignUp";
 
 
 class AuthPage extends Component {
+
     state = { currentForm: "signin"};
 
     componentDidMount = () => {
@@ -37,9 +36,10 @@ class AuthPage extends Component {
 
     render() {
         const authComponent = this.state.currentForm === "signin" ? <AuthSignIn /> :
-        this.state.currentForm === "signup" ? <AuthSignUp /> : <AuthSignIn />;  
+            this.state.currentForm === "signup" ? <AuthSignUp /> : <AuthSignIn />;  
         return (
-            <PageTemplate content = {<Auth authComponent = {authComponent} />}            
+            <PageTemplate 
+                content = {<Auth authComponent = {authComponent} />}            
             />
         )
     }
@@ -61,7 +61,7 @@ AuthPage.defaultProps = {
     resetAuth: () => {console.log("ResertAuth is not set")}
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actions }, dispatch);
+const mapDispatchToProps = { ...actions };
 
 
 export default withRouter(connect(
