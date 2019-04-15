@@ -1,50 +1,47 @@
 .calendar-wrapper {
   display: inline-block;
   position: absolute;
-  padding: 30px 30px 25px 30px;
-  border-radius: 5px;
-  background-color: #f4f7f8;
-  border: 1px solid #cad5da;
-  top: 100%;
-  right: -10%;
+  padding: $paddingCalendarWrapper;
+  border-radius: $borderRadiusCalendarWrapper;
+  background-color: $backgroundColorCalendarWrapper;
+  border: $borderCalendarWrapper;
+  top: $topRadiusCalendarWrapper;
+  right: $rightRadiusCalendarWrapper;
   user-select: none;
-  z-index: 999;
+  z-index: $zIndexCalendarWrapper;
 
   abbr {
     text-decoration: none;
   }
 
-  &__inputs-block {
+  .calendar-wrapper__inputs-block {
     display: flex;
     justify-content: space-between;
-    // margin-bottom: 27px;
 
-    &__input {
+    .calendar-wrapper__inputs-block__input {
       outline: none;
-      font-family: "Roboto", sans-serif;
-      font-weight: 400;
-      color: #000000;
-      font-size: 15px;
-      max-width: 115px;
-      border: 1px solid #cad5da;
-      border-radius: 5px;
-      background-color: #ffffff;
-      padding: 5px 16px;
+      font-family: $fontFamilyCalendarInput;
+      font-weight: $fontWeightCalendarInput;
+      color: $colorCalendarInput;
+      font-size: $fontSizeCalendarInput;
+      max-width: $maxWidthCalendarInput;
+      border: $borderCalendarInput;
+      border-radius: $borderRadiusCalendarInput;
+      background-color: $backgroundColorCalendarInput;
+      padding: $paddingCalendarInput;
 
       &::placeholder {
-        font-family: "Roboto", sans-serif;
-        font-weight: 400;
-        font-size: 15px;
-        color: #000000;
-        opacity: 0.3;
+        font-family: $fontFamilyCalendarInput;
+        font-weight: $fontWeightCalendarInput;
+        font-size: $fontSizeCalendarInput;
+        color: $colorCalendarInput;
+        opacity: $opacityCalendarInputPlaceholder;
       }
     }
   }
 
   .react-calendar {
-    width: 258px;
-    max-width: 100%;
-    background-color: #f4f7f8;
+    width: $widthCalendar;
 
     button {
       margin: 0;
@@ -58,160 +55,99 @@
       }
     }
 
-    &__navigation {
-      // height: 44px;
-      // margin-bottom: 1em;
+    .react-calendar__navigation {
 
       button {
-        min-width: 44px;
+        min-width: $minWidthCalendarNavigationButton;
         background: none;
-        font-family: "Roboto", sans-serif;
+        font-family: $fontFamilyCalendarNavigationButton;
         color: #2c2c2c;
         font-weight: 400;
 
         &:enabled {
           &:hover,
           &:focus {
-            color: #a2e9fa;
+            color: $colorCalendarNavigationButtonHover;
             cursor: pointer;
           }
         }
-
-        &[disabled] {
-          // background-color: rgb(240, 240, 240);
-        }
       }
-      &__label {
+      .react-calendar__navigation__label {
         font-size: 14px;
         padding: 25px 0;
       }
 
-      &__arrow {
-        font-size: 20px;
-        padding: 19px 0 24px 0;
+      .react-calendar__navigation__arrow {
+        font-size: $fontSizeCalendarNavigationLabel;
+        padding: $paddingCalendarNavigationLabel;
       }
 
-      &__next-button {
-        padding-left: 20px;
+      .react-calendar__navigation__next-button {
+        padding: $paddingCalendarNavigationNextButton;
       }
 
-      &__prev-button {
-        padding-right: 20px;
+      .react-calendar__navigation__prev-button {
+        padding-right: $paddingCalendarNavigationPrevButton;
       }
     }
 
     &__month-view {
       &__weekdays {
-        text-align: center;
-        text-transform: uppercase;
-        font-weight: 500;
-        font-size: 14px;
-        font-family: "Raleway", sans-serif;
-        color: #7b8180;
-        margin-bottom: 5px;
-
-        &__weekday {
-          // padding: 0.5em;
-        }
-      }
-
-      &__weekNumbers {
-        font-weight: bold;
-
-        .react-calendar__tile {
-          // display: flex;
-          // align-items: center;
-          // justify-content: center;
-          // font-size: 0.75em;
-          // padding: calc(0.75em / 0.75) calc(0.5em / 0.75);
-        }
+        text-align: $textAlignCalendarWeekDays;
+        text-transform: $textTransformCalendarWeekDays;
+        font-weight: $fontWeightCalendarWeekDays;
+        font-size: $fontSizeCalendarWeekDays;
+        font-family: $fontFamilyCalendarWeekDays;
+        color: $colorCalendarWeekDays;
+        margin-bottom: $marginCalendarWeekDays;
       }
 
       &__days {
         &__day {
-          font-family: "Roboto", sans-serif;
-          font-weight: 400;
-          font-size: 14px;
-          color: #7b8180;
-          &--weekend {
-            // color: red;
-          }
-
-          &--neighboringMonth {
-            color: rgb(150, 150, 150);
-          }
+          font-family: $fontFamilyCalendarDays;
+          font-weight: $fontWeightCalendarDays;
+          font-size: $fontSizeCalendarDays;
+          color: $colorCalendarDays;
         }
-      }
-    }
-
-    &__year-view,
-    &__decade-view,
-    &__century-view {
-      .react-calendar__tile {
-        padding: 2em 0.5em;
       }
     }
 
     &__tile {
-      max-width: 100%;
-      text-align: center;
-      padding: 0.75em 0.5em;
+      max-width: $maxWidthCalendarDays;
+      text-align: $textAlignCalendarDays;
+      padding: $paddingCalendarDays;
       background: none;
-
-      &:disabled {
-        // background-color: rgb(240, 240, 240);
-      }
 
       &:enabled {
         &:hover,
         &:focus {
-          background: linear-gradient(#03effe, #4facfe);
-          border-radius: 5px;
-          color: #ffffff;
-        }
-      }
-
-      &--hasActive {
-        $bgcolor: lighten(rgb(0, 110, 220), 30%);
-        background: $bgcolor;
-
-        &:enabled {
-          &:hover,
-          &:focus {
-            background: lighten($bgcolor, 10%);
-          }
+          background: $backgroundCalendarDayHover;
+          border-radius: $borderRadiusCalendarDayHover;
+          color: $colorCalendarDayHover;
         }
       }
 
       &--active {
-        $bgcolor: red;
-        background: #a2e9fa;
-        color: white;
-
-        &:enabled {
-          &:hover,
-          &:focus {
-            background: linear-gradient(#03effe, #4facfe);
-          }
-        }
+        background: $backgroundCalendarDayActive;
+        color: $colorCalendarDayActive;
       }
 
       &--rangeStart {
-        background: linear-gradient(#03effe, #4facfe);
-        border-radius: 5px;
+        background: $backgroundCalendarDayRangeStart;
+        border-radius: $borderRadiusCalendarDayRangeStart;
       }
 
       &--rangeEnd {
-        background: linear-gradient(#03effe, #4facfe);
-        border-radius: 5px;
+        background: $backgroundCalendarDayRangeEnd;
+        border-radius: $borderRadiusCalendarDayRangeEnd;
       }
     }
 
     &--selectRange {
       .react-calendar__tile {
         &--hover {
-          background-color: #a2e9fa;
-          color: #ffffff;
+          background-color: $backgroundCalendarDayActive;
+          color: $colorCalendarDayActive;
         }
       }
     }

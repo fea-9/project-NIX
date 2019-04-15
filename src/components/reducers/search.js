@@ -11,6 +11,11 @@ export default (state = initialState.search, { type, payload, error,}) => {
       case "SEARCH_FAIL": {
         return { ...initialState.search, error: true, isFetching: false, initial: false };
       }
+      case "SEARCH_SET": {
+        let searchNewData = JSON.parse(JSON.stringify(state.data))
+        searchNewData.data = payload
+        return { data: searchNewData, error: null, isFetching: false, initial: false };
+      }
       case "SEARCH_CLEAR":{
         return {...initialState.search}
       }

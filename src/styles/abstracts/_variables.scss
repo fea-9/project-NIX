@@ -12,11 +12,11 @@ $dark-black: #2c2c2c;
 
 $dark-green: #027478;
 
-// breakpoints
+// Breakpoints
 
 $firstBreakpoint: 768px;
 
-// sidebar
+// Sidebar
 
 $heightSidebar: 100vh;
 $widthtSidebar: 100vw;
@@ -32,7 +32,7 @@ $transitionSidebarDesktop: all 1s;
 
 $widthSidebarDesktopMinimized: 10rem;
 
-// Logo
+// Logo in Sidebar
 
 $fontFamilyLogo: "Raleway", sans-serif;
 $fontWeightLogo: 700;
@@ -50,7 +50,7 @@ $marginLogoSidebarMinimized: 0 0 6vh 0;
 $fontSizeLogoSidebarDesktop: 4rem;
 $fontSizeLogoSidebarDesktopMinimized: 6vh;
 
-// NavListItem
+// NavListItem in Sidebar
 
 $marginNavListItem: 0 0 1.5rem 0;
 
@@ -101,7 +101,7 @@ $widthNavListItemLinkProfileDesktopMinimized: 4.5rem;
 $paddingNavListItemDesktopMinimized: 1.5rem 0 1.5rem 0;
 $marginNavListItemDesktopMinimized: 0 0 6vh 0;
 
-// Social
+// Social in Sidebat
 
 $marginSocialList: 0 0 2rem 0;
 $paddingSocialList: 0 30vw 0;
@@ -113,7 +113,7 @@ $transitionSocialListDesktop: all 1s;
 
 $marginSocialListItemDesktopMinimized: 0 0 1rem 0;
 
-// PageTemplate
+// Main PageTemplate
 
 $widthPageTemplateWrapper: 100vw;
 $heightPageTemplateWrapper: 100vh;
@@ -185,3 +185,71 @@ $bottomRangePanelListLinkSelected: -20%;
 
 $widthRangePanelListMobile: 100vw;
 $borderRadiusRangePanelListMobile: 0;
+
+// Calendar in Range Panel
+
+$gradientActiveAndHoverDays: linear-gradient(#03effe, #4facfe);
+$backgroundRangeDays: #a2e9fa;
+
+$paddingCalendarWrapper: 3rem 3rem 2.5rem 3rem;
+$borderRadiusCalendarWrapper: 0.5rem;
+$backgroundColorCalendarWrapper: #f4f7f8;
+$borderCalendarWrapper: 1px solid #cad5da;
+$topRadiusCalendarWrapper: 100%;
+$rightRadiusCalendarWrapper: -10%;
+$zIndexCalendarWrapper: 999;
+
+$fontFamilyCalendarInput: "Roboto", sans-serif;
+$fontWeightCalendarInput: 400;
+$colorCalendarInput: #000000;
+$fontSizeCalendarInput: 1.5rem;
+$maxWidthCalendarInput: 11.5rem;
+$borderCalendarInput: 1px solid #cad5da;
+$borderRadiusCalendarInput: 0.5rem;
+$backgroundColorCalendarInput: #ffffff;
+$paddingCalendarInput: 0.5rem 1.6rem;
+
+$opacityCalendarInputPlaceholder: 0.3;
+
+$widthCalendar: 25.8rem;
+
+$minWidthCalendarNavigationButton: 4.4rem;
+$fontFamilyCalendarNavigationButton: "Roboto", sans-serif;
+$colorCalendarNavigationButton: #2c2c2c;
+$fontWeightCalendarNavigationButton: 400;
+
+$colorCalendarNavigationButtonHover: #a2e9fa;
+
+$fontSizeCalendarNavigationLabel: 2rem;
+$paddingCalendarNavigationLabel: 1.9rem 0 2.4rem 0;
+$paddingCalendarNavigationNextButton: 0 0 0 2rem;
+$paddingCalendarNavigationPrevButton: 0 2rem 0 0;
+
+$textAlignCalendarWeekDays: center;
+$textTransformCalendarWeekDays: uppercase;
+$fontWeightCalendarWeekDays: 500;
+$fontSizeCalendarWeekDays: 1.4rem;
+$fontFamilyCalendarWeekDays: "Raleway", sans-serif;
+$colorCalendarWeekDays: #7b8180;
+$marginCalendarWeekDays: 0 0 0.5rem 0;
+
+$fontFamilyCalendarDays: "Roboto", sans-serif;
+$fontWeightCalendarDays: 400;
+$fontSizeCalendarDays: 1.4rem;
+$colorCalendarDays: #7b8180;
+
+$maxWidthCalendarDays: 100%;
+$textAlignCalendarDays: center;
+$paddingCalendarDays: 0.75em 0.5em;
+
+$backgroundCalendarDayHover: $gradientActiveAndHoverDays;
+$borderRadiusCalendarDayHover: 0.5rem;
+$colorCalendarDayHover: #ffffff;
+
+$backgroundCalendarDayActive: $backgroundRangeDays;
+$colorCalendarDayActive: #ffffff;
+
+$backgroundCalendarDayRangeStart: $gradientActiveAndHoverDays;
+$borderRadiusCalendarDayRangeStart: 0.5rem;
+$backgroundCalendarDayRangeEnd: $gradientActiveAndHoverDays;
+$borderRadiusCalendarDayRangeEnd: 0.5rem;

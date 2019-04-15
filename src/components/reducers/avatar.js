@@ -7,7 +7,7 @@ export default (state = initialState.avatar, { type, payload }) => {
         return { ...state, src, scale };
     }
     case "AVATAR_RESET": {
-        return { ...state };
+        return { ...initialState.avatar };
     }
 
     default:
