@@ -1,4 +1,3 @@
-import {refreshTokens} from "./token";
 import apiWorker from "../../utils/apiWorker";
 
 export const transDocRequest = ( token ) => {

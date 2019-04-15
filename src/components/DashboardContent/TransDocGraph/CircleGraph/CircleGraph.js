@@ -160,7 +160,6 @@ export default class CircleGraph extends Component {
             fontSize={"0.3px"}
             style={{ transform: " rotate(90deg)" }}
             fill="#000"
-            className="sum-text"
           >
             {this.state.displayValue}
           </text>

@@ -1,4 +1,3 @@
-import {refreshTokens} from "./token";
 import apiWorker from "../../utils/apiWorker";
 
 export const setData =  data => ({type: "DOC_SET", payload: data})

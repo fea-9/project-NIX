@@ -7,7 +7,6 @@ import { HeaderTemplate } from "../Header/Header";
 import SearchList from '../Search/SearchList'
 import Spinner from "../Spinner/Spinner";
 import SearchInput from "../BaseComponents/Forms/SearchInput";
-import { Redirect } from 'react-router-dom'
 
 
 let mapStateToProps = state => ({

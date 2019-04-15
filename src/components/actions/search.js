@@ -1,4 +1,3 @@
-import {refreshTokens} from "./token";
 import apiWorker from "../../utils/apiWorker";
 
 export const setSearchData =  data => ({type: "SEARCH_SET", payload: data})
