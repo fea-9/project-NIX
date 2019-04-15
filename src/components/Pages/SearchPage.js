@@ -7,6 +7,7 @@ import { HeaderTemplate } from "../Header/Header";
 import SearchList from '../Search/SearchList'
 import Spinner from "../Spinner/Spinner";
 import SearchInput from "../BaseComponents/Forms/SearchInput";
+import {Copyright} from "../Copyright/Copyright";
 
 
 let mapStateToProps = state => ({
@@ -63,6 +64,9 @@ class SearchPage extends Component {
                   <div className="search-box" >
                       <SearchInput inputValue={this.changeInput()} /> 
                       <p className="search-box-input-fail">Nothing was found :(</p>
+                        <div className="search-box_copyright-wrapper">
+                          <Copyright searchClass={true}/>
+                        </div>
                   </div>
                   :
                   ( 
@@ -71,6 +75,9 @@ class SearchPage extends Component {
                   :
                   <div className = "search-box">
                     <SearchInput inputValue={this.changeInput()}/>
+                    <div className="search-box_copyright-wrapper">
+                    <Copyright searchClass={true}/>
+                    </div>
                   </div>
         }
       />
