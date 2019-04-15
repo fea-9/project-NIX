@@ -17,8 +17,20 @@ class BubbleChart extends Component {
 
     render() {
         const {data} = this.props
-        const dataToSHow = data.map(item => {return ({...item, v: item.count})})
-                                .filter(item => item.count > 100)
+        function unique(arr) {
+            var obj = {};
+          
+            for (var i of arr) {
+              var str = i.key;
+              obj[str] = JSON.parse(JSON.stringify({...i, v: i.count ? i.count : 0})); 
+            }
+          
+            return Object.keys(obj).reduce((prev, elem) => ([ ...prev, obj[elem] ]), []); 
+        }
+        const dataToSHow = unique(data).filter(item => item.count > 100)
+        
+        // const dataToSHow = data.map(item => {return ({...item, v: item.count ? item.count : 0})})
+        //                         .filter(item => item.count > 100)
         return (
             <div className = "chart-box" >
                 <h3 className = "chart-title" >

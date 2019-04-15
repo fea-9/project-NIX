@@ -3,21 +3,25 @@ import PropTypes from 'prop-types';
 
 import * as d3 from "d3";
 
-class BubbleChart extends Component {
+class BubbleChartView extends Component {
     
     minValue = 1;
     maxValue = 100;
     mounted = false;
     
     state = {
-        data: [],
+        data: []
         // width: 0,
         // height: 0
     };    
    
-    // componentDidUpdate() {//ловим пропсы с сайдбара, если изменились то resize.
+    // componentDidUpdate(prevProps, prevState) {//ловим пропсы с сайдбара, если изменились то resize.
     //     this.setSizes();
+    //     if (prevState.width !== this.state.width ||
+    //         prevState.height !== this.state.height)
+    //         this.simulatePositions(this.props.data)
     // }
+
     // componentWillUnmount(){
     //     window.removeEventListener("resize", this.setSizes)
     // }
@@ -42,6 +46,7 @@ class BubbleChart extends Component {
     componentDidMount() {
         // this.setSizes();
         // window.addEventListener("resize", this.setSizes)
+        this.mounted = true;
         if (this.props.data.length > 0) {
 
             this.minValue =
@@ -60,11 +65,14 @@ class BubbleChart extends Component {
         }
     }
 
-    
+    componentWillUnmount() {
+        this.mounted = false;
+    }
 
     radiusScale = value => {      
         const fx = d3
             .scaleSqrt()
+            // .range([1, (3200*this.state.width/this.maxValue)])
             .range([1, 90])
             .domain([this.minValue, this.maxValue]);
         return fx(value);
@@ -87,9 +95,8 @@ class BubbleChart extends Component {
                 .iterations(1)
             ) 
             .on("tick", () => {
-                
-                    this.setState({ data });
-                
+                if (this.mounted)
+                    this.setState({ data });                
             })
     };
 
@@ -102,10 +109,9 @@ class BubbleChart extends Component {
 
     renderBubbles = data => {
         const {width, height} = this.props
-
+        // const {width, height} = this.state
         const color = "#5CE5DD";
 
-        // render circle and text elements inside a group
         const texts = data.map((item, index) => {
             const fontSize = this.radiusScale(item.v)/3;
             const textLines = item.key.length > 10 && item.key.search(/\s/g) < 0 ? 
@@ -164,6 +170,7 @@ class BubbleChart extends Component {
     render() { 
         const {data} = this.state
         const { width, height} = this.props
+        // const { width, height} = this.state
         
         if (data.length) {
             return (
@@ -190,18 +197,20 @@ class BubbleChart extends Component {
     }
 }
 
-BubbleChart.propTypes = {
+BubbleChartView.propTypes = {
     data: PropTypes.arrayOf(PropTypes.object),
     width: PropTypes.number,
     height: PropTypes.number,
     setCurrent: PropTypes.func
 }
 
-BubbleChart.defaultProps = {
+BubbleChartView.defaultProps = {
     data: [],
     width: 325,
     height: 385,
     setCurrent: () => {console.log("SetCurrent isn't set")}
 };
 
-export default BubbleChart
+
+
+export default BubbleChartView;
