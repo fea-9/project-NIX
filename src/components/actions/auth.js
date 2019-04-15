@@ -78,8 +78,7 @@ export function jsonPost(url, data)
             if (x.readyState === XMLHttpRequest.DONE && x.status === 200){
                 resolve(JSON.parse(x.responseText))
             }
-            else if (x.readyState === XMLHttpRequest.DONE && x.status !== 200){                
-                // console.log(x.responseText)
+            else if (x.readyState === XMLHttpRequest.DONE && x.status !== 200){
                 reject(JSON.parse(x.responseText))
             }
         }
@@ -95,14 +94,14 @@ export function auth ( userData, endpoint ) {
             ) 
             payload.access_token && localStorage.setItem("access_token", payload.access_token)
             payload.expires_in && localStorage.setItem("expires_in", payload.expires_in) 
-            payload.Item && localStorage.setItem("refresh_token", payload.Item.refresh_token)           
-            // console.log("auth success", payload)
+            payload.Item && localStorage.setItem("refresh_token", payload.Item.refresh_token)    
+
             dispatch (authRequestSuccess({                
                 payload}))
         }
 
         catch(error){
-            // console.log("error",error)            
+                       
             dispatch (authRequestFail({                
                 error
             }))

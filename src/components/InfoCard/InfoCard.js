@@ -36,7 +36,7 @@ InfoCard.propTypes = {
   advanced: PropTypes.bool,
   color: PropTypes.string,
   num: PropTypes.number,
-  icon: PropTypes.func,
+  icon: PropTypes.object,
   dop: PropTypes.array,
   mobile: PropTypes.bool
 }

@@ -92,7 +92,6 @@ class DocumentsTable extends Component {
     let s = this.state;
     let p = this.props;
     let mob = p.mobile ? "-mobile" : ""
-    console.log("MOBILE", mob)
     if (p.documents.initial || p.documents.isFetching)
       return <Spinner procent={true} />;
     if (p.documents.error) return <Error />;

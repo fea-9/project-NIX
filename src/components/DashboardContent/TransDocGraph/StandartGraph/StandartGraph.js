@@ -33,9 +33,8 @@ export default class StandartGraph extends Component {
     const gap = (p.width * 0.3) / p.data.length;
     const maxVal = Math.max(...p.data.map(el => el[p.valueKey]));
     const numRank = maxVal.toString().substr(1).length;
-    const stepInd = +("5" + "e" + (numRank-1));
+    const stepInd = +("5e" + (numRank-1));
     const maxInd = Math.ceil(maxVal / stepInd) * stepInd;
-    console.log(stepInd, maxInd, maxVal, numRank)
 
     const indent = (() => {
       let result = 25;
