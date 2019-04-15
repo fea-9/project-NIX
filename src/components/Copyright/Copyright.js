@@ -1,10 +1,12 @@
 import React from "react";
 
-export const Copyright = () => {
+export const Copyright = props => {
   const year = new Date().getFullYear();
 
+  const { searchClass } = props;
+
   return (
-    <div className="copyright">
+    <div className={searchClass ? "copyright copyright_serach" : "copyright"}>
       Copyright &copy; {year}.&nbsp;
       <a className="copyright__link" href="http://www.google.com.ua">
         Cookie Preferences
