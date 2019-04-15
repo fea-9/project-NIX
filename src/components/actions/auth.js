@@ -1,6 +1,23 @@
-// import axios from "axios";
-import store from "../store"
+import apiWorker from "../../utils/apiWorker";
 
+export const updateUserRequest = (token, id, data )=> {
+    return apiWorker(
+        {
+            typeRequest: "AUTH_UPDATE_REQUEST",
+            typeSuccess: "AUTH_UPDATE_REQUEST_SUCCESS",
+            typeFail: "AUTH_UPDATE_REQUEST_FAIL"
+        },
+        {
+            url: `users/object/${id}/update`,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            },
+            method: "post",
+            data: data
+        }
+    )   
+} 
 
 export const authRequest = () => ({
     type: "AUTH_REQUEST",
