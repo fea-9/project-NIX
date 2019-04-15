@@ -3,17 +3,15 @@ import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import Spinner from "../Spinner/Spinner";
+import { Loading } from "../HOC/Loading";
 
 const PrivateRoute = ({ component: Component, user, isFetching, ...rest }) => {
   return (
     <Route
       {...rest}
       render={props => {
-        return isFetching ? (
-          <Spinner />
-        ) : user ? (
-          <Component {...props} />
+        return isFetching || user ? (
+          <Loading flag={isFetching} children={<Component {...props} />} />
         ) : (
           <Redirect to="/auth/signin" />
         );
