@@ -69,7 +69,7 @@ class ProfileForm extends Component{
             }           
         },        
         publicity: {
-            checked: true, // from props
+            checked: this.props.publicity, 
             config: {
                 type: "checkbox",
                 label: "Public Profile",
@@ -79,7 +79,7 @@ class ProfileForm extends Component{
             }          
         },        
         description: {            
-            value: "I am open to connecting and meeting new potential collaborators.", // from props
+            value: this.props.description, 
             config: {
                 type: "textarea",
                 label: "description",
@@ -103,7 +103,7 @@ class ProfileForm extends Component{
             }
         },
         researchAreaTags: {
-            tags: ["biology", "chemistry", "biochemistry"] // from props
+            tags: this.props.researchAreaTags 
         }        
     }
 
@@ -214,15 +214,14 @@ class ProfileForm extends Component{
 
     submit = e => {
         e.preventDefault(); 
-        const {auth, id} = this.props
+        const {updateUserRequest, id} = this.props
         const {email, firstName, lastName} = this.state.withValidation
         const values = {
             email: email.value,             
             fullName: `${firstName.value.trim()} ${lastName.value.trim()}`
         };
         if (this.formIsValid()){
-            // this.props.updateUserRequest(localStorage.getItem("refresh_token"), id, values)
-            auth (values, `users/object/${id}/update`);
+            updateUserRequest(localStorage.getItem("access_token"), id, values)
         }        
     }
 
@@ -405,11 +404,14 @@ class ProfileForm extends Component{
 }
 
 ProfileForm.propTypes = {
+    publicity: PropTypes.bool,
+    description: PropTypes.string,
+    researchAreaTags: PropTypes.arrayOf(PropTypes.string),
     user: PropTypes.object,
     id: PropTypes.string,
     isFetching: PropTypes.bool,
     authErrorMessage: PropTypes.string,
-    auth: PropTypes.func,
+    updateUserRequest: PropTypes.func,
     src: PropTypes.string,
     scale: PropTypes.number,
     saveAvatar: PropTypes.func,
@@ -417,6 +419,9 @@ ProfileForm.propTypes = {
 }
 
 ProfileForm.defaultProps = {
+    publicity: true, // mock
+    description: "I am open to connecting and meeting new potential collaborators.", // mock
+    researchAreaTags: ["biology", "chemistry", "biochemistry"], // mock
     user: {
         created_at: 1553715252982,
         refresh_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2EyMzU5MmItYjVkMi00MTQ1LThmNjMtMzFjODQyZjlhMDM2IiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20uY29tIiwicm9sZUlkIjoxfSwiaWF0IjoxNTU0ODAxNDU0LCJleHAiOjE1NTczOTM0NTR9.qTsOGV7xi1iDvVHegcMvaJKV2EFXCG0l8AT3AKnhcT0",
@@ -428,7 +433,7 @@ ProfileForm.defaultProps = {
     id: "ca23592b-b5d2-4145-8f63-31c842f9a036",
     isFetching: false,
     authErrorMessage: null,
-    auth: () => {console.log(`Auth submit ...`)},
+    updateUserRequest: () => {console.log(`Auth submit ...`)},
     src: "http://www.blackdesertbase.com/img/users/avatars/70.png",
     scale: 1,
     saveAvatar: () => {console.log("SaveAvatar isn't set")},

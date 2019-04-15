@@ -4,10 +4,7 @@ export default (state = initialState.auth, { type, payload, error }) => {
   switch (type) {
     case "AUTH_REQUEST": {
       return { ...state, isFetching: true };
-    }
-    case "AUTH_UPDATE_REQUEST": {
-      return { ...state, isFetching: true };
-    }
+    }    
     case "AUTH_REQUEST_SUCCESS": {
       const { Item, message } = payload;
       return { ...state, error: false, user: Item, message, isFetching: false };
@@ -18,6 +15,18 @@ export default (state = initialState.auth, { type, payload, error }) => {
     }
     case "AUTH_RESET": {
       return { ...initialState.auth, isFetching: false };
+    }    
+
+    case "AUTH_UPDATE_REQUEST": {
+      return { ...state, isFetching: true };
+    }
+    case "AUTH_UPDATE_REQUEST_SUCCESS": {
+      const { data, message } = payload;
+      return { ...state, error: false, user: data, message, isFetching: false };
+    }
+    case "AUTH_UPDATE_REQUEST_FAIL": {
+      const { message } = error;
+      return { ...state, error: true, message, isFetching: false };
     }
 
     case "TOKEN_REFRESH_REQUEST": {

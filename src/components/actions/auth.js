@@ -1,13 +1,11 @@
-import {refreshTokens} from "./token";
 import apiWorker from "../../utils/apiWorker";
 
-export const updateUserRequest = ( token, id, data ) => {
-    // refreshTokens(token)
+export const updateUserRequest = (token, id, data )=> {
     return apiWorker(
         {
             typeRequest: "AUTH_UPDATE_REQUEST",
-            typeSuccess: "AUTH_REQUEST_SUCCESS",
-            typeFail: "AUTH_REQUEST_FAIL"
+            typeSuccess: "AUTH_UPDATE_REQUEST_SUCCESS",
+            typeFail: "AUTH_UPDATE_REQUEST_FAIL"
         },
         {
             url: `users/object/${id}/update`,
@@ -18,7 +16,7 @@ export const updateUserRequest = ( token, id, data ) => {
             method: "post",
             data: data
         }
-    )
+    )   
 } 
 
 export const authRequest = () => ({
