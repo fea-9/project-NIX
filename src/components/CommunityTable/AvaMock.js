@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-export default ({text, width=78, height = 78} ) => {
+export default ({text, width=78, height = 78, className} ) => {
     const getRand = () => {
         let num =Math.round(Math.random()*255)
         let upNum = num.toString(16)
@@ -12,8 +12,9 @@ export default ({text, width=78, height = 78} ) => {
                     .reduce( (prev, el ) => prev += el[0].toUpperCase() ,"")
     return (
         <div 
+            className={className}
             style={
-                { 
+                {   
                     width: `${width}px`, 
                     height: `${height}px`, 
                     borderRadius: "50%",

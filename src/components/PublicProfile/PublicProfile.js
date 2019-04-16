@@ -6,6 +6,8 @@ import getFullMonthDate from "../../utils/getFullMonthDate";
 import Error from "../Error/Error";
 import Icon from "../BaseComponents/icon/index";
 import { Scrollbars } from "react-custom-scrollbars";
+import AvaMock from "../CommunityTable/AvaMock";
+import SwitchImage from "../SwitchImage/SwitchImage";
 
 let mapStateToProps = state => ({
   publicProfile: state.publicProfile,
@@ -150,7 +152,7 @@ class PublicProfile extends Component {
     let p = this.props;
     if (p.publicProfile.initial || p.publicProfile.isFetching)
       return <Spinner procent={true} />;
-    if (p.publicProfile.error) return <Error />;
+    if (p.publicProfile.error) return <Error title="ERROR 404" description="User not found"/>;
     const textView = str =>
       str
         .split("")
@@ -165,7 +167,10 @@ class PublicProfile extends Component {
       <div className="pub-us-main">
         <div className="pub-us-head">
           <div className={`pub-us-layout${mobile}`}>
-            <img src={data.logoUrl} alt="*" />
+            <SwitchImage src={data.logoUrl} 
+                         className={`pub-ava${mobile}`} 
+                         alt={<AvaMock text={data.name} className={`pub-ava${mobile}`} width="12rem" height="12rem"/>}/>
+            {/* <img src={data.logoUrl} alt="*" /> */}
             <div className={`pub-us-title${mobile}`}>
               <h3>{data.name}</h3>
               <p>Member since {getFullMonthDate(data.createdDate)}</p>
