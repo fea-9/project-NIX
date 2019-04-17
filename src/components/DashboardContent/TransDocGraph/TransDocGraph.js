@@ -53,14 +53,16 @@ class TransDocGraph extends Component {
       <div className="tr-doc-graph">
         <div className={`graph-panel${classMob}`}>
           <h3>TRANSACTED PROJECTS AND DOCUMENTS</h3>
-          <ButtonGroup>
-            <Button onClick={this.toggleView(false)} active={!s.view}>
-              POA
-            </Button>
-            <Button onClick={this.toggleView(true)} active={s.view}>
-              POE
-            </Button>
-          </ButtonGroup>
+          <div className="fix-btn-group">
+            <ButtonGroup>
+              <Button onClick={this.toggleView(false)} active={!s.view}>
+                POA
+              </Button>
+              <Button onClick={this.toggleView(true)} active={s.view}>
+                POE
+              </Button>
+            </ButtonGroup>
+          </div>
         </div>
         <div className={`graph-view${classMob}`} ref={el => (this.container = el)}>
           {s.view ? (
@@ -80,7 +82,8 @@ class TransDocGraph extends Component {
               height={
                 p.mobile
                   ? s.height > s.width ? s.width
-                  : s.height * 5 : s.height * 0.6
+                  : s.height * 5 : p.minimized ? 
+                  s.height * 0.7 : s.width * 0.7
               }
               mobile={p.mobile}
             />

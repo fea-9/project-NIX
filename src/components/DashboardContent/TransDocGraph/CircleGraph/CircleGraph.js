@@ -109,7 +109,7 @@ export default class CircleGraph extends Component {
                     <span className={"line__num"}>{el[valueKey]}</span>
                   </div>
                 );
-              })}
+              })} 
             </CustomScrollbars>
           </div>
         </div>
@@ -157,7 +157,7 @@ export default class CircleGraph extends Component {
             x={0}
             y={0 + 0.1}
             textAnchor="middle"
-            fontSize={"0.3px"}
+            fontSize={"2%"}
             style={{ transform: " rotate(90deg)" }}
             fill="#000"
           >

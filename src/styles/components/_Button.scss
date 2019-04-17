@@ -65,6 +65,7 @@
 
 .btn-group {
   display: inline-block;
+  flex-wrap: nowrap;
 
   .btn{
     color: #7B8180;
@@ -85,6 +86,7 @@
   border: 1px solid #CAD5DA;
   padding: 0.1rem 1.5rem;
   border-right: 0; 
+  
 }
 
 .btn-group > .btn:last-child {
@@ -92,6 +94,7 @@
   border: 1px solid #CAD5DA;
   padding: 0.1rem 1.5rem;
   border-left: 0; 
+
 }
 
 .logout-btn {
