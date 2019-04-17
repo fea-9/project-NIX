@@ -1,21 +1,51 @@
-import apiWorker from "../../utils/apiWorker";
+import * as request from "../../axiosConfig";
 
-export const setData =  data => ({type: "DOC_SET", payload: data})
+const documentsRequest = () => ({
+  type: "DOC_REQUEST",
+  status: "PENDING",
+  payload: null,
+  error: null
+});
 
-export const documentsRequest = (token) => {
-    return apiWorker(
-        {
-            typeRequest: "DOC_PENDING",
-            typeSuccess: "DOC_SUCCSESS",
-            typeFail: "DOC_FAIL"
-        },
-        {
-            url: "/documents",
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            },
-            method: "get"
-        }
-    )
-} 
+const documentsRequestSuccess = action => {
+  const { payload } = action;
+  return {
+    type: "DOC_REQUEST_SUCCSESS",
+    status: "RESOLVED",
+    payload,
+    error: null
+  };
+};
+
+const documentsRequestFail = action => {
+  const { error } = action;
+  return {
+    type: "DOC_REQUEST_FAIL",
+    status: "REJECTED",
+    payload: null,
+    error
+  };
+};
+
+export const setData = payload => ({ type: "DOC_SET", payload });
+
+export function getDocuments() {
+  return async function(dispatch) {
+    dispatch(documentsRequest());
+    try {
+      let payload = await request.getDocuments();
+
+      dispatch(
+        documentsRequestSuccess({
+          payload
+        })
+      );
+    } catch (error) {
+      dispatch(
+        documentsRequestFail({
+          error
+        })
+      );
+    }
+  };
+}

@@ -1,19 +1,49 @@
-import apiWorker from "../../utils/apiWorker";
+import * as request from "../../axiosConfig";
 
-export const communityRequest = ( token ) => {
-    return apiWorker(
-        {
-            typeRequest: "COMMUN_PENDING",
-            typeSuccess: "COMMUN_SUCCSESS",
-            typeFail: "COMMUN_FAIL"
-        },
-        {
-            url: "/community",
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            },
-            method: "get"
-        }
-    )
-} 
+const communityRequest = () => ({
+  type: "COMMUNITY_REQUEST",
+  status: "PENDING",
+  payload: null,
+  error: null
+});
+
+const communityRequestSuccess = action => {
+  const { payload } = action;
+  return {
+    type: "COMMUNITY_REQUEST_SUCCSESS",
+    status: "RESOLVED",
+    payload,
+    error: null
+  };
+};
+
+const communityRequestFail = action => {
+  const { error } = action;
+  return {
+    type: "COMMUNITY_REQUEST_FAIL",
+    status: "REJECTED",
+    payload: null,
+    error
+  };
+};
+
+export function getCommunity() {
+  return async function(dispatch) {
+    dispatch(communityRequest());
+    try {
+      let payload = await request.getCommunity();
+
+      dispatch(
+        communityRequestSuccess({
+          payload
+        })
+      );
+    } catch (error) {
+      dispatch(
+        communityRequestFail({
+          error
+        })
+      );
+    }
+  };
+}

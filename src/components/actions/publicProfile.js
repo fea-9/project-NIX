@@ -1,20 +1,49 @@
-import apiWorker from "../../utils/apiWorker";
+import * as request from "../../axiosConfig";
 
+const publicProfileRequest = () => ({
+  type: "PUBLIC_PROFILE_REQUEST",
+  status: "PENDING",
+  payload: null,
+  error: null
+});
 
-export const publicProfileRequest = (url, token) => {
-    return apiWorker(
-        {
-            typeRequest: "PUBLIC_PROFILE_PENDING",
-            typeSuccess: "PUBLIC_PROFILE_SUCCSESS",
-            typeFail: "PUBLIC_PROFILE_FAIL"
-        },
-        {
-            url: url,
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            },
-            method: "get"
-        }
-    )
-} 
+const publicProfileRequestSuccess = action => {
+  const { payload } = action;
+  return {
+    type: "PUBLIC_PROFILE_REQUEST_SUCCSESS",
+    status: "RESOLVED",
+    payload,
+    error: null
+  };
+};
+
+const publicProfileRequestFail = action => {
+  const { error } = action;
+  return {
+    type: "PUBLIC_PROFILE_REQUEST_FAIL",
+    status: "REJECTED",
+    payload: null,
+    error
+  };
+};
+
+export function getPublicProfile(id) {
+  return async function(dispatch) {
+    dispatch(publicProfileRequest());
+    try {
+      let payload = await request.getCommunityMember(id);
+
+      dispatch(
+        publicProfileRequestSuccess({
+          payload
+        })
+      );
+    } catch (error) {
+      dispatch(
+        publicProfileRequestFail({
+          error
+        })
+      );
+    }
+  };
+}

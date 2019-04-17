@@ -1,112 +1,123 @@
-import apiWorker from "../../utils/apiWorker";
+import * as request from "../../axiosConfig";
 
-export const updateUserRequest = (token, id, data )=> {
-    return apiWorker(
-        {
-            typeRequest: "AUTH_UPDATE_REQUEST",
-            typeSuccess: "AUTH_UPDATE_REQUEST_SUCCESS",
-            typeFail: "AUTH_UPDATE_REQUEST_FAIL"
-        },
-        {
-            url: `users/object/${id}/update`,
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            },
-            method: "post",
-            data: data
-        }
-    )   
-} 
+const authUpdateRequest = () => ({
+  type: "AUTH_UPDATE_REQUEST",
+  status: "PENDING",
+  payload: null,
+  error: null
+});
 
-export const authRequest = () => ({
-    type: "AUTH_REQUEST",
-    status: "PENDING",
+const authUpdateRequestSuccess = action => {
+  const { payload } = action;
+  return {
+    type: "AUTH_UPDATE_REQUEST_SUCCESS",
+    status: "RESOLVED",
+    payload,
+    error: null
+  };
+};
+
+const authUpdateRequestFail = action => {
+  const { error } = action;
+  return {
+    type: "AUTH_UPDATE_REQUEST_FAIL",
+    status: "REJECTED",
+    payload: null,
+    error
+  };
+};
+
+const authRequest = () => ({
+  type: "AUTH_REQUEST",
+  status: "PENDING",
+  payload: null,
+  error: null
+});
+
+const authRequestSuccess = action => {
+  const { payload } = action;
+  return {
+    type: "AUTH_REQUEST_SUCCESS",
+    status: "RESOLVED",
+    payload,
+    error: null
+  };
+};
+
+const authRequestFail = action => {
+  const { error } = action;
+  return {
+    type: "AUTH_REQUEST_FAIL",
+    status: "REJECTED",
+    payload: null,
+    error
+  };
+};
+
+function resetAuth() {
+  return {
+    type: "AUTH_RESET",
+    status: "REJECTED",
     payload: null,
     error: null
-})
-
-export const authRequestSuccess = (action) => {
-    const { payload} = action
-    return ({
-        type: "AUTH_REQUEST_SUCCESS",
-        status: "RESOLVED",
-        payload,
-        error: null
-    }
-)}
-
-export const authRequestFail = (action) => {
-    const { error} = action
-    return ({
-        type: "AUTH_REQUEST_FAIL",
-        status: "REJECTED",
-        payload: null,
-        error
-    }
-)}
-
-export function resetAuth (){    
-    return ({
-        type: "AUTH_RESET",
-        status: "REJECTED",
-        payload: null,
-        error: null
-    }
-)}
-
-export function authLogout () {
-    return function (dispatch){
-        localStorage.setItem("access_token", "")
-        localStorage.setItem("expires_in", "")
-        localStorage.setItem("refresh_token", "") 
-        dispatch(resetAuth())
-    }
-    
+  };
 }
 
-export function jsonPost(url, data)
-  {
-    return new Promise((resolve, reject) => {
-        var x = new XMLHttpRequest();   
-        x.onerror = () => reject({message: 'Request failed'})        
-        x.open("POST", url, true);
-        x.setRequestHeader('Content-Type', 'application/json');
-        x.send(JSON.stringify(data))
-
-        x.onreadystatechange = () => {
-            if (x.readyState === XMLHttpRequest.DONE && x.status === 200){
-                resolve(JSON.parse(x.responseText))
-            }
-            else if (x.readyState === XMLHttpRequest.DONE && x.status !== 200){
-                reject(JSON.parse(x.responseText))
-            }
-        }
-    })
+export function authLogout() {
+  return function(dispatch) {
+    localStorage.setItem("access_token", "");
+    localStorage.setItem("refresh_token", "");
+    dispatch(resetAuth());
+  };
 }
-export function auth ( userData, endpoint ) {
-    return async function (dispatch){
-        dispatch (authRequest())
-        try {            
-            let payload = await jsonPost(
-                `https://0uumsbtgfd.execute-api.eu-central-1.amazonaws.com/Development/v0/auth/${endpoint}`,                
-                   userData                 
-            ) 
-            payload.access_token && localStorage.setItem("access_token", payload.access_token)
-            payload.expires_in && localStorage.setItem("expires_in", payload.expires_in) 
-            payload.Item && localStorage.setItem("refresh_token", payload.Item.refresh_token)    
 
-            dispatch (authRequestSuccess({                
-                payload}))
-        }
+export function updateUserRequest(id, data) {
+  return async function(dispatch) {
+    dispatch(authUpdateRequest());
+    try {
+      let payload = await request.updateUser(id, data);
 
-        catch(error){
-                       
-            dispatch (authRequestFail({                
-                error
-            }))
-        }
+      dispatch(
+        authUpdateRequestSuccess({
+          payload
+        })
+      );
+    } catch (error) {
+      dispatch(
+        authUpdateRequestFail({
+          error
+        })
+      );
     }
+  };
 }
 
+export function auth(data, typeRequest) {
+  return async function(dispatch) {
+    dispatch(authRequest());
+    try {
+      let payload =
+        typeRequest === "signin"
+          ? await request.signIn(data)
+          : typeRequest === "signup"
+          ? await request.signUp(data)
+          : null;
+      payload.access_token &&
+        localStorage.setItem("access_token", payload.access_token);
+      payload.Item &&
+        localStorage.setItem("refresh_token", payload.Item.refresh_token);
 
+      dispatch(
+        authRequestSuccess({
+          payload
+        })
+      );
+    } catch (error) {
+      dispatch(
+        authRequestFail({
+          error
+        })
+      );
+    }
+  };
+}

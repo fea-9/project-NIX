@@ -1,20 +1,14 @@
-import { jsonPost, authLogout } from "./auth";
+import { authLogout } from "./auth";
+import * as request from "../../axiosConfig";
 
-export function isAccessTokenValid() {
-  const accessTokenExpDate = localStorage.getItem("expires_in") - 1;
-  const nowTime = Math.floor(new Date().getTime() / 1000);
-
-  return accessTokenExpDate <= nowTime;
-}
-
-export const tokenRefreshRequest = () => ({
+const tokenRefreshRequest = () => ({
   type: "TOKEN_REFRESH_REQUEST",
   status: "PENDING",
   payload: null,
   error: null
 });
 
-export const tokenRefreshRequestSuccess = action => {
+const tokenRefreshRequestSuccess = action => {
   const { payload } = action;
   return {
     type: "TOKEN_REFRESH_REQUEST_SUCCESS",
@@ -24,7 +18,7 @@ export const tokenRefreshRequestSuccess = action => {
   };
 };
 
-export const tokenRefreshRequestFail = action => {
+const tokenRefreshRequestFail = action => {
   const { error } = action;
   return {
     type: "TOKEN_REFRESH_REQUEST_FAIL",
@@ -34,18 +28,13 @@ export const tokenRefreshRequestFail = action => {
   };
 };
 
-export function refreshTokens(refreshToken) {
+export function refreshTokens() {
   return async function(dispatch) {
     dispatch(tokenRefreshRequest());
     try {
-      let payload = await jsonPost(
-        `https://0uumsbtgfd.execute-api.eu-central-1.amazonaws.com/Development/v0/auth/refresh`,
-        refreshToken
-      );
+      let payload = await request.refreshToken();
       payload.access_token &&
         localStorage.setItem("access_token", payload.access_token);
-      payload.expires_in &&
-        localStorage.setItem("expires_in", payload.expires_in); //нужно убрать , как по мне (Silent)
       payload.Item &&
         localStorage.setItem("refresh_token", payload.Item.refresh_token);
       dispatch(
