@@ -121,8 +121,8 @@ const instanceInterseptorsResponse = instance.interceptors.response.use(
 
 instance.interceptors.request.use(
   config => {
-    // const token = localStorage.getItem("access_token");
-    const token = null
+    const token = localStorage.getItem("access_token");
+    // const token = null
     if (token) {
       return {
         ...config,
