@@ -21,8 +21,8 @@ export default (state = initialState.auth, { type, payload, error }) => {
       return { ...state, isFetching: true };
     }
     case "AUTH_UPDATE_REQUEST_SUCCESS": {
-      const { data, message } = payload;
-      return { ...state, error: false, user: data, message, isFetching: false };
+      const { message } = payload;
+      return { ...state, error: false, user: payload, message, isFetching: false };
     }
     case "AUTH_UPDATE_REQUEST_FAIL": {
       const { message } = error;
