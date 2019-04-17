@@ -7,7 +7,7 @@
   flex-direction: column;
 }
 .graph-panel h3, .graph-panel-mobile h3 {
-  font-size: 2rem;
+  font-size: calc(1vw + 1vh);
   font-weight: 600;
 }
 .graph-view, .graph-view-mobile {
@@ -20,4 +20,15 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
+}
+.fix-btn-group {
+  min-width: 12rem;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+@media  (min-width: 778px) and (max-width: 1024px) {
+  .fix-btn-group {
+    min-width: 0;
+  }
 }

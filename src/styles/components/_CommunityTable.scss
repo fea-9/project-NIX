@@ -33,7 +33,7 @@
   justify-content: space-around;
   box-shadow: 0  0 40px #cad5da;
   margin: 20px 5%;
-
+  flex-wrap: wrap;
   &__ava {
     width: 78px;
     height: 78px;
@@ -61,23 +61,29 @@
       margin-left: 10px;
     }
   }
+  &__bottom {
+    display: block;
+    // flex-wrap: nowrap;
+    padding: 2%;
+  }
   &__block, &__middle-block {
     width: 18%;
     display: flex;
     align-items: center;
+    min-width: 20rem;
     &__num {
-      width: 25%;
       color: #2c2c2c;
       text-align: left;
-      font-size: 30px;
+      font-size: calc(1.2vw + 1.2vh);
       font-family: 'Roboto', sans-serif;
       font-weight: bold;
     }
     &__text {
       width: 75%;
-      font-size: 16px;
+      font-size: calc(0.65vw + 0.65vh);
       font-weight: 500;
       font-family: 'Raleway', sans-serif;
+      margin-left: 4%;
     }
   }
 }
