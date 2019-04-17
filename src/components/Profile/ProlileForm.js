@@ -221,7 +221,7 @@ class ProfileForm extends Component{
             fullName: `${firstName.value.trim()} ${lastName.value.trim()}`
         };
         if (this.formIsValid()){
-            updateUserRequest(localStorage.getItem("access_token"), id, values)
+            updateUserRequest(id, values)
         }        
     }
 

@@ -18,9 +18,8 @@ let mapStateToProps = state => ({
 class SearchPage extends Component {
 
   componentDidMount() {
-    let token = localStorage.getItem("access_token");
-    const { location, searchRequest } = this.props
-    location.search && searchRequest({ request: location.search.substr(1) }, token);
+    const { location, getSearch } = this.props
+    location.search && getSearch( location.search.substr(1) );
     
   }
 
@@ -40,7 +39,7 @@ class SearchPage extends Component {
           p.search.data === null ? (
             <HeaderTemplate title="Search" />)
           :
-          p.search.data.data.length === 0 ? 
+          p.search.data.length === 0 ? 
             <HeaderTemplate title="Search"/>
           :
             <HeaderTemplate component={
@@ -59,7 +58,7 @@ class SearchPage extends Component {
               <h1>ERROR</h1>
             ) 
             : 
-            p.search.data.data.length === 0 && this.props.location.search
+            p.search.data.length === 0 && this.props.location.search
             ?     
                   <div className="search-box" >
                       <SearchInput inputValue={this.changeInput()} /> 

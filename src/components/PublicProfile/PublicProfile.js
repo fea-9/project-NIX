@@ -145,8 +145,8 @@ const CitiedCard = ({data}) => {
 
 class PublicProfile extends Component {
   componentDidMount() {
-    let token = localStorage.getItem("access_token");
-    this.props.publicProfileRequest(`/community/${this.props.userId}`, token);
+    const { userId, getPublicProfile } = this.props
+    getPublicProfile(userId);
   }
   render() {
     let p = this.props;
@@ -161,7 +161,7 @@ class PublicProfile extends Component {
             symb === symb.toUpperCase() ? (prev += " " + symb) : (prev += symb),
           ""
         );
-    const data = p.publicProfile.data.data;
+    const data = p.publicProfile.data;
     const mobile = p.mobile ? "-mobile" : ""
     return (
       <div className="pub-us-main">

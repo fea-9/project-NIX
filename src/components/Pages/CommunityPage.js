@@ -17,9 +17,9 @@ let mapStateToProps = state => ({
 
 });
 class CommunityPage extends Component {
-  componentDidMount() { 
-    let token = localStorage.getItem("access_token");
-    this.props.communityRequest(token);
+  componentDidMount() {
+    const { getCommunity } = this.props
+    getCommunity();
   }
 
   render() { 
@@ -37,8 +37,8 @@ class CommunityPage extends Component {
             <Error />
           ) : (
             <CommunityTable
-              title={p.community.data.data.totalCount}
-              data={p.community.data.data.memberslist}
+              title={p.community.data.totalCount}
+              data={p.community.data.memberslist}
               mobile={p.mobile}
             />
           )

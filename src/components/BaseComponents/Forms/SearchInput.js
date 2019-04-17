@@ -21,8 +21,7 @@ class SearchInput extends PureComponent{
     }
 
     clickHandler = e =>{
-        let token = localStorage.getItem("access_token");
-        this.props.searchRequest({request:this.state.value}, token);
+        this.props.getSearch( this.state.value );
     }
 
     componentDidMount(){

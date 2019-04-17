@@ -27,8 +27,7 @@ class RangePanel extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { location, dashboardRequest } = this.props;
-    const token = localStorage.getItem("access_token");
+    const { location, getStats } = this.props;
     const search = queryString.parse(location.search);
 
     if (prevProps.location.search !== location.search) {
@@ -36,7 +35,7 @@ class RangePanel extends Component {
         ? null
         : search.period === "range"
         ? null
-        : dashboardRequest(search, token);
+        : getStats(search);
     }
   }
 
