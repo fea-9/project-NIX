@@ -18,7 +18,8 @@ class ProfileForm extends Component{
     defaultState = {
         avatar: {
             scale: this.props.scale, 
-            src: this.props.src // from server in ideal
+            src: this.props.src, // from server in ideal
+            sourceSrc: this.props.sourceSrc
         },
         withValidation: {
             firstName: {
@@ -109,6 +110,7 @@ class ProfileForm extends Component{
 
     state = JSON.parse(JSON.stringify(this.defaultState)) // because of array of tags
 
+    // VALIDATION OF FORM INPUTS
     validateInput = e => {
         e.persist()
         const { name, value } = e.target;
@@ -164,6 +166,7 @@ class ProfileForm extends Component{
         })   
     } 
     
+    // WORK WITH TAGS
     addTags = (e) => {
         if(e.key !== "Enter") return;
         
@@ -173,15 +176,18 @@ class ProfileForm extends Component{
             const {tags} = JSON.parse(JSON.stringify(this.state.researchAreaTags))
 
             let tagsFromInput = value.split(/\.|\,|\;/g)
-            tagsFromInput.forEach( tag => {
-                if( tags.indexOf(tag) > -1 || !/^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*\s\*]{1,25}$/.test(value)){
-                    this.setState(prevState => ({
-                        ...prevState,
-                        researchAreas:{
-                            ...prevState.researchAreas,
-                            value: ""
-                    }}))
-                } else {
+
+            tagsFromInput.forEach( elem => {
+                let tag = elem.trim();
+                if( tags.indexOf(tag) > -1 ||  
+                    /^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*\s\*]{2,25}$/.test(value)){
+                        this.setState(prevState => ({
+                            ...prevState,
+                            researchAreas:{
+                                ...prevState.researchAreas,
+                                value: ""
+                        }}))
+                } else {                     
                     tags.push(tag)
                     this.setState(prevState => ({
                         ...prevState,
@@ -192,7 +198,7 @@ class ProfileForm extends Component{
                         researchAreaTags:{
                             tags: tags
                         }
-                    }))
+                    }))                    
                 }         
             })                
         }
@@ -211,17 +217,18 @@ class ProfileForm extends Component{
         }}})
     }
 
-
+    // SUBMIT, VALIDATION, RESET OF FORM 
     submit = e => {
         e.preventDefault(); 
-        const {updateUserRequest, id} = this.props
+        const {updateUserRequest, id, saveAvatar} = this.props
         const {email, firstName, lastName} = this.state.withValidation
         const values = {
             email: email.value,             
             fullName: `${firstName.value.trim()} ${lastName.value.trim()}`
         };
+        saveAvatar(this.state.avatar) // no backend
         if (this.formIsValid()){
-            updateUserRequest(localStorage.getItem("access_token"), id, values)
+            updateUserRequest(localStorage.getItem("access_token"), id, values);            
         }        
     }
 
@@ -248,12 +255,20 @@ class ProfileForm extends Component{
             }
         })
 
-        validForm = JSON.stringify(this.state) !== JSON.stringify(this.defaultState) && validForm // to avoid unnecessary requests
+        validForm = JSON.stringify(this.state.withValidation) !== JSON.stringify(this.defaultState.withValidation) && validForm 
+        // to avoid unnecessary requests. this.state.withValidation - not proper, 
+        // for future data structure to be changed according to backend
        
-        return validForm
+        return validForm;
+    }   
+    
+    resetForm = (e) => {
+        e.preventDefault();
+        this.props.resetAvatar();
+        this.setState(JSON.parse(JSON.stringify(this.defaultState))) // because of array of tags
+    }
 
-    }    
-
+    // WORK WITH AVATAR EDITOR, INCLUDING SAVE, RESET
     onZoomChange = (e) => {
         e.persist()
         this.setState(prevState => ({
@@ -276,12 +291,23 @@ class ProfileForm extends Component{
                 ...prevState,
                 avatar: {
                     ...prevState.avatar,
+                    sourceSrc: newImage,
                     src: newImage
                 }
             }));                                                                          
         }             
         fileReader.readAsDataURL ( file );
         event.target.value = ""
+    }
+
+    onPositionChangeOfAvatar = (data) => {
+        this.setState(prevState => ({
+            ...prevState,
+            avatar:{
+                ...prevState.avatar,
+                src: data
+            }
+        }))
     }
 
     resetFormAvatar = (e) => {
@@ -296,23 +322,26 @@ class ProfileForm extends Component{
         
     }
 
-    saveFormAvatar = (e) => {       
-        e.preventDefault(); // mock, no back-end
+    saveFormAvatar = (data) => {   // mock, no back-end
         const {saveAvatar, src, scale} = this.props;
         const {avatar} = this.state;  
         if (avatar.src === src && avatar.scale === scale) return;
-        else saveAvatar(this.state.avatar);
+        else {
+            saveAvatar({src: data,
+                scale: avatar.scale});
+            this.setState(prevState => ({
+                ...prevState,
+                avatar:{
+                    ...prevState.avatar,
+                    src: data
+                }
+            }))
+        }            
     }
-
-    resetForm = (e) => {
-        e.preventDefault();
-        this.props.resetAvatar();
-        this.setState(JSON.parse(JSON.stringify(this.defaultState))) // because of array of tags
-    }
+   
 
     render () {
         const {isFetching, authErrorMessage } = this.props
-
         const {publicity, description, researchAreas, avatar} = this.state
         const errorMessage = authErrorMessage === "You should specify at least one updateble field in your request" ? 
             "" : "Something went wrong. Try again, please"
@@ -347,10 +376,11 @@ class ProfileForm extends Component{
                 onSubmit={this.submit} noValidate={true} >
                     <div className = "profile__form-box" >
                         <ProfileAvatar 
-                            src = {avatar.src}
+                            src = {avatar.sourceSrc}
                             scale = {avatar.scale}
                             onSelectFile = {this.onSelectFile}
                             onZoomChange = {this.onZoomChange}
+                            onPositionChangeOfAvatar = {this.onPositionChangeOfAvatar}
                             saveAvatar = {this.saveFormAvatar}
                             resetAvatar = {this.resetFormAvatar}
                         />
@@ -413,6 +443,7 @@ ProfileForm.propTypes = {
     authErrorMessage: PropTypes.string,
     updateUserRequest: PropTypes.func,
     src: PropTypes.string,
+    sourceSrc: PropTypes.string,
     scale: PropTypes.number,
     saveAvatar: PropTypes.func,
     resetAvatar: PropTypes.func
@@ -435,6 +466,7 @@ ProfileForm.defaultProps = {
     authErrorMessage: null,
     updateUserRequest: () => {console.log(`Auth submit ...`)},
     src: "http://www.blackdesertbase.com/img/users/avatars/70.png",
+    sourceSrc: "http://www.blackdesertbase.com/img/users/avatars/70.png",
     scale: 1,
     saveAvatar: () => {console.log("SaveAvatar isn't set")},
     resetAvatar: () => {console.log(`ResetAvatar isn't set`)}    
@@ -442,6 +474,7 @@ ProfileForm.defaultProps = {
 
 const mapStateToProps = state => ({ 
     src: state.avatar.src,
+    sourceSrc: state.avatar.sourceSrc,
     scale: state.avatar.scale,       
     id: state.auth.user.id,
     isFetching: state.auth.isFetching,
