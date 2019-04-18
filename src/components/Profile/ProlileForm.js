@@ -327,7 +327,9 @@ class ProfileForm extends Component{
         const {avatar} = this.state;  
         if (avatar.src === src && avatar.scale === scale) return;
         else {
-            saveAvatar({src: data,
+            saveAvatar({
+                sourceSrc: avatar.sourceSrc,
+                src: data,
                 scale: avatar.scale});
             this.setState(prevState => ({
                 ...prevState,
