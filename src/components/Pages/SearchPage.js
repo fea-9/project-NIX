@@ -41,9 +41,9 @@ class SearchPage extends Component {
           p.search.data === null ? (
             <HeaderTemplate title="Search" />)
           :
-          p.search.data.data.length === 0 ? 
+          p.search.data.length === 0 ? 
             <HeaderTemplate title="Search"/>
-          :
+          : !this.props.location.search ? <HeaderTemplate title="Search"/>:
             <HeaderTemplate component={
               (<SearchInput inputValue={this.changeInput()}/>)}/>
           }
