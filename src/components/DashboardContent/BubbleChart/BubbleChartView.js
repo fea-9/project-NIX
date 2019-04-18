@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
+import { connect } from "react-redux";
 
 import * as d3 from "d3";
 
@@ -10,13 +11,28 @@ class BubbleChartView extends Component {
     mounted = false;
     
     state = {
-        data: []
-    };    
+        data: [],
+        width: 0,
+        height: 0
+    };   
+
+    componentDidUpdate(prevProps, prevState) {
+        this.setSizes();
+        if (prevState.width !== this.state.width ||
+            prevState.height !== this.state.height)
+            this.simulatePositions(this.props.data);
+    }
+    
+    componentWillUnmount(){
+        this.mounted = false;
+        window.removeEventListener("resize", this.setSizes);
+    }
    
     componentDidMount() {
-        
+        this.setSizes();
+        window.addEventListener("resize", this.setSizes);
         this.mounted = true;
-        if (this.props.data.length > 0) {
+        if (this.props.data.length > 0 ) {
 
             this.minValue =
                 0.5 *
@@ -33,15 +49,28 @@ class BubbleChartView extends Component {
             this.simulatePositions(this.props.data);
         }
     }
+    
+    setSizes = () => {
+        if(!this.container) return;
+        
+        let currentWidth = this.container.offsetWidth;
+        let currentHeight = this.container.offsetHeight;
+        if (
+            this.state.width !== currentWidth &&
+            this.state.height !== currentHeight
+        )
+            this.setState(prevState => ({ 
+                ...prevState,
+                width: currentWidth, 
+                height: currentHeight }));
+    };
 
-    componentWillUnmount() {
-        this.mounted = false;
-    }
-
-    radiusScale = value => {      
+    radiusScale = value => { 
+        const {width, height} = this.state
+        const minSideSize = width < height ? width : height  
         const fx = d3
             .scaleSqrt()
-            .range([1, 90])
+            .range([1, (3200*minSideSize/this.maxValue)])
             .domain([this.minValue, this.maxValue]);
         return fx(value);
     };
@@ -76,7 +105,8 @@ class BubbleChartView extends Component {
     }
 
     renderBubbles = data => {
-        const {width, height} = this.props
+        // const {width, height} = this.props
+        const {width, height} = this.state
         const color = "#5CE5DD";
 
         const texts = data.map((item, index) => {
@@ -136,12 +166,17 @@ class BubbleChartView extends Component {
    
     render() { 
         const {data} = this.state
-        const { width, height} = this.props
-        
+        // const { width, height} = this.props
+        const {width, height} = this.state
+        const {mobile} = this.props
+        const minSideSize = width < height ? width : height
+
         if (data.length) {
             return (
-                <div className = "keychart-view" ref={el => (this.container = el)}>
-                    <svg width={width} height={height} >
+                <div className = "keychart-view" 
+                ref={el => (this.container = el)} 
+                id = "view" >
+                    <svg width={width} height={mobile ? minSideSize : height*0.9 } >
                         <defs>
                             <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
                                 <stop offset="0%" style={{stopColor:"#03EFFE",
@@ -167,7 +202,9 @@ BubbleChartView.propTypes = {
     data: PropTypes.arrayOf(PropTypes.object),
     width: PropTypes.number,
     height: PropTypes.number,
-    setCurrent: PropTypes.func
+    setCurrent: PropTypes.func,
+    minimized: PropTypes.bool,
+    mobile: PropTypes.bool
 }
 
 BubbleChartView.defaultProps = {
@@ -177,4 +214,9 @@ BubbleChartView.defaultProps = {
     setCurrent: () => {console.log("SetCurrent isn't set")}
 };
 
-export default BubbleChartView;
+const mapStateToProps = state => ({
+    minimized: state.sidebar.minimized,
+    mobile: state.resize.mobile
+});
+
+export default connect(mapStateToProps, null)(BubbleChartView);

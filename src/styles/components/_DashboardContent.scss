@@ -49,7 +49,7 @@
 }
 .graph-block, 
 .graph-block-mobile {
-    margin-top: 3%;
+    // margin-top: 3%;
     flex-grow: 1;
     &__cell {
         padding: 1rem;
@@ -105,6 +105,11 @@
             // background: blue;
         }
     }
+    .graph-block {
+        &__cell {
+            margin-top: 2%;
+        }
+    }
 }
 @media  (min-width: 1336px) and (max-width: 1440px){
     .info-block {
@@ -133,9 +138,17 @@
         min-height: 20%;
         &__cell {
             max-width: 25%;
-            min-width: 350px;
+            min-width: 300px;
             border-left: 1px solid #CAD5DA;
             // background: magenta;
         }
     }
+}
+.info-block-mobile {
+    &__cell {
+        min-width: 40%;
+    }
+}
+.info-card-title--adv--mob .num {
+    font-size: 10rem;
 }

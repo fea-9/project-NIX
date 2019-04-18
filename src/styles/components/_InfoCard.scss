@@ -71,3 +71,14 @@
         font-size: 1.4rem;
     }
 }
+@media  (min-width: 768px) and (max-width: 1280px){
+    .info-card-title--adv .num {
+        font-size: calc(2vh + 2vw);
+    }
+    .info-card-text--adv span{
+        font-size: calc(0.7vh + 0.7vw);
+    }
+    .info-card-dop__line span:first-child{
+        font-size: 1.2rem;
+    }
+}
