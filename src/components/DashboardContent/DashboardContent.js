@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 let mapStateToProps = state => ({
   graph: state.transDocGraph,
   token: state.auth.user.access_token,
+  interseptrorWorking: state.auth.interseptrorWorking,
   mobile: state.resize.mobile
 });
 let iconsArr = [
@@ -29,7 +30,8 @@ class DashboardContent extends Component {
     mobile: PropTypes.bool
   }
   componentDidMount() {
-    const { getTransDoc } = this.props
+    const { getTransDoc, interseptrorWorking } = this.props
+    if (interseptrorWorking) return;
     getTransDoc()
   }
   render(){

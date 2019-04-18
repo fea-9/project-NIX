@@ -12,18 +12,22 @@ import {Copyright} from "../Copyright/Copyright";
 
 let mapStateToProps = state => ({
   search: state.search,
+  interseptrorWorking: state.auth.interseptrorWorking,
   token: state.auth.user.access_token
 });
 
 class SearchPage extends Component {
 
   componentDidMount() {
-    const { location, getSearch } = this.props
+    const { location, getSearch, interseptrorWorking } = this.props
+    if (interseptrorWorking) return;
     location.search && getSearch( location.search.substr(1) );
     
   }
 
   componentWillUnmount(){
+    const { interseptrorWorking } = this.props
+    if (interseptrorWorking) return;
     this.props.searchClear()
   }
 

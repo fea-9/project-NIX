@@ -13,12 +13,14 @@ import PropTypes from "prop-types";
 let mapStateToProps = state => ({
   community: state.community,
   token: state.auth.user.access_token,
+  interseptrorWorking: state.auth.interseptrorWorking,
   mobile: state.resize.mobile
 
 });
 class CommunityPage extends Component {
   componentDidMount() {
-    const { getCommunity } = this.props
+    const { getCommunity, interseptrorWorking } = this.props
+    if (interseptrorWorking) return;
     getCommunity();
   }
 

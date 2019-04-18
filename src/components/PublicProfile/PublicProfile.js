@@ -11,7 +11,8 @@ import SwitchImage from "../SwitchImage/SwitchImage";
 
 let mapStateToProps = state => ({
   publicProfile: state.publicProfile,
-  mobile: state.resize.mobile
+  mobile: state.resize.mobile,
+  interseptrorWorking: state.auth.interseptrorWorking,
 });
 const SlideItem = ({title, dop}) => (
     <div className="slide-item">
@@ -145,7 +146,8 @@ const CitiedCard = ({data}) => {
 
 class PublicProfile extends Component {
   componentDidMount() {
-    const { userId, getPublicProfile } = this.props
+    const { userId, getPublicProfile, interseptrorWorking } = this.props
+    if (interseptrorWorking) return;
     getPublicProfile(userId);
   }
   render() {
