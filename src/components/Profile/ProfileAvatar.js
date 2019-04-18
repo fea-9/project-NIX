@@ -25,23 +25,29 @@ class ProfileAvatar extends Component {
     }
 
     setNewSrc = callback => {
+        const {src} = this.props;
         if (this.editor) {
         // If you want the image resized to the canvas size (a HTMLCanvasElement)
-            const canvasScaled = this.editor.getImageScaledToCanvas().toDataURL();
-            callback(canvasScaled);
+            try {
+                const canvasScaled = this.editor.getImageScaledToCanvas().toDataURL();
+                callback(canvasScaled);
+            } catch {
+                callback(src)
+            }
         }
     }
 
     setEditorRef = (editor) => this.editor = editor;
     
     render(){
-        const {src, scale, onSelectFile, onZoomChange, saveAvatar, resetAvatar, onPositionChangeOfAvatar} = this.props;
+        const {src, sourceSrc, scale, onSelectFile, onZoomChange, saveAvatar, resetAvatar, onPositionChangeOfAvatar} = this.props;
+        const currentSrc = src === sourceSrc ? sourceSrc : src
         return (
             <div className = "avatar-box" >
                 <AvatarEditor 
                     ref={this.setEditorRef}
                     className = "avatar-preview"
-                    image={src}
+                    image={currentSrc}
                     onPositionChange={e => this.setNewSrc(onPositionChangeOfAvatar)}
                     width={250}
                     height={250}
