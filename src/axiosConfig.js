@@ -117,8 +117,9 @@ const createInterceptorsResponse = () => {
     error => {
       const { url } = error.config;
       const mass = url.split("/");
+      if (mass[mass.length - 2] === "auth") return Promise.reject(error);
       if (mass[mass.length - 1] > 2 && mass[mass.length - 2] === "community")
-        return;
+        return Promise.reject(error);
       instance.interceptors.response.eject(instanceInterceptorsResponse);
       store.dispatch(setInterceptorStatus(true));
       return store

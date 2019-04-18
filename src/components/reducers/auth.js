@@ -10,7 +10,7 @@ export default (state = initialState.auth, { type, payload, error }) => {
       return { ...state, error: false, user: Item, message, isFetching: false };
     }
     case "AUTH_REQUEST_FAIL": {
-      const { message } = error;
+      const { message } = error.response.data;
       return { ...initialState.auth, error: true, message, isFetching: false };
     }
     case "AUTH_RESET": {
@@ -25,7 +25,7 @@ export default (state = initialState.auth, { type, payload, error }) => {
       return { ...state, error: false, user: payload, message, isFetching: false };
     }
     case "AUTH_UPDATE_REQUEST_FAIL": {
-      const { message } = error;
+      const { message } = error.response.data;
       return { ...state, error: true, message, isFetching: false };
     }
 
