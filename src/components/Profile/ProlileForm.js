@@ -180,7 +180,7 @@ class ProfileForm extends Component{
             tagsFromInput.forEach( elem => {
                 let tag = elem.trim();
                 if( tags.indexOf(tag) > -1 ||  
-                    /^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*\s\*]{2,25}$/.test(value)){
+                    !/^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*\s\*]{2,25}$/.test(tag)){
                         this.setState(prevState => ({
                             ...prevState,
                             researchAreas:{
