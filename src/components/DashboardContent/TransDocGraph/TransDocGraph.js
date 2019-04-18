@@ -83,7 +83,8 @@ class TransDocGraph extends Component {
                 p.mobile
                   ? s.height > s.width ? s.width
                   : s.height * 5 : p.minimized ? 
-                  s.height * 0.7 : s.width * 0.7
+                  s.height * 0.7 : s.width * 0.5
+                
               }
               mobile={p.mobile}
             />

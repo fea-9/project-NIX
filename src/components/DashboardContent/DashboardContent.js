@@ -93,6 +93,7 @@ class DashboardContent extends Component {
   }
 };
 
+
 DashboardContent =connect(mapStateToProps, {...actions})(DashboardContent)
 
 export default DashboardContent
