@@ -8,6 +8,7 @@ import SearchList from '../Search/SearchList'
 import Spinner from "../Spinner/Spinner";
 import SearchInput from "../BaseComponents/Forms/SearchInput";
 import {Copyright} from "../Copyright/Copyright";
+import Error from "../Error/Error"
 
 
 let mapStateToProps = state => ({
@@ -45,7 +46,7 @@ class SearchPage extends Component {
           :
           p.search.data.length === 0 ? 
             <HeaderTemplate title="Search"/>
-          :
+          : !this.props.location.search ? <HeaderTemplate title="Search"/>:
             <HeaderTemplate component={
               (<SearchInput inputValue={this.changeInput()}/>)}/>
           }
@@ -59,7 +60,7 @@ class SearchPage extends Component {
             p.search.error 
             ? 
             (
-              <h1>ERROR</h1>
+              <Error/>
             ) 
             : 
             p.search.data.length === 0 && this.props.location.search

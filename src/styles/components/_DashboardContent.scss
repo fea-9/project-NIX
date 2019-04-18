@@ -28,21 +28,19 @@
 }
 .info-block, 
 .info-block-mobile {
-    margin: 1% 0;
+    margin: 1% 0; 
     display: flex;
     justify-content: space-evenly;
     flex-flow: row wrap;
     min-height: 20%;
     &__cell {
+        max-width: 25%;
         display: inline-block;
-        width: 25%;
-        min-width: 180px;
-        padding: 1%;
+        min-width: 320px;
         border-left: 1px solid #CAD5DA;
     }
 }
 .info-block-mobile {
-    // min-height: 35%;
     &__cell {
         width: 50%;
         min-width: 0;
@@ -51,7 +49,7 @@
 }
 .graph-block, 
 .graph-block-mobile {
-    margin-top: 3%;
+    // margin-top: 3%;
     flex-grow: 1;
     &__cell {
         padding: 1rem;
@@ -85,4 +83,72 @@
     &__cell:last-child {
         min-height: 70%;
     }
+}
+@media  (min-width: 778px) and (max-width: 1024px){
+    .info-block {
+        min-height: 20%;
+        &__cell {
+            max-width: 25%;
+            min-width: 220px;
+            border-left: none;
+            // background: red;
+        }
+    }
+}
+@media  (min-width: 1024px) and (max-width: 1336px){
+    .info-block {
+        min-height: 20%;
+        &__cell {
+            max-width: 25%;
+            min-width: 320px;
+            border-left: 1px solid #CAD5DA;
+            // background: blue;
+        }
+    }
+    .graph-block {
+        &__cell {
+            margin-top: 2%;
+        }
+    }
+}
+@media  (min-width: 1336px) and (max-width: 1440px){
+    .info-block {
+        min-height: 20%;
+        &__cell {
+            max-width: 25%;
+            min-width: 450px;
+            border-left: 1px solid #CAD5DA;
+            // background: green;
+        }
+    }
+}
+@media  (min-width: 1440px) and (max-width: 1610px){
+    .info-block {
+        min-height: 20%;
+        &__cell {
+            max-width: 25%;
+            min-width: 500px;
+            border-left: 1px solid #CAD5DA;
+            // background: yellow;
+        }
+    }
+}
+@media  (min-width: 1610px) and (max-width: 1712px){
+    .info-block {
+        min-height: 20%;
+        &__cell {
+            max-width: 25%;
+            min-width: 300px;
+            border-left: 1px solid #CAD5DA;
+            // background: magenta;
+        }
+    }
+}
+.info-block-mobile {
+    &__cell {
+        min-width: 40%;
+    }
+}
+.info-card-title--adv--mob .num {
+    font-size: 10rem;
 }

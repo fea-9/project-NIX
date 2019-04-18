@@ -10,7 +10,7 @@ import {Copyright} from "../Copyright/Copyright";
 import Error from "../Error/Error";
 import PropTypes from "prop-types";
 
-let mapStateToProps = state => ({
+let mapStateToProps = state => ({ 
   graph: state.transDocGraph,
   token: state.auth.user.access_token,
   interseptrorWorking: state.auth.interseptrorWorking,
@@ -94,6 +94,7 @@ class DashboardContent extends Component {
     )
   }
 };
+
 
 DashboardContent =connect(mapStateToProps, {...actions})(DashboardContent)
 
