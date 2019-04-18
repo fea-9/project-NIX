@@ -1,5 +1,10 @@
 import axios from "axios";
 
+import store from "./components/store";
+
+import { authLogout, setInterceptorStatus } from "./components/actions/auth";
+import { refreshTokens } from "./components/actions/token";
+
 const baseURL =
   "https://0uumsbtgfd.execute-api.eu-central-1.amazonaws.com/Development/v0";
 
@@ -11,13 +16,12 @@ const instance = axios.create({
 });
 
 export const refreshToken = () => {
-  const refToken = localStorage.getItem("refresh_token");
-
+  const refreshToken = localStorage.getItem("refresh_token");
   return instance({
     url: "/auth/refresh",
     method: "POST",
     data: {
-      refresh_token: refToken
+      refresh_token: refreshToken
     }
   });
 };
@@ -107,22 +111,38 @@ export const updateUser = (id, { fullName, email }) =>
     }
   });
 
-const instanceInterseptorsResponse = instance.interceptors.response.use(
-  response => response.data,
-  error => {
-    const refToken = localStorage.getItem("refresh_token");
-    const { response = {} } = error;
-    console.log('error', error.response)
-    
+const createInterceptorsResponse = () => {
+  const instanceInterceptorsResponse = instance.interceptors.response.use(
+    response => response,
+    error => {
+      const { url } = error.config;
+      const mass = url.split("/");
+      if (mass[mass.length - 1] > 2 && mass[mass.length - 2] === "community")
+        return;
+      instance.interceptors.response.eject(instanceInterceptorsResponse);
+      store.dispatch(setInterceptorStatus(true));
+      return store
+        .dispatch(refreshTokens())
+        .then(() => {
+          return instance.request(error.config);
+        })
+        .catch(err => {
+          store.dispatch(authLogout());
+          return new Promise.reject(err);
+        })
+        .finally(() => {
+          store.dispatch(setInterceptorStatus(false));
+          return createInterceptorsResponse();
+        });
+    }
+  );
+};
 
-    return Promise.reject(error);
-  }
-);
+createInterceptorsResponse();
 
 instance.interceptors.request.use(
   config => {
     const token = localStorage.getItem("access_token");
-    // const token = null
     if (token) {
       return {
         ...config,
