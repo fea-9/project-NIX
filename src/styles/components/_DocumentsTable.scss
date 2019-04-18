@@ -78,8 +78,9 @@
 		&__total-citations, 
 		&__proof-of-existence {
 			margin-left: 10px;
-			width: 100%;
+			width: 0;
 			text-align: left;
+			font-size: 2rem;
 		}
 		&__total-citations {
 			justify-content: flex-start;

@@ -139,3 +139,11 @@
         }
     }
 }
+.info-block-mobile {
+    &__cell {
+        min-width: 40%;
+    }
+}
+.info-card-title--adv--mob .num {
+    font-size: 10rem;
+}
