@@ -40,6 +40,10 @@ export default (state = initialState.auth, { type, payload, error }) => {
       const { err } = error;
       return { ...initialState.auth, error: err, isFetching_token: false };
     }
+    
+    case "INTERCEPTOR_WORKING_SET": {
+      return { ...state, interseptrorWorking: payload };
+    }
 
     default:
       return state;

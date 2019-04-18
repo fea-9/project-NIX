@@ -4,7 +4,8 @@ export default {
     user: null,
     error: null,
     message: null,
-    isFetching_token: false
+    isFetching_token: false,
+    interseptrorWorking: false
   },
   resize: {
     mobile: false
