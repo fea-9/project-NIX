@@ -185,7 +185,18 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-height: 768px){
+  .profile__form-box{     
+      padding: 2rem; 
+      .input-box{
+        &__input, &__textarea, &__message{
+        margin-bottom: 1rem;
+      } 
+    }       
+  } 
+}
+
+@media screen and (max-width: 768px){
   .profile {    
     &__form-box{     
       flex-direction: column;
