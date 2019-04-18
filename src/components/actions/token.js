@@ -32,11 +32,14 @@ export function refreshTokens() {
   return async function(dispatch) {
     dispatch(tokenRefreshRequest());
     try {
-      let payload = await request.refreshToken();
-      payload.access_token &&
-        localStorage.setItem("access_token", payload.access_token);
-      payload.Item &&
-        localStorage.setItem("refresh_token", payload.Item.refresh_token);
+      const { data } = await request.refreshToken();
+      const payload = data;
+
+      data.access_token &&
+        localStorage.setItem("access_token", data.access_token);
+      data.Item &&
+        localStorage.setItem("refresh_token", data.Item.refresh_token);
+
       dispatch(
         tokenRefreshRequestSuccess({
           payload

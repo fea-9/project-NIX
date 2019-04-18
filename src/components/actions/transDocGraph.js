@@ -31,7 +31,8 @@ export function getTransDoc() {
   return async function(dispatch) {
     dispatch(transDocRequest());
     try {
-      let payload = await request.getKeywords();
+      const { data } = await request.getKeywords();
+      const payload = data;
 
       dispatch(
         transDocRequestSuccess({

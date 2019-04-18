@@ -31,7 +31,8 @@ export function getStats(params) {
   return async function(dispatch) {
     dispatch(dashboardRequest());
     try {
-      let payload = await request.getStats(params.period);
+      const { data } = await request.getStats(params.period);
+      const payload = data;
 
       dispatch(
         dashboardRequestSuccess({

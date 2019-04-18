@@ -37,7 +37,8 @@ export function getSearch(searchQuery) {
   return async function(dispatch) {
     dispatch(searchRequest());
     try {
-      let payload = await request.search(searchQuery);
+      const { data } = await request.search(searchQuery);
+      const payload = data;
 
       dispatch(
         searchRequestSuccess({

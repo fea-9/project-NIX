@@ -33,7 +33,8 @@ export function getDocuments() {
   return async function(dispatch) {
     dispatch(documentsRequest());
     try {
-      let payload = await request.getDocuments();
+      const { data } = await request.getDocuments();
+      const payload = data;
 
       dispatch(
         documentsRequestSuccess({

@@ -31,7 +31,8 @@ export function getCommunity() {
   return async function(dispatch) {
     dispatch(communityRequest());
     try {
-      let payload = await request.getCommunity();
+      const { data } = await request.getCommunity();
+      const payload = data;
 
       dispatch(
         communityRequestSuccess({

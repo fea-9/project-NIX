@@ -31,7 +31,8 @@ export function getPublicProfile(id) {
   return async function(dispatch) {
     dispatch(publicProfileRequest());
     try {
-      let payload = await request.getCommunityMember(id);
+      const { data } = await request.getCommunityMember(id);
+      const payload = data;
 
       dispatch(
         publicProfileRequestSuccess({
