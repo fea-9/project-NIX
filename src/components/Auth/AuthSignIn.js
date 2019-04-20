@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import * as actions from "../actions/auth";
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import {authValidation} from "../../utils/authValidate";
 import InputField from "../BaseComponents/Forms/Input";
@@ -65,11 +64,10 @@ class SignIn extends Component{
    
     submit = e => {
         e.preventDefault();
-        const {auth, history} = this.props
+        const {auth} = this.props
         const values = Object.keys(this.state).reduce((prev, elem) => ({ ...prev, [elem]: this.state[elem].value }), {});
         if (this.formIsValid()){
             auth (values, "signin")
-                .then(() => history.push("/dashboard?period=day"));
         }        
     }
 
@@ -145,4 +143,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { ...actions };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignIn));
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import * as actions from "../actions/auth";
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import {authValidation} from "../../utils/authValidate";
 import InputField from "../BaseComponents/Forms/Input";
@@ -129,7 +128,7 @@ class SignUp extends Component{
 
     submit = e => {
         e.preventDefault();
-        const {auth, history} = this.props
+        const {auth} = this.props
         const {email, password, firstName, lastName} = this.state
         const values = {
             email: email.value,
@@ -138,7 +137,6 @@ class SignUp extends Component{
         };
         if (this.formIsValid()){
             auth (values, "signup")
-                .then(() => history.push("/dashboard?period=day"));;
         }        
     }
 
@@ -213,4 +211,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { ...actions };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUp));
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
