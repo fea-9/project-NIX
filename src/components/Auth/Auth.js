@@ -3,22 +3,16 @@ import PropTypes from 'prop-types';
 
 import { connect } from "react-redux";
 
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AuthSignIn from "./AuthSignIn";
-import Spinner from "../Spinner/Spinner";
 
 
 class Auth extends Component {
     
 	render() {	
-        const {authComponent, isFetching, user} = this.props
+        const { authComponent } = this.props
 		
-        return isFetching ? (
-            <Spinner />
-          ) : user ? (
-            <Redirect to="/dashboard?period=day" />
-        ) :
-        (
+        return (
             <div className="auth-box">
                 <div className="auth-box__aside">
                     <h1 className="auth-box__aside-logo">

@@ -19,14 +19,14 @@ let mapStateToProps = state => ({
 class SearchPage extends Component {
 
   componentDidMount() {
-    let token = localStorage.getItem("access_token");
-    const { location, searchRequest } = this.props
-    location.search && searchRequest({ request: location.search.substr(1) }, token);
+    const { location, getSearch } = this.props
+    location.search && getSearch( location.search.substr(1) );
     
   }
 
   componentWillUnmount(){
-    this.props.searchClear()
+    const { searchClear } = this.props
+    searchClear()
   }
 
   changeInput =()=> this.props.location.search ? this.props.location.search.substr(1): ''
@@ -60,7 +60,7 @@ class SearchPage extends Component {
               <Error/>
             ) 
             : 
-            p.search.data.data.length === 0 && this.props.location.search
+            p.search.data.length === 0 && this.props.location.search
             ?     
                   <div className="search-box" >
                       <SearchInput inputValue={this.changeInput()} /> 

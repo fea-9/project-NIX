@@ -67,7 +67,7 @@ class SignIn extends Component{
         const {auth} = this.props
         const values = Object.keys(this.state).reduce((prev, elem) => ({ ...prev, [elem]: this.state[elem].value }), {});
         if (this.formIsValid()){
-            auth (values, "signin");
+            auth (values, "signin")
         }        
     }
 

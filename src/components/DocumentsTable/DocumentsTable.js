@@ -70,9 +70,9 @@ class DocumentsTable extends Component {
       }
       return elem;
     });
-    let nData = JSON.parse(JSON.stringify(this.props.documents.data.data));
+    let nData = JSON.parse(JSON.stringify(this.props.documents.data));
     nData.documentslist = sortFunc(
-      this.props.documents.data.data.documentslist,
+      this.props.documents.data.documentslist,
       indic.key,
       indic.direction,
       "modifiedDate"
@@ -84,8 +84,8 @@ class DocumentsTable extends Component {
   };
 
   componentDidMount() {
-    let token = localStorage.getItem("access_token");
-    this.props.documentsRequest(token);
+    const { getDocuments } = this.props
+    getDocuments();
   }
 
   render() {
@@ -100,7 +100,7 @@ class DocumentsTable extends Component {
         <div className="documents-info">
           You have {p.documents.data.totalCount} documents
           <div className="documents-info__dop">
-            Last update {varyDateView(p.documents.data.data.modifiedDate)}
+            Last update {varyDateView(p.documents.data.modifiedDate)}
           </div>
         </div>
         <div className={`indikators${mob}`}>
@@ -140,9 +140,9 @@ class DocumentsTable extends Component {
         </div>
         <div className="documents__main">
           <Scrollbars>
-            {p.documents.data.data.documentslist.map((elem, index, arr) => (
+            {p.documents.data.documentslist.map((elem, index, arr) => (
               <DocCard
-                data={p.documents.data.data}
+                data={p.documents.data}
                 mobile={p.mobile}
                 ind={index}
                 key={index}

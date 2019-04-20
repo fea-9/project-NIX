@@ -1,112 +1,76 @@
-import apiWorker from "../../utils/apiWorker";
+import * as request from "../../axiosConfig";
+import history from "../../history";
 
-export const updateUserRequest = (token, id, data )=> {
-    return apiWorker(
-        {
-            typeRequest: "AUTH_UPDATE_REQUEST",
-            typeSuccess: "AUTH_UPDATE_REQUEST_SUCCESS",
-            typeFail: "AUTH_UPDATE_REQUEST_FAIL"
-        },
-        {
-            url: `users/object/${id}/update`,
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            },
-            method: "post",
-            data: data
-        }
-    )   
-} 
+const authUpdateRequest = () => ({
+  type: "AUTH_UPDATE_REQUEST"
+});
 
-export const authRequest = () => ({
-    type: "AUTH_REQUEST",
-    status: "PENDING",
-    payload: null,
-    error: null
-})
+const authUpdateRequestSuccess = payload => ({
+  type: "AUTH_UPDATE_REQUEST_SUCCESS",
+  payload
+});
 
-export const authRequestSuccess = (action) => {
-    const { payload} = action
-    return ({
-        type: "AUTH_REQUEST_SUCCESS",
-        status: "RESOLVED",
-        payload,
-        error: null
-    }
-)}
+const authUpdateRequestFail = error => ({
+  type: "AUTH_UPDATE_REQUEST_FAIL",
+  error
+});
 
-export const authRequestFail = (action) => {
-    const { error} = action
-    return ({
-        type: "AUTH_REQUEST_FAIL",
-        status: "REJECTED",
-        payload: null,
-        error
-    }
-)}
+const authRequest = () => ({
+  type: "AUTH_REQUEST"
+});
 
-export function resetAuth (){    
-    return ({
-        type: "AUTH_RESET",
-        status: "REJECTED",
-        payload: null,
-        error: null
-    }
-)}
+const authRequestSuccess = payload => ({
+  type: "AUTH_REQUEST_SUCCESS",
+  payload
+});
 
-export function authLogout () {
-    return function (dispatch){
-        localStorage.setItem("access_token", "")
-        localStorage.setItem("expires_in", "")
-        localStorage.setItem("refresh_token", "") 
-        dispatch(resetAuth())
-    }
-    
-}
+const authRequestFail = error => ({
+  type: "AUTH_REQUEST_FAIL",
+  error
+});
 
-export function jsonPost(url, data)
-  {
-    return new Promise((resolve, reject) => {
-        var x = new XMLHttpRequest();   
-        x.onerror = () => reject({message: 'Request failed'})        
-        x.open("POST", url, true);
-        x.setRequestHeader('Content-Type', 'application/json');
-        x.send(JSON.stringify(data))
+const resetAuth = () => ({
+  type: "AUTH_RESET"
+});
 
-        x.onreadystatechange = () => {
-            if (x.readyState === XMLHttpRequest.DONE && x.status === 200){
-                resolve(JSON.parse(x.responseText))
-            }
-            else if (x.readyState === XMLHttpRequest.DONE && x.status !== 200){
-                reject(JSON.parse(x.responseText))
-            }
-        }
-    })
-}
-export function auth ( userData, endpoint ) {
-    return async function (dispatch){
-        dispatch (authRequest())
-        try {            
-            let payload = await jsonPost(
-                `https://0uumsbtgfd.execute-api.eu-central-1.amazonaws.com/Development/v0/auth/${endpoint}`,                
-                   userData                 
-            ) 
-            payload.access_token && localStorage.setItem("access_token", payload.access_token)
-            payload.expires_in && localStorage.setItem("expires_in", payload.expires_in) 
-            payload.Item && localStorage.setItem("refresh_token", payload.Item.refresh_token)    
+export const setInterceptorStatus = payload => ({
+  type: "INTERCEPTOR_WORKING_SET",
+  payload
+});
 
-            dispatch (authRequestSuccess({                
-                payload}))
-        }
+export const authLogout = () => dispatch => {
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
 
-        catch(error){
-                       
-            dispatch (authRequestFail({                
-                error
-            }))
-        }
-    }
-}
+  dispatch(resetAuth());
+};
 
+export const updateUserRequest = (id, values) => async dispatch => {
+  dispatch(authUpdateRequest());
+  try {
+    const { data } = await request.updateUser(id, values);
 
+    dispatch(authUpdateRequestSuccess(data));
+  } catch (error) {
+    dispatch(authUpdateRequestFail(error));
+  }
+};
+
+export const auth = (values, typeRequest) => async dispatch => {
+  dispatch(authRequest());
+  try {
+    const { data } =
+      typeRequest === "signin"
+        ? await request.signIn(values)
+        : typeRequest === "signup"
+        ? await request.signUp(values)
+        : null;
+
+    localStorage.setItem("access_token", data.access_token);
+    localStorage.setItem("refresh_token", data.Item.refresh_token);
+    dispatch(authRequestSuccess(data));
+    history.push('/dashboard?period=day');
+  } catch (error) {
+    dispatch(authRequestFail(error));
+  }
+};

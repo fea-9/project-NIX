@@ -16,14 +16,13 @@ class SearchList extends PureComponent {
     }
 
     sortSearch = e =>{
-        
-        let nData = this.props.data.data;
+        let nData = this.props.data;
         if(e.target.value === "Max"){
-            nData.articlesList = sortFunc(this.props.data.data.articlesList, "articleCitations")
+            nData.articlesList = sortFunc(this.props.data.articlesList, "articleCitations")
             this.props.setSearchData(nData)
         }
         else if(e.target.value === "Min"){
-            nData.articlesList = sortFunc(this.props.data.data.articlesList, "articleCitations", true)
+            nData.articlesList = sortFunc(this.props.data.articlesList, "articleCitations", true)
             this.props.setSearchData(nData)
         }
         this.setState({disabled:true})
@@ -36,7 +35,7 @@ class SearchList extends PureComponent {
                     <h3 className="search-list_header-name" >
                         Articles 
                         <span className="search-list_header-name-count" >
-                            ({this.props.data.data.totalCount})
+                            ({this.props.data.totalCount})
                         </span>
                     </h3>
                     <div className="search-list_header-sort-wrapper">
@@ -51,7 +50,7 @@ class SearchList extends PureComponent {
                 <div className="search-list_content">
                     <Scrollbars>
                         {
-                            this.props.data.data.articlesList.map((article, index) => {
+                            this.props.data.articlesList.map((article, index) => {
                                 return (
                                     <div key={index} className="article_item">
                                         <h3 className="article_title">

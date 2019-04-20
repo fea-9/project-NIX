@@ -136,7 +136,7 @@ class SignUp extends Component{
             fullName: `${firstName.value.trim()} ${lastName.value.trim()}`
         };
         if (this.formIsValid()){
-            auth (values, "signup");
+            auth (values, "signup")
         }        
     }
 

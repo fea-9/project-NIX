@@ -228,7 +228,7 @@ class ProfileForm extends Component{
         };
         saveAvatar(this.state.avatar) // no backend
         if (this.formIsValid()){
-            updateUserRequest(localStorage.getItem("access_token"), id, values);            
+            updateUserRequest(id, values)
         }        
     }
 
