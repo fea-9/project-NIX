@@ -1,50 +1,26 @@
 import * as request from "../../axiosConfig";
 
 const transDocRequest = () => ({
-  type: "TRANS_DOC_REQUEST",
-  status: "PENDING",
-  payload: null,
-  error: null
+  type: "TRANS_DOC_REQUEST"
 });
 
-const transDocRequestSuccess = action => {
-  const { payload } = action;
-  return {
-    type: "TRANS_DOC_REQUEST_SUCCSESS",
-    status: "RESOLVED",
-    payload,
-    error: null
-  };
+const transDocRequestSuccess = payload => ({
+  type: "TRANS_DOC_REQUEST_SUCCSESS",
+  payload
+});
+
+const transDocRequestFail = error => ({
+  type: "TRANS_DOC_REQUEST_FAIL",
+  error
+});
+
+export const getTransDoc = () => async dispatch => {
+  dispatch(transDocRequest());
+  try {
+    const { data } = await request.getKeywords();
+
+    dispatch(transDocRequestSuccess(data));
+  } catch (error) {
+    dispatch(transDocRequestFail(error));
+  }
 };
-
-const transDocRequestFail = action => {
-  const { error } = action;
-  return {
-    type: "TRANS_DOC_REQUEST_FAIL",
-    status: "REJECTED",
-    payload: null,
-    error
-  };
-};
-
-export function getTransDoc() {
-  return async function(dispatch) {
-    dispatch(transDocRequest());
-    try {
-      const { data } = await request.getKeywords();
-      const payload = data;
-
-      dispatch(
-        transDocRequestSuccess({
-          payload
-        })
-      );
-    } catch (error) {
-      dispatch(
-        transDocRequestFail({
-          error
-        })
-      );
-    }
-  };
-}

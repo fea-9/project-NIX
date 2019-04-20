@@ -1,50 +1,26 @@
 import * as request from "../../axiosConfig";
 
 const dashboardRequest = () => ({
-  type: "DASH_REQUEST",
-  status: "PENDING",
-  payload: null,
-  error: null
+  type: "DASH_REQUEST"
 });
 
-const dashboardRequestSuccess = action => {
-  const { payload } = action;
-  return {
-    type: "DASH_REQUEST_SUCCSESS",
-    status: "RESOLVED",
-    payload,
-    error: null
-  };
+const dashboardRequestSuccess = payload => ({
+  type: "DASH_REQUEST_SUCCSESS",
+  payload
+});
+
+const dashboardRequestFail = error => ({
+  type: "DASH_REQUEST_FAIL",
+  error
+});
+
+export const getStats = params => async dispatch => {
+  dispatch(dashboardRequest());
+  try {
+    const { data } = await request.getStats(params.period);
+
+    dispatch(dashboardRequestSuccess(data));
+  } catch (error) {
+    dispatch(dashboardRequestFail(error));
+  }
 };
-
-const dashboardRequestFail = action => {
-  const { error } = action;
-  return {
-    type: "DASH_REQUEST_FAIL",
-    status: "REJECTED",
-    payload: null,
-    error
-  };
-};
-
-export function getStats(params) {
-  return async function(dispatch) {
-    dispatch(dashboardRequest());
-    try {
-      const { data } = await request.getStats(params.period);
-      const payload = data;
-
-      dispatch(
-        dashboardRequestSuccess({
-          payload
-        })
-      );
-    } catch (error) {
-      dispatch(
-        dashboardRequestFail({
-          error
-        })
-      );
-    }
-  };
-}

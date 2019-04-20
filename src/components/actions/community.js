@@ -1,50 +1,30 @@
 import * as request from "../../axiosConfig";
 
 const communityRequest = () => ({
-  type: "COMMUNITY_REQUEST",
-  status: "PENDING",
-  payload: null,
-  error: null
+  type: "COMMUNITY_REQUEST"
 });
 
-const communityRequestSuccess = action => {
-  const { payload } = action;
+const communityRequestSuccess = payload => {
   return {
     type: "COMMUNITY_REQUEST_SUCCSESS",
-    status: "RESOLVED",
-    payload,
-    error: null
+    payload
   };
 };
 
-const communityRequestFail = action => {
-  const { error } = action;
+const communityRequestFail = error => {
   return {
     type: "COMMUNITY_REQUEST_FAIL",
-    status: "REJECTED",
-    payload: null,
     error
   };
 };
 
-export function getCommunity() {
-  return async function(dispatch) {
-    dispatch(communityRequest());
-    try {
-      const { data } = await request.getCommunity();
-      const payload = data;
+export const getCommunity = () => async dispatch => {
+  dispatch(communityRequest());
+  try {
+    const { data } = await request.getCommunity();
 
-      dispatch(
-        communityRequestSuccess({
-          payload
-        })
-      );
-    } catch (error) {
-      dispatch(
-        communityRequestFail({
-          error
-        })
-      );
-    }
-  };
-}
+    dispatch(communityRequestSuccess(data));
+  } catch (error) {
+    dispatch(communityRequestFail(error));
+  }
+};

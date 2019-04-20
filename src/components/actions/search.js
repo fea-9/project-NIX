@@ -4,49 +4,32 @@ export const searchClear = () => ({
   type: "SEARCH_CLEAR"
 });
 
-export const setSearchData = payload => ({ type: "SEARCH_SET", payload });
-
-const searchRequest = () => ({
-  type: "SEARCH_REQUEST",
-  status: "PENDING",
-  payload: null,
-  error: null
+export const setSearchData = payload => ({
+  type: "SEARCH_SET",
+  payload
 });
 
-const searchRequestSuccess = action => {
-  const { payload } = action;
-  return {
-    type: "SEARCH_REQUEST_SUCCESS",
-    status: "RESOLVED",
-    payload,
-    error: null
-  };
+const searchRequest = () => ({
+  type: "SEARCH_REQUEST"
+});
+
+const searchRequestSuccess = payload => ({
+  type: "SEARCH_REQUEST_SUCCESS",
+  payload
+});
+
+const searchRequestFail = error => ({
+  type: "SEARCH_REQUEST_FAIL",
+  error
+});
+
+export const getSearch = searchQuery => async dispatch => {
+  dispatch(searchRequest());
+  try {
+    const { data } = await request.search(searchQuery);
+
+    dispatch(searchRequestSuccess(data));
+  } catch (error) {
+    dispatch(searchRequestFail(error));
+  }
 };
-
-const searchRequestFail = action => {
-  const { error } = action;
-  return {
-    type: "SEARCH_REQUEST_FAIL",
-    status: "REJECTED",
-    payload: null,
-    error
-  };
-};
-
-export function getSearch(searchQuery) {
-  return async function(dispatch) {
-    dispatch(searchRequest());
-    try {
-      const { data } = await request.search(searchQuery);
-      const payload = data;
-
-      dispatch(
-        searchRequestSuccess({
-          payload
-        })
-      );
-    } catch (error) {
-      dispatch(searchRequestFail({ error }));
-    }
-  };
-}
