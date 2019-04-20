@@ -180,7 +180,7 @@ class ProfileForm extends Component{
             tagsFromInput.forEach( elem => {
                 let tag = elem.trim();
                 if( tags.indexOf(tag) > -1 ||  
-                    /^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*\s\*]{2,25}$/.test(value)){
+                    !/^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*\s\*]{2,25}$/.test(tag)){
                         this.setState(prevState => ({
                             ...prevState,
                             researchAreas:{
@@ -327,7 +327,9 @@ class ProfileForm extends Component{
         const {avatar} = this.state;  
         if (avatar.src === src && avatar.scale === scale) return;
         else {
-            saveAvatar({src: data,
+            saveAvatar({
+                sourceSrc: avatar.sourceSrc,
+                src: data,
                 scale: avatar.scale});
             this.setState(prevState => ({
                 ...prevState,

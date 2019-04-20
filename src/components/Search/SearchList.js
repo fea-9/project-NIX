@@ -11,6 +11,10 @@ let mapStateToProps = state => ({
 
 class SearchList extends PureComponent {
 
+    state = {
+        disabled: false
+    }
+
     sortSearch = e =>{
         let nData = this.props.data;
         if(e.target.value === "Max"){
@@ -21,6 +25,7 @@ class SearchList extends PureComponent {
             nData.articlesList = sortFunc(this.props.data.articlesList, "articleCitations", true)
             this.props.setSearchData(nData)
         }
+        this.setState({disabled:true})
     }
 
     render() {
@@ -35,7 +40,8 @@ class SearchList extends PureComponent {
                     </h3>
                     <div className="search-list_header-sort-wrapper">
                         Sort by
-                        <select onChange={this.sortSearch} className="search-list_header-sort">
+                        <select selected="default"  onChange={this.sortSearch} className="search-list_header-sort">
+                            <option value="default" disabled={this.state.disabled} className="search-list_header-sort-item">---</option>
                             <option value="Max" className="search-list_header-sort-item">Max to min</option>
                             <option value="Min" className="search-list_header-sort-item">Min to max</option>
                         </select>
