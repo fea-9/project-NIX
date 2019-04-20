@@ -12,14 +12,12 @@ import Error from "../Error/Error";
 
 let mapStateToProps = state => ({
   dashRange: state.dashboardRange,
-  interseptrorWorking: state.auth.interseptrorWorking,
   token: state.auth.user.access_token
 });
 
 class DashboardPage extends Component {
   componentDidMount() {
-    const { location, getStats, interseptrorWorking } = this.props;
-    if (interseptrorWorking) return;
+    const { location, getStats } = this.props;
     const search = queryString.parse(location.search);
     getStats(search);
   }

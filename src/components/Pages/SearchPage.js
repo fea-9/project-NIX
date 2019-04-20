@@ -13,23 +13,20 @@ import Error from "../Error/Error"
 
 let mapStateToProps = state => ({
   search: state.search,
-  interseptrorWorking: state.auth.interseptrorWorking,
   token: state.auth.user.access_token
 });
 
 class SearchPage extends Component {
 
   componentDidMount() {
-    const { location, getSearch, interseptrorWorking } = this.props
-    if (interseptrorWorking) return;
+    const { location, getSearch } = this.props
     location.search && getSearch( location.search.substr(1) );
     
   }
 
   componentWillUnmount(){
-    const { interseptrorWorking } = this.props
-    if (interseptrorWorking) return;
-    this.props.searchClear()
+    const { searchClear } = this.props
+    searchClear()
   }
 
   changeInput =()=> this.props.location.search ? this.props.location.search.substr(1): ''

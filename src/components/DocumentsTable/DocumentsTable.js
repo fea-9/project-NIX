@@ -14,7 +14,6 @@ import PropTypes from "prop-types";
 let mapStateToProps = state => ({
   documents: state.documents,
   token: state.auth.user.access_token,
-  interseptrorWorking: state.auth.interseptrorWorking,
   mobile: state.resize.mobile
 });
 
@@ -85,8 +84,7 @@ class DocumentsTable extends Component {
   };
 
   componentDidMount() {
-    const { getDocuments, interseptrorWorking } = this.props
-    if (interseptrorWorking) return;
+    const { getDocuments } = this.props
     getDocuments();
   }
 
