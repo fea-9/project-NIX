@@ -2,7 +2,7 @@ import axios from "axios";
 
 import store from "./components/store";
 
-import { authLogout, setInterceptorStatus } from "./components/actions/auth";
+import { setInterceptorStatus } from "./components/actions/auth";
 import { refreshTokens } from "./components/actions/token";
 
 const baseURL =
@@ -114,27 +114,25 @@ export const updateUser = (id, { fullName, email }) =>
 const createInterceptorsResponse = () => {
   const instanceInterceptorsResponse = instance.interceptors.response.use(
     response => response,
-    error => {
+    async error => {
       const { url } = error.config;
-      const mass = url.split("/");
-      if (mass[mass.length - 2] === "auth") return Promise.reject(error);
-      if (mass[mass.length - 1] > 2 && mass[mass.length - 2] === "community")
+      const urlArr = url.split("/");
+      if (
+        urlArr[urlArr.length - 2] === "auth" ||
+        (urlArr[urlArr.length - 1] > 2 &&
+          urlArr[urlArr.length - 2] === "community")
+      )
         return Promise.reject(error);
       instance.interceptors.response.eject(instanceInterceptorsResponse);
-      store.dispatch(setInterceptorStatus(true));
-      return store
-        .dispatch(refreshTokens())
-        .then(() => {
-          return instance.request(error.config);
-        })
-        .catch(err => {
-          store.dispatch(authLogout());
-          return new Promise.reject(err);
-        })
-        .finally(() => {
-          store.dispatch(setInterceptorStatus(false));
-          return createInterceptorsResponse();
-        });
+      await store.dispatch(setInterceptorStatus(true));
+      await store.dispatch(refreshTokens());
+      const { auth } = store.getState();
+      if (auth.user) {
+        createInterceptorsResponse();
+        return instance.request(error.config);
+      }
+      createInterceptorsResponse();
+      return Promise.reject(error);
     }
   );
 };
