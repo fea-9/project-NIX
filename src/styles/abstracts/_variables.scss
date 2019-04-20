@@ -22,6 +22,7 @@ $heightSidebar: 100vh;
 $widthtSidebar: 100vw;
 $backgroundColorSidebar: linear-gradient(to top, #012724, #276763 75%, #489e98);
 $paddingSidebar: 1.5rem 0 0 0;
+$zIndexSidebar: 999;
 
 $heightSidebarMobileMinimized: auto;
 $backgroundSidebarMobileMinimized: #489e98;
@@ -196,7 +197,7 @@ $borderRadiusCalendarWrapper: 0.5rem;
 $backgroundColorCalendarWrapper: #f4f7f8;
 $borderCalendarWrapper: 1px solid #cad5da;
 $topRadiusCalendarWrapper: 100%;
-$rightRadiusCalendarWrapper: -10%;
+$rightRadiusCalendarWrapper: 0;
 $zIndexCalendarWrapper: 999;
 
 $fontFamilyCalendarInput: "Roboto", sans-serif;
