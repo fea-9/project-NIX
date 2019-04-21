@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import sortFunc from "../../utils/sortFunc.js";
-import { Scrollbars } from 'react-custom-scrollbars';
 import { connect } from "react-redux";
 import * as actions from "../actions/search";
+import CustomScrollbars from "../CustomScrollbars/CustomScrollbars";
 
 let mapStateToProps = state => ({
     search: state.search,
@@ -48,7 +48,7 @@ class SearchList extends PureComponent {
                     </div>
                 </div>
                 <div className="search-list_content">
-                    <Scrollbars>
+                    <CustomScrollbars>
                         {
                             this.props.data.articlesList.map((article, index) => {
                                 return (
@@ -80,7 +80,7 @@ class SearchList extends PureComponent {
                                 )
                             })
                         }
-                    </Scrollbars>
+                    </CustomScrollbars>
                 </div>
             </div>
         )

@@ -8,6 +8,7 @@ import Icon from "../BaseComponents/icon/index";
 import { Scrollbars } from "react-custom-scrollbars";
 import AvaMock from "../CommunityTable/AvaMock";
 import SwitchImage from "../SwitchImage/SwitchImage";
+import CustomScrollbars from "../CustomScrollbars/CustomScrollbars";
 
 let mapStateToProps = state => ({
   publicProfile: state.publicProfile,
@@ -165,83 +166,85 @@ class PublicProfile extends Component {
     const mobile = p.mobile ? "-mobile" : ""
     return (
       <div className="pub-us-main">
-        <div className="pub-us-head">
-          <div className={`pub-us-layout${mobile}`}>
-            <SwitchImage src={data.logoUrl} 
-                         className={`pub-ava${mobile}`} 
-                         alt={<AvaMock text={data.name} className={`pub-ava${mobile}`} width="12rem" height="12rem"/>}/>
-            {/* <img src={data.logoUrl} alt="*" /> */}
-            <div className={`pub-us-title${mobile}`}>
-              <h3>{data.name}</h3>
-              <p>Member since {getFullMonthDate(data.createdDate)}</p>
+        <CustomScrollbars >
+          <div className="pub-us-head">
+            <div className={`pub-us-layout${mobile}`}>
+              <SwitchImage src={data.logoUrl} 
+                          className={`pub-ava${mobile}`} 
+                          alt={<AvaMock text={data.name} className={`pub-ava${mobile}`} width="12rem" height="12rem"/>}/>
+              {/* <img src={data.logoUrl} alt="*" /> */}
+              <div className={`pub-us-title${mobile}`}>
+                <h3>{data.name}</h3>
+                <p>Member since {getFullMonthDate(data.createdDate)}</p>
+              </div>
             </div>
-          </div>
-          <div className={`pub-us-total${mobile}`}>
-            {Object.entries(data.totalStats).map((el, ind) => {
-              const colors = ["#34FFF3", "#5CE5DD", "#37D3CA"];
-              return (
-                <div className={`pub-us-inf${mobile}`} key={ind}>
-                  <div
-                    className={`pub-us-inf${mobile}__num`}
-                    style={{ color: colors[ind] }}
-                  >
-                    {el[1]}
+            <div className={`pub-us-total${mobile}`}>
+              {Object.entries(data.totalStats).map((el, ind) => {
+                const colors = ["#34FFF3", "#5CE5DD", "#37D3CA"];
+                return (
+                  <div className={`pub-us-inf${mobile}`} key={ind}>
+                    <div
+                      className={`pub-us-inf${mobile}__num`}
+                      style={{ color: colors[ind] }}
+                    >
+                      {el[1]}
+                    </div>
+                    <div className={`pub-us-inf${mobile}__text`}>{textView(el[0])}</div>
                   </div>
-                  <div className={`pub-us-inf${mobile}__text`}>{textView(el[0])}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className={`pub-us-body${mobile}`}>
-          <div className={`pub-us-left${mobile}`}>
-            <div className="pub-us-panel">
-              {Object.entries(data.platformStats).map((el, ind) => (
-                <div className="pub-us-item" key={ind}>
-                  <div className="pub-us-item__num">{el[1]}</div>
-                  <div className="pub-us-item__text">{textView(el[0])}</div>
-                </div>
-              ))}
-            </div>
-            <div className="pub-us-center">
-              <SlideCard
-                icon={
-                  <Icon
-                    type="projectsIcon"
-                    className="list-icon"
-                    width={20}
-                    height={20}
-                  />
-                }
-                title="Public Projects"
-                arrows={[
-                  <Icon
-                    type="tabPrewIcon"
-                    className="arrow-icon"
-                    width={10}
-                    height={18}
-                    viewBox="0 0 10 18"
-                  />,
-                  <Icon
-                    type="tabNextIcon"
-                    className="arrow-icon"
-                    width={10}
-                    height={18}
-                    viewBox="0 0 10 18"
-                  />
-                  
-                ]}
-                data={data.publicProjects}
-              />
-            </div>
-            <div className={`pub-us-bottom${mobile}`}> 
-                <DescriptionCard mobile={mobile} data={data.description}/>
+                );
+              })}
             </div>
           </div>
-          <div className={`pub-us-right${mobile}`}> 
-                <CitiedCard data={data.mostCitationsArticle}/>
+          <div className={`pub-us-body${mobile}`}>
+            <div className={`pub-us-left${mobile}`}>
+              <div className="pub-us-panel">
+                {Object.entries(data.platformStats).map((el, ind) => (
+                  <div className="pub-us-item" key={ind}>
+                    <div className="pub-us-item__num">{el[1]}</div>
+                    <div className="pub-us-item__text">{textView(el[0])}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="pub-us-center">
+                <SlideCard
+                  icon={
+                    <Icon
+                      type="projectsIcon"
+                      className="list-icon"
+                      width={20}
+                      height={20}
+                    />
+                  }
+                  title="Public Projects"
+                  arrows={[
+                    <Icon
+                      type="tabPrewIcon"
+                      className="arrow-icon"
+                      width={10}
+                      height={18}
+                      viewBox="0 0 10 18"
+                    />,
+                    <Icon
+                      type="tabNextIcon"
+                      className="arrow-icon"
+                      width={10}
+                      height={18}
+                      viewBox="0 0 10 18"
+                    />
+                    
+                  ]}
+                  data={data.publicProjects}
+                />
+              </div>
+              <div className={`pub-us-bottom${mobile}`}> 
+                  <DescriptionCard mobile={mobile} data={data.description}/>
+              </div>
+            </div>
+            <div className={`pub-us-right${mobile}`}> 
+                  <CitiedCard data={data.mostCitationsArticle}/>
+            </div>
           </div>
-        </div>
+        </CustomScrollbars>
       </div>
     );
   }

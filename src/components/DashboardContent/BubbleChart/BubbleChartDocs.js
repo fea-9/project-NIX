@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { Scrollbars } from "react-custom-scrollbars";
+import CustomScrollbars from "../../CustomScrollbars/CustomScrollbars"
 
 class DocumentsList extends Component {
     render () {
@@ -30,9 +30,9 @@ class DocumentsList extends Component {
                 </>
         return (
             <div className = "keychart-list__box" >
-                {!mobile ? <Scrollbars>
+                {!mobile ? <CustomScrollbars>
                     {documentsList}
-                </Scrollbars > : documentsList}
+                </CustomScrollbars > : documentsList}
             </div>
         )
     }

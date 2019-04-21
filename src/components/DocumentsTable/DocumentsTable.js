@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import sortFunc from "../../utils/sortFunc.js";
 import varyDateView from "../../utils/varyDateView.js";
-import { Scrollbars } from "react-custom-scrollbars";
 import DocCard from "../DocCard/DocCard";
 import * as actions from "../actions/documents";
 import { connect } from "react-redux";
@@ -10,6 +9,7 @@ import Icon from "../BaseComponents/icon/index";
 import Button from "../BaseComponents/Button";
 import Error from "../Error/Error";
 import PropTypes from "prop-types";
+import CustomScrollbars from "../CustomScrollbars/CustomScrollbars";
  
 let mapStateToProps = state => ({
   documents: state.documents,
@@ -139,7 +139,7 @@ class DocumentsTable extends Component {
           ))}
         </div>
         <div className="documents__main">
-          <Scrollbars>
+          <CustomScrollbars>
             {p.documents.data.documentslist.map((elem, index, arr) => (
               <DocCard
                 data={p.documents.data}
@@ -154,7 +154,7 @@ class DocumentsTable extends Component {
                 documentProof={elem.documentProof || false}
               />
             ))}
-          </Scrollbars>
+          </CustomScrollbars>
         </div>
       </div>
     );

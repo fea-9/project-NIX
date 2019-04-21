@@ -1,0 +1,11 @@
+.tr-horizontal, .th-horizontal {
+    display: none;
+  }
+  .tr-vertical {
+    position: absolute;
+    width: 6px;
+    right: 2px;
+    bottom: 2px;
+    top: 2px;
+    border-radius: 3px;
+  }
