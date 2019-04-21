@@ -123,6 +123,7 @@ const createInterceptorsResponse = () => {
           urlArr[urlArr.length - 2] === "community")
       )
         return Promise.reject(error);
+      if(!error.response) return Promise.reject(error);
       instance.interceptors.response.eject(instanceInterceptorsResponse);
       await store.dispatch(setInterceptorStatus(true));
       await store.dispatch(refreshTokens());

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import PropTypes from "prop-types";
+import CustomScrollbars from "../CustomScrollbars/CustomScrollbars"
 
 import Button from "../BaseComponents/Button";
 import getFullMonthDate from "../../utils/getFullMonthDate";
@@ -36,7 +37,7 @@ export default class CommunityTable extends Component {
           {this.props.title} People community
         </div>
         <div className={`community-table${mobile}__main`}>
-          <Scrollbars>
+          <CustomScrollbars>
             {this.props.data.map((user, index) => {
               return (
                 <div key={index} className={`table-line${mobile}`}>
@@ -76,7 +77,7 @@ export default class CommunityTable extends Component {
                 </div>
               );
             })}
-          </Scrollbars>
+          </CustomScrollbars>
         </div>
       </div>
     );
