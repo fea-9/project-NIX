@@ -120,7 +120,8 @@ const createInterceptorsResponse = () => {
       if (
         urlArr[urlArr.length - 2] === "auth" ||
         (urlArr[urlArr.length - 1] > 2 &&
-          urlArr[urlArr.length - 2] === "community")
+          urlArr[urlArr.length - 2] === "community") ||
+        !error.response // правка от Яна, фикс бага при search запросе с кириллицей
       )
         return Promise.reject(error);
       instance.interceptors.response.eject(instanceInterceptorsResponse);
