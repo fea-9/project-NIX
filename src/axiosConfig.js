@@ -124,7 +124,6 @@ const createInterceptorsResponse = () => {
         !error.response // правка от Яна, фикс бага при search запросе с кириллицей
       )
         return Promise.reject(error);
-      if(!error.response) return Promise.reject(error);
       instance.interceptors.response.eject(instanceInterceptorsResponse);
       await store.dispatch(setInterceptorStatus(true));
       await store.dispatch(refreshTokens());
