@@ -29,10 +29,11 @@ class Calend extends Component {
           .join(" ")
       : format === "mm/dd/yyyy"
       ? [date.getMonth() + 1, date.getDate(), date.getFullYear()].join("/")
-      : '';
+      : "";
   };
 
   render() {
+    const { startRange, endRange } = this.state;
     return (
       <div className="calendar-wrapper">
         <div className="calendar-wrapper__inputs-block">
@@ -41,14 +42,14 @@ class Calend extends Component {
             type="text"
             name="startRange"
             placeholder="06/11/2018"
-            defaultValue={this.state.startRange}
+            defaultValue={startRange}
           />
           <input
             className="calendar-wrapper__inputs-block__input"
             type="text"
             name="endRange"
             placeholder="06/14/2018"
-            defaultValue={this.state.endRange}
+            defaultValue={endRange}
           />
         </div>
         <Calendar
