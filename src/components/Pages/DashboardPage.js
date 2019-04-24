@@ -19,6 +19,7 @@ class DashboardPage extends Component {
   componentDidMount() {
     const { location, getStats } = this.props;
     const search = queryString.parse(location.search);
+    if (search.period === "range") return getStats({period: "quarter"}); // fix request range
     getStats(search);
   }
 
