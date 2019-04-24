@@ -4,11 +4,12 @@ import "core-js";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 
 import App from "./components/App/App";
 import { refreshTokens } from "./components/actions/token";
 import store from "./components/store";
+import history from "./history"
 
 import * as serviceWorker from "./serviceWorker";
 
@@ -23,9 +24,9 @@ if (token && refreshToken) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

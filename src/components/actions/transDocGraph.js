@@ -1,20 +1,26 @@
-import {refreshTokens} from "./token";
-import apiWorker from "../../utils/apiWorker";
+import * as request from "../../axiosConfig";
 
-export const transDocRequest = ( token ) => {
-    return apiWorker(
-        {
-            typeRequest: "TRANS_DOC_PENDING",
-            typeSuccess: "TRANS_DOC_SUCCSESS",
-            typeFail: "TRANS_DOC_FAIL"
-        },
-        {
-            url: "/keywords",
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            },
-            method: "get"
-        }
-    )
-} 
+const transDocRequest = () => ({
+  type: "TRANS_DOC_REQUEST"
+});
+
+const transDocRequestSuccess = payload => ({
+  type: "TRANS_DOC_REQUEST_SUCCSESS",
+  payload
+});
+
+const transDocRequestFail = error => ({
+  type: "TRANS_DOC_REQUEST_FAIL",
+  error
+});
+
+export const getTransDoc = () => async dispatch => {
+  dispatch(transDocRequest());
+  try {
+    const { data } = await request.getKeywords();
+
+    dispatch(transDocRequestSuccess(data));
+  } catch (error) {
+    dispatch(transDocRequestFail(error));
+  }
+};

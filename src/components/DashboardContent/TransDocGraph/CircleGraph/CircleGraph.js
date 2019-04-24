@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Scrollbars } from "react-custom-scrollbars";
 import "./CircleGraph.scss";
 import PropTypes from "prop-types";
+import {Scrollbars} from "react-custom-scrollbars";
 
 class CustomScrollbars extends Component {
   render() {
@@ -26,7 +26,7 @@ export default class CircleGraph extends Component {
     data: PropTypes.array,
     valueKey: PropTypes.string,
     nameKey: PropTypes.string,
-    mobile: PropTypes.number,
+    mobile: PropTypes.bool,
     height: PropTypes.oneOfType (
       [
         PropTypes.string,
@@ -109,7 +109,7 @@ export default class CircleGraph extends Component {
                     <span className={"line__num"}>{el[valueKey]}</span>
                   </div>
                 );
-              })}
+              })} 
             </CustomScrollbars>
           </div>
         </div>
@@ -157,10 +157,9 @@ export default class CircleGraph extends Component {
             x={0}
             y={0 + 0.1}
             textAnchor="middle"
-            fontSize={"0.3px"}
+            fontSize={"2%"}
             style={{ transform: " rotate(90deg)" }}
             fill="#000"
-            className="sum-text"
           >
             {this.state.displayValue}
           </text>

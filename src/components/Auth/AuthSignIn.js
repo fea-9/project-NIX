@@ -2,11 +2,9 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 
 import * as actions from "../actions/auth";
-
 import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
 
-import {authValidation} from "./authValidate";
+import {authValidation} from "../../utils/authValidate";
 import InputField from "../BaseComponents/Forms/Input";
 
 class SignIn extends Component{
@@ -66,10 +64,10 @@ class SignIn extends Component{
    
     submit = e => {
         e.preventDefault();
-        let {auth} = this.props
+        const {auth} = this.props
         const values = Object.keys(this.state).reduce((prev, elem) => ({ ...prev, [elem]: this.state[elem].value }), {});
         if (this.formIsValid()){
-            auth (values, "signin");
+            auth (values, "signin")
         }        
     }
 
@@ -98,18 +96,19 @@ class SignIn extends Component{
     }
 
     render () {
-        let {isFetching, authErrorMessage} = this.props
-        let errorMessage = authErrorMessage === "Password incorrect" || 
+        const {isFetching, authErrorMessage} = this.props
+        const errorMessage = authErrorMessage === "Password incorrect" || 
             authErrorMessage === "No such user" ? "Incorrect email or password" : "Something went wrong. Try again, please"
-        let list = Object.keys(this.state).map (elem => {
-            let stateItem = this.state[elem]
+
+        const list = Object.keys(this.state).map (elem => {
+            const stateItem = this.state[elem]
             return <InputField 
-                key={elem}
-                config = {stateItem.config}
-                validationRequired = {stateItem.validationRequired}                
-                onBlur={this.validateInput}
-                onChange={this.validateInput}                
-                />
+                        key={elem}
+                        config = {stateItem.config}
+                        validationRequired = {stateItem.validationRequired}                
+                        onBlur={this.validateInput}
+                        onChange={this.validateInput}                
+                    />
         })
         return (                        
             <form className="auth__form" onSubmit={this.submit} noValidate={true} >
@@ -133,16 +132,15 @@ SignIn.propTypes = {
 SignIn.defaultProps = {
     isFetching: false,
     authErrorMessage: "",
-    auth: () => {console.log(`Auth submit ...`)} 
+    auth: () => {console.log(`Auth submit isn't set`)} 
 };
 
-const mapStateToProps = state => {
-	return {
-        isFetching: state.auth.isFetching,
-        authErrorMessage: state.auth.message	
-	};
-};
+const mapStateToProps = state => ({
+    isFetching: state.auth.isFetching,
+    authErrorMessage: state.auth.message	
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actions }, dispatch);
+
+const mapDispatchToProps = { ...actions };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

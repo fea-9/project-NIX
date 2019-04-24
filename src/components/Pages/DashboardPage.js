@@ -10,7 +10,6 @@ import RangePanel from "../RangePanel/RangePanel";
 import queryString from "query-string";
 import Error from "../Error/Error";
 
-
 let mapStateToProps = state => ({
   dashRange: state.dashboardRange,
   token: state.auth.user.access_token
@@ -18,9 +17,9 @@ let mapStateToProps = state => ({
 
 class DashboardPage extends Component {
   componentDidMount() {
-    const {location, token, dashboardRequest} = this.props
-    const search = queryString.parse(location.search)
-    dashboardRequest( search, token);
+    const { location, getStats } = this.props;
+    const search = queryString.parse(location.search);
+    getStats(search);
   }
 
   render() {
@@ -29,14 +28,16 @@ class DashboardPage extends Component {
       <PageTemplate
         title={"Dashboard"}
         sidebar={<Sidebar />}
-        header={<HeaderTemplate title={"Dashboard"} component={<RangePanel/>}/>}
+        header={
+          <HeaderTemplate title={"Dashboard"} component={<RangePanel />} />
+        }
         content={
           p.dashRange.initial || p.dashRange.isFetching ? (
             <DashboardContent spinner={true} />
           ) : p.dashRange.error ? (
             <Error />
           ) : (
-            <DashboardContent data={p.dashRange.data.data} />
+            <DashboardContent data={p.dashRange.data} />
           )
         }
       />

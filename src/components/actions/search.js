@@ -1,29 +1,35 @@
-import {refreshTokens} from "./token";
-import apiWorker from "../../utils/apiWorker";
+import * as request from "../../axiosConfig";
 
-export const searchRequest = ( params, token ) => {
-    return apiWorker(
-        {
-            typeRequest: "SEARCH_PENDING",
-            typeSuccess: "SEARCH_SUCCSESS",
-            typeFail: "SEARCH_FAIL"
-        },
-        {
-            url: "/search",
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            },
-            method: "get",
-            params: params
-        }
-    )
-}
+export const searchClear = () => ({
+  type: "SEARCH_CLEAR"
+});
 
-export const searchClear = () => {
-    return(
-        {
-            type: "SEARCH_CLEAR"
-        }
-    ) 
-}
+export const setSearchData = payload => ({
+  type: "SEARCH_SET",
+  payload
+});
+
+const searchRequest = () => ({
+  type: "SEARCH_REQUEST"
+});
+
+const searchRequestSuccess = payload => ({
+  type: "SEARCH_REQUEST_SUCCESS",
+  payload
+});
+
+const searchRequestFail = error => ({
+  type: "SEARCH_REQUEST_FAIL",
+  error
+});
+
+export const getSearch = searchQuery => async dispatch => {
+  dispatch(searchRequest());
+  try {
+    const { data } = await request.search(searchQuery);
+
+    dispatch(searchRequestSuccess(data));
+  } catch (error) {
+    dispatch(searchRequestFail(error));
+  }
+};

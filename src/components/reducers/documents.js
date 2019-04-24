@@ -2,19 +2,17 @@ import initialState from "../store/initialState";
 
 export default (state = initialState.documents, { type, payload, error }) => {
     switch (type) {
-      case "DOC_PENDING": {
+      case "DOC_REQUEST": {
         return { ...state, isFetching: true, initial: false };
       }
-      case "DOC_SUCCSESS": {
+      case "DOC_REQUEST_SUCCSESS": {
         return { data: payload ,error: false,  isFetching: false, initial: false};
       }
-      case "DOC_FAIL": {
-        return { ...initialState.documents, error: true, isFetching: false, initial: false };
+      case "DOC_REQUEST_FAIL": {
+        return { ...initialState.documents, error, isFetching: false, initial: false };
       }
       case "DOC_SET": {
-        let newData = JSON.parse(JSON.stringify(state.data))
-        newData.data = payload
-        return { data: newData, error: null, isFetching: false, initial: false };
+        return { data: payload, error: null, isFetching: false, initial: false };
       }
       default:
         return state;

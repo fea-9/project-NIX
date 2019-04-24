@@ -10,7 +10,9 @@ import {Copyright} from "../Copyright/Copyright";
 import Error from "../Error/Error";
 import PropTypes from "prop-types";
 
-let mapStateToProps = state => ({
+
+
+let mapStateToProps = state => ({ 
   graph: state.transDocGraph,
   token: state.auth.user.access_token,
   mobile: state.resize.mobile
@@ -28,9 +30,9 @@ class DashboardContent extends Component {
     token: PropTypes.string,
     mobile: PropTypes.bool
   }
-  componentDidMount(){
-    let token = localStorage.getItem("access_token");
-    this.props.transDocRequest(token)
+  componentDidMount() {
+    const { getTransDoc } = this.props
+    getTransDoc()
   }
   render(){
     const p = this.props 
@@ -69,7 +71,7 @@ class DashboardContent extends Component {
               ) : p.graph.error ? (
                 <Error />
               ) : (
-                <BubbleChart data={p.graph.data.data}/>
+                <BubbleChart data={p.graph.data}/>
               )
             }            
           </div>
@@ -80,7 +82,7 @@ class DashboardContent extends Component {
               ) : p.graph.error ? (
                 <Error />
               ) : (
-                <TransDocGraph data={p.graph.data.data}/>
+                <TransDocGraph data={p.graph.data}/>
               )
             }
           </div>
@@ -92,6 +94,7 @@ class DashboardContent extends Component {
     )
   }
 };
+
 
 DashboardContent =connect(mapStateToProps, {...actions})(DashboardContent)
 

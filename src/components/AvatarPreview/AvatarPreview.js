@@ -9,11 +9,10 @@ class AvatarPreview extends Component {
     srcAvatar: PropTypes.string,
     fullName: PropTypes.string,
     minimized: PropTypes.bool,
-    scale: PropTypes.number
   };
 
   render() {
-    const { srcAvatar, fullName, minimized, scale } = this.props;
+    const { srcAvatar, fullName, minimized } = this.props;
 
     return (
       <div
@@ -29,7 +28,6 @@ class AvatarPreview extends Component {
               className="profile-preview__img"
               src={srcAvatar}
               alt="avatar"
-              style={{ transform: `scale(${scale})` }}
             />
             <div className="profile-preview__icon">
               <Icon
@@ -53,7 +51,6 @@ const mapStateToProps = state => ({
   fullName: state.auth.user.fullName,
   minimized: state.sidebar.minimized,
   srcAvatar: state.avatar.src,
-  scale: state.avatar.scale
 });
 
 export default connect(mapStateToProps)(AvatarPreview);

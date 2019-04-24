@@ -71,7 +71,6 @@
 .indikators-mobile {
 	flex-direction: column;
 	margin: 0;
-	// justify-content: center;
 	&__item {
 		&__artifacts,
 		&__contributors, 
@@ -79,8 +78,9 @@
 		&__total-citations, 
 		&__proof-of-existence {
 			margin-left: 10px;
-			width: 100%;
+			width: 0;
 			text-align: left;
+			font-size: 2rem;
 		}
 		&__total-citations {
 			justify-content: flex-start;
@@ -96,4 +96,27 @@
 }
 .threePointIcon:hover {
 	background: #7b8180aa;
+}
+@media  (min-width: 778px) and (max-width: 1440px) {
+	.indikators {
+		&__item {
+			&__artifacts,
+			&__contributors, 
+			&__keywords, 
+			&__total-citations, 
+			&__proof-of-existence {
+				font-size: calc(0.6vh + 0.6vw);
+			}
+			&__contributors {
+				width: 22%;
+			}
+			&__keywords {
+				width: 16%;
+			}
+			&__total-citations {
+				width: 18%;
+				justify-content: center;
+			}
+		}
+	}
 }

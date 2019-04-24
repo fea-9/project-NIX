@@ -4,7 +4,8 @@ export default {
     user: null,
     error: null,
     message: null,
-    isFetching_token: false
+    isFetching_token: false,
+    interseptrorWorking: false
   },
   resize: {
     mobile: false
@@ -44,6 +45,7 @@ export default {
   },
   avatar: {
     src:"http://www.blackdesertbase.com/img/users/avatars/70.png",
+    sourceSrc: "http://www.blackdesertbase.com/img/users/avatars/70.png",
     scale: 1
   },
   search: {

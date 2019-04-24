@@ -21,3 +21,27 @@
   width: 100%;
   height: 100%;
 }
+.fix-btn-group {
+  min-width: 12rem;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+@media  (min-width: 778px) and (max-width: 1024px) {
+  .fix-btn-group {
+    min-width: 0;
+  }
+  .graph-panel h3 {
+    font-size: 1.2rem;
+  }
+}
+@media  (min-width: 768px) and (max-width: 1336px){
+  .graph-panel h3 {
+    font-size: 1.2rem;
+  }
+  .fix-btn-group .btn-group .btn {
+    padding: 1px 5px;
+    font-size: 1rem;
+  }
+  
+}

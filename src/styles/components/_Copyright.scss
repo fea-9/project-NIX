@@ -1,9 +1,17 @@
 .copyright {
-    font-family: "Roboto";
-    color: #9B9F9F;
-    font-size: 1.1rem;
+  font-family: $fontFamilyCopyright;
+  color: $colorCopyright;
+  font-size: $fontSizeCopyright;
 
-    .copyright__link {
-        color: #2C2C2C;
-    }
+  .copyright__link {
+    color: $colorCopyrightLink;
+  }
+}
+
+.copyright_serach {
+  color: $colorCopyrightSearchPage;
+
+  .copyright__link {
+    color: $colorCopyrightLinkSearchPage;
+  }
 }

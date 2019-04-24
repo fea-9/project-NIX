@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
+import { connect } from "react-redux";
 
 import * as d3 from "d3";
 
-class BubbleChart extends Component {
+class BubbleChartView extends Component {
     
     minValue = 1;
     maxValue = 100;
@@ -11,38 +12,27 @@ class BubbleChart extends Component {
     
     state = {
         data: [],
-        // width: 0,
-        // height: 0
-    };    
-   
-    // componentDidUpdate() {//ловим пропсы с сайдбара, если изменились то resize.
-    //     this.setSizes();
-    // }
-    // componentWillUnmount(){
-    //     window.removeEventListener("resize", this.setSizes)
-    // }
-    
-    // setSizes = () => {
-    //     if(!this.container) return
-        
-    //     let currentWidth = this.container.offsetWidth;
-    //     let currentHeight = this.container.offsetHeight;
-    //     console.log(currentWidth, currentHeight)
-    //     if (
-    //         this.state.width !== currentWidth &&
-    //         this.state.height !== currentHeight
-    //     )
-    //     this.setState(prevState => ({ 
-    //         ...prevState,
-    //         width: currentWidth, 
-    //         height: currentHeight }));
-    // };
-   
+        width: 0,
+        height: 0
+    };   
 
+    componentDidUpdate(prevProps, prevState) {
+        this.setSizes();
+        if (prevState.width !== this.state.width ||
+            prevState.height !== this.state.height)
+            this.simulatePositions(this.props.data);
+    }
+    
+    componentWillUnmount(){
+        this.mounted = false;
+        window.removeEventListener("resize", this.setSizes);
+    }
+   
     componentDidMount() {
-        // this.setSizes();
-        // window.addEventListener("resize", this.setSizes)
-        if (this.props.data.length > 0) {
+        this.setSizes();
+        window.addEventListener("resize", this.setSizes);
+        this.mounted = true;
+        if (this.props.data.length > 0 ) {
 
             this.minValue =
                 0.5 *
@@ -59,13 +49,28 @@ class BubbleChart extends Component {
             this.simulatePositions(this.props.data);
         }
     }
-
     
+    setSizes = () => {
+        if(!this.container) return;
+        
+        let currentWidth = this.container.offsetWidth;
+        let currentHeight = this.container.offsetHeight;
+        if (
+            this.state.width !== currentWidth &&
+            this.state.height !== currentHeight
+        )
+            this.setState(prevState => ({ 
+                ...prevState,
+                width: currentWidth, 
+                height: currentHeight }));
+    };
 
-    radiusScale = value => {      
+    radiusScale = value => { 
+        const {width, height} = this.state
+        const minSideSize = width < height ? width : height  
         const fx = d3
             .scaleSqrt()
-            .range([1, 90])
+            .range([1, (3200*minSideSize/this.maxValue)])
             .domain([this.minValue, this.maxValue]);
         return fx(value);
     };
@@ -87,9 +92,8 @@ class BubbleChart extends Component {
                 .iterations(1)
             ) 
             .on("tick", () => {
-                
-                    this.setState({ data });
-                
+                if (this.mounted)
+                    this.setState({ data });                
             })
     };
 
@@ -101,11 +105,10 @@ class BubbleChart extends Component {
     }
 
     renderBubbles = data => {
-        const {width, height} = this.props
-
+        // const {width, height} = this.props
+        const {width, height} = this.state
         const color = "#5CE5DD";
 
-        // render circle and text elements inside a group
         const texts = data.map((item, index) => {
             const fontSize = this.radiusScale(item.v)/3;
             const textLines = item.key.length > 10 && item.key.search(/\s/g) < 0 ? 
@@ -118,9 +121,9 @@ class BubbleChart extends Component {
                     transform={`translate(${width / 2 + item.x}, 
                         ${height / 2 + item.y})`}
                     onClick = {this.onClick}
-                    onMouseOver = {(d) => d3.select(`#${item.key.split(" ").join("")}`)
-                            .attr("r", this.radiusScale(item.v) * 1.04)}
-                    onMouseOut = {(d) => d3.select(`#${item.key.split(" ").join("")}`)
+                    onMouseEnter = {(d) => d3.select(`#${item.key.split(" ").join("_")}`)
+                            .attr("r", this.radiusScale(item.v) + 1.5)}
+                    onMouseLeave = {(d) => d3.select(`#${item.key.split(" ").join("_")}`)
                         .attr("r", this.radiusScale(item.v))}
                 >
                     <circle
@@ -163,12 +166,17 @@ class BubbleChart extends Component {
    
     render() { 
         const {data} = this.state
-        const { width, height} = this.props
-        
+        // const { width, height} = this.props
+        const {width, height} = this.state
+        const {mobile} = this.props
+        const minSideSize = width < height ? width : height
+
         if (data.length) {
             return (
-                <div className = "keychart-view" ref={el => (this.container = el)}>
-                    <svg width={width} height={height} >
+                <div className = "keychart-view" 
+                ref={el => (this.container = el)} 
+                id = "view" >
+                    <svg width={width} height={mobile ? minSideSize : height*0.9 } >
                         <defs>
                             <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
                                 <stop offset="0%" style={{stopColor:"#03EFFE",
@@ -190,18 +198,25 @@ class BubbleChart extends Component {
     }
 }
 
-BubbleChart.propTypes = {
+BubbleChartView.propTypes = {
     data: PropTypes.arrayOf(PropTypes.object),
     width: PropTypes.number,
     height: PropTypes.number,
-    setCurrent: PropTypes.func
+    setCurrent: PropTypes.func,
+    minimized: PropTypes.bool,
+    mobile: PropTypes.bool
 }
 
-BubbleChart.defaultProps = {
+BubbleChartView.defaultProps = {
     data: [],
     width: 325,
     height: 385,
     setCurrent: () => {console.log("SetCurrent isn't set")}
 };
 
-export default BubbleChart
+const mapStateToProps = state => ({
+    minimized: state.sidebar.minimized,
+    mobile: state.resize.mobile
+});
+
+export default connect(mapStateToProps, null)(BubbleChartView);

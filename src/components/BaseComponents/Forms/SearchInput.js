@@ -21,20 +21,17 @@ class SearchInput extends PureComponent{
     }
 
     clickHandler = e =>{
-        let token = localStorage.getItem("access_token");
-        this.props.searchRequest({request:this.state.value}, token);
+        this.props.getSearch( this.state.value );
     }
 
     componentDidMount(){
         if(this.state.value !== this.props.inputValue && this.props.inputValue !== ""){
             this.setState({value: this.props.inputValue})
-            console.log("Помойка")
         }
     }
 
 
     render(){
-        console.log("searchinputprops", this.props)
         return(
             <div className = "search-box-input__wrapper">
                 <input 

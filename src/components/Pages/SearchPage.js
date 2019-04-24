@@ -7,7 +7,8 @@ import { HeaderTemplate } from "../Header/Header";
 import SearchList from '../Search/SearchList'
 import Spinner from "../Spinner/Spinner";
 import SearchInput from "../BaseComponents/Forms/SearchInput";
-import { Redirect } from 'react-router-dom'
+import {Copyright} from "../Copyright/Copyright";
+import Error from "../Error/Error"
 
 
 let mapStateToProps = state => ({
@@ -18,23 +19,20 @@ let mapStateToProps = state => ({
 class SearchPage extends Component {
 
   componentDidMount() {
-    let token = localStorage.getItem("access_token");
-    const { location, searchRequest } = this.props
-    //const search = queryString.parse(location.search)
-    //console.log('locsearch', location, location.search.substr(1))
-    location.search && searchRequest({ request: location.search.substr(1) }, token);
+    const { location, getSearch } = this.props
+    location.search && getSearch( location.search.substr(1) );
     
   }
 
   componentWillUnmount(){
-    this.props.searchClear()
+    const { searchClear } = this.props
+    searchClear()
   }
 
   changeInput =()=> this.props.location.search ? this.props.location.search.substr(1): ''
 
   render() {
     let p = this.props;
-    console.log("searchprops", this.props)
     return (
       <PageTemplate
         title="Search"
@@ -43,9 +41,9 @@ class SearchPage extends Component {
           p.search.data === null ? (
             <HeaderTemplate title="Search" />)
           :
-          p.search.data.data.length === 0 ? 
+          p.search.data.length === 0 ? 
             <HeaderTemplate title="Search"/>
-          :
+          : !this.props.location.search ? <HeaderTemplate title="Search"/>:
             <HeaderTemplate component={
               (<SearchInput inputValue={this.changeInput()}/>)}/>
           }
@@ -59,14 +57,17 @@ class SearchPage extends Component {
             p.search.error 
             ? 
             (
-              <h1>ERROR</h1>
+              <Error/>
             ) 
             : 
-            p.search.data.data.length === 0 && this.props.location.search
+            p.search.data.length === 0 && this.props.location.search
             ?     
                   <div className="search-box" >
                       <SearchInput inputValue={this.changeInput()} /> 
                       <p className="search-box-input-fail">Nothing was found :(</p>
+                        <div className="search-box_copyright-wrapper">
+                          <Copyright searchClass={true}/>
+                        </div>
                   </div>
                   :
                   ( 
@@ -75,8 +76,11 @@ class SearchPage extends Component {
                   :
                   <div className = "search-box">
                     <SearchInput inputValue={this.changeInput()}/>
+                    <div className="search-box_copyright-wrapper">
+                    <Copyright searchClass={true}/>
+                    </div>
                   </div>
-                  }
+        }
       />
     );
   }

@@ -1,9 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
+import classNames from 'classnames';
 
 const InputField = ({ config = {}, validationRequired = {}, ...rest }) => {
 	const {name, type, label, placeholder, required} = config
 	const {touch, errorMsg, valid} = validationRequired
+	const {disabled} = rest
 	return (
 		<div className = "input-box" >
 			{label && 
@@ -16,7 +18,9 @@ const InputField = ({ config = {}, validationRequired = {}, ...rest }) => {
 				</label>
 			}			
 			<input 
-				className = {touch && errorMsg && !valid ? "input-box__error" : "input-box__input"}
+				className = {classNames(touch && errorMsg && !valid ? "input-box__error" : 
+					disabled ? "input-box__disabled": "input-box__input"					
+				)}
 				{...rest} placeholder={placeholder} type={type} name={name} />
 			{touch && errorMsg && !valid && 
 				<span className ="input-box__error-message">

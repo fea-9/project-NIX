@@ -49,3 +49,10 @@
     }
   }
 }
+
+.range-panel-wrapper__mobile {
+  .range-panel-list {
+    width: $widthRangePanelListMobile;
+    border-radius: $borderRadiusRangePanelListMobile;
+  }
+}

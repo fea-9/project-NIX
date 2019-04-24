@@ -22,6 +22,7 @@ $heightSidebar: 100vh;
 $widthtSidebar: 100vw;
 $backgroundColorSidebar: linear-gradient(to top, #012724, #276763 75%, #489e98);
 $paddingSidebar: 1.5rem 0 0 0;
+$zIndexSidebar: 999;
 
 $heightSidebarMobileMinimized: auto;
 $backgroundSidebarMobileMinimized: #489e98;
@@ -81,14 +82,14 @@ $backgroundNavListItemLinkHoverVerticalLineEnd: linear-gradient(
 $widthNavListItemLinkHoverVerticalLineEnd: 0.8rem;
 
 $heightNavListItemLinkProfile: 9rem;
-$widthNavListItemLinkProfile: 11.8rem;
+$widthNavListItemLinkProfile: 100%;
 $colorNavListItemLinkProfile: #fff;
 
 $paddingNavListItemLinkDesktop: 1.5rem 0 1.5rem 5rem;
 $transitionNavListItemLinkDesktop: all 1s;
 
 $heightNavListItemLinkProfileDesktop: 11.3rem;
-$widthNavListItemLinkProfileDesktop: 12.4rem;
+$widthNavListItemLinkProfileDesktop: 100%;
 
 $transitionNavListItemLinkTextDesktop: all 0.8s 0.2s;
 
@@ -183,6 +184,9 @@ $heightRangePanelListLinkSelected: 140%;
 $leftRangePanelListLinkSelected: 0;
 $bottomRangePanelListLinkSelected: -20%;
 
+$widthRangePanelListMobile: 100vw;
+$borderRadiusRangePanelListMobile: 0;
+
 // Calendar in Range Panel
 
 $gradientActiveAndHoverDays: linear-gradient(#03effe, #4facfe);
@@ -193,7 +197,7 @@ $borderRadiusCalendarWrapper: 0.5rem;
 $backgroundColorCalendarWrapper: #f4f7f8;
 $borderCalendarWrapper: 1px solid #cad5da;
 $topRadiusCalendarWrapper: 100%;
-$rightRadiusCalendarWrapper: -10%;
+$rightRadiusCalendarWrapper: 0;
 $zIndexCalendarWrapper: 999;
 
 $fontFamilyCalendarInput: "Roboto", sans-serif;
@@ -250,3 +254,14 @@ $backgroundCalendarDayRangeStart: $gradientActiveAndHoverDays;
 $borderRadiusCalendarDayRangeStart: 0.5rem;
 $backgroundCalendarDayRangeEnd: $gradientActiveAndHoverDays;
 $borderRadiusCalendarDayRangeEnd: 0.5rem;
+
+// Copyright
+
+$fontFamilyCopyright: "Roboto", sans-serif;
+$colorCopyright: #9b9f9f;
+$fontSizeCopyright: 1.1rem;
+
+$colorCopyrightLink: #2c2c2c;
+
+$colorCopyrightSearchPage: #ffffff;
+$colorCopyrightLinkSearchPage: #ffffff;

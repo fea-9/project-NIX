@@ -1,32 +1,56 @@
 import React, { PureComponent } from 'react'
+import sortFunc from "../../utils/sortFunc.js";
+import { connect } from "react-redux";
+import * as actions from "../actions/search";
+import CustomScrollbars from "../CustomScrollbars/CustomScrollbars";
 
-import { Scrollbars } from 'react-custom-scrollbars';
+let mapStateToProps = state => ({
+    search: state.search,
+    token: state.auth.user.access_token
+  });
 
 class SearchList extends PureComponent {
+
+    state = {
+        disabled: false
+    }
+
+    sortSearch = e =>{
+        let nData = this.props.data;
+        if(e.target.value === "Max"){
+            nData.articlesList = sortFunc(this.props.data.articlesList, "articleCitations")
+            this.props.setSearchData(nData)
+        }
+        else if(e.target.value === "Min"){
+            nData.articlesList = sortFunc(this.props.data.articlesList, "articleCitations", true)
+            this.props.setSearchData(nData)
+        }
+        this.setState({disabled:true})
+    }
+
     render() {
-        console.log("searchList", this.props.data)
-        console.log(JSON.stringify(this.props.data.data.articlesList))
         return (
             <div className="search-list_wrapper">
                 <div className="search-list_header">
                     <h3 className="search-list_header-name" >
                         Articles 
                         <span className="search-list_header-name-count" >
-                            ({this.props.data.data.totalCount})
+                            ({this.props.data.totalCount})
                         </span>
                     </h3>
                     <div className="search-list_header-sort-wrapper">
                         Sort by
-                        <select className="search-list_header-sort">
-                            <option className="search-list_header-sort-item">Max to min</option>
-                            <option className="search-list_header-sort-item">Min to max</option>
+                        <select selected="default"  onChange={this.sortSearch} className="search-list_header-sort">
+                            <option value="default" disabled={this.state.disabled} className="search-list_header-sort-item">---</option>
+                            <option value="Max" className="search-list_header-sort-item">Max to min</option>
+                            <option value="Min" className="search-list_header-sort-item">Min to max</option>
                         </select>
                     </div>
                 </div>
                 <div className="search-list_content">
-                    <Scrollbars>
+                    <CustomScrollbars>
                         {
-                            this.props.data.data.articlesList.map((article, index) => {
+                            this.props.data.articlesList.map((article, index) => {
                                 return (
                                     <div key={index} className="article_item">
                                         <h3 className="article_title">
@@ -56,10 +80,16 @@ class SearchList extends PureComponent {
                                 )
                             })
                         }
-                    </Scrollbars>
+                    </CustomScrollbars>
                 </div>
             </div>
         )
     }
 }
-export default SearchList
+
+SearchList = connect(
+    mapStateToProps,
+    { ...actions }
+  )(SearchList);
+  
+export default SearchList;

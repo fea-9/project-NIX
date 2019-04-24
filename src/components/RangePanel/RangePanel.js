@@ -27,8 +27,7 @@ class RangePanel extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { location, dashboardRequest } = this.props;
-    const token = localStorage.getItem("access_token");
+    const { location, getStats } = this.props;
     const search = queryString.parse(location.search);
 
     if (prevProps.location.search !== location.search) {
@@ -36,12 +35,12 @@ class RangePanel extends Component {
         ? null
         : search.period === "range"
         ? null
-        : dashboardRequest(search, token);
+        : getStats(search);
     }
   }
 
   render() {
-    const { location } = this.props;
+    const { location, mobile } = this.props;
     const { periods } = this.state;
     const search = queryString.parse(location.search);
 
@@ -50,7 +49,13 @@ class RangePanel extends Component {
     }
 
     return (
-      <div className="range-panel-wrapper">
+      <div
+        className={
+          mobile
+            ? "range-panel-wrapper range-panel-wrapper__mobile"
+            : "range-panel-wrapper"
+        }
+      >
         <ul className="range-panel-list">
           <li className="range-panel-list__item">
             <NavLink
@@ -114,9 +119,13 @@ class RangePanel extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  mobile: state.resize.mobile
+});
+
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     { ...actions }
   )(RangePanel)
 );

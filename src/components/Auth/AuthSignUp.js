@@ -2,11 +2,9 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 
 import * as actions from "../actions/auth";
-
 import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
 
-import {authValidation} from "./authValidate";
+import {authValidation} from "../../utils/authValidate";
 import InputField from "../BaseComponents/Forms/Input";
 
 class SignUp extends Component{
@@ -91,23 +89,27 @@ class SignUp extends Component{
     validateInput = e => {
         e.persist()
         const { name, value } = e.target;
+
         this.setState(prevState => {
-            let {status, message} = authValidation(name, value, this.state.password.value)
-            let valid = prevState[name].validationRequired.touch ? !status : prevState[name].validationRequired.valid            
+            const {status, message} = authValidation(name, value, this.state.password.value, "signUp")
+            const valid = prevState[name].validationRequired.touch ? !status : prevState[name].validationRequired.valid
+            const currentInputChanged = {
+                ...prevState,
+                [name]: {
+                    ...prevState[name],
+                    value,
+                    validationRequired: {
+                        valid,
+                        touch: e.type === "blur" ? true : prevState[name].validationRequired.touch,
+                        errorMsg: message
+                    }                        
+                }
+            }            
             if (name === "password"){
                 const {confirmPassword} = this.state
-                let confirmValid = authValidation(confirmPassword.config.name, confirmPassword.value, value)
+                const confirmValid = authValidation(confirmPassword.config.name, confirmPassword.value, value, "signUp")
                 return {
-                    ...prevState,
-                    [name]: {
-                        ...prevState[name],
-                        value,
-                        validationRequired: {
-                            valid,
-                            touch: e.type === "blur" ? true : prevState[name].validationRequired.touch,
-                            errorMsg: message
-                        }                        
-                    },
+                    ...currentInputChanged,
                     confirmPassword: {
                         ...prevState.confirmPassword,
                         validationRequired: {
@@ -118,16 +120,7 @@ class SignUp extends Component{
                     }
                 }
             } else return {
-                ...prevState,
-                [name]: {
-                    ...prevState[name],
-                    value,
-                    validationRequired: {
-                        valid,
-                        touch: e.type === "blur" ? true : prevState[name].validationRequired.touch,
-                        errorMsg: message
-                    }                    
-                }
+                ...currentInputChanged
             }
         })
     }
@@ -135,8 +128,7 @@ class SignUp extends Component{
 
     submit = e => {
         e.preventDefault();
-        // console.log("start submit")
-        let {auth} = this.props
+        const {auth} = this.props
         const {email, password, firstName, lastName} = this.state
         const values = {
             email: email.value,
@@ -144,8 +136,7 @@ class SignUp extends Component{
             fullName: `${firstName.value.trim()} ${lastName.value.trim()}`
         };
         if (this.formIsValid()){
-            // console.log("submit", values)
-            auth (values, "signup");
+            auth (values, "signup")
         }        
     }
 
@@ -154,7 +145,7 @@ class SignUp extends Component{
 
         Object.keys(this.state).forEach(elem => {
             let stateItem = this.state[elem]
-            let {status, message} = authValidation(stateItem.config.name, stateItem.value, this.state.password.value)            
+            let {status, message} = authValidation(stateItem.config.name, stateItem.value, this.state.password.value, "signUp")            
 
             this.setState(prevState => ({
                 ...prevState,
@@ -171,22 +162,22 @@ class SignUp extends Component{
         })
        
         return validForm
-
     }
 
     render () {
-        let {isFetching, authErrorMessage } = this.props
-        let errorMessage = authErrorMessage === "User already exist" ? 
+        const {isFetching, authErrorMessage } = this.props
+        const errorMessage = authErrorMessage === "User already exist" ? 
             "User already exists" : "Something went wrong. Try again, please"
-        let list = Object.keys(this.state).map (elem => {
+
+        const list = Object.keys(this.state).map (elem => {
             let stateItem = this.state[elem]
             return <InputField 
-                key = {elem}
-                config = {stateItem.config}
-                validationRequired = {stateItem.validationRequired}
-                onBlur = {this.validateInput}
-                onChange = {this.validateInput}                
-                />
+                        key = {elem}
+                        config = {stateItem.config}
+                        validationRequired = {stateItem.validationRequired}
+                        onBlur = {this.validateInput}
+                        onChange = {this.validateInput}                
+                    />
         })
         return (            
             <form className="auth__form" onSubmit={this.submit} noValidate={true} >
@@ -210,16 +201,14 @@ SignUp.propTypes = {
 SignUp.defaultProps = {
     isFetching: false,
     authErrorMessage: "",
-    auth: () => {console.log(`Auth submit ...`)} 
+    auth: () => {console.log(`Auth submit isn't set`)} 
 };
 
-const mapStateToProps = state => {
-	return {
-        isFetching: state.auth.isFetching,
-        authErrorMessage: state.auth.message
-    };
-};
+const mapStateToProps = state => ({
+    isFetching: state.auth.isFetching,
+    authErrorMessage: state.auth.message    
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actions }, dispatch);
+const mapDispatchToProps = { ...actions };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

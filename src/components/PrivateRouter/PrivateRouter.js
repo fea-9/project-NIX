@@ -3,17 +3,24 @@ import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import Spinner from "../Spinner/Spinner";
+import { Loading } from "../HOC/Loading";
 
-const PrivateRoute = ({ component: Component, user, isFetching, ...rest }) => {
+const PrivateRoute = ({
+  component: Component,
+  user,
+  isFetching,
+  interseptrorWorking,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
       render={props => {
-        return isFetching ? (
-          <Spinner />
-        ) : user ? (
-          <Component {...props} />
+        return isFetching || user ? (
+          <Loading
+            flag={isFetching && !interseptrorWorking}
+            children={<Component {...props} />}
+          />
         ) : (
           <Redirect to="/auth/signin" />
         );
@@ -24,12 +31,15 @@ const PrivateRoute = ({ component: Component, user, isFetching, ...rest }) => {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  isFetching: state.auth.isFetching_token
+  isFetching: state.auth.isFetching_token,
+  interseptrorWorking: state.auth.interseptrorWorking
 });
 
 export default connect(mapStateToProps)(PrivateRoute);
 
 PrivateRoute.propTypes = {
   user: PropTypes.object,
-  isFetching: PropTypes.bool
+  isFetching: PropTypes.bool,
+  interseptrorWorking: PropTypes.bool,
+  component: PropTypes.elementType
 };

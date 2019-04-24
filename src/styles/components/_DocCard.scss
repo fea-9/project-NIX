@@ -12,8 +12,8 @@
 .doc-line-mobile {
     flex-direction: column;
     align-items: center;
-    min-height: 100%;
-    margin: 5px 5px;
+    margin: 3px 3px;
+    width: 100%;
 }
 .doc-line-transact span, 
 .doc-line-transact-mobile span{
@@ -110,4 +110,38 @@
     font-family: 'Roboto', sans-serif;
     display:flex;
     justify-content:center;
+}
+// mobile
+.indikators-mobile__item__artifacts {
+    width: 0;
+}
+.doc-line-transact-mobile span{
+    font-size: 3rem; 
+}
+.doc-line-artfs-mobile {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    &__dop {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+}
+.doc-line-contr-mobile {
+    font-size: 2rem;
+    text-align: center;
+}
+.doc-line-keyw-mobile {
+    margin: 3rem 0;
+    & span {
+        font-size: 2rem;
+    }
+}
+.doc-line-cit-mobile {
+    font-size: 4rem;
+    margin: 3rem 0 4rem 0;
+}
+.doc-line-prof-mobile {
+    height: 20rem;
 }
