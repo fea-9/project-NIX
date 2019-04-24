@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 
 import Icon from "../BaseComponents/icon/";
 
-class AvatarPreview extends Component {
+export class AvatarPreview extends Component {
   static propTypes = {
     srcAvatar: PropTypes.string,
     fullName: PropTypes.string,
-    minimized: PropTypes.bool,
+    minimized: PropTypes.bool
   };
 
   render() {
@@ -50,7 +50,7 @@ class AvatarPreview extends Component {
 const mapStateToProps = state => ({
   fullName: state.auth.user.fullName,
   minimized: state.sidebar.minimized,
-  srcAvatar: state.avatar.src,
+  srcAvatar: state.avatar.src
 });
 
 export default connect(mapStateToProps)(AvatarPreview);
