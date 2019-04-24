@@ -3,9 +3,8 @@ import {PageTemplate} from '../../components/Templates/PageTemplate';
 import {shallow} from 'enzyme';
 
 describe ('Page template', () => {
-
   describe ('Page template initial render', () => {
-
+    
     const props = {
       header: React.createElement('Header'),
       sidebar: React.createElement('Sidebar'),

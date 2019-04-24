@@ -1,21 +1,8 @@
 import React, { Component } from "react";
 import "./CircleGraph.scss";
 import PropTypes from "prop-types";
-import {Scrollbars} from "react-custom-scrollbars";
+import CustomScrollbars from "../../../CustomScrollbars/CustomScrollbars";
 
-class CustomScrollbars extends Component {
-  render() {
-    return (
-      <Scrollbars
-        renderTrackHorizontal={props => <div {...props} className="track-horizontal"/>}
-        renderTrackVertical={props => <div {...props} className="track-vertical"/>}
-        renderThumbHorizontal={props => <div {...props} className="thumb-horizontal"/>}
-      >
-        {this.props.children}
-      </Scrollbars>
-    );
-  }
-}
 export default class CircleGraph extends Component {
   state = {
     displayValue: 0,
@@ -27,13 +14,8 @@ export default class CircleGraph extends Component {
     valueKey: PropTypes.string,
     nameKey: PropTypes.string,
     mobile: PropTypes.bool,
-    height: PropTypes.oneOfType (
-      [
-        PropTypes.string,
-        PropTypes.number
-      ]
-    )
-  }
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  };
 
   getDataSum = (data, key) => data.reduce((prev, el) => (prev += el[key]), 0);
 
@@ -45,20 +27,24 @@ export default class CircleGraph extends Component {
 
   mouseOverHandler = (val, ind) => e => {
     if (!val) return;
+    if (e.target.localName === "path") {
+      const a = document.createElement("a");
+      a.href = `#line${ind}`;
+      a.click();
+    }
     this.setState({ displayValue: val, displayInd: ind });
   };
   mouseOutHandler = val => e => {
     this.setState({ displayValue: val, displayInd: -1 });
   };
 
-
   render() {
-    const { data, valueKey, height, nameKey, mobile} = this.props;
+    const { data, valueKey, height, nameKey, mobile } = this.props;
     const colors = ["#03EFFE", "#34FFF3", "#5CE5DD", "#37D3CA", "#26BCB3"];
     const sum = this.getDataSum(data, valueKey);
     const colorChange = num => colors[num % colors.length];
-    const classMob = mobile ? "-mobile" : ""
- 
+    const classMob = mobile ? "-mobile" : "";
+
     const createViewData = () => {
       const viewData = [...data];
       let i = 0;
@@ -84,16 +70,17 @@ export default class CircleGraph extends Component {
       const y = Math.sin(2 * Math.PI * percent);
       return [x, y];
     }
-    
+
     return (
       <div className={`circle-graph${classMob}`}>
         <div className={`graph-info${classMob}`}>
           <div className={`graph-list${classMob}`}>
-            <CustomScrollbars >
+            <CustomScrollbars right={true}>
               {data.map((el, ind) => {
                 return (
                   <div
                     key={ind}
+                    id={"line" + ind}
                     style={{
                       backgroundImage:
                         this.state.displayInd === ind
@@ -103,13 +90,16 @@ export default class CircleGraph extends Component {
                     className={"line"}
                     onMouseOver={this.mouseOverHandler(el[valueKey], ind)}
                     onMouseOut={this.mouseOutHandler(sum)}
-                  > 
-                    <span className="line__dot" style={{background: colorChange(ind)}}></span>
+                  >
+                    <span
+                      className="line__dot"
+                      style={{ background: colorChange(ind) }}
+                    />
                     <span className={"line__text"}>{el[nameKey]}</span>
                     <span className={"line__num"}>{el[valueKey]}</span>
                   </div>
                 );
-              })} 
+              })}
             </CustomScrollbars>
           </div>
         </div>

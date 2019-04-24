@@ -9,6 +9,7 @@ import { Social } from "../Social/Social";
 import { Logo } from "../Logo/Logo";
 import { Button } from "../BaseComponents/Forms/Button";
 import { BurgerButton } from "../BaseComponents/BurgerButton";
+import CustomScrollbars from "../CustomScrollbars/CustomScrollbars";
 
 class Sidebar extends Component {
   static propTypes = {
@@ -37,31 +38,33 @@ class Sidebar extends Component {
             : "sidebar-wrapper"
         }
       >
-        <div className="top-content-wrapper">
-          <Logo
-            className="logo logo_sidebar"
-            minimized={minimized}
-            button={
-              mobile && (
-                <BurgerButton
-                  onClick={this.showSidebar}
-                  isOpen={!isMinSidebar}
-                />
-              )
-            }
-          />
-          {(!isMinSidebar || !mobile) && <NavList minimized={minimized} />}
-        </div>
-        {(!isMinSidebar || !mobile) && (
-          <div className="bottom-content-wrapper">
-            <Social minimized={minimized} />
-            <Button
-              className="logout-btn"
-              text="Log out"
-              onClick={authLogout}
+        {/* <CustomScrollbars right={true} autoHide={true}> */}
+          <div className="top-content-wrapper">
+            <Logo
+              className="logo logo_sidebar"
+              minimized={minimized}
+              button={
+                mobile && (
+                  <BurgerButton
+                    onClick={this.showSidebar}
+                    isOpen={!isMinSidebar}
+                  />
+                )
+              }
             />
+            {(!isMinSidebar || !mobile) && <NavList minimized={minimized} />}
           </div>
-        )}
+          {(!isMinSidebar || !mobile) && (
+            <div className="bottom-content-wrapper">
+              <Social minimized={minimized} />
+              <Button
+                className="logout-btn"
+                text="Log out"
+                onClick={authLogout}
+              />
+            </div>
+          )}
+        {/* </CustomScrollbars> */}
       </div>
     );
   }

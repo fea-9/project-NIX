@@ -1,11 +1,21 @@
-.tr-horizontal, .th-horizontal {
+.tr-horizontal, 
+.th-horizontal,
+.rg-horizontal,
+.rg-horizontal
+ {
     display: none;
   }
-  .tr-vertical {
+  .tr-vertical, .rg-vertical  {
     position: absolute;
     width: 6px;
-    right: 2px;
     bottom: 2px;
     top: 2px;
     border-radius: 3px;
   }
+  .tr-vertical {
+    right: 2px;
+  }
+  .rg-vertical { 
+    left: 2px;
+  }
+  

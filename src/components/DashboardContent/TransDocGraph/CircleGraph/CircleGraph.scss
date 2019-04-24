@@ -89,17 +89,7 @@
 .line:last-child {
   border: none;
 }
-.track-horizontal, .thumb-horizontal {
-  display: none;
-}
-.track-vertical {
-  position: absolute;
-  width: 6px;
-  left: 2px;
-  bottom: 2px;
-  top: 2px;
-  border-radius: 3px;
-}
+
 @media  (min-width: 778px) and (max-width: 1440px) {
   .circle-graph {
     flex-direction: column;
