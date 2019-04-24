@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { NavLink, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+
+import { PropTypes } from "prop-types";
 import queryString from "query-string";
 
 import * as actions from "../actions/dashboardRange";
@@ -8,9 +10,46 @@ import * as actions from "../actions/dashboardRange";
 import Calendar from "../Calendar/Calendar";
 
 class RangePanel extends Component {
+  static propTypes = {
+    location: PropTypes.object,
+    mobile: PropTypes.bool
+  };
+
   state = {
     showCalendar: false,
-    periods: ["day", "week", "month", "quarter", "range"]
+    periods: ["day", "week", "month", "quarter", "range"],
+    buttons: [
+      {
+        text: "Today",
+        period: "day",
+        to: "/dashboard?period=day",
+        activeClassName: "range-panel-list__link_selected"
+      },
+      {
+        text: "7 days",
+        period: "week",
+        to: "/dashboard?period=week",
+        activeClassName: "range-panel-list__link_selected"
+      },
+      {
+        text: "30 days",
+        period: "month",
+        to: "/dashboard?period=month",
+        activeClassName: "range-panel-list__link_selected"
+      },
+      {
+        text: "90 days",
+        period: "quarter",
+        to: "/dashboard?period=quarter",
+        activeClassName: "range-panel-list__link_selected"
+      },
+      {
+        text: "Range",
+        period: "range",
+        to: "/dashboard?period=range",
+        activeClassName: "range-panel-list__link_selected"
+      }
+    ]
   };
 
   resetShowCalendar = event => this.setState({ showCalendar: false });
@@ -41,7 +80,7 @@ class RangePanel extends Component {
 
   render() {
     const { location, mobile } = this.props;
-    const { periods } = this.state;
+    const { periods, buttons, showCalendar } = this.state;
     const search = queryString.parse(location.search);
 
     if (!periods.includes(search.period)) {
@@ -57,63 +96,28 @@ class RangePanel extends Component {
         }
       >
         <ul className="range-panel-list">
-          <li className="range-panel-list__item">
-            <NavLink
-              className="range-panel-list__link"
-              to="/dashboard?period=day"
-              activeClassName="range-panel-list__link_selected"
-              isActive={this.isActive("day")}
-              onClick={this.resetShowCalendar}
-            >
-              Today
-            </NavLink>
-          </li>
-          <li className="range-panel-list__item">
-            <NavLink
-              className="range-panel-list__link"
-              to="/dashboard?period=week"
-              activeClassName="range-panel-list__link_selected"
-              isActive={this.isActive("week")}
-              onClick={this.resetShowCalendar}
-            >
-              7 days
-            </NavLink>
-          </li>
-          <li className="range-panel-list__item">
-            <NavLink
-              className="range-panel-list__link"
-              to="/dashboard?period=month"
-              activeClassName="range-panel-list__link_selected"
-              isActive={this.isActive("month")}
-              onClick={this.resetShowCalendar}
-            >
-              30 days
-            </NavLink>
-          </li>
-          <li className="range-panel-list__item">
-            <NavLink
-              className="range-panel-list__link"
-              to="/dashboard?period=quarter"
-              activeClassName="range-panel-list__link_selected"
-              isActive={this.isActive("quarter")}
-              onClick={this.resetShowCalendar}
-            >
-              90 days
-            </NavLink>
-          </li>
-          <li className="range-panel-list__item">
-            <NavLink
-              className="range-panel-list__link"
-              to="/dashboard?period=range"
-              activeClassName="range-panel-list__link_selected"
-              onClick={this.showCalendar}
-              isActive={this.isActive("range")}
-            >
-              Range
-            </NavLink>
-          </li>
+          {buttons.map(btn => {
+            const { text, period, to, activeClassName } = btn;
+            return (
+              <li className="range-panel-list__item" key={period}>
+                <NavLink
+                  className="range-panel-list__link"
+                  to={to}
+                  activeClassName={activeClassName}
+                  isActive={this.isActive(period)}
+                  onClick={
+                    period === "range"
+                      ? this.showCalendar
+                      : this.resetShowCalendar
+                  }
+                >
+                  {text}
+                </NavLink>
+              </li>
+            );
+          })}
         </ul>
-        {this.state.showCalendar && <Calendar />}
+        {showCalendar && <Calendar />}
       </div>
     );
   }

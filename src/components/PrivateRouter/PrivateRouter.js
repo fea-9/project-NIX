@@ -39,5 +39,7 @@ export default connect(mapStateToProps)(PrivateRoute);
 
 PrivateRoute.propTypes = {
   user: PropTypes.object,
-  isFetching: PropTypes.bool
+  isFetching: PropTypes.bool,
+  interseptrorWorking: PropTypes.bool,
+  component: PropTypes.elementType
 };
