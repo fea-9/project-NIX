@@ -30,7 +30,7 @@
 .info-block, 
 .info-block-mobile {
     margin: 1% 0; 
-    max-height: 30%;
+    // max-height: 30%;
     display: flex;
     justify-content: space-evenly;
     flex-flow: row wrap;
@@ -43,6 +43,7 @@
     }
 }
 .info-block-mobile {
+    height: auto;
     &__cell {
         width: 50%;
         min-width: 0;
