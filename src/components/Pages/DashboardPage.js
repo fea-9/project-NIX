@@ -6,7 +6,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import { HeaderTemplate } from "../Header/Header";
 import DashboardContent from "../DashboardContent/DashboardContent";
 import * as actions from "../actions/dashboardRange";
-import RangePanel from "../RangePanel/RangePanel";
+import RangePanel from "../RangePanel/RangePanel"; 
 import queryString from "query-string";
 import Error from "../Error/Error";
 

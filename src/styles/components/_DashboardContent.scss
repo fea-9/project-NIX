@@ -14,6 +14,7 @@
     align-self: flex-start;
     padding: 0.5rem;
     padding-left: 8rem;
+    margin-bottom: 4px;
 }
 .dash-copyright-mobile {
     display: none;
@@ -50,6 +51,7 @@
 .graph-block, 
 .graph-block-mobile {
     // margin-top: 3%;
+    height: 70%;
     flex-grow: 1;
     &__cell {
         padding: 1rem;
